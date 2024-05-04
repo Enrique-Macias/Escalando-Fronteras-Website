@@ -20,8 +20,7 @@ The website for "Escalando Fronteras" is an informational platform developed for
    cd Escalando-Fronteras-Website
 3. **Open the project in a web browser**:
    ```bash
-   You can use a local server or simply open the `index.html![voluntario](https://github.com/Enrique-Macias/Escalando-Fronteras-Website/assets/141685396/6de9ad89-4146-479f-afb7-5db9cd74b191)
-` file in web browser.
+   You can use a local server or simply open the `index.html` file in web browser.
 
 ## Usage 
 - The website is designed to be navigated easily using the main menu.

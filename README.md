@@ -14,7 +14,7 @@ The website for "Escalando Fronteras" is an informational platform developed for
 
 1. **Clone the repository**:
    ```bash
-   git clone <>
+   git clone https://github.com/Enrique-Macias/Escalando-Fronteras-Website.git
 2. **Navigate to the project directory**:
    ```bash
    cd Escalando-Fronteras-Website

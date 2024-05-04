@@ -19,6 +19,7 @@ The website for "Escalando Fronteras" is an informational platform developed for
    ```bash
    cd Escalando-Fronteras-Website
 3. **Open the project in a web browser**:
+   ```bash
    * You can use a local server or simply open the `index.html` file in web browser.
 
 ## Usage 

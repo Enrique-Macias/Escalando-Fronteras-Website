@@ -22,5 +22,12 @@ The website for "Escalando Fronteras" is an informational platform developed for
    * You can use a local server or simply open the `index.html` file in web browser.
 
 ## Usage 
-* this web
-- sds
+- The website is designed to be navigated easily using the main menu.
+- Users can view information, browse events, donate, or contact the organization through the respective pages.
+
+## License
+
+MIT License
+
+Copyright (c) [2024] [Enrique Macías López]
+

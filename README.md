@@ -15,7 +15,7 @@ The website for "Escalando Fronteras" is an informational platform developed for
 1. **Clone the repository**:
    ```bash
    git clone <>
-2. **Navigate to the project direcory**:
+2. **Navigate to the project directory**:
    ```bash
    cd Escalando-Fronteras-Website
 3. **Open the project in a web browser**:

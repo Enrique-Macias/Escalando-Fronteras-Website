@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { customCors } from './middlewares/cors';
 import { csrfProtection, sendCsrfToken } from './middlewares/csrf';
+import authRouter from './routes/auth';
+import protectedRouter from './routes/protected';
 
 dotenv.config();
 const app = express();
@@ -10,6 +12,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(customCors);
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/protected', protectedRouter);
 
 // Endpoint para obtener el token CSRF
 app.get('/api/v1/auth/login', csrfProtection, sendCsrfToken, (req, res) => {

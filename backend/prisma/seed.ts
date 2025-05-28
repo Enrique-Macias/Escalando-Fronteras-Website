@@ -13,6 +13,7 @@ async function main() {
     create: {
         email: 'admin@escalando.org',
         passwordHash,
+        fullName: 'Enrique Macias',
         role: Role.ADMIN,
     },
   });

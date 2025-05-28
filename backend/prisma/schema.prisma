@@ -21,6 +21,7 @@ enum Role {
 
 model User {
   id           Int      @id @default(autoincrement())
+  fullName     String
   email        String   @unique
   passwordHash String
   role         Role
@@ -31,4 +32,83 @@ model UsedToken {
   id        Int      @id @default(autoincrement())
   token     String   @unique
   usedAt    DateTime @default(now())
+}
+
+model News {
+  id               Int          @id @default(autoincrement())
+  title_es         String
+  title_en         String
+  body_es          String
+  body_en          String
+  date             DateTime
+  tags             String[]
+  category         String
+  author           String
+  location_city    String
+  location_country String
+  coverImageUrl    String
+  newsImages       NewsImage[]  // Relación one-to-many
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  @@map("news")
+}
+
+model NewsImage {
+  id        Int    @id @default(autoincrement())
+  news      News   @relation(fields: [newsId], references: [id])
+  newsId    Int
+  imageUrl  String
+  order     Int?
+  @@map("news_image")
+}
+
+model Event {
+  id               Int           @id @default(autoincrement())
+  title_es         String
+  title_en         String
+  body_es          String
+  body_en          String
+  date             DateTime
+  tags             String[]
+  category         String
+  author           String
+  location_city    String
+  location_country String
+  coverImageUrl    String
+  phrase           String?
+  credits          String
+  eventImages      EventImage[]  // Relación one-to-many
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  @@map("event")
+}
+
+model EventImage {
+  id        Int    @id @default(autoincrement())
+  event     Event  @relation(fields: [eventId], references: [id])
+  eventId   Int
+  imageUrl  String
+  order     Int?
+  @@map("event_image")
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  author    String
+  role      String
+  body_es   String
+  body_en   String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("testimonial")
+}
+
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  resource  String
+  action    String
+  changes   Json
+  createdAt DateTime @default(now())
 }

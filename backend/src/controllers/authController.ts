@@ -7,63 +7,68 @@ import jwt from 'jsonwebtoken';
 const prisma = new PrismaClient();
 
 export async function login(req: Request, res: Response) {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    res.status(401).json({ code: 'UNAUTHORIZED', message: 'Email o contraseña incorrectos' });
-    return;
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(401).json({ code: 'UNAUTHORIZED', message: 'Email o contraseña incorrectos' });
+      return;
+    }
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      res.status(401).json({ code: 'UNAUTHORIZED', message: 'Email o contraseña incorrectos' });
+      return;
+    }
+    const valid = await bcrypt.compare(password, user.passwordHash);
+    if (!valid) {
+      res.status(401).json({ code: 'UNAUTHORIZED', message: 'Email o contraseña incorrectos' });
+      return;
+    }
+    const payload = { id: user.id, email: user.email, role: user.role };
+    const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
+    // CSRF token: usa req.csrfToken si tienes csurf, si no, genera uno simple
+    const csrfToken = req.csrfToken ? req.csrfToken() : '';
+    res.cookie('csrf-token', csrfToken, { httpOnly: false, sameSite: 'strict' });
+    res.status(200).json({ token });
+  } catch (err: any) {
+    res.status(500).json({ code: 'INTERNAL_SERVER_ERROR', message: err.message || 'Error inesperado.' });
   }
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) {
-    res.status(401).json({ code: 'UNAUTHORIZED', message: 'Email o contraseña incorrectos' });
-    return;
-  }
-  const valid = await bcrypt.compare(password, user.passwordHash);
-  if (!valid) {
-    res.status(401).json({ code: 'UNAUTHORIZED', message: 'Email o contraseña incorrectos' });
-    return;
-  }
-  const payload = { id: user.id, email: user.email, role: user.role };
-  const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
-  // CSRF token: usa req.csrfToken si tienes csurf, si no, genera uno simple
-  const csrfToken = req.csrfToken ? req.csrfToken() : '';
-  res.cookie('csrf-token', csrfToken, { httpOnly: false, sameSite: 'strict' });
-  res.status(200).json({ token });
-  return;
 } 
 
 export async function forgotPassword(req: Request, res: Response) {
-  const { email } = req.body;
-  const user = await prisma.user.findUnique({ where: { email } });
-  // Siempre responde 200 para no revelar si el email existe
-  if (!user) {
-    // Por seguridad, responde 200 aunque el usuario no exista
+  try {
+    const { email } = req.body;
+    const user = await prisma.user.findUnique({ where: { email } });
+    // Siempre responde 200 para no revelar si el email existe
+    if (!user) {
+      res.status(200).json({ message: 'Si el email existe, se ha enviado un enlace de recuperación.' });
+      return;
+    }
+
+    const token = jwt.sign(
+      { userId: user.id, purpose: 'password_reset' },
+      process.env.JWT_SECRET!,
+      { expiresIn: '1h' }
+    );
+    const resetUrl = `https://tusitio.com/reset?token=${token}`;
+    await sendMail({
+      to: user.email,
+      subject: 'Recupera tu contraseña',
+      html: `<p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+             <a href="${resetUrl}">${resetUrl}</a>`,
+    });
+
+    // Log simple (puedes guardar en BD si quieres)
+    console.log({
+      userId: user.id,
+      timestamp: new Date().toISOString(),
+      email: user.email,
+      action: 'password_reset_email_sent',
+    });
+
     res.status(200).json({ message: 'Si el email existe, se ha enviado un enlace de recuperación.' });
-    return;
+  } catch (err: any) {
+    res.status(500).json({ code: 'INTERNAL_SERVER_ERROR', message: err.message || 'Error inesperado.' });
   }
-
-  const token = jwt.sign(
-    { userId: user.id, purpose: 'password_reset' },
-    process.env.JWT_SECRET!,
-    { expiresIn: '1h' }
-  );
-  const resetUrl = `https://tusitio.com/reset?token=${token}`;
-  await sendMail({
-    to: user.email,
-    subject: 'Recupera tu contraseña',
-    html: `<p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-           <a href="${resetUrl}">${resetUrl}</a>`,
-  });
-
-  // Log simple (puedes guardar en BD si quieres)
-  console.log({
-    userId: user.id,
-    timestamp: new Date().toISOString(),
-    email: user.email,
-    action: 'password_reset_email_sent',
-  });
-
-  res.status(200).json({ message: 'Si el email existe, se ha enviado un enlace de recuperación.' });
-  return;
 }
 
 export async function resetPassword(req: Request, res: Response) {

@@ -52,16 +52,22 @@ export async function getNewsById(req: Request, res: Response) {
 export async function createNews(req: Request, res: Response) {
   const {
     title_es, title_en, body_es, body_en, date, tags,
-    category, author, location_city, location_country,
-    coverImageUrl, images
+    category, author, location_city, location_country
   } = req.body;
+
+  // Obtener URLs de Cloudinary desde los archivos subidos
+  // @ts-ignore
+  const coverImageUrl = req.files?.coverImage?.[0]?.path || '';
+  // @ts-ignore
+  const images = req.files?.images?.map((file) => file.path) || [];
+
   try {
     const news = await prisma.news.create({
       data: {
         title_es, title_en, body_es, body_en, date: new Date(date), tags,
         category, author, location_city, location_country, coverImageUrl,
         newsImages: {
-          create: (images || []).map((url: string, idx: number) => ({
+          create: images.map((url: string, idx: number) => ({
             imageUrl: url,
             order: idx,
           })),
@@ -86,19 +92,31 @@ export async function updateNews(req: Request, res: Response) {
   const id = Number(req.params.id);
   const {
     title_es, title_en, body_es, body_en, date, tags,
-    category, author, location_city, location_country,
-    coverImageUrl, images
+    category, author, location_city, location_country
   } = req.body;
+
+  // Obtener URLs de Cloudinary desde los archivos subidos (si hay)
+  // @ts-ignore
+  const coverImageUrl = req.files?.coverImage?.[0]?.path;
+  // @ts-ignore
+  const images = req.files?.images?.map((file) => file.path);
+
   try {
+    // Construir el objeto de datos a actualizar
+    const updateData: any = {
+      title_es, title_en, body_es, body_en, date: new Date(date), tags,
+      category, author, location_city, location_country,
+    };
+    if (coverImageUrl) updateData.coverImageUrl = coverImageUrl;
+
     const news = await prisma.news.update({
       where: { id },
-      data: {
-        title_es, title_en, body_es, body_en, date: new Date(date), tags,
-        category, author, location_city, location_country, coverImageUrl,
-      },
+      data: updateData,
     });
-    await prisma.newsImage.deleteMany({ where: { newsId: id } });
+
+    // Actualizar galería solo si se subieron nuevas imágenes
     if (images && images.length > 0) {
+      await prisma.newsImage.deleteMany({ where: { newsId: id } });
       await prisma.newsImage.createMany({
         data: images.map((url: string, idx: number) => ({
           newsId: id,
@@ -107,10 +125,12 @@ export async function updateNews(req: Request, res: Response) {
         })),
       });
     }
+
     const updated = await prisma.news.findUnique({
       where: { id },
       include: { newsImages: { orderBy: { order: 'asc' } } },
     });
+
     await auditService.log({
       userId: req.user?.id,
       resource: 'news',

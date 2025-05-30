@@ -5,11 +5,12 @@ import { customCors } from './middlewares/cors';
 import { csrfProtection, sendCsrfToken } from './middlewares/csrf';
 import authRouter from './routes/auth';
 import protectedRouter from './routes/protected';
-import newsRouter from './routes/news.routes';
+import newsRouter from './routes/newsRoutes';
 import eventRouter from './routes/event.routes';
 import testimonialRouter from './routes/testimonial.routes';
 import auditRouter from './routes/audit.routes';
 import userRouter from './routes/user.routes';
+import uploadRouter from './routes/uploadRoutes';
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,7 @@ app.use('/api/v1/events', eventRouter);
 app.use('/api/v1/testimonials', testimonialRouter);
 app.use('/api/v1/audit', auditRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/uploads', uploadRouter);
 
 // Endpoint para obtener el token CSRF
 app.get('/api/v1/auth/login', csrfProtection, sendCsrfToken, (req, res) => {

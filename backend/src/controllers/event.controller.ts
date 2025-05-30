@@ -54,9 +54,15 @@ export async function getEventById(req: Request, res: Response) {
 export async function createEvent(req: Request, res: Response) {
   const {
     title_es, title_en, body_es, body_en, date, tags,
-    category, author, location_city, location_country,
-    coverImageUrl, phrase, credits, images
+    category, author, location_city, location_country, phrase, credits
   } = req.body;
+
+  // Obtener URLs de Cloudinary desde los archivos subidos
+  // @ts-ignore
+  const coverImageUrl = req.files?.coverImage?.[0]?.path || '';
+  // @ts-ignore
+  const images = req.files?.images?.map((file) => file.path) || [];
+
   try {
     const event = await prisma.event.create({
       data: {
@@ -64,7 +70,7 @@ export async function createEvent(req: Request, res: Response) {
         category, author, location_city, location_country, coverImageUrl,
         phrase, credits,
         eventImages: {
-          create: (images || []).map((url: string, idx: number) => ({
+          create: images.map((url: string, idx: number) => ({
             imageUrl: url,
             order: idx,
           })),
@@ -89,20 +95,31 @@ export async function updateEvent(req: Request, res: Response) {
   const id = Number(req.params.id);
   const {
     title_es, title_en, body_es, body_en, date, tags,
-    category, author, location_city, location_country,
-    coverImageUrl, phrase, credits, images
+    category, author, location_city, location_country, phrase, credits
   } = req.body;
+
+  // Obtener URLs de Cloudinary desde los archivos subidos (si hay)
+  // @ts-ignore
+  const coverImageUrl = req.files?.coverImage?.[0]?.path;
+  // @ts-ignore
+  const images = req.files?.images?.map((file) => file.path);
+
   try {
+    // Construir el objeto de datos a actualizar
+    const updateData: any = {
+      title_es, title_en, body_es, body_en, date: new Date(date), tags,
+      category, author, location_city, location_country, phrase, credits,
+    };
+    if (coverImageUrl) updateData.coverImageUrl = coverImageUrl;
+
     const event = await prisma.event.update({
       where: { id },
-      data: {
-        title_es, title_en, body_es, body_en, date: new Date(date), tags,
-        category, author, location_city, location_country, coverImageUrl,
-        phrase, credits,
-      },
+      data: updateData,
     });
-    await prisma.eventImage.deleteMany({ where: { eventId: id } });
+
+    // Actualizar galería solo si se subieron nuevas imágenes
     if (images && images.length > 0) {
+      await prisma.eventImage.deleteMany({ where: { eventId: id } });
       await prisma.eventImage.createMany({
         data: images.map((url: string, idx: number) => ({
           eventId: id,
@@ -111,10 +128,12 @@ export async function updateEvent(req: Request, res: Response) {
         })),
       });
     }
+
     const updated = await prisma.event.findUnique({
       where: { id },
       include: { eventImages: { orderBy: { order: 'asc' } } },
     });
+
     await auditService.log({
       userId: req.user?.id,
       resource: 'event',

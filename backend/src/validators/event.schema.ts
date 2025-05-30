@@ -11,7 +11,7 @@ export const eventSchema = z.object({
   author: z.string().min(1),
   location_city: z.string().min(1),
   location_country: z.string().min(1),
-  coverImageUrl: z.string().url(),
+  coverImageUrl: z.string().url().optional(),
   phrase: z.string().optional(),
   credits: z.string().min(1),
   images: z.array(z.string().url()).optional(),

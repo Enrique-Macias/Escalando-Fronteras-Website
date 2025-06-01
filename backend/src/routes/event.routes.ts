@@ -4,10 +4,11 @@ import {
     getEventById, 
     createEvent, 
     updateEvent, 
-    deleteEvent 
+    deleteEvent, 
+    getEventTranslationById 
 } from '../controllers/event.controller';
 import { validateBody } from '../middlewares/validate';
-import { eventSchema } from '../validators/event.schema';
+import { eventSchema, eventUpdateSchema } from '../validators/event.schema';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import upload from '../config/multer';
 
@@ -15,6 +16,7 @@ const router = Router();
 
 router.get('/', getEventList);
 router.get('/:id', getEventById);
+router.get('/:id/translation', getEventTranslationById);
 router.post(
   '/',
   authMiddleware,
@@ -32,7 +34,7 @@ router.put(
     { name: 'coverImage', maxCount: 1 },
     { name: 'images', maxCount: 10 },
   ]),
-  validateBody(eventSchema),
+  validateBody(eventUpdateSchema),
   updateEvent
 );
 router.delete('/:id', authMiddleware, deleteEvent);

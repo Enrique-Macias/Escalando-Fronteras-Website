@@ -42,7 +42,9 @@ model News {
   body_en          String
   date             DateTime
   tags             String[]
+  tags_en          String[]
   category         String
+  category_en      String?
   author           String
   location_city    String
   location_country String
@@ -70,13 +72,17 @@ model Event {
   body_en          String
   date             DateTime
   tags             String[]
+  tags_en          String[]
   category         String
+  category_en      String?
   author           String
   location_city    String
   location_country String
   coverImageUrl    String
   phrase           String?
+  phrase_en        String?
   credits          String
+  credits_en          String?
   eventImages      EventImage[]  // Relación one-to-many
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt

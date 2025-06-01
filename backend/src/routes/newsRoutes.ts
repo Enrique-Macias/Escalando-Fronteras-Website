@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import upload from '../config/multer';
-import { createNews, getNewsList, getNewsById, updateNews, deleteNews } from '../controllers/news.controller';
+import { createNews, getNewsList, getNewsById, updateNews, deleteNews, getNewsTranslationById } from '../controllers/news.controller';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { validateBody } from '../middlewares/validate';
-import { newsSchema } from '../validators/news.schema';
+import { newsSchema, newsUpdateSchema } from '../validators/news.schema';
 
 const router = Router();
 
 router.get('/', getNewsList);
 router.get('/:id', getNewsById);
+router.get('/:id/translation', getNewsTranslationById);
 router.post(
   '/',
   authMiddleware,
@@ -26,7 +27,7 @@ router.put(
     { name: 'coverImage', maxCount: 1 },
     { name: 'images', maxCount: 10 },
   ]),
-  validateBody(newsSchema),
+  validateBody(newsUpdateSchema),
   updateNews
 );
 router.delete('/:id', authMiddleware, deleteNews);

@@ -91,6 +91,34 @@ export async function getNewsById(req: Request, res: Response) {
   }
 }
 
+// GET /api/v1/news/:id/translation (solo campos en inglés)
+export async function getNewsTranslationById(req: Request, res: Response) {
+  const id = Number(req.params.id);
+  try {
+    const news = await prisma.news.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        title_en: true,
+        body_en: true,
+        category_en: true,
+        tags_en: true,
+        author: true, 
+        location_city: true,
+        location_country: true,
+        // Otros campos en inglés si existen
+      },
+    });
+    if (!news) {
+      res.status(404).json({ code: 'NOT_FOUND', message: 'Noticia no encontrada' });
+      return;
+    }
+    res.json(news);
+  } catch (err: any) {
+    res.status(500).json({ code: 'INTERNAL_SERVER_ERROR', message: err.message || 'Error inesperado.' });
+  }
+}
+
 // POST /api/v1/news (crear)
 export async function createNews(req: Request, res: Response) {
   const {
@@ -203,12 +231,58 @@ export async function updateNews(req: Request, res: Response) {
   const images = req.files?.images?.map((file) => file.path);
 
   try {
+    // Obtener la noticia actual para comparar
+    const current = await prisma.news.findUnique({ where: { id } });
+    if (!current) {
+      res.status(404).json({ code: 'NOT_FOUND', message: 'Noticia no encontrada.' });
+      return;
+    }
+
+    // Traducción automática solo si el campo en español cambió
+    let autoTitleEn = title_en;
+    let autoBodyEn = body_en;
+    let autoCategoryEn = current.category_en;
+    let autoTagsEn = current.tags_en;
+    if (title_es && title_es !== current.title_es) {
+      autoTitleEn = await translate(title_es, 'EN');
+      await auditService.log({ userId: req.user?.id, resource: 'news', action: 'deepl_translate', changes: { field: 'title', original: title_es, translated: autoTitleEn } });
+    }
+    if (body_es && body_es !== current.body_es) {
+      autoBodyEn = await translate(body_es, 'EN');
+      await auditService.log({ userId: req.user?.id, resource: 'news', action: 'deepl_translate', changes: { field: 'body', original: body_es, translated: autoBodyEn } });
+    }
+    if (category && category !== current.category) {
+      autoCategoryEn = await translate(category, 'EN');
+      await auditService.log({ userId: req.user?.id, resource: 'news', action: 'deepl_translate', changes: { field: 'category', original: category, translated: autoCategoryEn } });
+    }
+    if (tags && JSON.stringify(tags) !== JSON.stringify(current.tags)) {
+      autoTagsEn = await Promise.all(tags.map((tag: string) => translate(tag, 'EN')));
+      await auditService.log({ userId: req.user?.id, resource: 'news', action: 'deepl_translate', changes: { field: 'tags', original: tags, translated: autoTagsEn } });
+    }
+
     // Construir el objeto de datos a actualizar
     const updateData: any = {
-      title_es, title_en, body_es, body_en, date: new Date(date), tags,
-      category, author, location_city, location_country,
+      title_es,
+      title_en: autoTitleEn,
+      body_es,
+      body_en: autoBodyEn,
+      tags,
+      tags_en: autoTagsEn,
+      category,
+      category_en: autoCategoryEn,
+      author,
+      location_city,
+      location_country,
     };
     if (coverImageUrl) updateData.coverImageUrl = coverImageUrl;
+    if (date !== undefined) {
+      updateData.date = new Date(date);
+    }
+
+    // Limpia el objeto para quitar los undefined
+    Object.keys(updateData).forEach(
+      (key) => updateData[key] === undefined && delete updateData[key]
+    );
 
     const news = await prisma.news.update({
       where: { id },

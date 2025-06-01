@@ -42,7 +42,9 @@ model News {
   body_en          String
   date             DateTime
   tags             String[]
+  tags_en          String[]
   category         String
+  category_en      String?
   author           String
   location_city    String
   location_country String
@@ -70,7 +72,9 @@ model Event {
   body_en          String
   date             DateTime
   tags             String[]
+  tags_en          String[]
   category         String
+  category_en      String?
   author           String
   location_city    String
   location_country String

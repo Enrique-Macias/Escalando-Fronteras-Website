@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '../generated/prisma';
 import { auditService } from '../services/audit.service';
+import { translate } from '../services/translation.service';
 
 const prisma = new PrismaClient();
 
@@ -104,10 +105,68 @@ export async function createNews(req: Request, res: Response) {
   const images = req.files?.images?.map((file) => file.path) || [];
 
   try {
+    // Traducción automática si no se envía *_en
+    let autoTitleEn = title_en;
+    let autoBodyEn = body_en;
+    let autoCategoryEn = undefined;
+    if (!title_en && title_es) autoTitleEn = await translate(title_es, 'EN');
+    if (!body_en && body_es) autoBodyEn = await translate(body_es, 'EN');
+    if (category) autoCategoryEn = await translate(category, 'EN');
+
+    let autoTagsEn = undefined;
+    if (tags && tags.length > 0) {
+      autoTagsEn = await Promise.all(tags.map((tag: string) => translate(tag, 'EN')));
+    }
+
+    // Registrar traducción en audit logs
+    if (!title_en && title_es) {
+      await auditService.log({
+        userId: req.user?.id,
+        resource: 'news',
+        action: 'deepl_translate',
+        changes: { field: 'title', original: title_es, translated: autoTitleEn }
+      });
+    }
+    if (!body_en && body_es) {
+      await auditService.log({
+        userId: req.user?.id,
+        resource: 'news',
+        action: 'deepl_translate',
+        changes: { field: 'body', original: body_es, translated: autoBodyEn }
+      });
+    }
+    if (category) {
+      await auditService.log({
+        userId: req.user?.id,
+        resource: 'news',
+        action: 'deepl_translate',
+        changes: { field: 'category', original: category, translated: autoCategoryEn }
+      });
+    }
+    if (tags && tags.length > 0) {
+      await auditService.log({
+        userId: req.user?.id,
+        resource: 'news',
+        action: 'deepl_translate',
+        changes: { field: 'tags', original: tags, translated: autoTagsEn }
+      });
+    }
+
     const news = await prisma.news.create({
       data: {
-        title_es, title_en, body_es, body_en, date: new Date(date), tags,
-        category, author, location_city, location_country, coverImageUrl,
+        title_es,
+        title_en: autoTitleEn,
+        body_es,
+        body_en: autoBodyEn,
+        category,
+        category_en: autoCategoryEn,
+        date: new Date(date),
+        tags,
+        tags_en: autoTagsEn,
+        author,
+        location_city,
+        location_country,
+        coverImageUrl,
         newsImages: {
           create: images.map((url: string, idx: number) => ({
             imageUrl: url,

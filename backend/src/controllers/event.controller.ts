@@ -7,7 +7,38 @@ const prisma = new PrismaClient();
 // GET /api/v1/events (lista sin galería)
 export async function getEventList(req: Request, res: Response) {
   try {
-    const events = await prisma.event.findMany({
+    // 1. Leer y normalizar parámetros de paginación y búsqueda
+    const page = Math.max(parseInt(req.query.page as string) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit as string) || 10, 1), 50); // máximo 50
+    const q = (req.query.q as string)?.trim() || '';
+    const dateFrom = req.query.dateFrom ? new Date(req.query.dateFrom as string) : undefined;
+    const dateTo = req.query.dateTo ? new Date(req.query.dateTo as string) : undefined;
+
+    // 2. Construir el filtro (where) dinámico
+    const where: any = {};
+    if (q) {
+      where.OR = [
+        { title_es: { contains: q, mode: 'insensitive' } },
+        { title_en: { contains: q, mode: 'insensitive' } },
+        { tags: { has: q } },
+        { category: { contains: q, mode: 'insensitive' } },
+        { author: { contains: q, mode: 'insensitive' } },
+      ];
+    }
+    if (dateFrom || dateTo) {
+      where.date = {};
+      if (dateFrom) where.date.gte = dateFrom;
+      if (dateTo) where.date.lte = dateTo;
+    }
+
+    // 3. Obtener el total de registros para la paginación
+    const totalItems = await prisma.event.count({ where });
+    const totalPages = Math.ceil(totalItems / limit);
+    const skip = (page - 1) * limit;
+
+    // 4. Obtener los items paginados
+    const items = await prisma.event.findMany({
+      where,
       select: {
         id: true,
         title_es: true,
@@ -25,8 +56,19 @@ export async function getEventList(req: Request, res: Response) {
         updatedAt: true,
       },
       orderBy: { date: 'desc' },
+      skip,
+      take: limit,
     });
-    res.json(events);
+
+    // 5. Responder con items y metadatos
+    res.json({
+      items,
+      meta: {
+        totalItems,
+        totalPages,
+        currentPage: page,
+      },
+    });
   } catch (err: any) {
     res.status(500).json({ code: 'INTERNAL_SERVER_ERROR', message: err.message || 'Error inesperado.' });
   }

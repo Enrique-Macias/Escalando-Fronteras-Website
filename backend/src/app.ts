@@ -11,6 +11,7 @@ import testimonialRouter from './routes/testimonial.routes';
 import auditRouter from './routes/audit.routes';
 import userRouter from './routes/user.routes';
 import uploadRouter from './routes/uploadRoutes';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(customCors);
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // límite de 100 peticiones por ventana por IP
+  message: { code: 'TOO_MANY_REQUESTS', message: 'Demasiadas peticiones, intenta más tarde.' }
+});
+
+app.use(limiter);
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/protected', protectedRouter);

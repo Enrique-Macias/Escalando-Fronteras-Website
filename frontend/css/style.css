@@ -1327,8 +1327,32 @@ blockquote::before {
 
 #testimonial-carousel .carousel-title {
   background: var(--section-bg-color);
-  line-height: normal;
-  margin-bottom: 30px;
+  line-height: 1.4; /* Consistent line height for even spacing */
+  margin: 0 !important; /* Override any global h4 margins */
+  padding: 0 !important; /* Override any global h4 padding */
+  quotes: """ """ "'" "'"; /* Combined with the quotes property */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Override any global paragraph spacing for testimonial text */
+#testimonial-carousel .carousel-title p {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+}
+
+/* Ensure text content has no extra spacing */
+#testimonial-carousel .carousel-title * {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure the last line has no extra spacing */
+#testimonial-carousel .carousel-title:last-line {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 #testimonial-carousel .carousel-title::before {
@@ -1345,34 +1369,31 @@ blockquote::before {
   color: var(--p-color);
   font-size: var(--h1-font-size);
   position: relative;
-  top: 10px;
+  top: 0px; /* Changed from 10px to 0px to eliminate extra spacing */
   left: 10px;
-}
-
-#testimonial-carousel .carousel-title {
-  quotes: "“" "”" "‘" "’";
 }
 
 #testimonial-carousel .carousel-name {
   background: var(--primary-color);
   border-radius: var(--border-radius-medium);
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Changed from hidden to visible to prevent arrow clipping */
   padding: 10px 20px;
+  margin-top: 10px; /* Add some space between text and author box */
 }
 
 #testimonial-carousel .carousel-name::before {
   content: "";
   position: absolute;
-  top: -10px;
+  top: -8px; /* Reduced from -10px to bring arrow closer to box */
   right: 0;
   left: 0;
   width: 0;
   height: 0;
   margin: auto;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid var(--primary-color);
+  border-left: 8px solid transparent; /* Reduced from 10px */
+  border-right: 8px solid transparent; /* Reduced from 10px */
+  border-bottom: 8px solid var(--primary-color); /* Reduced from 10px */
 }
 
 .carousel-name-title {
@@ -1381,10 +1402,10 @@ blockquote::before {
 
 #testimonial-carousel .carousel-indicators {
   position: relative;
-  top: 150px;
+  top: 5px; /* Much closer - almost touching the author box */
   bottom: auto;
-  margin-top: 50px;
-  margin-bottom: 150px;
+  margin-top: 5px; /* Minimal top margin */
+  margin-bottom: 20px; /* Reduced bottom margin */
 }
 
 #testimonial-carousel .carousel-indicators li {
@@ -2151,8 +2172,19 @@ faq {
     height: 200px;
   }
 
-  #testimonial-carousel .carousel-caption {
-    padding-top: 0;
+  #testimonial-carousel .carousel-indicators {
+    top: 3px; /* Very close on tablets */
+    margin-top: 3px;
+    margin-bottom: 15px;
+  }
+  
+  #testimonial-carousel .carousel-title {
+    margin-bottom: 0px !important; /* No margin on tablets */
+    line-height: 1.3; /* Slightly tighter line height on tablets */
+  }
+  
+  #testimonial-carousel .carousel-name {
+    margin-top: 8px; /* Slightly less space on tablets */
   }
 
   blockquote {
@@ -2270,10 +2302,19 @@ faq {
     height: 100px;
   }
 
-  .testimonial-section::after {
-    bottom: -150px;
-    width: 200px;
-    height: 200px;
+  #testimonial-carousel .carousel-indicators {
+    top: 2px; /* Almost touching on small screens */
+    margin-top: 2px;
+    margin-bottom: 10px;
+  }
+  
+  #testimonial-carousel .carousel-title {
+    margin-bottom: 0px !important; /* No margin on small screens */
+    line-height: 1.2; /* Tighter line height on small screens */
+  }
+  
+  #testimonial-carousel .carousel-name {
+    margin-top: 6px; /* Less space on small screens */
   }
 
   .social-share .tags-block {

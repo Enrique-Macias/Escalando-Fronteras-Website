@@ -53,7 +53,15 @@ class TeamAPI {
             limit: 100, // Get all team members
             lang: lang
         });
-        return response.data || [];
+        
+        // Handle both paginated response format and direct array format
+        if (Array.isArray(response)) {
+            return response;
+        } else if (response && response.data) {
+            return response.data;
+        } else {
+            return [];
+        }
     }
 
     /**
@@ -89,8 +97,16 @@ class TeamAPI {
             ...options
         });
 
+        // Handle both paginated response format and direct array format
+        let teamMembers = [];
+        if (Array.isArray(response)) {
+            teamMembers = response;
+        } else if (response && response.data) {
+            teamMembers = response.data;
+        }
+
         // Filter by exact role match
-        const filteredMembers = (response.data || []).filter(member => {
+        const filteredMembers = teamMembers.filter(member => {
             const memberRole = options.lang === 'en' ? member.role_en : member.role;
             return memberRole && memberRole.toLowerCase().includes(role.toLowerCase());
         });
@@ -108,7 +124,15 @@ class TeamAPI {
             limit: 6,
             lang: lang
         });
-        return response.data || [];
+        
+        // Handle both paginated response format and direct array format
+        if (Array.isArray(response)) {
+            return response.slice(0, 6); // Take first 6 members
+        } else if (response && response.data) {
+            return response.data;
+        } else {
+            return [];
+        }
     }
 }
 

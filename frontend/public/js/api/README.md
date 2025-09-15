@@ -44,6 +44,25 @@ Add these script tags to your HTML files (in order):
 
 ### 2. Update Configuration
 
+#### Option A: Using Environment Variables (Recommended)
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` file and update the API base URL:
+   ```bash
+   EF_CMS_API_URL=https://your-actual-cms-url.vercel.app/api
+   ```
+
+3. Run the build process to inject environment variables:
+   ```bash
+   npm run build
+   ```
+
+#### Option B: Direct Configuration
+
 Edit `config.js` and update the API base URL:
 
 ```javascript
@@ -166,6 +185,42 @@ EFAPI.language.setLanguage('en');
 ```
 
 ## Configuration
+
+### Environment Variables
+
+The API services support configuration through environment variables. Create a `.env` file in the project root:
+
+```bash
+# API Configuration
+EF_CMS_API_URL=https://your-cms-domain.vercel.app/api
+EF_CMS_API_URL_DEV=http://localhost:3000/api
+EF_CMS_API_URL_STAGING=https://ef-cms-staging.vercel.app/api
+EF_CMS_API_URL_PROD=https://ef-cms.vercel.app/api
+
+# Default Settings
+EF_CMS_DEFAULT_LANG=es
+EF_CMS_TIMEOUT=10000
+EF_CMS_ITEMS_PER_PAGE=10
+
+# Feature Flags
+EF_CMS_ENABLE_SEARCH=true
+EF_CMS_ENABLE_PAGINATION=true
+EF_CMS_ENABLE_LANGUAGE_SWITCHING=true
+EF_CMS_ENABLE_ERROR_RETRY=true
+EF_CMS_ENABLE_OFFLINE_MODE=false
+
+# UI Settings
+EF_CMS_SHOW_LOADING_SPINNERS=true
+EF_CMS_SHOW_ERROR_MESSAGES=true
+EF_CMS_ENABLE_INFINITE_SCROLL=false
+
+# Cache Settings
+EF_CMS_CACHE_ENABLED=true
+EF_CMS_CACHE_TTL=300000
+EF_CMS_CACHE_MAX_SIZE=50
+```
+
+### Direct Configuration
 
 Update `config.js` to customize:
 

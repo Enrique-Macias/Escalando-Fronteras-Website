@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API URL Test</title>
+</head>
+<body>
+    <h1>API URL Test</h1>
+    <div id="results"></div>
+
+    <!-- Scripts -->
+    <script src="js/api/env-vars.js"></script>
+    <script src="js/api/config.js"></script>
+    <script src="js/api/client.js"></script>
+    <script src="js/api/language.js"></script>
+    <script src="js/api/team.js"></script>
+    <script src="js/api/index.js"></script>
+    
+    <script>
+        document.addEventListener('apiServicesReady', function() {
+            const results = document.getElementById('results');
+            
+            results.innerHTML = `
+                <h2>Environment Variables:</h2>
+                <p><strong>EF_ENV_VARS:</strong> ${JSON.stringify(window.EF_ENV_VARS, null, 2)}</p>
+                
+                <h2>API Client:</h2>
+                <p><strong>Base URL:</strong> ${EFAPI.client.baseURL}</p>
+                
+                <h2>Test API Call:</h2>
+                <button onclick="testAPI()">Test Team API</button>
+                <div id="api-result"></div>
+            `;
+        });
+
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = '<p>Testing API...</p>';
+            
+            try {
+                const teamMembers = await EFAPI.team.getAllTeamMembers('es');
+                resultDiv.innerHTML = `
+                    <h3>✅ Success!</h3>
+                    <p><strong>Team Members:</strong> ${teamMembers.length}</p>
+                    <pre>${JSON.stringify(teamMembers, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <h3>❌ Error:</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

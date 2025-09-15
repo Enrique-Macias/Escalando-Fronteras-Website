@@ -12,7 +12,7 @@
     "inject-env": "node scripts/inject-env.js",
     "copy-assets": "mkdir -p dist && cp -r css dist/ && cp -r fonts dist/ && cp -r images dist/ && cp -r js dist/ && cp *.html dist/ && cp -r dist public",
     "minify-css": "cleancss -o dist/css/style.min.css css/style.css && cp dist/css/style.min.css public/css/",
-    "minify-js": "terser js/api/env-vars.js js/custom.js js/click-scroll.js js/counter.js js/faq.js js/youtube.js js/api/*.js -o dist/js/app.min.js && cp dist/js/app.min.js public/js/",
+    "minify-js": "terser js/api/env-vars.js js/custom.js js/click-scroll.js js/counter.js js/faq.js js/youtube.js js/team-integration.js js/api/*.js -o dist/js/app.min.js && cp dist/js/app.min.js public/js/",
     "preview": "live-server dist --port=3001 --open=/index.html"
   },
   "keywords": [

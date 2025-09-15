@@ -5,13 +5,33 @@
 
 class APIClient {
     constructor() {
-        // Update this URL to match your CMS deployment URL
-        this.baseURL = 'https://your-cms-domain.vercel.app/api';
+        // Get API URL from environment variables or use fallback
+        this.baseURL = this.getAPIBaseURL();
         this.timeout = 10000; // 10 seconds timeout
         this.defaultHeaders = {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         };
+    }
+
+    /**
+     * Get API base URL from environment variables
+     * @returns {string} - API base URL
+     */
+    getAPIBaseURL() {
+        // Check if environment variables are available
+        if (typeof window !== 'undefined' && window.EF_ENV_VARS) {
+            const envURL = window.EF_ENV_VARS.EF_CMS_API_URL;
+            if (envURL) {
+                console.log('🌐 Using API URL from environment:', envURL);
+                return envURL;
+            }
+        }
+
+        // Fallback to Railway URL
+        const fallbackURL = 'https://ef-cms-production.up.railway.app/api';
+        console.log('🌐 Using fallback API URL:', fallbackURL);
+        return fallbackURL;
     }
 
     /**

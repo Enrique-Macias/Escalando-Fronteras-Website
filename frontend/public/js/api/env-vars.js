@@ -5,7 +5,7 @@
  */
 
 window.EF_ENV_VARS = {
-  "EF_CMS_API_URL": "https://ef-cms-production.up.railway.app/",
+  "EF_CMS_API_URL": "https://ef-cms-production.up.railway.app/api",
   "EF_CMS_API_URL_DEV": "http://localhost:3000/api",
   "EF_CMS_API_URL_STAGING": "https://ef-cms-staging.vercel.app/api",
   "EF_CMS_API_URL_PROD": "https://ef-cms.vercel.app/api",

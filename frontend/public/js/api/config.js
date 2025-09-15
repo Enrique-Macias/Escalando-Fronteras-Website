@@ -77,6 +77,15 @@ window.EFCMS_CONFIG = {
 
 // Helper function to get current API URL
 window.getAPIBaseURL = function() {
+    // First try to get from environment variables
+    if (typeof window !== 'undefined' && window.EF_ENV_VARS) {
+        const envURL = window.EF_ENV_VARS.EF_CMS_API_URL;
+        if (envURL) {
+            return envURL;
+        }
+    }
+    
+    // Fallback to config
     const env = window.location.hostname === 'localhost' ? 'development' : 'production';
     return window.EFCMS_CONFIG.apiUrls[env] || window.EFCMS_CONFIG.apiBaseURL;
 };

@@ -452,61 +452,14 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam doloremque quibusdam repellendus. Sunt assumenda aperiam vero ullam ut. 
                             Beatae natus ipsum quam voluptas eaque, iusto laudantium dolore illo veniam eveniet vitae soluta temporibus a voluptatem.</p>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                            <div class="member" data-aos="fade-up" data-aos-delay="100">
-                                <div class="member-img">
-                                    <img src="images/team/alejandro_medina.jpeg" class="img-fluid" alt="">
-                                    <!-- === Iconos Sociales === -->
-                                    <div class="social">
-                                        <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
-                                        <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
-                                        <a href="https://www.x.com" class="social-icon-link bi-twitter" target="_blank"></a>
-                                    </div>
+                    <div class="row" id="team-container">
+                        <!-- Team members will be loaded dynamically here -->
+                        <div class="col-12 text-center">
+                            <div class="loading-spinner" id="team-loading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando equipo...</span>
                                 </div>
-                                <!-- === Informacion de Equipo === -->
-                                <div class="member-info">
-                                    <h4>Alejandro Medina</h4>
-                                    <span>Co-Director</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- === 2 === -->
-                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                            <div class="member" data-aos="fade-up" data-aos-delay="200">
-                                <div class="member-img">
-                                    <img src="images/team/siebeEF.jpeg" class="img-fluid" alt="">
-                                    <!-- === Iconos Sociales === -->
-                                    <div class="social">
-                                        <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
-                                        <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
-                                        <a href="https://www.x.com" class="social-icon-link bi-twitter" target="_blank"></a>
-                                    </div>
-                                </div>
-                                <!-- === Informacion de Equipo === -->
-                                <div class="member-info">
-                                    <h4>Alejandro Medina</h4>
-                                    <span>Director</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- === 3 === -->
-                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                            <div class="member" data-aos="fade-up" data-aos-delay="300">
-                                <div class="member-img">
-                                    <img src="images/team/francesaEF.jpeg" class="img-fluid" alt="">
-                                    <!-- === Iconos Sociales === -->
-                                    <div class="social">
-                                        <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
-                                        <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
-                                        <a href="https://www.x.com" class="social-icon-link bi-twitter" target="_blank"></a>
-                                    </div>
-                                </div>
-                                <!-- === Informacion de Equipo === -->
-                                <div class="member-info">
-                                    <h4>Alejandro Medina</h4>
-                                    <span>Fundador</span>
-                                </div>
+                                <p class="mt-2">Cargando equipo...</p>
                             </div>
                         </div>
                     </div>
@@ -1163,6 +1116,21 @@
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
         <script src="js/youtube.js"></script>
+        
+        <!-- EF CMS API Services -->
+        <script src="js/api/env-vars.js"></script>
+        <script src="js/api/config.js"></script>
+        <script src="js/api/client.js"></script>
+        <script src="js/api/language.js"></script>
+        <script src="js/api/news.js"></script>
+        <script src="js/api/events.js"></script>
+        <script src="js/api/team.js"></script>
+        <script src="js/api/testimonials.js"></script>
+        <script src="js/api/articles.js"></script>
+        <script src="js/api/index.js"></script>
+        
+        <!-- Team Integration Script -->
+        <script src="js/team-integration.js"></script>
         <script>
             window.onload = function() {
                 // Reset the form fields when the page loads

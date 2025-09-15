@@ -1457,15 +1457,40 @@ blockquote::before {
   width: 100%;
   background-color: #f7f7f7;
   position: relative;
+  height: 100%; /* Ensures all cards have the same height */
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px; /* Adds rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  overflow: hidden; /* Ensures content doesn't overflow */
 }
 
-.blog-section .section-content .cards .card img {
+.blog-section .section-content .cards .card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.blog-section .section-content .cards .card .image-section {
+  position: relative;
+  height: 200px; /* Reduced height for smaller cards */
   width: 100%;
-  height: auto;
+  overflow: hidden;
+}
+
+.blog-section .section-content .cards .card .image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images fill the container while maintaining aspect ratio */
+  object-position: center; /* Centers the image within the container */
 }
 
 .blog-section .section-content .cards .card .article {
-  padding: 15px 20px;
+  padding: 15px 20px; /* Reduced padding for more compact cards */
+  flex-grow: 1; /* Allows the article section to expand and fill remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distributes content evenly */
 }
 
 .blog-section .section-content .cards .card .article h4 {
@@ -1479,14 +1504,25 @@ blockquote::before {
   color: #6a6a6a;
 }
 
-.blog-section .section-content .cards .card a {
+.blog-section .section-content .cards .card .blog-view {
+  padding: 0 20px 20px 20px; /* Consistent padding with article section */
+  margin-top: auto; /* Pushes button to bottom */
+}
+
+.blog-section .section-content .cards .card .blog-view a {
   text-decoration: none;
   display: inline-block;
   background-color: var(--custom-btn-bg-color);
-  padding: 8px 15px;
-  margin-left: 20px;
+  padding: 10px 20px;
   color: #fff;
-  margin-bottom: 20px;
+  border-radius: 5px; /* Adds rounded corners to button */
+  transition: background-color 0.3s ease; /* Smooth color transition */
+  font-weight: 500;
+}
+
+.blog-section .section-content .cards .card .blog-view a:hover {
+  background-color: #2c3e50; /* Darker color on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
 }
 
 .blog-section .section-content .cards .card .posted-date p {
@@ -1504,12 +1540,34 @@ blockquote::before {
 @media screen and (max-width: 992px) {
   .blog-section .section-content .cards {
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px; /* Reduced gap on tablets */
+  }
+  
+  .blog-section .section-content .cards .card .image-section {
+    height: 180px; /* Proportionally smaller on tablets */
   }
 }
 
 @media screen and (max-width: 768px) {
   .blog-section .section-content .cards {
     grid-template-columns: 1fr;
+    grid-gap: 25px; /* Reduced gap on mobile */
+  }
+  
+  .blog-section .section-content .cards .card .image-section {
+    height: 160px; /* Proportionally smaller on mobile */
+  }
+  
+  .blog-section .section-content .cards .card .article {
+    padding: 12px 15px; /* Reduced padding on mobile */
+  }
+  
+  .blog-section .section-content .cards .card .article h4 {
+    font-size: 20px; /* Slightly smaller title on mobile */
+  }
+  
+  .blog-section .section-content .cards .card .blog-view {
+    padding: 0 15px 12px 15px; /* Consistent mobile padding */
   }
 }
 

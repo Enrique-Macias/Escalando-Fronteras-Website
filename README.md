@@ -42,14 +42,63 @@ Escalando-Fronteras-Website/
    cd Escalando-Fronteras-Website
    ```
 
-3. **Open the website**:
-   - **Option 1**: Simply open `frontend/index.html` in your web browser
-   - **Option 2**: Use a local server (recommended for development):
-     ```bash
-     cd frontend
-     python -m http.server 8000
-     # Then visit http://localhost:8000
-     ```
+3. **Start the development server**:
+   ```bash
+   # From root directory
+   npm run dev
+   
+   # OR from frontend directory
+   cd frontend
+   npm run dev
+   ```
+   This will start a live development server at `http://localhost:3000` with auto-reload functionality.
+
+   **Alternative**: Simply open `frontend/index.html` in your web browser (without live reload)
+
+## Development
+
+The project uses `live-server` for development, which provides:
+- **Auto-reload**: Automatically refreshes the browser when files change
+- **Live reload**: Real-time updates without manual refresh
+- **CORS support**: Handles cross-origin requests properly
+- **Simple setup**: Just run `npm run dev` to start
+
+### Available Scripts
+
+- `npm run dev` - Start development server with live reload
+- `npm start` - Same as dev (alias)
+- `npm run serve` - Same as dev (alias)
+- `npm run build` - Build production-ready files to `dist/` folder
+- `npm run preview` - Preview the built files on `http://localhost:3001`
+
+### Build Process
+
+The build process creates optimized production files in the `dist/` folder:
+
+- **File copying**: Copies all HTML, CSS, images, fonts, and JavaScript files
+- **CSS minification**: Creates `style.min.css` for faster loading
+- **JavaScript minification**: Combines and minifies custom JS files into `app.min.js`
+- **Production ready**: The `dist/` folder contains everything needed for deployment
+
+To build for production:
+```bash
+# From root directory
+npm run build
+
+# OR from frontend directory
+cd frontend
+npm run build
+```
+
+To preview the built version:
+```bash
+# From root directory
+npm run preview
+
+# OR from frontend directory
+cd frontend
+npm run preview
+```
 
 ## Usage
 

@@ -1,0 +1,19 @@
+{
+  "name": "escalando-fronteras-website",
+  "version": "1.0.0",
+  "description": "Escalando Fronteras organization website",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview",
+    "start": "cd frontend && npm start"
+  },
+  "keywords": [
+    "static",
+    "website",
+    "nonprofit",
+    "escalando-fronteras"
+  ],
+  "author": "Enrique Macías López",
+  "license": "MIT"
+}

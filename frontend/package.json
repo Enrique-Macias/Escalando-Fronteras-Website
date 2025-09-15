@@ -7,11 +7,12 @@
     "dev": "live-server --port=3000 --open=/index.html --host=localhost",
     "start": "live-server --port=3000 --open=/index.html --host=localhost",
     "serve": "live-server --port=3000 --open=/index.html --host=localhost",
-    "build": "npm run clean && npm run copy-assets && npm run minify-css && npm run minify-js",
+    "build": "npm run clean && npm run inject-env && npm run copy-assets && npm run minify-css && npm run minify-js",
     "clean": "rimraf dist public",
+    "inject-env": "node scripts/inject-env.js",
     "copy-assets": "mkdir -p dist && cp -r css dist/ && cp -r fonts dist/ && cp -r images dist/ && cp -r js dist/ && cp *.html dist/ && cp -r dist public",
     "minify-css": "cleancss -o dist/css/style.min.css css/style.css && cp dist/css/style.min.css public/css/",
-    "minify-js": "terser js/custom.js js/click-scroll.js js/counter.js js/faq.js js/youtube.js -o dist/js/app.min.js && cp dist/js/app.min.js public/js/",
+    "minify-js": "terser js/api/env-vars.js js/custom.js js/click-scroll.js js/counter.js js/faq.js js/youtube.js js/api/*.js -o dist/js/app.min.js && cp dist/js/app.min.js public/js/",
     "preview": "live-server dist --port=3001 --open=/index.html"
   },
   "keywords": [
@@ -26,10 +27,11 @@
   "author": "Enrique Macías López",
   "license": "MIT",
   "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "cpx": "^1.5.0",
+    "dotenv": "^17.2.2",
     "live-server": "^1.2.2",
     "rimraf": "^5.0.5",
-    "cpx": "^1.5.0",
-    "clean-css-cli": "^5.6.2",
     "terser": "^5.24.0"
   },
   "repository": {

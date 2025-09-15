@@ -1112,6 +1112,8 @@ blockquote::before {
   border-radius: 5px;
   background: #fff;
   height: 100%; /* Ensures all cards have the same height */
+  width: 100%; /* Full width of the column */
+  max-width: 100%; /* Prevent overflow */
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for better visual separation */
@@ -1126,7 +1128,7 @@ blockquote::before {
 .team .member .member-img {
   position: relative;
   overflow: hidden;
-  height: 300px; /* Fixed height for consistency */
+  height: 380px; /* Increased height for bigger images */
   width: 100%;
 }
 
@@ -1184,14 +1186,20 @@ blockquote::before {
 
 .team .col-lg-3.col-md-6 {
   flex: 0 0 auto;
-  max-width: none;
+  max-width: 400px; /* Increased maximum width for bigger cards */
   margin-bottom: 30px; /* Adds consistent spacing between rows */
+  width: auto; /* Let cards size naturally */
+  flex: 0 0 auto; /* Allow natural sizing */
 }
 
 /* Responsive adjustments for team member cards */
 @media (max-width: 768px) {
+  .team .col-lg-3.col-md-6 {
+    max-width: 350px; /* Increased for tablets too */
+  }
+  
   .team .member .member-img {
-    height: 250px; /* Slightly smaller images on mobile */
+    height: 320px; /* Increased height for tablets */
   }
   
   .team .member .member-info {
@@ -1204,13 +1212,18 @@ blockquote::before {
 }
 
 @media (max-width: 576px) {
+  .team .col-lg-3.col-md-6 {
+    max-width: 100%; /* Full width on very small screens */
+    width: 100%;
+  }
+  
   .team .member .member-img {
-    height: 220px; /* Even smaller on very small screens */
+    height: 280px; /* Increased height for mobile */
   }
 }
 
 .team .member .member-info {
-  padding: 25px 15px;
+  padding: 30px 20px; /* Increased padding for bigger cards */
   flex-grow: 1; /* Allows the info section to expand and fill remaining space */
   display: flex;
   flex-direction: column;

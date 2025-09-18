@@ -72,7 +72,7 @@ class TeamIntegration {
 
     displayTeamMembers(teamMembers) {
         if (!teamMembers || teamMembers.length === 0) {
-            this.showEmptyState();
+            this.hideSection();
             return;
         }
 
@@ -147,6 +147,15 @@ class TeamIntegration {
         }
 
         return links.join('');
+    }
+
+    hideSection() {
+        console.log('🚫 No team data available, hiding team section');
+        const teamSection = document.querySelector('#team');
+        if (teamSection) {
+            teamSection.style.display = 'none';
+            console.log('✅ Team section hidden successfully');
+        }
     }
 
     showError(error) {

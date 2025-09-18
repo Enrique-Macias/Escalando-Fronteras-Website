@@ -85,7 +85,7 @@ class ArticlesIntegration {
 
     displayArticles(articles) {
         if (!articles || articles.length === 0) {
-            this.showEmptyState();
+            this.hideSection();
             return;
         }
 
@@ -179,6 +179,15 @@ class ArticlesIntegration {
                 </div>
             </div>
         `;
+    }
+
+    hideSection() {
+        console.log('🚫 No articles data available, hiding articles section');
+        const articlesSection = document.querySelector('.blog-section');
+        if (articlesSection) {
+            articlesSection.style.display = 'none';
+            console.log('✅ Articles section hidden successfully');
+        }
     }
 
     showEmptyState() {

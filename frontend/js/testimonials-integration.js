@@ -86,7 +86,7 @@ class TestimonialsIntegration {
 
     displayTestimonials(testimonials) {
         if (!testimonials || testimonials.length === 0) {
-            this.showEmptyState();
+            this.hideSection();
             return;
         }
 
@@ -175,6 +175,15 @@ class TestimonialsIntegration {
                 </div>
             </div>
         `;
+    }
+
+    hideSection() {
+        console.log('🚫 No testimonials data available, hiding testimonials section');
+        const testimonialsSection = document.querySelector('.testimonial-section');
+        if (testimonialsSection) {
+            testimonialsSection.style.display = 'none';
+            console.log('✅ Testimonials section hidden successfully');
+        }
     }
 
     showEmptyState() {

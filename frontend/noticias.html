@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Escalando Fronteras - Noticias</title>
+        <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
+
+        <!-- ======================= CSS Styles ================== -->           
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+    </head>
+    
+    <body>
+
+        <header class="site-header">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="col-lg-8 col-12 d-flex flex-wrap">
+                        <p class="d-flex me-4 mb-0">
+                            <i class="bi-geo-alt me-2"></i>
+                            Monterrey, Nuevo León, México
+                        </p>
+
+                        <p class="d-flex mb-0">
+                            <i class="bi-envelope me-2"></i>
+
+                            <a href="mailto:Nadia@ClimbingBorders.org">
+                                Nadia@ClimbingBorders.org 
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                        <ul class="social-icon">
+
+                            <li class="social-icon-item">
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                            </li>
+                            <li class="social-icon-item">
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-whatsapp"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        
+        <!-- ======================= NAVIGATION BAR ================== -->
+        <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Escalando_Fronteras_Official_Logo.png/220px-Escalando_Fronteras_Official_Logo.png">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_1">Inicio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link smoothscroll" href="index.html#section_2">Acerca de</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_3">Apoyo</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_4">Voluntario</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
+
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item active" href="noticias.html">Noticias</a></li>
+
+                                <li><a class="dropdown-item" href="eventos2024.html">Eventos</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_6">Contacto</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="faq.html">FAQ</a>
+                        </li>
+
+                        <li class="nav-item ms-3">
+                            <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Dona</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ======================= Main Section ================== -->
+        <main>
+
+            <section class="news-detail-header-section text-center">
+                <div class="section-overlay"></div>
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-12">
+                            <h1 class="text-white">Noticias</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================= Main News Section ================== -->
+            <section class="news-section section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-7 col-12">
+                            <!-- Main News Article (Dynamic Content) -->
+                            <div id="main-news-container">
+                                <div class="d-flex justify-content-center align-items-center" style="min-height: 400px;">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando noticia principal...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ======================= SIDEBAR SECTION ================== -->
+                        <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
+                            <form class="custom-form search-form" action="#" method="post" role="form">
+                                <input class="form-control" type="search" placeholder="Buscar noticias" aria-label="Search" id="news-search">
+
+                                <button type="submit" class="form-control">
+                                    <i class="bi-search"></i>
+                                </button>
+                            </form>
+
+                            <h5 class="mt-5 mb-3">Noticias Recientes</h5>
+
+                            <!-- Recent News Container (Dynamic Content) -->
+                            <div id="recent-news-sidebar-container">
+                                <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando noticias recientes...</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Categories Section (Dynamic Content) -->
+                            <div class="category-block d-flex flex-column">
+                                <h5 class="mb-3">Categorías</h5>
+                                <div id="categories-sidebar-container">
+                                    <div class="d-flex justify-content-center align-items-center" style="min-height: 100px;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Cargando categorías...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================= All News Section ================== -->
+            <section class="news-section section-padding section-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-12 mb-4">
+                            <h2>Noticias</h2>
+                        </div>
+                    </div>
+
+                    <!-- News Grid Container (Dynamic Content) -->
+                    <div id="all-news-grid-container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center" style="min-height: 300px;">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando todas las noticias...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ======================= FOOTER SECTION ================== -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-12 mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Escalando_Fronteras_Official_Logo.png/220px-Escalando_Fronteras_Official_Logo.png" class="logo img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                        <h5 class="site-footer-title mb-3">Enlaces</h5>
+
+                        <ul class="footer-menu">
+                            <li class="footer-menu-item"><a href="index.html#section_2" class="footer-menu-link">Nuestra Historia</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link">Mirar Documental</a></li>
+
+                            <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#section_4" class="footer-menu-link">Conviértete en Voluntario</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link">Asóciate con Nosotros</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#articulos" class="footer-menu-link">Artículos</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mx-auto">
+                        <h5 class="site-footer-title mb-3">Contáctanos</h5>
+
+                        <p class="text-white d-flex mb-2">
+                            <i class="bi-telephone me-2"></i>
+
+                            <a href="tel: 120-240-9600" class="site-footer-link">
+                                120-240-9600
+                            </a>
+                        </p>
+
+                        <p class="text-white d-flex">
+                            <i class="bi-envelope me-2"></i>
+
+                            <a href="mailto:info@yourgmail.com" class="site-footer-link">
+                                Nadia@ClimbingBorders.org
+                            </a>
+                        </p>
+
+                        <p class="text-white d-flex mt-3">
+                            <i class="bi-geo-alt me-2"></i>
+                            Monterrey, Nuevo León, México
+                        </p>
+
+                        <a href="#" class="custom-btn btn mt-3">Obtener Dirección</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="site-footer-bottom">
+                <div class="container">
+                    <div class="row">
+
+                        
+                        
+                        <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+                            <ul class="social-icon">
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-facebook"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-instagram"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-whatsapp"></a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/counter.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="js/youtube.js"></script>
+        
+        <!-- EF CMS API Services -->
+        <script src="js/api/env-vars.js"></script>
+        <script src="js/api/config.js"></script>
+        <script src="js/api/client.js"></script>
+        <script src="js/api/language.js"></script>
+        <script src="js/api/news.js"></script>
+        <script src="js/api/events.js"></script>
+        <script src="js/api/team.js"></script>
+        <script src="js/api/testimonials.js"></script>
+        <script src="js/api/articles.js"></script>
+        <script src="js/api/index.js"></script>
+        
+        <!-- News Page Integration Script -->
+        <script src="js/noticias-integration.js"></script>
+
+    </body>
+</html>

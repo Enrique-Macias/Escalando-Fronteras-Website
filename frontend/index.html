@@ -84,12 +84,12 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link click-scroll dropdown-toggle" href="#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Eventos</a>
+                            <a class="nav-link click-scroll dropdown-toggle" href="#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" href="eventos2023.html">Eventos 2023</a></li>
+                                <li><a class="dropdown-item" href="noticias.html">Noticias</a></li>
 
-                                <li><a class="dropdown-item" href="eventos2024.html">Eventos 2024</a></li>
+                                <li><a class="dropdown-item" href="eventos2024.html">Eventos</a></li>
                             </ul>
                         </li>
 
@@ -515,15 +515,15 @@
                                     <input type="checkbox" name="botcheck" id="" style="display: none;">
 
                                     <div class="col-lg-6 col-12">
-                                        <input type="text" name="Nombre-voluntario" id="volunteer-name" class="form-control" placeholder="Nombre" required>
+                                        <input type="text" name="Nombre-voluntario" id="volunteer-name" class="form-control" placeholder="Nombre" autocomplete="given-name" required>
                                     </div>
 
                                     <div class="col-lg-6 col-12">    
-                                        <input type="email" name="Email-voluntario" id="volunteer-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Correo Electrónico" required>
+                                        <input type="email" name="Email-voluntario" id="volunteer-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Correo Electrónico" autocomplete="email" required>
                                     </div>
 
                                     <div class="col-lg-6 col-12">
-                                        <input type="text" name="Asunto-voluntario" id="volunteer-subject" class="form-control" placeholder="Asunto" required>
+                                        <input type="text" name="Asunto-voluntario" id="volunteer-subject" class="form-control" placeholder="Asunto" autocomplete="off" required>
                                     </div>
 
                                     <div class="col-lg-6 col-12">
@@ -537,7 +537,7 @@
                                     </div>
                                 </div>
 
-                                <textarea name="Mensaje-voluntario" rows="3" class="form-control" id="volunteer-message" placeholder="Comentarios (Opcional)"></textarea>
+                                <textarea name="Mensaje-voluntario" rows="3" class="form-control" id="volunteer-message" placeholder="Comentarios (Opcional)" autocomplete="off"></textarea>
 
                                 <button type="submit" class="form-control">Entregar</button>
 
@@ -684,17 +684,17 @@
                                     <input type="checkbox" name="botcheck" id="" style="display: none;">
 
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <input type="text" name="Contacto-Nombre" id="first-name" class="form-control" placeholder="Alejandro" required>
+                                        <input type="text" name="Contacto-Nombre" id="first-name" class="form-control" placeholder="Alejandro" autocomplete="given-name" required>
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <input type="text" name="Contacto-Apellido" id="last-name" class="form-control" placeholder="Medina" required>
+                                        <input type="text" name="Contacto-Apellido" id="last-name" class="form-control" placeholder="Medina" autocomplete="family-name" required>
                                     </div>
                                 </div>
 
-                                <input type="email" name="Contacto-Email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Alejandro@gmail.com" required>
+                                <input type="email" name="Contacto-Email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Alejandro@gmail.com" autocomplete="email" required>
 
-                                <textarea name="Contacto-Mensaje" rows="5" class="form-control" id="message" placeholder="Asunto"></textarea>
+                                <textarea name="Contacto-Mensaje" rows="5" class="form-control" id="message" placeholder="Asunto" autocomplete="off"></textarea>
 
                                 <button type="submit" class="form-control">Enviar Mensaje</button>
 
@@ -925,10 +925,7 @@
         </script>
 
 
-        <!-- Inclusión de Bootstrap JS y Popper.js -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+        <!-- Note: Bootstrap JS and jQuery are already loaded locally above -->
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('a[href^="#"]').forEach(link => {

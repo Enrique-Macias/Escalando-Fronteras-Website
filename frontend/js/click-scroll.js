@@ -3,9 +3,21 @@
 var sectionArray = [1, 2, 3, 4, 5, 6];
 
 $.each(sectionArray, function(index, value){
+    
+    // Check if the section exists before setting up scroll listeners
+    var sectionElement = $('#' + 'section_' + value);
+    if (sectionElement.length === 0) {
+        // Section doesn't exist, skip this iteration
+        return true; // Continue to next iteration
+    }
           
      $(document).scroll(function(){
-         var offsetSection = $('#' + 'section_' + value).offset().top - 90;
+         var sectionOffset = sectionElement.offset();
+         if (!sectionOffset) {
+             return; // Exit if offset is undefined
+         }
+         
+         var offsetSection = sectionOffset.top - 90;
          var docScroll = $(document).scrollTop();
          var docScroll1 = docScroll + 1;
          
@@ -20,7 +32,12 @@ $.each(sectionArray, function(index, value){
      });
     
     $('.click-scroll').eq(index).click(function(e){
-        var offsetClick = $('#' + 'section_' + value).offset().top - 90;
+        var clickOffset = sectionElement.offset();
+        if (!clickOffset) {
+            return; // Exit if offset is undefined
+        }
+        
+        var offsetClick = clickOffset.top - 90;
         e.preventDefault();
         $('html, body').animate({
             'scrollTop':offsetClick

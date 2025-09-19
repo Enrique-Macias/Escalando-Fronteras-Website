@@ -388,7 +388,7 @@ class NewsIntegration {
                             font-size: 12px;
                             transition: all 0.3s ease;
                         " onmouseover="this.style.background='var(--primary-color)'" onmouseout="this.style.background='var(--secondary-color)'">
-                            <i class="bi-arrow-left me-1"></i>Ver todos los eventos
+                            <i class="bi-arrow-left me-1"></i>Ver los más recientes
                         </button>
                     </div>
                 </div>

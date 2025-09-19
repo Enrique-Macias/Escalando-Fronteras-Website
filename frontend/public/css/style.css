@@ -962,6 +962,10 @@ strong {
 .news-category-block .category-block-link {
   color: var(--white-color);
   margin-right: 10px;
+  border-radius: 0 !important; /* Remove border radius from location overlay */
+  background: transparent !important; /* Remove background since parent has background */
+  border: none !important; /* Remove border since parent handles styling */
+  padding: 0 !important; /* Remove padding since parent handles spacing */
 }
 
 .news-block-info {
@@ -986,6 +990,74 @@ strong {
   width: 100%;
   overflow: hidden;
   border-radius: var(--border-radius-medium);
+}
+
+/* ===================== Compact News Grid Styling ===================== */
+/* For news grid at bottom of noticias.html - 3 columns on desktop */
+.news-section.section-bg .news-block-top {
+  height: 250px; /* Smaller height for grid layout */
+}
+
+.news-section.section-bg .news-block {
+  margin-bottom: 30px; /* Consistent spacing between cards */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow for cards */
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-section.section-bg .news-block:hover {
+  transform: translateY(-5px); /* Subtle lift on hover */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+}
+
+.news-section.section-bg .news-block-info {
+  padding: 20px; /* Compact padding for grid cards */
+}
+
+.news-section.section-bg .news-block-title h4 {
+  font-size: 18px; /* Smaller title for compact layout */
+  line-height: 1.3;
+  margin-bottom: 0;
+}
+
+.news-section.section-bg .news-block-date p,
+.news-section.section-bg .news-block-author p {
+  font-size: 13px; /* Smaller metadata text */
+  margin-bottom: 0;
+}
+
+.news-section.section-bg .news-block-author {
+  margin-left: 20px !important; /* Adjust author spacing for smaller layout */
+}
+
+/* Responsive adjustments for compact news grid */
+@media screen and (max-width: 992px) {
+  .news-section.section-bg .news-block-top {
+    height: 220px; /* Smaller on tablets */
+  }
+  
+  .news-section.section-bg .news-block-title h4 {
+    font-size: 16px; /* Smaller title on tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .news-section.section-bg .news-block-top {
+    height: 200px; /* Smaller on mobile */
+  }
+  
+  .news-section.section-bg .news-block-info {
+    padding: 15px; /* Less padding on mobile */
+  }
+  
+  .news-section.section-bg .news-block-title h4 {
+    font-size: 15px; /* Smaller title on mobile */
+  }
+  
+  .news-section.section-bg .news-block-author {
+    margin-left: 15px !important; /* Less spacing on mobile */
+  }
 }
 
 .news-block-top img.news-image {

@@ -1357,10 +1357,124 @@ blockquote::before {
   height: 150px;
 }
 
+/* ===================== Testimonials Responsive Fixes ===================== */
+.carousel-title {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.5;
+  max-height: none; /* Remove height restriction */
+  overflow: visible; /* Allow content to be fully visible */
+  display: block; /* Use block instead of -webkit-box */
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 20px; /* Add horizontal padding */
+}
+
+/* Ensure testimonial content doesn't break layout */
+.testimonial-section .carousel-caption {
+  padding: 30px 20px; /* Increased vertical padding */
+  position: relative;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  transform: none;
+  min-height: 200px; /* Ensure minimum height for content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure testimonial section has enough height */
+.testimonial-section {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.testimonial-section .container {
+  width: 100%;
+}
+
+/* Mobile responsiveness for testimonials */
+@media (max-width: 768px) {
+  .carousel-title {
+    font-size: 18px;
+    line-height: 1.4;
+    padding: 0 15px;
+  }
+  
+  .testimonial-section .carousel-caption {
+    padding: 25px 15px;
+    min-height: 180px;
+  }
+  
+  .testimonial-section {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-title {
+    font-size: 16px;
+    line-height: 1.3;
+    padding: 0 10px;
+  }
+  
+  .testimonial-section .carousel-caption {
+    padding: 20px 10px;
+    min-height: 160px;
+  }
+  
+  .testimonial-section {
+    min-height: 300px;
+  }
+}
+
+/* ===================== Language Switcher ===================== */
+/* Language dropdown should behave exactly like the "More" dropdown */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block !important; /* Show dropdown on hover like "More" */
+}
+
+#languageDropdown {
+  /* No custom styles - inherit all nav-link styles */
+}
+
+#languageDropdownMenu {
+  /* No custom positioning - let Bootstrap handle it */
+}
+
+#current-language {
+  /* No custom styles - inherit from parent */
+}
+
 /* ===================== Nuestro Equipo ===================== */
 .team {
   position: relative;
   overflow: hidden;
+}
+
+/* Mobile responsiveness for team section */
+@media (max-width: 768px) {
+  .team {
+    padding: 40px 15px; /* Add padding on mobile */
+  }
+  
+  .team .container-team {
+    padding: 0 10px; /* Additional container padding */
+  }
+  
+  .team .section-title h2 {
+    font-size: 28px; /* Smaller title on mobile */
+    margin-bottom: 15px;
+  }
+  
+  .team .section-title p {
+    font-size: 14px; /* Smaller description text */
+    padding: 0 15px; /* Add side padding */
+  }
 }
 
 .team .decorative-circle-2 {
@@ -1464,20 +1578,22 @@ blockquote::before {
 
 .team .col-lg-3.col-md-6 {
   flex: 0 0 auto;
-  max-width: 400px; /* Increased maximum width for bigger cards */
+  max-width: 400px; /* Desktop maximum width */
   margin-bottom: 30px; /* Adds consistent spacing between rows */
   width: auto; /* Let cards size naturally */
-  flex: 0 0 auto; /* Allow natural sizing */
 }
 
 /* Responsive adjustments for team member cards */
 @media (max-width: 768px) {
   .team .col-lg-3.col-md-6 {
-    max-width: 350px; /* Increased for tablets too */
+    max-width: 85% !important; /* Much wider on tablets - 85% of screen width */
+    margin: 0 auto 30px auto !important; /* Center cards with bottom margin */
+    min-width: 300px !important; /* Ensure minimum width */
+    width: auto !important; /* Override any fixed width */
   }
   
   .team .member .member-img {
-    height: 320px; /* Increased height for tablets */
+    height: 280px; /* Reduced height for tablets */
   }
   
   .team .member .member-info {
@@ -1487,16 +1603,39 @@ blockquote::before {
   .team .member .member-info h4 {
     font-size: 16px; /* Slightly smaller text on mobile */
   }
+  
+  /* Hide decorative circles on tablets */
+  .decorative-circle,
+  .team .decorative-circle-2 {
+    display: none;
+  }
 }
 
 @media (max-width: 576px) {
   .team .col-lg-3.col-md-6 {
-    max-width: 100%; /* Full width on very small screens */
-    width: 100%;
+    max-width: 90% !important; /* Much wider - 90% of screen width */
+    width: auto !important; /* Let it size naturally */
+    margin: 0 auto 25px auto !important; /* Center cards */
+    min-width: 280px !important; /* Ensure minimum width */
+    flex: none !important; /* Override Bootstrap flex properties */
   }
   
   .team .member .member-img {
-    height: 280px; /* Increased height for mobile */
+    height: 250px; /* Smaller height for mobile */
+  }
+  
+  .team .member .member-info {
+    padding: 15px 12px; /* Even more compact on mobile */
+  }
+  
+  .team .member .member-info h4 {
+    font-size: 15px; /* Smaller text on mobile */
+  }
+  
+  /* Ensure decorative circles are hidden on mobile */
+  .decorative-circle,
+  .team .decorative-circle-2 {
+    display: none !important;
   }
 }
 

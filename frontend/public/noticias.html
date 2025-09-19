@@ -105,6 +105,21 @@
                             <a class="nav-link" href="faq.html">FAQ</a>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-globe me-1"></i>
+                                <span id="current-language">ES</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item language-option" href="#" data-lang="es">
+                                    <i class="bi-flag me-2"></i>Español (ES)
+                                </a></li>
+                                <li><a class="dropdown-item language-option" href="#" data-lang="en">
+                                    <i class="bi-flag me-2"></i>English (EN)
+                                </a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item ms-3">
                             <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Dona</a>
                         </li>
@@ -314,6 +329,271 @@
         
         <!-- News Page Integration Script -->
         <script src="js/noticias-integration.js"></script>
+        
+        <!-- Language Switcher Script for Noticias -->
+        <script>
+            // Translation data for noticias.html
+            const noticiasTranslations = {
+                es: {
+                    // Navigation
+                    inicio: "Inicio",
+                    acercaDe: "Acerca de",
+                    apoyo: "Apoyo",
+                    voluntario: "Voluntario",
+                    mas: "Más",
+                    noticias: "Noticias",
+                    eventos: "Eventos",
+                    contacto: "Contacto",
+                    dona: "Dona",
+                    
+                    // Page content
+                    noticiasTitle: "Noticias",
+                    buscarNoticias: "Buscar noticias",
+                    noticiasRecientes: "Noticias Recientes",
+                    categorias: "Categorías",
+                    noHayCategorias: "No hay categorías disponibles.",
+                    cargandoNoticia: "Cargando noticia principal...",
+                    cargandoNoticias: "Cargando noticias recientes...",
+                    cargandoTodasNoticias: "Cargando todas las noticias...",
+                    mostrarMas: "Mostrar más",
+                    
+                    // Footer
+                    enlaces: "Enlaces",
+                    contactanos: "Contáctanos",
+                    obtenerDireccion: "Obtener Dirección",
+                    nuestraHistoria: "Nuestra Historia",
+                    mirarDocumental: "Mirar Documental",
+                    realizarDonacion: "Realiza una Donación",
+                    convirtiendoVoluntario: "Conviértete en Voluntario",
+                    articulos: "Artículos"
+                },
+                en: {
+                    // Navigation
+                    inicio: "Home",
+                    acercaDe: "About",
+                    apoyo: "Support",
+                    voluntario: "Volunteer",
+                    mas: "More",
+                    noticias: "News",
+                    eventos: "Events",
+                    contacto: "Contact",
+                    dona: "Donate",
+                    
+                    // Page content
+                    noticiasTitle: "News",
+                    buscarNoticias: "Search news",
+                    noticiasRecientes: "Recent News",
+                    categorias: "Categories",
+                    noHayCategorias: "No categories available.",
+                    cargandoNoticia: "Loading main news...",
+                    cargandoNoticias: "Loading recent news...",
+                    cargandoTodasNoticias: "Loading all news...",
+                    mostrarMas: "Show more",
+                    
+                    // Footer
+                    enlaces: "Links",
+                    contactanos: "Contact Us",
+                    obtenerDireccion: "Get Directions",
+                    nuestraHistoria: "Our Story",
+                    mirarDocumental: "Watch Documentary",
+                    realizarDonacion: "Make a Donation",
+                    convirtiendoVoluntario: "Become a Volunteer",
+                    articulos: "Articles"
+                }
+            };
+
+            // Language Switcher for Noticias Page
+            class NoticiasLanguageSwitcher {
+                constructor() {
+                    // Get language from localStorage for persistence
+                    this.currentLanguage = localStorage.getItem('userLanguagePreference') || 'es';
+                    this.translations = noticiasTranslations;
+                    this.init();
+                }
+                
+                init() {
+                    // Wait for DOM to be ready
+                    document.addEventListener('DOMContentLoaded', () => {
+                        // Check language from multiple sources
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const langFromUrl = urlParams.get('lang');
+                        const langFromSession = sessionStorage.getItem('selectedLanguage');
+                        const langFromLocal = localStorage.getItem('userLanguagePreference');
+                        
+                        // Priority: URL > sessionStorage > localStorage > default
+                        this.currentLanguage = langFromUrl || langFromSession || langFromLocal || 'es';
+                        
+                        // Store the final language choice in localStorage for persistence
+                        localStorage.setItem('userLanguagePreference', this.currentLanguage);
+                        
+                        console.log('🌍 Noticias page language:', this.currentLanguage);
+                        
+                        this.setupLanguageSwitcher();
+                        this.updateLanguageDisplay();
+                        this.translateStaticContent();
+                        
+                        // Update noticias integration language
+                        if (window.noticiasIntegration) {
+                            window.noticiasIntegration.currentLanguage = this.currentLanguage;
+                        }
+                    });
+                }
+                
+                setupLanguageSwitcher() {
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    
+                    languageOptions.forEach(option => {
+                        option.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            
+                            const selectedLang = option.getAttribute('data-lang');
+                            console.log('🌍 Language option clicked:', selectedLang);
+                            
+                            this.switchLanguage(selectedLang);
+                        });
+                    });
+                }
+                
+                switchLanguage(newLang) {
+                    console.log('🌍 Switching noticias language to:', newLang);
+                    
+                    if (this.currentLanguage === newLang) {
+                        console.log('🌍 Language already selected:', newLang);
+                        return;
+                    }
+                    
+                    this.currentLanguage = newLang;
+                    
+                    // Store language preference in localStorage for persistence
+                    localStorage.setItem('userLanguagePreference', newLang);
+                    console.log('💾 Language preference saved to localStorage:', newLang);
+                    
+                    // Also store in sessionStorage for immediate navigation
+                    sessionStorage.setItem('selectedLanguage', newLang);
+                    
+                    // Update API language if available
+                    if (typeof window.EFAPI !== 'undefined' && window.EFAPI.language) {
+                        window.EFAPI.language.setLanguage(newLang);
+                    }
+                    
+                    // Update display
+                    this.updateLanguageDisplay();
+                    
+                    // Translate static content
+                    this.translateStaticContent();
+                    
+                    // Update noticias integration language and refresh content
+                    if (window.noticiasIntegration) {
+                        window.noticiasIntegration.currentLanguage = newLang;
+                        // Trigger a complete reload of content
+                        setTimeout(() => {
+                            window.noticiasIntegration.loadContent();
+                        }, 100);
+                    }
+                    
+                    console.log('✅ Noticias language switched to:', newLang);
+                }
+                
+                updateLanguageDisplay() {
+                    const currentLanguageSpan = document.getElementById('current-language');
+                    if (currentLanguageSpan) {
+                        currentLanguageSpan.textContent = this.currentLanguage.toUpperCase();
+                    }
+                    
+                    // Update active state in dropdown
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    languageOptions.forEach(option => {
+                        const lang = option.getAttribute('data-lang');
+                        if (lang === this.currentLanguage) {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                }
+                
+                translateStaticContent() {
+                    console.log('🔄 Translating noticias static content to:', this.currentLanguage);
+                    
+                    const t = this.translations[this.currentLanguage];
+                    if (!t) return;
+                    
+                    // Navigation
+                    const navLinks = {
+                        'index.html#section_1': t.inicio,
+                        'index.html#section_2': t.acercaDe,
+                        'index.html#section_3': t.apoyo,
+                        'index.html#section_4': t.voluntario,
+                        'index.html#section_6': t.contacto,
+                        'faq.html': 'FAQ'
+                    };
+                    
+                    Object.entries(navLinks).forEach(([href, text]) => {
+                        const link = document.querySelector(`a[href="${href}"]`);
+                        if (link && text) {
+                            link.textContent = text;
+                        }
+                    });
+                    
+                    // Dropdown items
+                    const masDropdown = document.getElementById('navbarLightDropdownMenuLink');
+                    if (masDropdown) masDropdown.textContent = t.mas;
+                    
+                    const noticiasLink = document.querySelector('a[href="noticias.html"]');
+                    if (noticiasLink) noticiasLink.textContent = t.noticias;
+                    
+                    const eventosLink = document.querySelector('a[href="eventos2024.html"]');
+                    if (eventosLink) eventosLink.textContent = t.eventos;
+                    
+                    const donateBtn = document.querySelector('.custom-btn.custom-border-btn');
+                    if (donateBtn) donateBtn.textContent = t.dona;
+                    
+                    // Page content
+                    const pageTitle = document.querySelector('.news-detail-header-section h1');
+                    if (pageTitle) pageTitle.textContent = t.noticiasTitle;
+                    
+                    const searchInput = document.getElementById('news-search');
+                    if (searchInput) searchInput.placeholder = t.buscarNoticias;
+                    
+                    // Footer
+                    const footerTitles = document.querySelectorAll('.site-footer-title');
+                    footerTitles.forEach(title => {
+                        const text = title.textContent.trim();
+                        if (text.includes('Enlaces') || text.includes('Links')) {
+                            title.textContent = t.enlaces;
+                        } else if (text.includes('Contáctanos') || text.includes('Contact')) {
+                            title.textContent = t.contactanos;
+                        }
+                    });
+                    
+                    const footerContactBtn = document.querySelector('.site-footer .custom-btn');
+                    if (footerContactBtn) {
+                        footerContactBtn.textContent = t.obtenerDireccion;
+                    }
+                    
+                    // Footer links
+                    const footerLinksMap = {
+                        'index.html#section_2': t.nuestraHistoria,
+                        'index.html#documentary': t.mirarDocumental,
+                        'donate.html': t.realizarDonacion,
+                        'index.html#section_4': t.convirtiendoVoluntario,
+                        'index.html#articulos': t.articulos
+                    };
+                    
+                    Object.entries(footerLinksMap).forEach(([href, text]) => {
+                        const link = document.querySelector(`.footer-menu-link[href="${href}"]`);
+                        if (link && text) {
+                            link.textContent = text;
+                        }
+                    });
+                    
+                    console.log('✅ Noticias static content translated to:', this.currentLanguage);
+                }
+            }
+            
+            // Initialize noticias language switcher
+            window.noticiasLanguageSwitcher = new NoticiasLanguageSwitcher();
+        </script>
 
     </body>
 </html>

@@ -101,6 +101,21 @@
                             <a class="nav-link" href="faq.html">FAQ</a>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-globe me-1"></i>
+                                <span id="current-language">ES</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item language-option" href="#" data-lang="es">
+                                    <i class="bi-flag me-2"></i>Español (ES)
+                                </a></li>
+                                <li><a class="dropdown-item language-option" href="#" data-lang="en">
+                                    <i class="bi-flag me-2"></i>English (EN)
+                                </a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item ms-3">
                             <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Dona</a>
                         </li>
@@ -449,8 +464,7 @@
                 <div class="container-team" data-aos="fade-up">
                     <div class="section-title">
                         <h2>Conoce nuestro Equipo</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam doloremque quibusdam repellendus. Sunt assumenda aperiam vero ullam ut. 
-                            Beatae natus ipsum quam voluptas eaque, iusto laudantium dolore illo veniam eveniet vitae soluta temporibus a voluptatem.</p>
+                        <p>En Escalando Fronteras, nuestro equipo está conformado por personas apasionadas y comprometidas con el desarrollo integral de la juventud en Nuevo León. Cada miembro aporta su experiencia, energía y dedicación para transformar vidas a través de la educación, el deporte y la inclusión. ¡Conoce a quienes hacen posible este proyecto!</p>
                     </div>
                     <div class="row" id="team-container">
                         <!-- Team members will be loaded dynamically here -->
@@ -828,6 +842,902 @@
         
         <!-- Events Integration Script -->
         <script src="js/events-integration.js"></script>
+        
+        <!-- Language Switcher Script -->
+        <script>
+            // Translation data
+            const translations = {
+                es: {
+                    // Navigation
+                    inicio: "Inicio",
+                    acercaDe: "Acerca de",
+                    apoyo: "Apoyo", 
+                    voluntario: "Voluntario",
+                    mas: "Más",
+                    noticias: "Noticias",
+                    eventos: "Eventos",
+                    contacto: "Contacto",
+                    dona: "Dona",
+                    
+                    // Hero Section
+                    educacion: "Educación",
+                    educacionSubtitle: "para la juventud y sus familias",
+                    osfl: "OSFL",
+                    osflSubtitle: "Puedes ayudarnos a crecer más",
+                    humanidad: "Humanidad",
+                    humanidadSubtitle: "Dile a tus amigos acerca del sitio web",
+                    
+                    // Welcome Section
+                    bienvenidos: "Bienvenidos a Escalando Fronteras",
+                    convertirseVoluntario: "Conviértete en Voluntario",
+                    apoyarEF: "¡Apoya a Escalando Fronteras!",
+                    hacerDonacion: "Haz una Donación",
+                    
+                    // About Section
+                    nuestraHistoria: "Nuestra historia",
+                    organizacionSubtitle: "Escalando Fronteras, Organización sin fines de lucro",
+                    organizacionDescription: "Asociación Civil radicada en Monterrey. Trabajamos con niñxs, adolescentes y sus familias en el marco de un programa deportivo y educativo que complementa salidas a escalar con talleres de prevención de adicciones y de convivencia familiar.",
+                    nuestraMision: "Nuestra mision",
+                    misionDescription: "Escalando Fronteras utiliza el deporte y la educación para fortalecer habilidades para la vida y prevenir conductas de riesgo en niños, niñas y adolescentes en contextos de vulnerabilidad.",
+                    educacionEmocional: "Educación emocional",
+                    educacionFamiliar: "Educacion familiar",
+                    fundada: "Fundada",
+                    donaciones: "Donaciones",
+                    
+                    // Founder Section
+                    cofundador: "Co-fundador de Escalando Fronteras",
+                    
+                    // CTA Section
+                    crearImpacto: "Crear un impacto.",
+                    vidaConOpciones: "Una vida con más opciones.",
+                    hacerDonacionBtn: "Hacer una donación",
+                    serVoluntarioBtn: "Ser un voluntario",
+                    
+                    // Documentary Section
+                    documentalTitle: "Monkey Hands presenta el",
+                    documentalSubtitle: "Documental de Escalando Fronteras",
+                    documentalDescription: "Omnis iste natus error sit voluptatem accusantium dolorem que laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+                    documentalModalTitle: "Documental de Escalando Fronteras",
+                    
+                    // Support Section
+                    caminataSanLorenzo: "Caminata de San Lorenzo",
+                    caminataDescription: "El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. Gracias a todas las personas que participaron.",
+                    salidaIntegracion: "Salida de Integración",
+                    salidaIntegracionDescription: "El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. Gracias a todas las personas que participaron.",
+                    top10Wogu: "TOP 10 en revista Wogu",
+                    top10WoguDescription: "El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. Gracias a todas las personas que participaron.",
+                    donaAhora: "Dona ahora",
+                    
+                    // Team Section
+                    conoceEquipo: "Conoce nuestro Equipo",
+                    equipoDescription: "En Escalando Fronteras, nuestro equipo está conformado por personas apasionadas y comprometidas con el desarrollo integral de la juventud en Nuevo León. Cada miembro aporta su experiencia, energía y dedicación para transformar vidas a través de la educación, el deporte y la inclusión. ¡Conoce a quienes hacen posible este proyecto!",
+                    
+                    // Sponsors Section
+                    nuestrosPatrocinadores: "Nuestros Patrocinadores",
+                    
+                    // Volunteer Section
+                    convirtiendoVoluntario: "Conviértete en Voluntario",
+                    nombre: "Nombre",
+                    correoElectronico: "Correo Electrónico",
+                    asunto: "Asunto",
+                    subirCV: "Sube tu CV",
+                    comentarios: "Comentarios (Opcional)",
+                    entregar: "Entregar",
+                    acercaVoluntariado: "Acerca el Voluntariado",
+                    voluntariadoDescription: "Ofrecemos una amplia gama de oportunidades de voluntariado que se adaptan a distintos intereses y horarios. Desde una sola vez hasta roles de voluntariado continuo, hay algo para todos.",
+                    
+                    // News Section
+                    ultimasNoticias: "Últimas Noticias",
+                    cargandoNoticias: "Cargando noticias...",
+                    
+                    // Testimonials Section
+                    testimonios: "Testimonios",
+                    cargandoTestimonios: "Cargando testimonios...",
+                    
+                    // Articles Section
+                    articulos: "Artículos",
+                    articulosDescription: "Descubre cómo la visión de Escalando Fronteras resuena más allá de nuestras paredes en esta selección de artículos y blogs. Estas publicaciones de diversas fuentes capturan el espíritu y el impacto de nuestra labor. Lee y comparte las historias que nos unen.",
+                    cargandoArticulos: "Cargando artículos...",
+                    
+                    // Contact Section
+                    contactanos: "Contáctanos",
+                    directorGeneral: "Director General",
+                    informacionContacto: "Información de Contacto",
+                    obtenerDireccion: "Obtener Dirección",
+                    formularioContacto: "Formulario de Contacto",
+                    enviarCorreo: "O, simplemente puede enviar un correo electrónico:",
+                    enviarMensaje: "Enviar Mensaje",
+                    
+                    // Footer
+                    enlaces: "Enlaces",
+                    nuestraHistoriaLink: "Nuestra Historia",
+                    mirarDocumental: "Mirar Documental",
+                    realizarDonacion: "Realiza una Donación",
+                    convirtiendoVoluntarioLink: "Conviértete en Voluntario",
+                    nuestrosPatrocinadoresLink: "Nuestros Patrocinadores",
+                    articulosLink: "Artículos"
+                },
+                en: {
+                    // Navigation
+                    inicio: "Home",
+                    acercaDe: "About",
+                    apoyo: "Support",
+                    voluntario: "Volunteer",
+                    mas: "More",
+                    noticias: "News",
+                    eventos: "Events",
+                    contacto: "Contact",
+                    dona: "Donate",
+                    
+                    // Hero Section
+                    educacion: "Education",
+                    educacionSubtitle: "for youth and their families",
+                    osfl: "NPO",
+                    osflSubtitle: "You can help us grow more",
+                    humanidad: "Humanity",
+                    humanidadSubtitle: "Tell your friends about the website",
+                    
+                    // Welcome Section
+                    bienvenidos: "Welcome to Escalando Fronteras",
+                    convertirseVoluntario: "Become a Volunteer",
+                    apoyarEF: "Support Climbing Borders!",
+                    hacerDonacion: "Make a Donation",
+                    
+                    // About Section
+                    nuestraHistoria: "Our story",
+                    organizacionSubtitle: "Escalando Fronteras, Non-profit organization",
+                    organizacionDescription: "Civil Association based in Monterrey. We work with children, adolescents and their families within the framework of a sports and educational program that complements climbing outings with addiction prevention and family coexistence workshops.",
+                    nuestraMision: "Our mission",
+                    misionDescription: "Escalando Fronteras uses sport and education to strengthen life skills and prevent risky behaviors in children and adolescents in vulnerable contexts.",
+                    educacionEmocional: "Emotional education",
+                    educacionFamiliar: "Family education",
+                    fundada: "Founded",
+                    donaciones: "Donations",
+                    
+                    // Founder Section
+                    cofundador: "Co-founder of Escalando Fronteras",
+                    
+                    // CTA Section
+                    crearImpacto: "Create an impact.",
+                    vidaConOpciones: "A life with more options.",
+                    hacerDonacionBtn: "Make a donation",
+                    serVoluntarioBtn: "Be a volunteer",
+                    
+                    // Documentary Section
+                    documentalTitle: "Monkey Hands presents the",
+                    documentalSubtitle: "Escalando Fronteras Documentary",
+                    documentalDescription: "Omnis iste natus error sit voluptatem accusantium dolorem que laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+                    documentalModalTitle: "Escalando Fronteras Documentary",
+                    
+                    // Support Section
+                    caminataSanLorenzo: "San Lorenzo Hike",
+                    caminataDescription: "Last Sunday we went for a walk in this beautiful canyon, suitable for the whole family. Due to the two consecutive weeks of rain we had in Monterrey we had not been able to go out to the mountain but the wait brought its reward because now everything is green 🌵🌲🌳🍀. Thanks to all the people who participated.",
+                    salidaIntegracion: "Integration Outing",
+                    salidaIntegracionDescription: "Last Sunday we went for a walk in this beautiful canyon, suitable for the whole family. Due to the two consecutive weeks of rain we had in Monterrey we had not been able to go out to the mountain but the wait brought its reward because now everything is green 🌵🌲🌳🍀. Thanks to all the people who participated.",
+                    top10Wogu: "TOP 10 in Wogu magazine",
+                    top10WoguDescription: "Last Sunday we went for a walk in this beautiful canyon, suitable for the whole family. Due to the two consecutive weeks of rain we had in Monterrey we had not been able to go out to the mountain but the wait brought its reward because now everything is green 🌵🌲🌳🍀. Thanks to all the people who participated.",
+                    donaAhora: "Donate now",
+                    
+                    // Team Section
+                    conoceEquipo: "Meet our Team",
+                    equipoDescription: "At Escalando Fronteras, our team is made up of passionate people committed to the integral development of youth in Nuevo León. Each member contributes their experience, energy and dedication to transform lives through education, sports and inclusion. Meet those who make this project possible!",
+                    
+                    // Sponsors Section
+                    nuestrosPatrocinadores: "Our Sponsors",
+                    
+                    // Volunteer Section
+                    convirtiendoVoluntario: "Become a Volunteer",
+                    nombre: "Name",
+                    correoElectronico: "Email",
+                    asunto: "Subject",
+                    subirCV: "Upload your CV",
+                    comentarios: "Comments (Optional)",
+                    entregar: "Submit",
+                    acercaVoluntariado: "About Volunteering",
+                    voluntariadoDescription: "We offer a wide range of volunteer opportunities that adapt to different interests and schedules. From one-time to ongoing volunteer roles, there's something for everyone.",
+                    
+                    // News Section
+                    ultimasNoticias: "Latest News",
+                    cargandoNoticias: "Loading news...",
+                    
+                    // Testimonials Section
+                    testimonios: "Testimonials",
+                    cargandoTestimonios: "Loading testimonials...",
+                    
+                    // Articles Section
+                    articulos: "Articles",
+                    articulosDescription: "Discover how the vision of Escalando Fronteras resonates beyond our walls in this selection of articles and blogs. These publications from various sources capture the spirit and impact of our work. Read and share the stories that unite us.",
+                    cargandoArticulos: "Loading articles...",
+                    
+                    // Contact Section
+                    contactanos: "Contact Us",
+                    directorGeneral: "General Director",
+                    informacionContacto: "Contact Information",
+                    obtenerDireccion: "Get Directions",
+                    formularioContacto: "Contact Form",
+                    enviarCorreo: "Or, you can simply send an email:",
+                    enviarMensaje: "Send Message",
+                    
+                    // Footer
+                    enlaces: "Links",
+                    nuestraHistoriaLink: "Our Story",
+                    mirarDocumental: "Watch Documentary",
+                    realizarDonacion: "Make a Donation",
+                    convirtiendoVoluntarioLink: "Become a Volunteer",
+                    nuestrosPatrocinadoresLink: "Our Sponsors",
+                    articulosLink: "Articles"
+                }
+            };
+
+            // Language Switcher Functionality
+            class LanguageSwitcher {
+                constructor() {
+                    // Get language from localStorage or default to Spanish
+                    this.currentLanguage = localStorage.getItem('userLanguagePreference') || 'es';
+                    this.translations = translations;
+                    this.init();
+                }
+                
+                init() {
+                    // Wait for DOM and API to be ready
+                    document.addEventListener('DOMContentLoaded', () => {
+                        this.setupLanguageSwitcher();
+                        
+                        // Wait for API services to be ready
+                        const checkAPI = () => {
+                            if (typeof window.EFAPI !== 'undefined' && window.EFAPI.language) {
+                                // Use stored language preference or API default
+                                const apiLanguage = window.EFAPI.language.getCurrentLanguage() || 'es';
+                                const storedLanguage = localStorage.getItem('userLanguagePreference');
+                                
+                                // Priority: localStorage > API > default
+                                this.currentLanguage = storedLanguage || apiLanguage || 'es';
+                                
+                                console.log('🌍 Initial language setup:', this.currentLanguage);
+                                console.log('💾 From localStorage:', storedLanguage);
+                                console.log('🔧 From API:', apiLanguage);
+                                
+                                // Set API language to match user preference
+                                if (storedLanguage && storedLanguage !== apiLanguage) {
+                                    window.EFAPI.language.setLanguage(this.currentLanguage);
+                                }
+                                
+                                this.updateLanguageDisplay();
+                                this.translateStaticContent(); // Translate on initial load
+                            } else {
+                                setTimeout(checkAPI, 100);
+                            }
+                        };
+                        checkAPI();
+                    });
+                }
+                
+                setupLanguageSwitcher() {
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    
+                    languageOptions.forEach(option => {
+                        option.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            
+                            const selectedLang = option.getAttribute('data-lang');
+                            console.log('🌍 Language option clicked:', selectedLang);
+                            
+                            this.switchLanguage(selectedLang);
+                        });
+                    });
+                }
+                
+                switchLanguage(newLang) {
+                    console.log('🌍 Switching language to:', newLang);
+                    console.log('🌍 Current language before switch:', this.currentLanguage);
+                    
+                    if (this.currentLanguage === newLang) {
+                        console.log('🌍 Language already selected:', newLang);
+                        return;
+                    }
+                    
+                    console.log('🔄 Language change confirmed, updating from', this.currentLanguage, 'to', newLang);
+                    this.currentLanguage = newLang;
+                    
+                    // Store language preference in localStorage for persistence
+                    localStorage.setItem('userLanguagePreference', newLang);
+                    console.log('💾 Language preference saved to localStorage:', newLang);
+                    
+                    // Also store in sessionStorage for immediate navigation
+                    sessionStorage.setItem('selectedLanguage', newLang);
+                    
+                    // Update API language if available
+                    if (typeof window.EFAPI !== 'undefined' && window.EFAPI.language) {
+                        window.EFAPI.language.setLanguage(newLang);
+                    }
+                    
+                    // Update display
+                    this.updateLanguageDisplay();
+                    
+                    // Translate static content
+                    this.translateStaticContent();
+                    
+                    // Trigger content refresh
+                    this.refreshContent();
+                    
+                    console.log('✅ Language switched to:', newLang);
+                }
+                
+                updateLanguageDisplay() {
+                    const currentLanguageSpan = document.getElementById('current-language');
+                    if (currentLanguageSpan) {
+                        currentLanguageSpan.textContent = this.currentLanguage.toUpperCase();
+                    }
+                    
+                    // Update active state in dropdown
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    languageOptions.forEach(option => {
+                        const lang = option.getAttribute('data-lang');
+                        if (lang === this.currentLanguage) {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                }
+                
+                translateStaticContent() {
+                    console.log('🔄 Translating static content to:', this.currentLanguage);
+                    
+                    const t = this.translations[this.currentLanguage];
+                    if (!t) {
+                        console.error('❌ No translations found for language:', this.currentLanguage);
+                        return;
+                    }
+                    
+                    console.log('📖 Using translations:', Object.keys(t).length, 'keys available');
+                    
+                    // Helper function to safely update text content
+                    const updateText = (selector, key) => {
+                        try {
+                            if (!selector || selector === '#') return; // Skip invalid selectors
+                            const element = document.querySelector(selector);
+                            if (element && t[key]) {
+                                console.log('✅ Updating', selector, 'to:', t[key]);
+                                element.textContent = t[key];
+                            } else {
+                                console.log('⚠️ Element not found or no translation:', selector, 'key:', key);
+                            }
+                        } catch (error) {
+                            console.error('❌ Error updating', selector, ':', error);
+                        }
+                    };
+                    
+                    const updateHTML = (selector, key) => {
+                        try {
+                            if (!selector || selector === '#') return; // Skip invalid selectors
+                            const element = document.querySelector(selector);
+                            if (element && t[key]) {
+                                console.log('✅ Updating HTML', selector, 'to:', t[key]);
+                                element.innerHTML = t[key];
+                            }
+                        } catch (error) {
+                            console.error('❌ Error updating HTML', selector, ':', error);
+                        }
+                    };
+                    
+                    const updatePlaceholder = (selector, key) => {
+                        try {
+                            if (!selector || selector === '#') return; // Skip invalid selectors
+                            const element = document.querySelector(selector);
+                            if (element && t[key]) {
+                                console.log('✅ Updating placeholder', selector, 'to:', t[key]);
+                                element.placeholder = t[key];
+                            }
+                        } catch (error) {
+                            console.error('❌ Error updating placeholder', selector, ':', error);
+                        }
+                    };
+                    
+                    // Navigation
+                    updateText('a[href="#section_1"]', 'inicio');
+                    updateText('a[href="#section_2"]', 'acercaDe');
+                    updateText('a[href="#section_4"]', 'voluntario');
+                    updateText('#navbarLightDropdownMenuLink', 'mas');
+                    updateText('a[href="noticias.html"]', 'noticias');
+                    updateText('a[href="eventos2024.html"]', 'eventos');
+                    updateText('a[href="#section_6"]', 'contacto');
+                    updateText('a[href="donate.html"].custom-btn', 'dona');
+                    
+                    // Hero Section
+                    updateText('.carousel-item:nth-child(1) h1', 'educacion');
+                    updateText('.carousel-item:nth-child(1) p', 'educacionSubtitle');
+                    updateText('.carousel-item:nth-child(2) h1', 'osfl');
+                    updateText('.carousel-item:nth-child(2) p', 'osflSubtitle');
+                    updateText('.carousel-item:nth-child(3) h1', 'humanidad');
+                    updateText('.carousel-item:nth-child(3) p', 'humanidadSubtitle');
+                    
+                    // Welcome Section
+                    console.log('🔍 Translating Welcome section...');
+                    const welcomeH2 = document.querySelector('.section-padding h2');
+                    if (welcomeH2 && t.bienvenidos) {
+                        console.log('Updating welcome H2 from:', welcomeH2.textContent, 'to:', t.bienvenidos);
+                        welcomeH2.textContent = t.bienvenidos;
+                    }
+                    
+                    // Featured blocks - need to find them by their text content
+                    const featuredBlocks = document.querySelectorAll('.featured-block-text');
+                    featuredBlocks.forEach((block, index) => {
+                        const text = block.textContent.trim();
+                        console.log('Featured block', index, 'current text:', text);
+                        console.log('Current language:', this.currentLanguage);
+                        
+                        // Check by index position instead of text content to avoid translation conflicts
+                        if (index === 0) { // First block - Volunteer
+                            console.log('Updating volunteer block to:', t.convertirseVoluntario);
+                            if (this.currentLanguage === 'en') {
+                                block.innerHTML = `<strong>${t.convertirseVoluntario}</strong>`;
+                            } else {
+                                block.innerHTML = `Conviértete en <strong>Voluntario</strong>`;
+                            }
+                        } else if (index === 1) { // Second block - Support EF
+                            console.log('Updating EF block to:', t.apoyarEF);
+                            if (this.currentLanguage === 'en') {
+                                block.innerHTML = `<strong>${t.apoyarEF}</strong>`;
+                            } else {
+                                block.innerHTML = `Apoya a <br><strong> EF</strong>`;
+                            }
+                        } else if (index === 2) { // Third block - Donation
+                            console.log('Updating donation block to:', t.hacerDonacion);
+                            if (this.currentLanguage === 'en') {
+                                block.innerHTML = `<strong>${t.hacerDonacion}</strong>`;
+                            } else {
+                                block.innerHTML = `Haz una <strong>Donación</strong>`;
+                            }
+                        }
+                    });
+                    
+                    // About Section
+                    console.log('🔍 Translating About section...');
+                    
+                    // Main "Nuestra historia" title (first h2 in the section)
+                    const aboutH2 = document.querySelector('#section_2 .custom-text-box h2');
+                    console.log('About H2 found:', !!aboutH2, aboutH2?.textContent);
+                    if (aboutH2 && t.nuestraHistoria) {
+                        console.log('Updating About H2 to:', t.nuestraHistoria);
+                        aboutH2.textContent = t.nuestraHistoria;
+                    }
+                    
+                    // Organization subtitle (first h5 in the section)
+                    const aboutH5 = document.querySelector('#section_2 .custom-text-box h5');
+                    console.log('About H5 found:', !!aboutH5, aboutH5?.textContent);
+                    if (aboutH5 && t.organizacionSubtitle) {
+                        console.log('Updating About H5 to:', t.organizacionSubtitle);
+                        aboutH5.textContent = t.organizacionSubtitle;
+                    }
+                    
+                    // Organization description (first p with mb-0)
+                    const aboutP = document.querySelector('#section_2 .custom-text-box p.mb-0');
+                    console.log('About P found:', !!aboutP, aboutP?.textContent?.substring(0, 50) + '...');
+                    if (aboutP && t.organizacionDescription) {
+                        console.log('Updating About P to:', t.organizacionDescription.substring(0, 50) + '...');
+                        aboutP.textContent = t.organizacionDescription;
+                    }
+                    
+                    // Mission section - target the specific mission h5 (second custom-text-box)
+                    const missionBoxes = document.querySelectorAll('#section_2 .custom-text-box');
+                    if (missionBoxes.length >= 2) {
+                        const missionH5 = missionBoxes[1].querySelector('h5.mb-3');
+                        console.log('Mission H5 found:', !!missionH5, missionH5?.textContent);
+                        if (missionH5 && t.nuestraMision) {
+                            console.log('Updating Mission H5 to:', t.nuestraMision);
+                            missionH5.textContent = t.nuestraMision;
+                        }
+                        
+                        const missionP = missionBoxes[1].querySelector('p');
+                        console.log('Mission P found:', !!missionP, missionP?.textContent?.substring(0, 50) + '...');
+                        if (missionP && t.misionDescription) {
+                            console.log('Updating Mission P to:', t.misionDescription.substring(0, 50) + '...');
+                            missionP.textContent = t.misionDescription;
+                        }
+                    }
+                    
+                    // List items
+                    const listItems = document.querySelectorAll('.custom-list-item');
+                    if (listItems.length >= 2) {
+                        if (t.educacionEmocional) listItems[0].innerHTML = `<i class="bi-check custom-text-box-icon me-2"></i>${t.educacionEmocional}`;
+                        if (t.educacionFamiliar) listItems[1].innerHTML = `<i class="bi-check custom-text-box-icon me-2"></i>${t.educacionFamiliar}`;
+                    }
+                    
+                    // Counter texts
+                    const counterTexts = document.querySelectorAll('.counter-text');
+                    if (counterTexts.length >= 2) {
+                        if (t.fundada) counterTexts[0].textContent = t.fundada;
+                        if (t.donaciones) counterTexts[1].textContent = t.donaciones;
+                    }
+                    
+                    // Founder Section
+                    const founderTitle = document.querySelector('.about-section .text-muted');
+                    if (founderTitle && t.cofundador) founderTitle.textContent = t.cofundador;
+                    
+                    // CTA Section
+                    const ctaH2 = document.querySelector('.cta-section h2');
+                    if (ctaH2 && t.crearImpacto && t.vidaConOpciones) {
+                        ctaH2.innerHTML = t.crearImpacto + ' <br> ' + t.vidaConOpciones;
+                    }
+                    
+                    const ctaDonateBtn = document.querySelector('.cta-section a[href="donate.html"]');
+                    if (ctaDonateBtn && t.hacerDonacionBtn) ctaDonateBtn.textContent = t.hacerDonacionBtn;
+                    
+                    const ctaVolunteerBtn = document.querySelector('.cta-section a[href="#section_4"]');
+                    if (ctaVolunteerBtn && t.serVoluntarioBtn) ctaVolunteerBtn.textContent = t.serVoluntarioBtn;
+                    
+                    // Documentary Section
+                    const docH3 = document.querySelector('#documentary h3');
+                    if (docH3 && t.documentalTitle) docH3.textContent = t.documentalTitle;
+                    
+                    const docH2 = document.querySelector('#documentary h2');
+                    if (docH2 && t.documentalSubtitle) docH2.textContent = t.documentalSubtitle;
+                    
+                    const docP = document.querySelector('#documentary p');
+                    if (docP && t.documentalDescription) docP.textContent = t.documentalDescription;
+                    
+                    const modalTitle = document.querySelector('#videoModalLabel');
+                    if (modalTitle && t.documentalModalTitle) modalTitle.textContent = t.documentalModalTitle;
+                    
+                    // Support Section
+                    console.log('🔍 Translating Support section...');
+                    const supportH2 = document.querySelector('#section_3 h2');
+                    if (supportH2 && t.apoyo) {
+                        console.log('Updating support H2 to:', t.apoyo);
+                        supportH2.textContent = t.apoyo;
+                    }
+                    
+                    // Support blocks - use index-based targeting to avoid translation conflicts
+                    const supportBlocks = document.querySelectorAll('#section_3 .custom-block-body');
+                    supportBlocks.forEach((block, index) => {
+                        const h5 = block.querySelector('h5');
+                        const p = block.querySelector('p');
+                        
+                        if (h5 && p) {
+                            console.log('Support block', index, 'current title:', h5.textContent.trim());
+                            console.log('Current language:', this.currentLanguage);
+                            
+                            // Use index-based targeting instead of text content matching
+                            if (index === 0) { // First block - Caminata/San Lorenzo Hike
+                                if (this.currentLanguage === 'en') {
+                                    if (t.caminataSanLorenzo) {
+                                        console.log('Updating caminata title to EN:', t.caminataSanLorenzo);
+                                        h5.textContent = t.caminataSanLorenzo;
+                                    }
+                                    if (t.caminataDescription) {
+                                        console.log('Updating caminata description to EN');
+                                        p.textContent = t.caminataDescription;
+                                    }
+                                } else {
+                                    console.log('Updating caminata to ES');
+                                    h5.textContent = 'Caminata de San Lorenzo';
+                                    p.textContent = 'El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. Gracias a todas las personas que participaron.';
+                                }
+                            } else if (index === 1) { // Second block - Integración/Integration Outing
+                                if (this.currentLanguage === 'en') {
+                                    if (t.salidaIntegracion) {
+                                        console.log('Updating integration title to EN:', t.salidaIntegracion);
+                                        h5.textContent = t.salidaIntegracion;
+                                    }
+                                    if (t.salidaIntegracionDescription) {
+                                        console.log('Updating integration description to EN');
+                                        p.textContent = t.salidaIntegracionDescription;
+                                    }
+                                } else {
+                                    console.log('Updating integration to ES');
+                                    h5.textContent = 'Salida de Integración';
+                                    p.textContent = 'El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. Gracias a todas las personas que participaron.';
+                                }
+                            } else if (index === 2) { // Third block - TOP 10
+                                if (this.currentLanguage === 'en') {
+                                    if (t.top10Wogu) {
+                                        console.log('Updating TOP 10 title to EN:', t.top10Wogu);
+                                        h5.textContent = t.top10Wogu;
+                                    }
+                                    if (t.top10WoguDescription) {
+                                        console.log('Updating TOP 10 description to EN');
+                                        p.textContent = t.top10WoguDescription;
+                                    }
+                                } else {
+                                    console.log('Updating TOP 10 to ES');
+                                    h5.textContent = 'TOP 10 en revista Wogu';
+                                    p.textContent = 'El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. Gracias a todas las personas que participaron.';
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Support buttons - find and update donate buttons
+                    const supportDonateButtons = document.querySelectorAll('#section_3 .custom-btn');
+                    supportDonateButtons.forEach((btn, index) => {
+                        console.log('Support donate button', index, 'current text:', btn.textContent.trim());
+                        
+                        if (this.currentLanguage === 'en') {
+                            if (t.donaAhora) {
+                                console.log('Updating donate button', index, 'to EN:', t.donaAhora);
+                                btn.textContent = t.donaAhora;
+                            }
+                        } else {
+                            console.log('Updating donate button', index, 'to ES: Dona ahora');
+                            btn.textContent = 'Dona ahora';
+                        }
+                    });
+                    
+                    // Team Section
+                    console.log('🔍 Translating Team section...');
+                    const teamH2 = document.querySelector('.section-title h2');
+                    if (teamH2 && t.conoceEquipo) {
+                        console.log('Updating team H2 to:', t.conoceEquipo);
+                        teamH2.textContent = t.conoceEquipo;
+                    }
+                    
+                    const teamP = document.querySelector('.section-title p');
+                    if (teamP && t.equipoDescription) {
+                        console.log('Updating team description to:', t.equipoDescription.substring(0, 50) + '...');
+                        teamP.textContent = t.equipoDescription;
+                    }
+                    
+                    // Sponsors Section
+                    console.log('🔍 Translating Sponsors section...');
+                    const sponsorsH2 = document.querySelector('#sponsors h2');
+                    if (sponsorsH2 && t.nuestrosPatrocinadores) {
+                        console.log('Updating sponsors H2 to:', t.nuestrosPatrocinadores);
+                        sponsorsH2.textContent = t.nuestrosPatrocinadores;
+                    }
+                    
+                    // Volunteer Section
+                    console.log('🔍 Translating Volunteer section...');
+                    const volunteerH2 = document.querySelector('.volunteer-section h2');
+                    if (volunteerH2 && t.voluntario) {
+                        console.log('Updating volunteer H2 to:', t.voluntario);
+                        volunteerH2.textContent = t.voluntario;
+                    }
+                    
+                    const volunteerH3 = document.querySelector('.volunteer-form h3');
+                    if (volunteerH3 && t.convirtiendoVoluntario) {
+                        console.log('Updating volunteer H3 to:', t.convirtiendoVoluntario);
+                        volunteerH3.textContent = t.convirtiendoVoluntario;
+                    }
+                    
+                    // Form placeholders
+                    updatePlaceholder('#volunteer-name', 'nombre');
+                    updatePlaceholder('#volunteer-email', 'correoElectronico');
+                    updatePlaceholder('#volunteer-subject', 'asunto');
+                    updatePlaceholder('#volunteer-message', 'comentarios');
+                    
+                    const cvLabel = document.querySelector('label[for="inputGroupFile02"]');
+                    if (cvLabel && t.subirCV) {
+                        console.log('Updating CV label to:', t.subirCV);
+                        cvLabel.textContent = t.subirCV;
+                    }
+                    
+                    const volunteerBtn = document.querySelector('.volunteer-form button[type="submit"]');
+                    if (volunteerBtn && t.entregar) {
+                        console.log('Updating volunteer button to:', t.entregar);
+                        volunteerBtn.textContent = t.entregar;
+                    }
+                    
+                    const volunteerAboutH4 = document.querySelector('.volunteer-section .custom-block-body h4');
+                    if (volunteerAboutH4 && t.acercaVoluntariado) {
+                        console.log('Updating volunteer about H4 to:', t.acercaVoluntariado);
+                        volunteerAboutH4.textContent = t.acercaVoluntariado;
+                    }
+                    
+                    const volunteerAboutP = document.querySelector('.volunteer-section .custom-block-body p');
+                    if (volunteerAboutP && t.voluntariadoDescription) {
+                        console.log('Updating volunteer about P to:', t.voluntariadoDescription.substring(0, 50) + '...');
+                        volunteerAboutP.textContent = t.voluntariadoDescription;
+                    }
+                    
+                    // News Section
+                    console.log('🔍 Translating News section...');
+                    const newsH2 = document.querySelector('.news-section h2');
+                    if (newsH2 && t.ultimasNoticias) {
+                        console.log('Updating news H2 to:', t.ultimasNoticias);
+                        newsH2.textContent = t.ultimasNoticias;
+                    }
+                    
+                    // Testimonials Section
+                    console.log('🔍 Translating Testimonials section...');
+                    const testimonialsH2 = document.querySelector('.testimonial-section h2');
+                    if (testimonialsH2 && t.testimonios) {
+                        console.log('Updating testimonials H2 to:', t.testimonios);
+                        testimonialsH2.textContent = t.testimonios;
+                    }
+                    
+                    // Articles Section
+                    console.log('🔍 Translating Articles section...');
+                    const articlesH2 = document.querySelector('.blog-section h2');
+                    if (articlesH2 && t.articulos) {
+                        console.log('Updating articles H2 to:', t.articulos);
+                        articlesH2.textContent = t.articulos;
+                    }
+                    
+                    const articlesP = document.querySelector('.blog-section .title p');
+                    if (articlesP && t.articulosDescription) {
+                        console.log('Updating articles description to:', t.articulosDescription.substring(0, 50) + '...');
+                        articlesP.textContent = t.articulosDescription;
+                    }
+                    
+                    // Contact Section
+                    console.log('🔍 Translating Contact section...');
+                    const contactH2 = document.querySelector('.contact-section h2');
+                    if (contactH2 && t.contactanos) {
+                        console.log('Updating contact H2 to:', t.contactanos);
+                        contactH2.textContent = t.contactanos;
+                    }
+                    
+                    const directorStrong = document.querySelector('.contact-section strong');
+                    if (directorStrong && t.directorGeneral) {
+                        console.log('Updating director title to:', t.directorGeneral);
+                        directorStrong.textContent = t.directorGeneral;
+                    }
+                    
+                    const contactInfoH5 = document.querySelector('.contact-info h5');
+                    if (contactInfoH5 && t.informacionContacto) {
+                        console.log('Updating contact info H5 to:', t.informacionContacto);
+                        contactInfoH5.textContent = t.informacionContacto;
+                    }
+                    
+                    const contactBtn = document.querySelector('.contact-info .custom-btn');
+                    if (contactBtn) {
+                        if (this.currentLanguage === 'en') {
+                            if (t.obtenerDireccion) {
+                                console.log('Updating contact button to EN:', t.obtenerDireccion);
+                                contactBtn.textContent = t.obtenerDireccion;
+                            }
+                        } else {
+                            console.log('Updating contact button to ES: Obtener Dirección');
+                            contactBtn.textContent = 'Obtener Dirección';
+                        }
+                    }
+                    
+                    const contactFormH2 = document.querySelector('.contact-form h2');
+                    if (contactFormH2 && t.formularioContacto) {
+                        console.log('Updating contact form H2 to:', t.formularioContacto);
+                        contactFormH2.textContent = t.formularioContacto;
+                    }
+                    
+                    const contactFormP = document.querySelector('.contact-form p');
+                    if (contactFormP && t.enviarCorreo) {
+                        console.log('Updating contact form P to:', t.enviarCorreo);
+                        contactFormP.innerHTML = t.enviarCorreo + ' <a href="#">Nadia@ClimbingBorders.org</a>';
+                    }
+                    
+                    // Contact form placeholders
+                    updatePlaceholder('#first-name', 'nombre');
+                    updatePlaceholder('#email', 'correoElectronico');
+                    updatePlaceholder('#message', 'asunto');
+                    
+                    const contactSubmitBtn = document.querySelector('.contact-form button[type="submit"]');
+                    if (contactSubmitBtn && t.enviarMensaje) {
+                        console.log('Updating contact submit button to:', t.enviarMensaje);
+                        contactSubmitBtn.textContent = t.enviarMensaje;
+                    }
+                    
+                    // Footer
+                    console.log('🔍 Translating Footer section...');
+                    const footerTitles = document.querySelectorAll('.site-footer-title');
+                    footerTitles.forEach((title, index) => {
+                        const text = title.textContent.trim();
+                        if (text.includes('Enlaces') && t.enlaces) {
+                            console.log('Updating footer title to:', t.enlaces);
+                            title.textContent = t.enlaces;
+                        } else if (text.includes('Contáctanos') && t.contactanos) {
+                            console.log('Updating footer contact title to:', t.contactanos);
+                            title.textContent = t.contactanos;
+                        }
+                    });
+                    
+                    // Footer "Obtener Dirección" button
+                    const footerContactBtn = document.querySelector('.site-footer .custom-btn');
+                    if (footerContactBtn) {
+                        if (this.currentLanguage === 'en') {
+                            if (t.obtenerDireccion) {
+                                console.log('Updating footer contact button to EN:', t.obtenerDireccion);
+                                footerContactBtn.textContent = t.obtenerDireccion;
+                            }
+                        } else {
+                            console.log('Updating footer contact button to ES: Obtener Dirección');
+                            footerContactBtn.textContent = 'Obtener Dirección';
+                        }
+                    }
+                    
+                    // Footer links
+                    const footerLinks = document.querySelectorAll('.footer-menu-link');
+                    footerLinks.forEach((link, index) => {
+                        const href = link.getAttribute('href');
+                        const text = link.textContent.trim();
+                        
+                        if (href === '#section_2' && t.nuestraHistoriaLink) {
+                            link.textContent = t.nuestraHistoriaLink;
+                        } else if (href === '#documentary' && t.mirarDocumental) {
+                            link.textContent = t.mirarDocumental;
+                        } else if (href === 'donate.html' && t.realizarDonacion) {
+                            link.textContent = t.realizarDonacion;
+                        } else if (href === '#section_4' && t.convirtiendoVoluntarioLink) {
+                            link.textContent = t.convirtiendoVoluntarioLink;
+                        } else if (href === '#sponsors' && t.nuestrosPatrocinadoresLink) {
+                            link.textContent = t.nuestrosPatrocinadoresLink;
+                        } else if (href === '#articulos' && t.articulosLink) {
+                            link.textContent = t.articulosLink;
+                        }
+                    });
+                    
+                    console.log('✅ Static content translated to:', this.currentLanguage);
+                }
+                
+                refreshContent() {
+                    console.log('🔄 Refreshing content for language:', this.currentLanguage);
+                    
+                    // Refresh news content
+                    if (window.newsIntegration && typeof window.newsIntegration.loadNews === 'function') {
+                        setTimeout(() => {
+                            window.newsIntegration.currentLanguage = this.currentLanguage;
+                            window.newsIntegration.loadNews();
+                        }, 100);
+                    }
+                    
+                    // Refresh events content (for recent events in sidebar)
+                    const refreshEvents = () => {
+                        if (window.eventsIntegration) {
+                            console.log('🔄 Refreshing events for language:', this.currentLanguage);
+                            console.log('🎪 Events integration available:', !!window.eventsIntegration);
+                            
+                            // Update language first
+                            window.eventsIntegration.currentLanguage = this.currentLanguage;
+                            
+                            // Use the most aggressive reset method
+                            if (typeof window.eventsIntegration.resetAndReload === 'function') {
+                                console.log('🔄 Using resetAndReload method');
+                                window.eventsIntegration.resetAndReload();
+                            } else if (typeof window.eventsIntegration.forceRefresh === 'function') {
+                                console.log('🔄 Using forceRefresh method');
+                                window.eventsIntegration.forceRefresh();
+                            } else if (typeof window.eventsIntegration.loadRecentEvents === 'function') {
+                                console.log('🔄 Using loadRecentEvents method');
+                                window.eventsIntegration.loadRecentEvents();
+                            }
+                        } else {
+                            console.log('⚠️ Events integration not available, retrying...');
+                        }
+                    };
+                    
+                    // Multiple attempts - this was working before
+                    setTimeout(refreshEvents, 200);  // After news loads
+                    setTimeout(refreshEvents, 500);  // Backup attempt
+                    //setTimeout(refreshEvents, 1000); // Final attempt
+                    
+                    // Refresh team content
+                    if (window.teamIntegration && typeof window.teamIntegration.displayTeamMembers === 'function') {
+                        setTimeout(() => {
+                            window.teamIntegration.currentLanguage = this.currentLanguage;
+                            window.teamIntegration.loadTeamMembers();
+                        }, 200);
+                    }
+                    
+                    // Refresh testimonials content
+                    if (window.testimonialsIntegration && typeof window.testimonialsIntegration.displayTestimonials === 'function') {
+                        setTimeout(() => {
+                            window.testimonialsIntegration.currentLanguage = this.currentLanguage;
+                            window.testimonialsIntegration.loadTestimonials();
+                        }, 300);
+                    }
+                    
+                    // Refresh articles content
+                    if (window.articlesIntegration && typeof window.articlesIntegration.displayArticles === 'function') {
+                        setTimeout(() => {
+                            window.articlesIntegration.currentLanguage = this.currentLanguage;
+                            window.articlesIntegration.loadArticles();
+                        }, 400);
+                    }
+                }
+            }
+            
+            // Initialize language switcher
+            window.languageSwitcher = new LanguageSwitcher();
+        </script>
         <script>
             window.onload = function() {
                 // Reset the form fields when the page loads
@@ -930,13 +1840,25 @@
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('a[href^="#"]').forEach(link => {
                     link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        
+                        // Skip invalid hrefs or language dropdown links
+                        if (!href || href === '#' || this.classList.contains('language-option')) {
+                            return; // Don't prevent default for language options
+                        }
+                        
                         e.preventDefault(); // Prevent default anchor click behavior only for in-page navigation
-                        var target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            window.scrollTo({
-                                top: target.offsetTop,
-                                behavior: 'smooth'
-                            });
+                        
+                        try {
+                            var target = document.querySelector(href);
+                            if (target) {
+                                window.scrollTo({
+                                    top: target.offsetTop,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        } catch (error) {
+                            console.warn('Invalid selector for scroll:', href);
                         }
                     });
                 });

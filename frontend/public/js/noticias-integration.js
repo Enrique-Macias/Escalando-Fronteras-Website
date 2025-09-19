@@ -63,6 +63,7 @@ class NoticiasIntegration {
 
     async loadContent() {
         console.log('📰 Loading news content...');
+        console.log('🌍 Current language:', this.currentLanguage);
         
         try {
             // Load all content in parallel
@@ -78,8 +79,47 @@ class NoticiasIntegration {
             this.setupSearchFunctionality();
             this.setupWindowResize(); // Add window resize listener
             
+            // Translate static sidebar content
+            this.translateSidebarContent();
+            
         } catch (error) {
             console.error('❌ Error loading news content:', error);
+        }
+    }
+
+    translateSidebarContent() {
+        console.log('🔄 Translating sidebar content to:', this.currentLanguage);
+        
+        // Translate "Noticias Recientes" title
+        const recentNewsTitle = document.querySelector('h5.mt-5.mb-3');
+        if (recentNewsTitle) {
+            const title = this.currentLanguage === 'en' ? 'Recent News' : 'Noticias Recientes';
+            recentNewsTitle.textContent = title;
+            console.log('✅ Updated recent news title to:', title);
+        }
+        
+        // Translate "Categorías" title
+        const categoriesTitle = document.querySelector('.category-block h5');
+        if (categoriesTitle) {
+            const title = this.currentLanguage === 'en' ? 'Categories' : 'Categorías';
+            categoriesTitle.textContent = title;
+            console.log('✅ Updated categories title to:', title);
+        }
+        
+        // Translate search placeholder
+        const searchInput = document.getElementById('news-search');
+        if (searchInput) {
+            const placeholder = this.currentLanguage === 'en' ? 'Search news' : 'Buscar noticias';
+            searchInput.placeholder = placeholder;
+            console.log('✅ Updated search placeholder to:', placeholder);
+        }
+        
+        // Translate main news grid title
+        const mainGridTitle = document.querySelector('.news-section.section-bg h2');
+        if (mainGridTitle) {
+            const title = this.currentLanguage === 'en' ? 'News' : 'Noticias';
+            mainGridTitle.textContent = title;
+            console.log('✅ Updated main grid title to:', title);
         }
     }
 
@@ -97,8 +137,65 @@ class NoticiasIntegration {
     async loadMainNews() {
         console.log('📋 Loading main news article...');
         
+        // Check if there's a selected article ID from sessionStorage
+        const selectedArticleId = sessionStorage.getItem('selectedNewsArticleId');
+        
         try {
-            const response = await window.EFAPI.news.getNews({ 
+            let response;
+            
+            if (selectedArticleId) {
+                console.log('🎯 Loading specific news article:', selectedArticleId);
+                
+                // First, try to find the article in the full news list
+                const allNewsResponse = await window.EFAPI.news.getNews({ 
+                    limit: 100, // Get more articles to find the specific one
+                    lang: this.currentLanguage 
+                });
+                
+                let allNewsList = [];
+                if (Array.isArray(allNewsResponse)) {
+                    allNewsList = allNewsResponse;
+                } else if (allNewsResponse && allNewsResponse.news) {
+                    allNewsList = allNewsResponse.news;
+                } else if (allNewsResponse && allNewsResponse.data) {
+                    allNewsList = allNewsResponse.data;
+                }
+                
+                // Find the specific article by ID
+                const selectedArticle = allNewsList.find(article => 
+                    article.id == selectedArticleId || 
+                    article.id === parseInt(selectedArticleId)
+                );
+                
+                // Clear the sessionStorage after using it
+                sessionStorage.removeItem('selectedNewsArticleId');
+                
+                if (selectedArticle) {
+                    console.log('📰 Selected news article found:', selectedArticle);
+                    this.displayMainNews(selectedArticle);
+                    this.displayMainNewsCategories(selectedArticle);
+                    return;
+                } else {
+                    console.warn('⚠️ Selected article not found in news list, trying direct API call...');
+                    
+                    // Fallback: try direct API call
+                    try {
+                        response = await window.EFAPI.news.getNewsById(selectedArticleId);
+                        if (response) {
+                            console.log('📰 Selected news article loaded via direct call:', response);
+                            this.displayMainNews(response);
+                            this.displayMainNewsCategories(response);
+                            return;
+                        }
+                    } catch (error) {
+                        console.error('❌ Error loading specific article:', error);
+                    }
+                }
+            }
+            
+            // Fallback to latest news if no specific article or if loading specific article failed
+            console.log('📋 Loading latest news article...');
+            response = await window.EFAPI.news.getNews({ 
                 limit: 1, 
                 lang: this.currentLanguage 
             });
@@ -237,7 +334,8 @@ class NoticiasIntegration {
             `;
             container.innerHTML = categoriesHtml;
         } else {
-            container.innerHTML = '<p style="color: var(--primary-color); font-size: 14px; margin: 0;">No hay categorías disponibles.</p>';
+            const noCategoriesText = this.currentLanguage === 'en' ? 'No categories available.' : 'No hay categorías disponibles.';
+            container.innerHTML = `<p style="color: var(--primary-color); font-size: 14px; margin: 0;">${noCategoriesText}</p>`;
         }
     }
 
@@ -471,7 +569,7 @@ class NoticiasIntegration {
                         transition: all 0.3s ease;
                     " onmouseover="this.style.backgroundColor='var(--secondary-color)'; this.style.color='var(--white-color)';" 
                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--secondary-color)';">
-                        <i class="bi-plus-circle me-2"></i>Mostrar más
+                        <i class="bi-plus-circle me-2"></i>${this.currentLanguage === 'en' ? 'Show more' : 'Mostrar más'}
                     </button>
                 </div>
             </div>
@@ -813,20 +911,34 @@ class NoticiasIntegration {
     }
 
     formatDate(dateString) {
-        if (!dateString) return 'Fecha no disponible';
+        if (!dateString) {
+            return this.currentLanguage === 'en' ? 'Date not available' : 'Fecha no disponible';
+        }
         
         try {
             const date = new Date(dateString);
-            const formattedDate = date.toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }).replace(/(\d+) de (\w+) de (\d+)/, '$2 $1, $3');
             
-            // Capitalize the first letter of the month
-            return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+            if (this.currentLanguage === 'en') {
+                // English format: "Month Day, Year"
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                return formattedDate; // Already in "Month Day, Year" format
+            } else {
+                // Spanish format: "Month Day, Year" (capitalized)
+                const formattedDate = date.toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }).replace(/(\d+) de (\w+) de (\d+)/, '$2 $1, $3');
+                
+                // Capitalize the first letter of the month
+                return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+            }
         } catch (error) {
-            return 'Fecha no disponible';
+            return this.currentLanguage === 'en' ? 'Date not available' : 'Fecha no disponible';
         }
     }
 

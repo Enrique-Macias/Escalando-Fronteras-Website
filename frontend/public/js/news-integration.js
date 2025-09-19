@@ -92,11 +92,22 @@ class NewsIntegration {
         const tagsSet = new Set();
         
         newsList.forEach(newsItem => {
-            if (newsItem.category) {
-                categoriesSet.add(newsItem.category);
+            // Use language-specific category
+            const category = this.currentLanguage === 'en' ? 
+                (newsItem.category_en || newsItem.category) : 
+                (newsItem.category_es || newsItem.category);
+            
+            if (category) {
+                categoriesSet.add(category);
             }
-            if (newsItem.tags && Array.isArray(newsItem.tags)) {
-                newsItem.tags.forEach(tag => tagsSet.add(tag));
+            
+            // Use language-specific tags
+            const tags = this.currentLanguage === 'en' ? 
+                (newsItem.tags_en || newsItem.tags) : 
+                (newsItem.tags_es || newsItem.tags);
+                
+            if (tags && Array.isArray(tags)) {
+                tags.forEach(tag => tagsSet.add(tag));
             }
         });
 
@@ -107,10 +118,15 @@ class NewsIntegration {
             const content = this.currentLanguage === 'en' ? newsItem.body_en || newsItem.body_es : newsItem.body_es;
             const author = this.currentLanguage === 'en' ? newsItem.author_en || newsItem.author : newsItem.author;
             const imageUrl = newsItem.coverImageUrl || 'images/eventos/montaña2.0EF.jpeg';
-            const category = newsItem.category || 'General';
+            
+            // Use language-specific category
+            const category = this.currentLanguage === 'en' ? 
+                (newsItem.category_en || newsItem.category || 'General') : 
+                (newsItem.category_es || newsItem.category || 'General');
+                
             const location = newsItem.location_city && newsItem.location_country 
                 ? `${newsItem.location_city}, ${newsItem.location_country}` 
-                : (newsItem.location_city || newsItem.location_country || 'Ubicación');
+                : (newsItem.location_city || newsItem.location_country || (this.currentLanguage === 'en' ? 'Location' : 'Ubicación'));
             const createdAt = new Date(newsItem.createdAt);
             const formattedDate = this.formatDate(createdAt);
             
@@ -121,16 +137,16 @@ class NewsIntegration {
             const marginClass = index > 0 ? 'mt-3' : '';
             
             newsHTML += `
-                <div class="news-block ${marginClass}">
+                <div class="news-block ${marginClass} clickable-news-card" style="cursor: pointer;" data-news-id="${newsItem.id}">
                     <div class="news-block-top">
-                        <a href="#" onclick="return false;">
+                        <div class="clickable-news-image" style="cursor: pointer;" data-news-id="${newsItem.id}">
                             <img src="${imageUrl}" class="news-image img-fluid" alt="${title}" loading="lazy" onerror="this.src='images/eventos/montaña2.0EF.jpeg'">
-                        </a>
+                        </div>
 
                         <div class="news-category-block">
-                            <a href="#" class="category-block-link" onclick="return false;">
+                            <span class="category-block-link">
                                 <i class="bi-geo-alt me-1"></i>${location}
-                            </a>
+                            </span>
                         </div>
                     </div>
 
@@ -152,7 +168,7 @@ class NewsIntegration {
                         </div>
 
                         <div class="news-block-title mb-2">
-                            <h4><a href="#" class="news-block-title-link" onclick="return false;">${title}</a></h4>
+                            <h4><span class="news-block-title-link clickable-news-title" style="cursor: pointer;" data-news-id="${newsItem.id}">${title}</span></h4>
                         </div>
 
                         <div class="news-block-body">
@@ -167,17 +183,21 @@ class NewsIntegration {
         const categoriesHTML = this.generateCategoriesHTML(Array.from(categoriesSet));
         const tagsHTML = this.generateTagsHTML(Array.from(tagsSet));
 
+        // Get translated text based on current language
+        const searchPlaceholder = this.currentLanguage === 'en' ? 'Search' : 'Buscar';
+        const recentEventsTitle = this.currentLanguage === 'en' ? 'Recent Events' : 'Eventos Recientes';
+        
         // Keep the existing sidebar structure
         const sidebarHTML = `
             <div class="col-lg-4 col-12 mx-auto">
                 <form class="custom-form search-form" action="#" method="get" role="form">
-                    <input name="search" type="search" class="form-control" id="search" placeholder="Buscar" aria-label="Search">
+                    <input name="search" type="search" class="form-control" id="search" placeholder="${searchPlaceholder}" aria-label="Search">
                     <button type="submit" class="form-control">
                         <i class="bi-search"></i>
                     </button>
                 </form>
 
-                <h5 class="mt-5 mb-3">Eventos Recientes</h5>
+                <h5 class="mt-5 mb-3">${recentEventsTitle}</h5>
                 
                 <div id="recent-events-container">
                     <!-- Recent events will be loaded here -->
@@ -195,15 +215,21 @@ class NewsIntegration {
             </div>
         `;
 
+        // Get translated section title
+        const sectionTitle = this.currentLanguage === 'en' ? 'Latest News' : 'Últimas Noticias';
+        
         this.newsContainer.innerHTML = `
             <div class="col-lg-12 col-12 mb-5">
-                <h2>Últimas Noticias</h2>
+                <h2>${sectionTitle}</h2>
             </div>
             <div class="col-lg-7 col-12">
                 ${newsHTML}
             </div>
             ${sidebarHTML}
         `;
+        
+        // Set up click handlers for news articles
+        this.setupNewsClickHandlers();
 
         // Trigger events integration for the recent events section
         console.log('🔄 Attempting to trigger events integration...');
@@ -227,6 +253,31 @@ class NewsIntegration {
         
         // Set up search functionality after sidebar is created
         setTimeout(() => this.setupSearchFunctionality(), 200);
+    }
+
+    setupNewsClickHandlers() {
+        console.log('🖱️ Setting up news click handlers...');
+        
+        // Add click handlers to all clickable news elements
+        const clickableElements = document.querySelectorAll('.clickable-news-card, .clickable-news-image, .clickable-news-title');
+        
+        clickableElements.forEach(element => {
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                const newsId = element.getAttribute('data-news-id');
+                console.log('🔗 News clicked, ID:', newsId);
+                
+                if (newsId) {
+                    this.navigateToNewsArticle(newsId);
+                } else {
+                    console.error('❌ No news ID found on clicked element');
+                }
+            });
+        });
+        
+        console.log('✅ Click handlers set up for', clickableElements.length, 'elements');
     }
 
     setupSearchFunctionality() {
@@ -377,8 +428,8 @@ class NewsIntegration {
                         text-align: center;
                         margin: 10px 0;
                     ">
-                        <h6 style="color: var(--primary-color); margin-bottom: 8px;">No se encontraron eventos</h6>
-                        <p class="small mb-3" style="color: var(--secondary-color); margin: 0;">No hay eventos que coincidan con "${query}"</p>
+                        <h6 style="color: var(--primary-color); margin-bottom: 8px;">${this.currentLanguage === 'en' ? 'No events found' : 'No se encontraron eventos'}</h6>
+                        <p class="small mb-3" style="color: var(--secondary-color); margin: 0;">${this.currentLanguage === 'en' ? `No events match "${query}"` : `No hay eventos que coincidan con "${query}"`}</p>
                         <button class="btn btn-sm" onclick="newsIntegration.resetEventSearch()" style="
                             background: var(--secondary-color);
                             color: var(--white-color);
@@ -388,7 +439,7 @@ class NewsIntegration {
                             font-size: 12px;
                             transition: all 0.3s ease;
                         " onmouseover="this.style.background='var(--primary-color)'" onmouseout="this.style.background='var(--secondary-color)'">
-                            <i class="bi-arrow-left me-1"></i>Ver los más recientes
+                            <i class="bi-arrow-left me-1"></i>${this.currentLanguage === 'en' ? 'View recent events' : 'Ver los más recientes'}
                         </button>
                     </div>
                 </div>
@@ -444,13 +495,19 @@ class NewsIntegration {
 
         // Add search results header and clear button
         const resultsHeader = events.length > 2 ? 
-            `<p class="small text-muted mb-3">Mostrando ${displayEvents.length} de ${events.length} resultados para "${query}"</p>` :
-            `<p class="small text-muted mb-3">${events.length} resultado${events.length !== 1 ? 's' : ''} para "${query}"</p>`;
+            (this.currentLanguage === 'en' ? 
+                `<p class="small text-muted mb-3">Showing ${displayEvents.length} of ${events.length} results for "${query}"</p>` :
+                `<p class="small text-muted mb-3">Mostrando ${displayEvents.length} de ${events.length} resultados para "${query}"</p>`) :
+            (this.currentLanguage === 'en' ? 
+                `<p class="small text-muted mb-3">${events.length} result${events.length !== 1 ? 's' : ''} for "${query}"</p>` :
+                `<p class="small text-muted mb-3">${events.length} resultado${events.length !== 1 ? 's' : ''} para "${query}"</p>`);
 
+        const clearSearchText = this.currentLanguage === 'en' ? 'Clear search' : 'Limpiar búsqueda';
+        
         const clearButton = `
             <div class="text-center mt-3 mb-3">
                 <button class="btn btn-sm btn-outline-secondary" onclick="newsIntegration.resetEventSearch()">
-                    <i class="bi-x-circle me-1"></i>Limpiar búsqueda
+                    <i class="bi-x-circle me-1"></i>${clearSearchText}
                 </button>
             </div>
         `;
@@ -472,11 +529,14 @@ class NewsIntegration {
     }
 
     generateCategoriesHTML(categories) {
+        const categoriesTitle = this.currentLanguage === 'en' ? 'Categories' : 'Categorías';
+        const noCategoriesText = this.currentLanguage === 'en' ? 'No categories available' : 'No hay categorías disponibles';
+        
         if (!categories || categories.length === 0) {
             return `
                 <div class="category-block">
-                    <h5>Categorías</h5>
-                    <p class="text-muted small">No hay categorías disponibles</p>
+                    <h5>${categoriesTitle}</h5>
+                    <p class="text-muted small">${noCategoriesText}</p>
                 </div>
             `;
         }
@@ -491,7 +551,7 @@ class NewsIntegration {
 
         return `
             <div class="category-block">
-                <h5>Categorías</h5>
+                <h5>${categoriesTitle}</h5>
                 <div class="category-links-container">
                     ${categoriesLinks}
                 </div>
@@ -500,11 +560,14 @@ class NewsIntegration {
     }
 
     generateTagsHTML(tags) {
+        const tagsTitle = this.currentLanguage === 'en' ? 'Tags' : 'Etiquetas';
+        const noTagsText = this.currentLanguage === 'en' ? 'No tags available' : 'No hay etiquetas disponibles';
+        
         if (!tags || tags.length === 0) {
             return `
                 <div class="tags-block">
-                    <h5 class="mb-3">Etiquetas</h5>
-                    <p class="text-muted small">No hay etiquetas disponibles</p>
+                    <h5 class="mb-3">${tagsTitle}</h5>
+                    <p class="text-muted small">${noTagsText}</p>
                 </div>
             `;
         }
@@ -515,36 +578,54 @@ class NewsIntegration {
 
         return `
             <div class="tags-block">
-                <h5 class="mb-3">Etiquetas</h5>
+                <h5 class="mb-3">${tagsTitle}</h5>
                 ${tagsLinks}
             </div>
         `;
     }
 
     formatDate(date) {
-        const months = [
-            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-        ];
-        
-        const day = date.getDate();
-        const month = months[date.getMonth()];
-        const year = date.getFullYear();
-        
-        return `${month} ${day}, ${year}`;
+        if (this.currentLanguage === 'en') {
+            // English date format: "Month Day, Year"
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${month} ${day}, ${year}`;
+        } else {
+            // Spanish date format: "Day de Month de Year"
+            const months = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${day} de ${month} de ${year}`;
+        }
     }
 
     showError(error) {
         if (this.newsContainer) {
+            const sectionTitle = this.currentLanguage === 'en' ? 'Latest News' : 'Últimas Noticias';
+            const errorUnknown = this.currentLanguage === 'en' ? 'Unknown error' : 'Error desconocido';
+            
             this.newsContainer.innerHTML = `
                 <div class="col-lg-12 col-12 mb-5">
-                    <h2>Últimas Noticias</h2>
+                    <h2>${sectionTitle}</h2>
                 </div>
                 <div class="col-lg-7 col-12">
                     <div class="error-state">
                         <div class="alert alert-warning" role="alert">
                             <h4 class="alert-heading">${EFAPI.language.getUIText('error_loading')}</h4>
-                            <p>${error.message || 'Error desconocido'}</p>
+                            <p>${error.message || errorUnknown}</p>
                             <hr>
                             <button class="btn btn-primary" onclick="newsIntegration.loadNews()">
                                 ${EFAPI.language.getUIText('try_again')}
@@ -581,6 +662,30 @@ class NewsIntegration {
                 </div>
             `;
         }
+    }
+
+    // Navigate to noticias.html with selected article
+    navigateToNewsArticle(articleId) {
+        console.log('📰 Navigating to news article:', articleId);
+        console.log('📰 Article ID type:', typeof articleId);
+        console.log('📰 Current language:', this.currentLanguage);
+        
+        // Store the selected article ID and language
+        sessionStorage.setItem('selectedNewsArticleId', articleId);
+        sessionStorage.setItem('selectedLanguage', this.currentLanguage);
+        
+        // Also ensure language preference is stored in localStorage
+        localStorage.setItem('userLanguagePreference', this.currentLanguage);
+        
+        // Verify storage
+        const storedId = sessionStorage.getItem('selectedNewsArticleId');
+        const storedLang = sessionStorage.getItem('selectedLanguage');
+        console.log('📰 Stored article ID:', storedId);
+        console.log('📰 Stored language:', storedLang);
+        console.log('💾 Language preference saved for persistence');
+        
+        // Navigate to noticias.html with language parameter
+        window.location.href = `noticias.html?lang=${this.currentLanguage}`;
     }
 }
 

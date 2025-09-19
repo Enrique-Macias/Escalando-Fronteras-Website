@@ -68,17 +68,20 @@ class TestimonialsIntegration {
     }
 
     showLoading() {
+        const testimonialsTitle = this.currentLanguage === 'en' ? 'Testimonials' : 'Testimonios';
+        const loadingText = this.currentLanguage === 'en' ? 'Loading testimonials...' : 'Cargando testimonios...';
+        
         if (this.loadingElement) {
             this.loadingElement.style.display = 'block';
         }
         this.testimonialsContainer.innerHTML = `
             <div class="col-lg-8 col-12 mx-auto">
-                <h2 class="mb-lg-3">Testimonios</h2>
+                <h2 class="mb-lg-3">${testimonialsTitle}</h2>
                 <div class="text-center">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Cargando testimonios...</span>
+                        <span class="visually-hidden">${loadingText}</span>
                     </div>
-                    <p class="mt-2">Cargando testimonios...</p>
+                    <p class="mt-2">${loadingText}</p>
                 </div>
             </div>
         `;
@@ -101,17 +104,23 @@ class TestimonialsIntegration {
     createCarouselHTML(testimonials) {
         const carouselItems = testimonials.map((testimonial, index) => {
             const isActive = index === 0 ? 'active' : '';
-            const author = testimonial.author || 'Autor desconocido';
+            const author = testimonial.author || (this.currentLanguage === 'en' ? 'Unknown Author' : 'Autor desconocido');
             const role = this.currentLanguage === 'en' ? testimonial.role_en : testimonial.role;
             const content = this.currentLanguage === 'en' ? testimonial.body_en : testimonial.body_es;
             const imageUrl = testimonial.imageUrl || 'images/avatar/default-avatar.jpg';
+            
+            // Truncate content if too long to prevent overflow
+            const maxLength = 200; // Maximum characters for testimonial
+            const truncatedContent = content && content.length > maxLength 
+                ? content.substring(0, maxLength) + '...' 
+                : content;
 
             return `
                 <div class="carousel-item ${isActive}">
                     <div class="carousel-caption">
-                        <h4 class="carousel-title">${content}</h4>
+                        <h4 class="carousel-title">${truncatedContent}</h4>
                         <small class="carousel-name">
-                            <span class="carousel-name-title">${author}</span>, ${role || 'Miembro'}
+                            <span class="carousel-name-title">${author}</span>, ${role || (this.currentLanguage === 'en' ? 'Member' : 'Miembro')}
                         </small>
                     </div>
                 </div>
@@ -130,9 +139,12 @@ class TestimonialsIntegration {
             `;
         }).join('');
 
+        // Get translated title
+        const testimonialsTitle = this.currentLanguage === 'en' ? 'Testimonials' : 'Testimonios';
+        
         return `
             <div class="col-lg-8 col-12 mx-auto">
-                <h2 class="mb-lg-3">Testimonios</h2>
+                <h2 class="mb-lg-3">${testimonialsTitle}</h2>
                 
                 <div id="testimonial-carousel" class="carousel carousel-fade slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -160,16 +172,21 @@ class TestimonialsIntegration {
     }
 
     showError(error) {
+        const testimonialsTitle = this.currentLanguage === 'en' ? 'Testimonials' : 'Testimonios';
+        const errorHeading = this.currentLanguage === 'en' ? 'Error loading testimonials' : 'Error al cargar los testimonios';
+        const errorUnknown = this.currentLanguage === 'en' ? 'Unknown error' : 'Error desconocido';
+        const retryButton = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
+        
         this.testimonialsContainer.innerHTML = `
             <div class="col-lg-8 col-12 mx-auto">
-                <h2 class="mb-lg-3">Testimonios</h2>
+                <h2 class="mb-lg-3">${testimonialsTitle}</h2>
                 <div class="text-center">
                     <div class="alert alert-warning" role="alert">
-                        <h4 class="alert-heading">Error al cargar los testimonios</h4>
-                        <p>${error.message || 'Error desconocido'}</p>
+                        <h4 class="alert-heading">${errorHeading}</h4>
+                        <p>${error.message || errorUnknown}</p>
                         <hr>
                         <button class="btn btn-primary" onclick="testimonialsIntegration.loadTestimonials()">
-                            Intentar de nuevo
+                            ${retryButton}
                         </button>
                     </div>
                 </div>

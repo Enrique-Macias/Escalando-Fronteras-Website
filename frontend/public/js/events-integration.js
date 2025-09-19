@@ -33,6 +33,8 @@ class EventsIntegration {
     }
 
     async loadRecentEvents() {
+        console.log('🎪 loadRecentEvents called, current language:', this.currentLanguage);
+        
         // Try to find the container if we don't have it yet
         if (!this.recentEventsContainer) {
             this.recentEventsContainer = document.getElementById('recent-events-container');
@@ -56,6 +58,8 @@ class EventsIntegration {
                 published: true
             });
             
+            console.log('🎪 Events API response:', events);
+            
             let eventsList = [];
             if (Array.isArray(events)) {
                 eventsList = events;
@@ -77,14 +81,49 @@ class EventsIntegration {
         }
     }
 
+    // Method to force refresh events (useful for language changes)
+    forceRefresh() {
+        console.log('🔄 Force refreshing events...');
+        
+        // Clear any existing timeout or loading state
+        this.recentEventsContainer = document.getElementById('recent-events-container');
+        
+        if (!this.recentEventsContainer) {
+            console.log('❌ Events container not found during force refresh');
+            return;
+        }
+        
+        // Force reload with a clean state
+        this.loadRecentEvents();
+    }
+
+    // Method to reset and reload events (even more aggressive)
+    resetAndReload() {
+        console.log('🔄 Reset and reload events...');
+        
+        this.recentEventsContainer = document.getElementById('recent-events-container');
+        
+        if (this.recentEventsContainer) {
+            // Clear container first
+            this.recentEventsContainer.innerHTML = '';
+            
+            // Then reload
+            setTimeout(() => {
+                this.loadRecentEvents();
+            }, 100);
+        }
+    }
+
     showLoading() {
         if (this.recentEventsContainer) {
+            const loadingText = this.currentLanguage === 'en' ? 'Loading events...' : 'Cargando eventos...';
+            
             this.recentEventsContainer.innerHTML = `
                 <div class="text-center">
                     <div class="spinner-border spinner-border-sm text-primary" role="status">
-                        <span class="visually-hidden">${EFAPI.language.getUIText('Cargando eventos...')}</span>
+                        <span class="visually-hidden">${loadingText}</span>
                     </div>
-                    <p class="mt-2 small">${EFAPI.language.getUIText('Cargando eventos...')}</p>
+                    <p class="mt-2 small">${loadingText}</p>
                 </div>
             `;
         }
@@ -102,7 +141,7 @@ class EventsIntegration {
             const title = this.currentLanguage === 'en' ? event.title_en || event.title_es : event.title_es;
             const location = event.location_city && event.location_country 
                 ? `${event.location_city}, ${event.location_country}` 
-                : (event.location_city || event.location_country || 'Ubicación');
+                : (event.location_city || event.location_country || (this.currentLanguage === 'en' ? 'Location' : 'Ubicación'));
             const imageUrl = event.coverImageUrl || (event.images && event.images[0]) || 'images/eventos/ejemplo_evento.jpg';
             const eventDate = new Date(event.date);
             const formattedDate = this.formatDate(eventDate);
@@ -147,16 +186,31 @@ class EventsIntegration {
     }
 
     formatDate(date) {
-        const months = [
-            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-        ];
-        
-        const day = date.getDate();
-        const month = months[date.getMonth()];
-        const year = date.getFullYear();
-        
-        return `${month} ${day}, ${year}`;
+        if (this.currentLanguage === 'en') {
+            // English date format: "Month Day, Year"
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${month} ${day}, ${year}`;
+        } else {
+            // Spanish date format: "Month Day, Year" (capitalized)
+            const months = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${month} ${day}, ${year}`;
+        }
     }
 
     showError(error) {

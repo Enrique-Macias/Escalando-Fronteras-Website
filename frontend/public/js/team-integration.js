@@ -159,17 +159,21 @@ class TeamIntegration {
     }
 
     showError(error) {
+        const errorTitle = this.currentLanguage === 'en' ? 'Error loading team' : 'Error al cargar el equipo';
+        const errorMessage = error.message || (this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión');
+        const retryText = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
+        
         this.teamContainer.innerHTML = `
             <div class="col-12 text-center">
-                <div class="error-state">
-                    <div class="alert alert-warning" role="alert">
-                        <h4 class="alert-heading">${EFAPI.language.getUIText('error_loading')}</h4>
-                        <p>${error.message || 'Error desconocido'}</p>
-                        <hr>
-                        <button class="btn btn-primary" onclick="teamIntegration.loadTeamMembers()">
-                            ${EFAPI.language.getUIText('try_again')}
-                        </button>
+                <div class="error-modal network-error">
+                    <div class="error-modal-icon">
+                        <i class="bi-wifi-off"></i>
                     </div>
+                    <h3>${errorTitle}</h3>
+                    <p>${errorMessage}</p>
+                    <button class="btn-retry" onclick="teamIntegration.loadTeamMembers()">
+                        ${retryText}
+                    </button>
                 </div>
             </div>
         `;

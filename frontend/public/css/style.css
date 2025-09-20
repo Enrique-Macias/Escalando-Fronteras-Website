@@ -2804,3 +2804,162 @@ faq {
     padding: 25px;
   }
 }
+
+/* ===================== Error Modal Styles ===================== */
+
+.error-modal {
+  background: var(--white-color);
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 10px 30px rgba(49, 54, 63, 0.15);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: center;
+  font-family: var(--body-font-family);
+}
+
+.error-modal-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  color: var(--white-color);
+}
+
+.error-modal h3 {
+  color: var(--primary-color);
+  font-size: var(--h4-font-size);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.error-modal p {
+  color: var(--p-color);
+  font-size: var(--p-font-size);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.error-modal .btn-retry {
+  background: var(--custom-btn-bg-color);
+  color: var(--white-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius-small);
+  font-size: var(--btn-font-size);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--body-font-family);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.error-modal .btn-retry:hover {
+  background: var(--custom-btn-bg-hover-color);
+  color: var(--white-color);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(49, 54, 63, 0.2);
+}
+
+.error-modal .btn-retry:active {
+  transform: translateY(0);
+}
+
+/* Error state for smaller containers */
+.error-state {
+  padding: 1.5rem;
+  background: var(--section-bg-color);
+  border-radius: var(--border-radius-small);
+  border: 1px solid #e3f2fd;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.error-state .error-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: var(--white-color);
+}
+
+.error-state h4,
+.error-state h5,
+.error-state h6 {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.error-state p {
+  color: var(--p-color);
+  margin-bottom: 1rem;
+}
+
+.error-state .btn-retry-sm {
+  background: var(--custom-btn-bg-color);
+  color: var(--white-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-small);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--body-font-family);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.error-state .btn-retry-sm:hover {
+  background: var(--custom-btn-bg-hover-color);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(49, 54, 63, 0.15);
+}
+
+/* Network error specific styling */
+.network-error {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border: 1px solid #ffcc02;
+}
+
+.network-error .error-modal-icon {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+}
+
+.network-error .error-state .error-icon {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+}
+
+/* Loading state improvements */
+.loading-spinner {
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading-spinner .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3rem;
+  border-color: var(--custom-btn-bg-color);
+  border-right-color: transparent;
+}
+
+.loading-spinner p {
+  color: var(--p-color);
+  margin-top: 1rem;
+  font-size: var(--p-font-size);
+}

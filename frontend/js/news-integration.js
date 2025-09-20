@@ -615,22 +615,24 @@ class NewsIntegration {
     showError(error) {
         if (this.newsContainer) {
             const sectionTitle = this.currentLanguage === 'en' ? 'Latest News' : 'Últimas Noticias';
-            const errorUnknown = this.currentLanguage === 'en' ? 'Unknown error' : 'Error desconocido';
+            const errorTitle = this.currentLanguage === 'en' ? 'Error loading news' : 'Error al cargar las noticias';
+            const errorMessage = error.message || (this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión');
+            const retryText = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
             
             this.newsContainer.innerHTML = `
                 <div class="col-lg-12 col-12 mb-5">
                     <h2>${sectionTitle}</h2>
                 </div>
                 <div class="col-lg-7 col-12">
-                    <div class="error-state">
-                        <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">${EFAPI.language.getUIText('error_loading')}</h4>
-                            <p>${error.message || errorUnknown}</p>
-                            <hr>
-                            <button class="btn btn-primary" onclick="newsIntegration.loadNews()">
-                                ${EFAPI.language.getUIText('try_again')}
-                            </button>
+                    <div class="error-modal network-error">
+                        <div class="error-modal-icon">
+                            <i class="bi-wifi-off"></i>
                         </div>
+                        <h3>${errorTitle}</h3>
+                        <p>${errorMessage}</p>
+                        <button class="btn-retry" onclick="newsIntegration.loadNews()">
+                            ${retryText}
+                        </button>
                     </div>
                 </div>
             `;

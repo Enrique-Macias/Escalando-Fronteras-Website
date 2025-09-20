@@ -1,0 +1,1130 @@
+/**
+ * Eventos Integration - Dynamic content loading for eventos.html
+ * Handles events from database with bilingual support and responsive pagination
+ */
+
+class EventosIntegration {
+    constructor() {
+        this.currentLanguage = 'es'; // Default language
+        this.allEvents = [];
+        this.displayedEvents = [];
+        this.currentPage = 1;
+        this.eventsPerPage = this.getEventsPerPage();
+        this.selectedEventId = null;
+        this.isLoading = false;
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            this.init();
+        });
+        
+        // Update events per page on window resize
+        window.addEventListener('resize', () => {
+            this.eventsPerPage = this.getEventsPerPage();
+            this.updatePaginationSettings();
+        });
+    }
+    
+    async init() {
+        console.log('🎪 EventosIntegration initializing...');
+        
+        // Wait for API to be ready
+        await this.waitForAPI();
+        
+        // Check if specific event was selected
+        this.selectedEventId = sessionStorage.getItem('selectedEventId');
+        console.log('🎪 Selected event ID:', this.selectedEventId);
+        
+        // Load events
+        await this.loadEvents();
+        
+        // Setup search functionality
+        this.setupSearch();
+        
+        // Setup show more button
+        this.setupShowMoreButton();
+    }
+    
+    async waitForAPI() {
+        return new Promise((resolve) => {
+            const checkAPI = () => {
+                if (typeof window.EFAPI !== 'undefined' && window.EFAPI.events) {
+                    console.log('🎪 API ready');
+                    resolve();
+                } else {
+                    console.log('🎪 Waiting for API...');
+                    setTimeout(checkAPI, 100);
+                }
+            };
+            checkAPI();
+        });
+    }
+    
+    getEventsPerPage() {
+        // Mobile: 3 events, Desktop: 6 events
+        return window.innerWidth <= 768 ? 3 : 6;
+    }
+    
+    updatePaginationSettings() {
+        // Recalculate pagination when screen size changes
+        if (this.displayedEvents.length > 0) {
+            this.displayAllEventsGrid();
+        }
+    }
+    
+    async loadEvents() {
+        if (this.isLoading) return;
+        this.isLoading = true;
+        
+        try {
+            console.log('🎪 Loading events...');
+            
+            // Load events from API
+            const response = await window.EFAPI.events.getEvents(100); // Get more events for better selection
+            console.log('🎪 Events API response:', response);
+            
+            // Handle different response formats
+            let events;
+            if (response && response.success && Array.isArray(response.events)) {
+                // New API format: { success: true, events: [...] }
+                events = response.events;
+            } else if (Array.isArray(response)) {
+                // Old API format: direct array
+                events = response;
+            } else {
+                throw new Error('Invalid events data received');
+            }
+            
+            if (!Array.isArray(events)) {
+                throw new Error('Events data is not an array');
+            }
+            
+            this.allEvents = events;
+            console.log('🎪 Total events loaded:', this.allEvents.length);
+            
+            // Load main event (selected or latest)
+            await this.loadMainEvent();
+            
+            // Load sidebar content
+            await this.loadSidebarContent();
+            
+            // Update sidebar titles with current language
+            this.translateSidebarContent();
+            
+            // Load all events grid
+            this.displayAllEventsGrid();
+            
+        } catch (error) {
+            console.error('🚨 Error loading events:', error);
+            this.showError('Error loading events');
+        } finally {
+            this.isLoading = false;
+        }
+    }
+    
+    async loadMainEvent() {
+        let mainEvent = null;
+        
+        if (this.selectedEventId) {
+            console.log('🎪 Looking for selected event:', this.selectedEventId);
+            
+            // Try to find the event in loaded events first
+            mainEvent = this.allEvents.find(event => 
+                event.id == this.selectedEventId || parseInt(event.id) === parseInt(this.selectedEventId)
+            );
+            
+            // If not found in loaded events, try to get it directly from API
+            if (!mainEvent) {
+                try {
+                    console.log('🎪 Event not found in list, fetching directly...');
+                    mainEvent = await window.EFAPI.events.getEventById(this.selectedEventId);
+                } catch (error) {
+                    console.warn('🎪 Could not fetch selected event:', error);
+                }
+            }
+        }
+        
+        // If no selected event or not found, use the latest event
+        if (!mainEvent && this.allEvents.length > 0) {
+            mainEvent = this.allEvents[0]; // Assuming events are ordered by date
+            console.log('🎪 Using latest event as main event');
+        }
+        
+        if (mainEvent) {
+            this.displayMainEvent(mainEvent);
+        } else {
+            this.showError('No events available');
+        }
+    }
+    
+    displayMainEvent(event) {
+        console.log('🎪 Displaying main event:', event);
+        
+        // Clear the selected event ID from sessionStorage after displaying it
+        if (this.selectedEventId) {
+            sessionStorage.removeItem('selectedEventId');
+            console.log('🎪 Cleared selectedEventId from sessionStorage');
+        }
+        
+        const container = document.getElementById('main-event-content');
+        if (!container) return;
+        
+        // Get event details with language support
+        const title = this.getLocalizedField(event, 'title') || 'Sin título';
+        const description = this.getLocalizedField(event, 'description') || 'Sin descripción';
+        const category = this.getLocalizedField(event, 'category') || 'General';
+        const tags = this.getLocalizedField(event, 'tags') || [];
+        const location = this.getEventLocation(event);
+        const date = this.formatDate(event.date || event.createdAt || event.created_at);
+        const author = event.author || 'Escalando Fronteras';
+        const mainImage = event.coverImageUrl || event.image || event.imageUrl || 'images/introEF.jpeg';
+        
+        // Get quote/phrase with language support
+        const quote = this.getLocalizedField(event, 'quote') || this.getLocalizedField(event, 'phrase') || '';
+        
+        // Get credits with language support
+        const credits = this.getLocalizedField(event, 'credits') || '';
+        
+        // Generate additional images
+        const additionalImages = this.formatAdditionalImages(event.eventImages || event.images || []);
+        
+        // Generate tags HTML
+        const tagsHtml = Array.isArray(tags) ? 
+            tags.map(tag => `<a href="#" class="tags-block-link">${tag}</a>`).join('') :
+            `<a href="#" class="tags-block-link">${tags}</a>`;
+        
+        const eventHtml = `
+            <div class="news-block">
+                <div class="news-block-top">
+                    <img src="${mainImage}" class="news-image img-fluid" alt="${title}" onerror="this.src='images/introEF.jpeg'">
+
+                    <div class="news-category-block">
+                        ${location ? `
+                            <a href="#" class="category-block-link">
+                                <i class="bi-geo-alt me-1"></i>
+                                ${location}
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+
+                <div class="news-block-info">
+                    <div class="d-flex mt-2">
+                        <div class="news-block-date">
+                            <p>
+                                <i class="bi-calendar4 custom-icon me-1"></i>
+                                ${date}
+                            </p>
+                        </div>
+
+                        <div class="news-block-author mx-5">
+                            <p>
+                                <i class="bi-person custom-icon me-1"></i>
+                                ${this.currentLanguage === 'en' ? 'By' : 'Por'} ${author}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="news-block-title mb-2">
+                        <h4>${title}</h4>
+                    </div>
+
+                    <div class="news-block-body">
+                        ${this.formatDescription(description)}
+                        
+                        ${quote ? `
+                            <!-- ======================= QUOTE SECTION ================== -->
+                            <blockquote>${quote}</blockquote>
+                        ` : ''}
+                    </div>
+                    
+                    ${additionalImages}
+                    
+                    ${credits ? `
+                        <p class="mt-3 text-muted">${credits}</p>
+                    ` : ''}
+
+                    <div class="social-share border-top mt-5 py-4 d-flex flex-wrap align-items-center">
+                        <div class="tags-block me-auto">
+                            ${tagsHtml}
+                        </div>
+
+                        <div class="d-flex">
+                            <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" title="Síguenos en Facebook"></a>
+                            <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" title="Síguenos en Instagram"></a>
+                            <a href="#" class="social-icon-link bi-whatsapp" title="WhatsApp"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        container.innerHTML = eventHtml;
+        
+        // Setup image modal if there are additional images
+        if (event.eventImages && event.eventImages.length > 0) {
+            this.setupImageModal();
+        }
+    }
+    
+    formatAdditionalImages(images) {
+        if (!images || images.length === 0) {
+            return '';
+        }
+        
+        console.log('🎪 Formatting additional images:', images);
+        
+        let imagesHtml = '';
+        const leftColumnImages = [];
+        const rightColumnImages = [];
+        
+        // Distribute images alternately between columns
+        images.forEach((image, index) => {
+            if (index % 2 === 0) {
+                leftColumnImages.push(image);
+            } else {
+                rightColumnImages.push(image);
+            }
+        });
+        
+        // Generate HTML for left column
+        const leftColumnHtml = leftColumnImages.map((image, index) => {
+            const imageUrl = image?.imageUrl || image?.url || image;
+            const imageAlt = image?.alt || image?.title || 'Imagen del evento';
+            const globalIndex = index * 2; // Calculate global index for modal
+            
+            return `
+                <div class="mb-3">
+                    <img src="${imageUrl}" 
+                         class="news-detail-image img-fluid clickable-image" 
+                         alt="${imageAlt}"
+                         data-image-index="${globalIndex}"
+                         style="border-radius: 8px; cursor: pointer;"
+                         onerror="this.style.display='none'">
+                </div>
+            `;
+        }).join('');
+        
+        // Generate HTML for right column
+        const rightColumnHtml = rightColumnImages.map((image, index) => {
+            const imageUrl = image?.imageUrl || image?.url || image;
+            const imageAlt = image?.alt || image?.title || 'Imagen del evento';
+            const globalIndex = (index * 2) + 1; // Calculate global index for modal
+            
+            return `
+                <div class="mb-3">
+                    <img src="${imageUrl}" 
+                         class="news-detail-image img-fluid clickable-image" 
+                         alt="${imageAlt}"
+                         data-image-index="${globalIndex}"
+                         style="border-radius: 8px; cursor: pointer;"
+                         onerror="this.style.display='none'">
+                </div>
+            `;
+        }).join('');
+        
+        imagesHtml = `
+            <div class="row mt-5 mb-4" style="row-gap: 5px;">
+                <div class="col-lg-6 col-12" style="align-items: flex-start;">
+                    ${leftColumnHtml}
+                </div>
+                <div class="col-lg-6 col-12" style="align-items: flex-start;">
+                    ${rightColumnHtml}
+                </div>
+            </div>
+        `;
+        
+        return imagesHtml;
+    }
+    
+    setupImageModal() {
+        // Add modal HTML to body if not exists
+        if (!document.getElementById('imageModal')) {
+            const modalHtml = `
+                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title text-white" id="imageModalLabel">
+                                    <span id="modal-image-counter">1 / 1</span>
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center p-0 position-relative">
+                                <img id="modal-image" src="" class="img-fluid" alt="">
+                                <button class="btn btn-outline-light position-absolute start-0 top-50 translate-middle-y ms-3" id="modal-prev-btn">
+                                    <i class="bi-chevron-left"></i>
+                                </button>
+                                <button class="btn btn-outline-light position-absolute end-0 top-50 translate-middle-y me-3" id="modal-next-btn">
+                                    <i class="bi-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
+        
+        // Setup click handlers for images
+        document.querySelectorAll('.clickable-image').forEach(img => {
+            img.addEventListener('click', (e) => {
+                const imageIndex = parseInt(e.target.getAttribute('data-image-index'));
+                this.openImageModal(imageIndex);
+            });
+        });
+        
+        // Setup modal navigation
+        document.getElementById('modal-prev-btn')?.addEventListener('click', () => this.previousImage());
+        document.getElementById('modal-next-btn')?.addEventListener('click', () => this.nextImage());
+    }
+    
+    openImageModal(startIndex = 0) {
+        this.currentImageIndex = startIndex;
+        this.modalImages = Array.from(document.querySelectorAll('.clickable-image'));
+        this.updateModalImage();
+        
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        modal.show();
+    }
+    
+    updateModalImage() {
+        const modalImage = document.getElementById('modal-image');
+        const modalCounter = document.getElementById('modal-image-counter');
+        
+        if (this.modalImages && this.modalImages[this.currentImageIndex]) {
+            modalImage.src = this.modalImages[this.currentImageIndex].src;
+            modalImage.alt = this.modalImages[this.currentImageIndex].alt;
+            modalCounter.textContent = `${this.currentImageIndex + 1} / ${this.modalImages.length}`;
+        }
+    }
+    
+    previousImage() {
+        if (this.currentImageIndex > 0) {
+            this.currentImageIndex--;
+        } else {
+            this.currentImageIndex = this.modalImages.length - 1;
+        }
+        this.updateModalImage();
+    }
+    
+    nextImage() {
+        if (this.currentImageIndex < this.modalImages.length - 1) {
+            this.currentImageIndex++;
+        } else {
+            this.currentImageIndex = 0;
+        }
+        this.updateModalImage();
+    }
+    
+    async loadSidebarContent() {
+        // Load recent events
+        this.displayRecentEvents();
+        
+        // Load categories and tags
+        this.displayCategories();
+        this.displayTags();
+    }
+    
+    displayRecentEvents() {
+        const container = document.getElementById('recent-events-container');
+        if (!container || this.allEvents.length === 0) return;
+        
+        // Get first 3 events for recent events
+        const recentEvents = this.allEvents.slice(0, 3);
+        
+        const eventsHtml = recentEvents.map(event => {
+            const title = this.getLocalizedField(event, 'title') || 'Sin título';
+            const date = this.formatDate(event.date || event.createdAt || event.created_at);
+            const image = event.coverImageUrl || event.image || event.imageUrl || 'images/introEF.jpeg';
+            
+            return `
+                <div class="news-block news-block-two-col d-flex mt-4">
+                    <div class="news-block-two-col-image-wrap">
+                        <a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;">
+                            <img src="${image}" class="news-image img-fluid" alt="${title}" onerror="this.src='images/introEF.jpeg'">
+                        </a>
+                    </div>
+
+                    <div class="news-block-two-col-info">
+                        <div class="news-block-title mb-2">
+                            <h6><a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;" class="news-block-title-link">${title}</a></h6>
+                        </div>
+
+                        <div class="news-block-date">
+                            <p>
+                                <i class="bi-calendar4 custom-icon me-1"></i>
+                                ${date}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        container.innerHTML = eventsHtml;
+    }
+    
+    displayCategories() {
+        const container = document.getElementById('categories-container');
+        if (!container || this.allEvents.length === 0) return;
+        
+        // Extract unique categories
+        const categoriesMap = new Map();
+        
+        this.allEvents.forEach(event => {
+            const category = this.getLocalizedField(event, 'category') || 'General';
+            categoriesMap.set(category, (categoriesMap.get(category) || 0) + 1);
+        });
+        
+        // Convert to array and sort by count
+        const categories = Array.from(categoriesMap.entries())
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 8); // Limit to 8 categories
+        
+        if (categories.length === 0) {
+            container.innerHTML = `<p class="text-muted">${this.currentLanguage === 'en' ? 'No categories available' : 'No hay categorías disponibles'}</p>`;
+            return;
+        }
+        
+        const categoriesHtml = categories.map(([category, count]) => `
+            <a href="#" class="category-block-link">
+                ${category}
+            </a>
+        `).join('');
+        
+        container.innerHTML = categoriesHtml;
+    }
+    
+    displayTags() {
+        const container = document.getElementById('tags-container');
+        if (!container || this.allEvents.length === 0) return;
+        
+        // Extract unique tags
+        const tagsSet = new Set();
+        
+        this.allEvents.forEach(event => {
+            const tags = this.getLocalizedField(event, 'tags') || [];
+            if (Array.isArray(tags)) {
+                tags.forEach(tag => tagsSet.add(tag));
+            } else if (typeof tags === 'string' && tags.trim()) {
+                tagsSet.add(tags);
+            }
+        });
+        
+        const tagsArray = Array.from(tagsSet).slice(0, 10); // Limit to 10 tags
+        
+        if (tagsArray.length === 0) {
+            container.innerHTML = `<p class="text-muted">${this.currentLanguage === 'en' ? 'No tags available' : 'No hay etiquetas disponibles'}</p>`;
+            return;
+        }
+        
+        const tagsHtml = tagsArray.map(tag => `
+            <a href="#" class="tags-block-link">${tag}</a>
+        `).join('');
+        
+        container.innerHTML = tagsHtml;
+    }
+    
+    displayAllEventsGrid() {
+        const container = document.getElementById('all-events-grid');
+        const showMoreBtn = document.getElementById('show-more-btn');
+        
+        if (!container || this.allEvents.length === 0) return;
+        
+        // Calculate events to show
+        const eventsToShow = this.currentPage * this.eventsPerPage;
+        const eventsToDisplay = this.allEvents.slice(0, eventsToShow);
+        
+        console.log('🎪 Displaying events:', eventsToDisplay.length, 'of', this.allEvents.length);
+        
+        const eventsHtml = eventsToDisplay.map(event => {
+            const title = this.getLocalizedField(event, 'title') || 'Sin título';
+            const description = this.getLocalizedField(event, 'description') || 'Sin descripción';
+            const category = this.getLocalizedField(event, 'category') || 'General';
+            const location = this.getEventLocation(event);
+            const date = this.formatDate(event.date || event.createdAt || event.created_at);
+            const author = event.author || 'Escalando Fronteras';
+            const image = event.coverImageUrl || event.image || event.imageUrl || 'images/introEF.jpeg';
+            
+            // Truncate description
+            const truncatedDescription = description.length > 150 ? 
+                description.substring(0, 150) + '...' : description;
+            
+            return `
+                <div class="col-lg-6 col-12 mb-4">
+                    <div class="news-block">
+                        <div class="news-block-top">
+                            <a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;">
+                                <img src="${image}" class="news-image img-fluid" alt="${title}" onerror="this.src='images/introEF.jpeg'">
+                            </a>
+
+                            <div class="news-category-block">
+                                ${location ? `
+                                    <a href="#" class="category-block-link">
+                                        <i class="bi-geo-alt me-1"></i>
+                                        ${location}
+                                    </a>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <div class="news-block-info">
+                            <div class="d-flex mt-2">
+                                <div class="news-block-date">
+                                    <p>
+                                        <i class="bi-calendar4 custom-icon me-1"></i>
+                                        ${date}
+                                    </p>
+                                </div>
+
+                                <div class="news-block-author mx-5">
+                                    <p>
+                                        <i class="bi-person custom-icon me-1"></i>
+                                        ${this.currentLanguage === 'en' ? 'By' : 'Por'} ${author}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="news-block-title mb-2">
+                                <h4><a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;" class="news-block-title-link">${title}</a></h4>
+                            </div>
+
+                            <div class="news-block-body">
+                                <p>${truncatedDescription}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        container.innerHTML = eventsHtml;
+        
+        // Show/hide "Show more" button
+        if (eventsToShow < this.allEvents.length) {
+            showMoreBtn.style.display = 'inline-block';
+        } else {
+            showMoreBtn.style.display = 'none';
+        }
+    }
+    
+    setupShowMoreButton() {
+        const showMoreBtn = document.getElementById('show-more-btn');
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', () => {
+                this.currentPage++;
+                this.displayAllEventsGrid();
+                
+                // Scroll to new content
+                setTimeout(() => {
+                    const newEvents = document.querySelectorAll('#all-events-grid .col-lg-6');
+                    if (newEvents.length > 0) {
+                        const targetEvent = newEvents[Math.max(0, newEvents.length - this.eventsPerPage)];
+                        targetEvent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
+            });
+        }
+    }
+    
+    setupSearch() {
+        const searchInput = document.getElementById('search-input');
+        const searchForm = document.querySelector('.search-form');
+        
+        if (searchForm) {
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.performSidebarSearch();
+            });
+        }
+        
+        if (searchInput) {
+            // Real-time search with debounce for sidebar
+            let searchTimeout;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this.performSidebarSearch();
+                }, 300);
+            });
+        }
+    }
+    
+    performSidebarSearch() {
+        const searchInput = document.getElementById('search-input');
+        const query = searchInput?.value.toLowerCase().trim() || '';
+        
+        console.log('🔍 Sidebar search query:', query);
+        
+        if (!query) {
+            // Reset to show recent events (first 3)
+            this.displayRecentEvents();
+            this.updateSearchTitle(false);
+            return;
+        }
+        
+        // Filter events based on search query
+        const filteredEvents = this.allEvents.filter(event => {
+            const title = this.getLocalizedField(event, 'title') || '';
+            const description = this.getLocalizedField(event, 'description') || '';
+            const category = this.getLocalizedField(event, 'category') || '';
+            const tags = this.getLocalizedField(event, 'tags') || [];
+            const author = event.author || '';
+            const location = this.getEventLocation(event);
+            
+            const searchableText = [
+                title,
+                description,
+                category,
+                author,
+                location,
+                Array.isArray(tags) ? tags.join(' ') : tags
+            ].join(' ').toLowerCase();
+            
+            return searchableText.includes(query);
+        });
+        
+        console.log('🔍 Found events:', filteredEvents.length);
+        
+        // Display up to 3 search results
+        this.displaySearchResults(filteredEvents.slice(0, 3), query);
+        this.updateSearchTitle(true, filteredEvents.length, query);
+    }
+    
+    displaySearchResults(events, query) {
+        console.log('🔍 Displaying events search results in sidebar:', events.length);
+        
+        const container = document.getElementById('recent-events-container');
+        if (!container) {
+            console.error('❌ Recent events container not found!');
+            return;
+        }
+        
+        if (events.length === 0) {
+            this.displayNoEventsSearchResults(query);
+            return;
+        }
+        
+        // Display search results (same format as recent events, limit to 3 like noticias limits to 2)
+        const eventsHtml = events.map(event => {
+            const title = this.getLocalizedField(event, 'title') || 'Sin título';
+            const date = this.formatDate(event.date || event.createdAt || event.created_at);
+            const image = event.coverImageUrl || event.image || event.imageUrl || 'images/introEF.jpeg';
+            
+            return `
+                <div class="news-block news-block-two-col d-flex mt-4">
+                    <div class="news-block-two-col-image-wrap">
+                        <a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;">
+                            <img src="${image}" class="news-image img-fluid" alt="${title}" onerror="this.src='images/introEF.jpeg'">
+                        </a>
+                    </div>
+
+                    <div class="news-block-two-col-info">
+                        <div class="news-block-title mb-2">
+                            <h6><a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;" class="news-block-title-link">${title}</a></h6>
+                        </div>
+
+                        <div class="news-block-date">
+                            <p>
+                                <i class="bi-calendar4 custom-icon me-1"></i>
+                                ${date}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        // Add clear search option with consistent noticias styling
+        const clearSearchButton = `
+            <div class="text-center mt-3">
+                <button class="btn btn-sm" onclick="eventosIntegration.clearSidebarSearch()" style="
+                    background-color: var(--secondary-color);
+                    border-color: var(--secondary-color);
+                    color: var(--white-color);
+                ">
+                    ← ${this.currentLanguage === 'en' ? 'View recent events' : 'Ver eventos recientes'}
+                </button>
+            </div>
+        `;
+        
+        container.innerHTML = eventsHtml + clearSearchButton;
+        
+        console.log('✅ Events search results displayed successfully');
+    }
+    
+    displayNoEventsSearchResults(query) {
+        console.log('❌ No events search results found for:', query);
+        
+        const container = document.getElementById('recent-events-container');
+        if (!container) return;
+
+        const noEventsTitle = this.currentLanguage === 'en' ? 'No events found' : 'No se encontraron eventos';
+        const noEventsText = this.currentLanguage === 'en' ? 
+            `No events match "${query}"` : 
+            `No hay eventos que coincidan con "${query}"`;
+        const backButtonText = this.currentLanguage === 'en' ? '← View recent events' : '← Ver eventos recientes';
+
+        container.innerHTML = `
+            <div class="no-results-message" style="
+                background: var(--section-bg-color);
+                border: 1px solid var(--secondary-color);
+                border-radius: var(--border-radius-small);
+                padding: 20px;
+                text-align: center;
+                margin: 10px 0;
+            ">
+                <h5 style="color: var(--secondary-color); margin-bottom: 1rem;">${noEventsTitle}</h5>
+                <p style="color: var(--primary-color); margin-bottom: 1rem;">${noEventsText}</p>
+                <button class="btn" onclick="document.getElementById('search-input').value=''; eventosIntegration.clearSidebarSearch();" style="
+                    background-color: var(--secondary-color);
+                    border-color: var(--secondary-color);
+                    color: var(--white-color);
+                ">
+                    ${backButtonText}
+                </button>
+            </div>
+        `;
+    }
+    
+    updateSearchTitle(isSearching, totalResults = 0, query = '') {
+        const titleElement = document.getElementById('recent-events-title');
+        if (!titleElement) return;
+        
+        if (isSearching) {
+            // Match noticias pattern: show results count in parentheses
+            const searchResultsText = this.currentLanguage === 'en' ? 
+                `Search Results (${totalResults})` : 
+                `Resultados de Búsqueda (${totalResults})`;
+            titleElement.textContent = searchResultsText;
+            titleElement.style.color = 'var(--primary-color)';
+        } else {
+            // Reset to default title
+            const recentEventsText = this.currentLanguage === 'en' ? 
+                'Recent Events' : 
+                'Eventos Recientes';
+            titleElement.textContent = recentEventsText;
+            titleElement.style.color = '';
+        }
+    }
+    
+    clearSidebarSearch() {
+        console.log('🔄 Clearing events sidebar search');
+        
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        
+        // Reset to show recent events
+        this.displayRecentEvents();
+        this.updateSearchTitle(false);
+        
+        console.log('✅ Events sidebar search cleared');
+    }
+    
+    resetEventsSearch() {
+        // Method to match noticias pattern
+        this.clearSidebarSearch();
+    }
+    
+    translateSidebarContent() {
+        console.log('🌍 Translating events sidebar content to:', this.currentLanguage);
+        
+        // Translate "Eventos Recientes" title
+        const recentEventsTitle = document.getElementById('recent-events-title');
+        if (recentEventsTitle) {
+            const title = this.currentLanguage === 'en' ? 'Recent Events' : 'Eventos Recientes';
+            recentEventsTitle.textContent = title;
+        }
+        
+        // Translate "Categorías" title
+        const categoriesTitle = document.getElementById('categories-title');
+        if (categoriesTitle) {
+            const title = this.currentLanguage === 'en' ? 'Categories' : 'Categorías';
+            categoriesTitle.textContent = title;
+        }
+        
+        // Translate "Etiquetas" title
+        const tagsTitle = document.getElementById('tags-title');
+        if (tagsTitle) {
+            const title = this.currentLanguage === 'en' ? 'Tags' : 'Etiquetas';
+            tagsTitle.textContent = title;
+        }
+        
+        // Translate search placeholder
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            const placeholder = this.currentLanguage === 'en' ? 'Search events' : 'Buscar eventos';
+            searchInput.placeholder = placeholder;
+        }
+        
+        console.log('✅ Events sidebar content translated');
+    }
+    
+    performSearch() {
+        const searchInput = document.getElementById('search-input');
+        const query = searchInput?.value.toLowerCase().trim() || '';
+        
+        if (!query) {
+            // Reset to show all events
+            this.displayedEvents = [...this.allEvents];
+            this.currentPage = 1;
+            this.displayAllEventsGrid();
+            return;
+        }
+        
+        // Filter events based on search query
+        this.displayedEvents = this.allEvents.filter(event => {
+            const title = this.getLocalizedField(event, 'title') || '';
+            const description = this.getLocalizedField(event, 'description') || '';
+            const category = this.getLocalizedField(event, 'category') || '';
+            const tags = this.getLocalizedField(event, 'tags') || [];
+            
+            const searchableText = [
+                title,
+                description,
+                category,
+                Array.isArray(tags) ? tags.join(' ') : tags
+            ].join(' ').toLowerCase();
+            
+            return searchableText.includes(query);
+        });
+        
+        // Update display with filtered events
+        this.currentPage = 1;
+        this.displayFilteredEvents();
+    }
+    
+    displayFilteredEvents() {
+        const container = document.getElementById('all-events-grid');
+        const showMoreBtn = document.getElementById('show-more-btn');
+        
+        if (!container) return;
+        
+        if (this.displayedEvents.length === 0) {
+            container.innerHTML = `
+                <div class="col-12 text-center">
+                    <p class="text-muted">${this.currentLanguage === 'en' ? 'No events found' : 'No se encontraron eventos'}</p>
+                </div>
+            `;
+            showMoreBtn.style.display = 'none';
+            return;
+        }
+        
+        // Use the same display logic as displayAllEventsGrid but with filtered events
+        const eventsToShow = this.currentPage * this.eventsPerPage;
+        const eventsToDisplay = this.displayedEvents.slice(0, eventsToShow);
+        
+        const eventsHtml = eventsToDisplay.map(event => {
+            const title = this.getLocalizedField(event, 'title') || 'Sin título';
+            const description = this.getLocalizedField(event, 'description') || 'Sin descripción';
+            const category = this.getLocalizedField(event, 'category') || 'General';
+            const location = this.getEventLocation(event);
+            const date = this.formatDate(event.date || event.createdAt || event.created_at);
+            const author = event.author || 'Escalando Fronteras';
+            const image = event.coverImageUrl || event.image || event.imageUrl || 'images/introEF.jpeg';
+            
+            const truncatedDescription = description.length > 150 ? 
+                description.substring(0, 150) + '...' : description;
+            
+            return `
+                <div class="col-lg-6 col-12 mb-4">
+                    <div class="news-block">
+                        <div class="news-block-top">
+                            <a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;">
+                                <img src="${image}" class="news-image img-fluid" alt="${title}" onerror="this.src='images/introEF.jpeg'">
+                            </a>
+
+                            <div class="news-category-block">
+                                ${location ? `
+                                    <a href="#" class="category-block-link">
+                                        <i class="bi-geo-alt me-1"></i>
+                                        ${location}
+                                    </a>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <div class="news-block-info">
+                            <div class="d-flex mt-2">
+                                <div class="news-block-date">
+                                    <p>
+                                        <i class="bi-calendar4 custom-icon me-1"></i>
+                                        ${date}
+                                    </p>
+                                </div>
+
+                                <div class="news-block-author mx-5">
+                                    <p>
+                                        <i class="bi-person custom-icon me-1"></i>
+                                        ${this.currentLanguage === 'en' ? 'By' : 'Por'} ${author}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="news-block-title mb-2">
+                                <h4><a href="#" onclick="eventosIntegration.selectEvent('${event.id}'); return false;" class="news-block-title-link">${title}</a></h4>
+                            </div>
+
+                            <div class="news-block-body">
+                                <p>${truncatedDescription}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        container.innerHTML = eventsHtml;
+        
+        // Show/hide "Show more" button
+        if (eventsToShow < this.displayedEvents.length) {
+            showMoreBtn.style.display = 'inline-block';
+        } else {
+            showMoreBtn.style.display = 'none';
+        }
+    }
+    
+    selectEvent(eventId) {
+        console.log('🎪 Event selected:', eventId);
+        
+        // Store selected event
+        this.selectedEventId = eventId;
+        sessionStorage.setItem('selectedEventId', eventId);
+        
+        // Find and display the selected event
+        const selectedEvent = this.allEvents.find(event => 
+            event.id == eventId || parseInt(event.id) === parseInt(eventId)
+        );
+        
+        if (selectedEvent) {
+            this.displayMainEvent(selectedEvent);
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            console.warn('🎪 Selected event not found:', eventId);
+        }
+    }
+    
+    // Utility methods
+    getLocalizedField(item, field) {
+        if (!item) return null;
+        
+        // Handle different field mappings
+        const fieldMappings = {
+            'title': this.currentLanguage === 'en' ? 'title_en' : 'title_es',
+            'description': this.currentLanguage === 'en' ? 'body_en' : 'body_es',
+            'category': this.currentLanguage === 'en' ? 'category_en' : 'category',
+            'tags': this.currentLanguage === 'en' ? 'tags_en' : 'tags',
+            'quote': this.currentLanguage === 'en' ? 'quote_en' : 'quote_es',
+            'phrase': this.currentLanguage === 'en' ? 'phrase_en' : 'phrase_es',
+            'credits': this.currentLanguage === 'en' ? 'credits_en' : 'credits_es'
+        };
+        
+        // Get the mapped field name
+        const mappedField = fieldMappings[field];
+        if (mappedField && item[mappedField]) {
+            return item[mappedField];
+        }
+        
+        // Try language-specific field first, then fallback to default
+        if (this.currentLanguage === 'en') {
+            return item[`${field}_en`] || item[`${field}_es`] || item[field];
+        } else {
+            return item[`${field}_es`] || item[`${field}_en`] || item[field];
+        }
+    }
+    
+    getEventLocation(event) {
+        if (!event) return '';
+        
+        const city = event.location_city || event.city;
+        const country = event.location_country || event.country;
+        
+        if (city && country) {
+            return `${city}, ${country}`;
+        } else if (city || country) {
+            return city || country;
+        } else {
+            return this.currentLanguage === 'en' ? 'Location' : 'Ubicación';
+        }
+    }
+    
+    formatDate(dateString) {
+        if (!dateString) {
+            return this.currentLanguage === 'en' ? 'Date not available' : 'Fecha no disponible';
+        }
+        
+        try {
+            const date = new Date(dateString);
+            
+            if (this.currentLanguage === 'en') {
+                // English format: "Month Day, Year"
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } else {
+                // Spanish format: "Month Day, Year" (capitalized)
+                const formattedDate = date.toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }).replace(/(\d+) de (\w+) de (\d+)/, '$2 $1, $3');
+                
+                // Capitalize the first letter of the month
+                return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+            }
+        } catch (error) {
+            console.error('🚨 Error formatting date:', error);
+            return this.currentLanguage === 'en' ? 'Date not available' : 'Fecha no disponible';
+        }
+    }
+    
+    formatDescription(description) {
+        if (!description) return '';
+        
+        // Split description into paragraphs
+        const paragraphs = description.split('\n').filter(p => p.trim());
+        
+        // Format as HTML paragraphs
+        return paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+    }
+    
+    showError(message) {
+        const container = document.getElementById('main-event-content');
+        if (container) {
+            const errorTitle = this.currentLanguage === 'en' ? 
+                'Error loading events' : 
+                'Error al cargar eventos';
+            const errorMessage = this.currentLanguage === 'en' ? 
+                'Network error - please check your connection' : 
+                'Error de red - por favor verifica tu conexión';
+            const retryText = this.currentLanguage === 'en' ? 
+                'Try again' : 
+                'Intentar de nuevo';
+                
+            container.innerHTML = `
+                <div class="error-modal network-error">
+                    <div class="error-modal-icon">
+                        <i class="bi-wifi-off"></i>
+                    </div>
+                    <h3>${errorTitle}</h3>
+                    <p>${errorMessage}</p>
+                    <button class="btn-retry" onclick="eventosIntegration.loadEvents()">
+                        ${retryText}
+                    </button>
+                </div>
+            `;
+        }
+    }
+}
+
+// Initialize EventosIntegration
+window.eventosIntegration = new EventosIntegration();
+
+console.log('🎪 EventosIntegration script loaded');

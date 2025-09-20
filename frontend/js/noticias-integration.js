@@ -66,11 +66,13 @@ class NoticiasIntegration {
         console.log('🌍 Current language:', this.currentLanguage);
         
         try {
-            // Load all content in parallel
+            // First, load all news to populate this.allNews array
+            await this.loadAllNewsGrid();
+            
+            // Then load other content in parallel (now that allNews is populated)
             await Promise.all([
                 this.loadMainNews(),
                 this.loadRecentNewsSidebar(),
-                this.loadAllNewsGrid(),
                 this.loadSidebarData()
             ]);
 
@@ -93,9 +95,12 @@ class NoticiasIntegration {
         // Translate "Noticias Recientes" title
         const recentNewsTitle = document.querySelector('h5.mt-5.mb-3');
         if (recentNewsTitle) {
-            const title = this.currentLanguage === 'en' ? 'Recent News' : 'Noticias Recientes';
-            recentNewsTitle.textContent = title;
-            console.log('✅ Updated recent news title to:', title);
+            // Only update if not currently showing search results
+            if (!recentNewsTitle.textContent.includes('Search Results') && !recentNewsTitle.textContent.includes('Resultados de Búsqueda')) {
+                const title = this.currentLanguage === 'en' ? 'Recent News' : 'Noticias Recientes';
+                recentNewsTitle.textContent = title;
+                console.log('✅ Updated recent news title to:', title);
+            }
         }
         
         // Translate "Categorías" title
@@ -278,14 +283,13 @@ class NoticiasIntegration {
 
                     <div class="social-share border-top mt-5 py-4 d-flex flex-wrap align-items-center">
                         <div class="tags-block me-auto">
-                            ${news.tags ? news.tags.map(tag => `
-                                <a href="#" class="tags-block-link">${tag}</a>
-                            `).join('') : `<a href="#" class="tags-block-link">${category}</a>`}
+                            ${this.formatTags(news, category)}
                         </div>
 
                         <div class="d-flex">
                             <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" title="Síguenos en Facebook"></a>
                             <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" title="Síguenos en Instagram"></a>
+                            <a href="#" class="social-icon-link bi-whatsapp" title="WhatsApp"></a>
                         </div>
                     </div>
                 </div>
@@ -296,7 +300,7 @@ class NoticiasIntegration {
     }
 
     displayMainNewsCategories(news) {
-        console.log('📂 Displaying categories for main news:', news);
+        console.log('📂 Displaying categories for main news article:', news);
         
         const container = document.getElementById('categories-sidebar-container');
         if (!container) {
@@ -304,25 +308,19 @@ class NoticiasIntegration {
             return;
         }
 
-        // Extract categories from the main news article
+        // Extract only categories from the main news article (not tags)
         const categories = [];
         
-        // Check for category field
-        const category = news[`category_${this.currentLanguage}`] || news.category;
+        // Check for language-specific category field only
+        const category = this.currentLanguage === 'en' ? 
+            (news.category_en || news.category) : 
+            (news.category_es || news.category);
+        
         if (category) {
             categories.push(category);
         }
 
-        // Check for tags that might be categories
-        if (news.tags && Array.isArray(news.tags)) {
-            news.tags.forEach(tag => {
-                if (!categories.includes(tag)) {
-                    categories.push(tag);
-                }
-            });
-        }
-
-        console.log('📂 Found categories:', categories);
+        console.log('📂 Found categories for main article in', this.currentLanguage, ':', categories);
 
         if (categories.length > 0) {
             const categoriesHtml = `
@@ -343,17 +341,20 @@ class NoticiasIntegration {
         const container = document.getElementById('main-news-container');
         if (!container) return;
 
+        const errorTitle = this.currentLanguage === 'en' ? 'No news available' : 'No hay noticias disponibles';
+        const errorMessage = this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión';
+        const retryText = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
+
         container.innerHTML = `
-            <div class="alert text-center" style="
-                background-color: var(--section-bg-color) !important;
-                border: 1px solid var(--secondary-color) !important;
-                border-radius: var(--border-radius-small) !important;
-                color: var(--primary-color) !important;
-                padding: 30px;
-                margin: 20px 0;
-            ">
-                <h5 style="color: var(--secondary-color) !important; margin-bottom: 1rem; font-weight: 600;">No hay noticias disponibles</h5>
-                <p style="color: var(--primary-color) !important; margin-bottom: 0;">Por favor, intenta de nuevo más tarde.</p>
+            <div class="error-modal network-error">
+                <div class="error-modal-icon">
+                    <i class="bi-wifi-off"></i>
+                </div>
+                <h3>${errorTitle}</h3>
+                <p>${errorMessage}</p>
+                <button class="btn-retry" onclick="window.noticiasIntegration.loadContent()">
+                    ${retryText}
+                </button>
             </div>
         `;
     }
@@ -362,26 +363,22 @@ class NoticiasIntegration {
         console.log('📋 Loading recent news for sidebar...');
         
         try {
-            const response = await window.EFAPI.news.getNews({ 
-                limit: 3, 
-                lang: this.currentLanguage 
-            });
-            
-            let newsList = [];
-            if (Array.isArray(response)) {
-                newsList = response;
-            } else if (response && response.news) {
-                newsList = response.news;
-            } else if (response && response.data) {
-                newsList = response.data;
-            }
-
-            // Skip the first one (it's the main news)
-            const recentNews = newsList.slice(1, 3);
-
-            if (recentNews && recentNews.length > 0) {
-                this.displayRecentNewsSidebar(recentNews);
+            // Use already loaded allNews array (populated by loadAllNewsGrid)
+            if (this.allNews && this.allNews.length > 0) {
+                console.log('📋 Using already loaded news for sidebar, total articles:', this.allNews.length);
+                
+                // Skip the first one (it's the main news) and take next 2
+                const recentNews = this.allNews.slice(1, 3);
+                
+                if (recentNews && recentNews.length > 0) {
+                    console.log('📋 Displaying recent news sidebar with', recentNews.length, 'articles');
+                    this.displayRecentNewsSidebar(recentNews);
+                } else {
+                    console.warn('⚠️ No recent news available after skipping main article');
+                    this.showRecentNewsError();
+                }
             } else {
+                console.error('❌ allNews array is empty, cannot load recent news sidebar');
                 this.showRecentNewsError();
             }
         } catch (error) {
@@ -391,7 +388,10 @@ class NoticiasIntegration {
     }
 
     displayRecentNewsSidebar(newsList) {
+        console.log('🚨 ENHANCED DEBUGGING - displayRecentNewsSidebar called!');
         console.log('📰 Displaying recent news sidebar:', newsList);
+        console.log('📰 AllNews array:', this.allNews);
+        console.log('📰 AllNews length:', this.allNews.length);
         
         const container = document.getElementById('recent-news-sidebar-container');
         if (!container) return;
@@ -401,11 +401,51 @@ class NoticiasIntegration {
             const imageUrl = news.coverImageUrl || news.imageUrl || 'images/introEF.jpeg';
             const formattedDate = this.formatDate(news.createdAt || news.publishDate);
             
-            // Find the index in allNews array (sidebar shows articles 1 and 2, so add 1 to index)
-            const articleIndex = this.allNews.findIndex(article => article === news);
+            console.log('🔍 Processing recent news article:', {
+                index: index,
+                id: news.id,
+                title: title,
+                allNewsLength: this.allNews.length
+            });
+            
+            // Find the index in allNews array using ID comparison (more reliable than object reference)
+            let articleIndex = this.allNews.findIndex(article => 
+                article.id === news.id || 
+                article.id == news.id || 
+                (article.id && news.id && String(article.id) === String(news.id))
+            );
+
+            console.log('🔍 ID comparison result:', articleIndex);
+
+            // Fallback: if ID comparison fails, try object reference comparison
+            if (articleIndex === -1) {
+                console.warn('⚠️ ID comparison failed, trying object reference for article:', news.id);
+                articleIndex = this.allNews.findIndex(article => article === news);
+                console.log('🔍 Object reference result:', articleIndex);
+            }
+
+            // Additional fallback: try finding by title if both above fail
+            if (articleIndex === -1) {
+                console.warn('⚠️ Object reference failed, trying title comparison for article:', news.id);
+                const newsTitle = news[`title_${this.currentLanguage}`] || news.title;
+                articleIndex = this.allNews.findIndex(article => {
+                    const articleTitle = article[`title_${this.currentLanguage}`] || article.title;
+                    return articleTitle === newsTitle;
+                });
+                console.log('🔍 Title comparison result:', articleIndex);
+            }
+
+            console.log('📰 Recent news sidebar - Article ID:', news.id, 'Found index:', articleIndex, 'Total articles:', this.allNews.length);
+
+            // If we still can't find the article, use the sidebar index + 1 as fallback
+            // (since recent news shows articles 1 and 2 from allNews, and we skip index 0)
+            if (articleIndex === -1) {
+                console.warn('⚠️ Could not find article in allNews, using fallback index:', index + 1);
+                articleIndex = index + 1; // Recent news shows articles at indices 1 and 2
+            }
 
             return `
-                <div class="news-block news-block-two-col d-flex mt-4" style="cursor: pointer;" onclick="window.noticiasIntegration.displaySelectedArticle(${articleIndex})">
+                <div class="news-block news-block-two-col d-flex mt-4" style="cursor: pointer;" onclick="console.log('🚨 CLICK DEBUG: Article index =', ${articleIndex}); window.noticiasIntegration.displaySelectedArticle(${articleIndex})">
                     <div class="news-block-two-col-image-wrap">
                         <div>
                             <img src="${imageUrl}" class="news-image img-fluid" alt="${title}" onerror="this.src='images/introEF.jpeg'">
@@ -435,16 +475,20 @@ class NoticiasIntegration {
         const container = document.getElementById('recent-news-sidebar-container');
         if (!container) return;
 
+        const errorTitle = this.currentLanguage === 'en' ? 'No recent news' : 'No hay noticias recientes';
+        const errorMessage = this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión';
+        const retryText = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
+
         container.innerHTML = `
-            <div class="alert text-center" style="
-                background-color: var(--section-bg-color) !important;
-                border: 1px solid var(--secondary-color) !important;
-                border-radius: var(--border-radius-small) !important;
-                color: var(--primary-color) !important;
-                padding: 20px;
-                margin: 10px 0;
-            ">
-                <p style="color: var(--primary-color) !important; margin-bottom: 0; font-size: 14px;">No hay noticias recientes disponibles.</p>
+            <div class="error-state network-error">
+                <div class="error-icon">
+                    <i class="bi-wifi-off"></i>
+                </div>
+                <h6>${errorTitle}</h6>
+                <p class="small">${errorMessage}</p>
+                <button class="btn-retry-sm" onclick="window.noticiasIntegration.loadRecentNewsSidebar()">
+                    ${retryText}
+                </button>
             </div>
         `;
     }
@@ -605,19 +649,22 @@ class NoticiasIntegration {
         const container = document.getElementById('all-news-grid-container');
         if (!container) return;
 
+        const errorTitle = this.currentLanguage === 'en' ? 'No news available' : 'No hay noticias disponibles';
+        const errorMessage = this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión';
+        const retryText = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
+
         container.innerHTML = `
             <div class="row">
                 <div class="col-12">
-                    <div class="alert text-center" style="
-                        background-color: var(--section-bg-color) !important;
-                        border: 1px solid var(--secondary-color) !important;
-                        border-radius: var(--border-radius-small) !important;
-                        color: var(--primary-color) !important;
-                        padding: 40px;
-                        margin: 30px 0;
-                    ">
-                        <h5 style="color: var(--secondary-color) !important; margin-bottom: 1rem; font-weight: 600;">No hay noticias disponibles</h5>
-                        <p style="color: var(--primary-color) !important; margin-bottom: 0;">Por favor, intenta de nuevo más tarde.</p>
+                    <div class="error-modal network-error">
+                        <div class="error-modal-icon">
+                            <i class="bi-wifi-off"></i>
+                        </div>
+                        <h3>${errorTitle}</h3>
+                        <p>${errorMessage}</p>
+                        <button class="btn-retry" onclick="window.noticiasIntegration.loadAllNewsGrid()">
+                            ${retryText}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -681,7 +728,7 @@ class NoticiasIntegration {
             if (query.length >= 2) {
                 this.performNewsSearch();
             } else if (query.length === 0) {
-                this.resetNewsSearch();
+                this.clearSidebarSearch();
             }
         });
 
@@ -700,7 +747,7 @@ class NoticiasIntegration {
                 return false;
             } else if (e.key === 'Escape') {
                 searchInput.value = '';
-                this.resetNewsSearch();
+                this.clearSidebarSearch();
             }
         });
 
@@ -743,7 +790,7 @@ class NoticiasIntegration {
         if (!query || query.length < 2) {
             // Show recent news if search is empty
             console.log('🔄 Empty query, showing recent news');
-            this.resetNewsSearch();
+            this.clearSidebarSearch();
             return;
         }
 
@@ -764,8 +811,10 @@ class NoticiasIntegration {
 
         if (this.filteredNews.length > 0) {
             this.displayNewsSearchResults(this.filteredNews, query);
+            this.updateSearchTitle(true, this.filteredNews.length, query);
         } else {
             this.displayNoNewsSearchResults(query);
+            this.updateSearchTitle(true, 0, query);
         }
     }
 
@@ -787,8 +836,30 @@ class NoticiasIntegration {
             const imageUrl = news.coverImageUrl || news.imageUrl || 'images/introEF.jpeg';
             const formattedDate = this.formatDate(news.createdAt || news.publishDate);
             
-            // Find the index in allNews array
-            const articleIndex = this.allNews.findIndex(article => article === news);
+            // Find the index in allNews array using ID comparison (more reliable than object reference)
+            let articleIndex = this.allNews.findIndex(article => 
+                article.id === news.id || 
+                article.id == news.id || 
+                (article.id && news.id && String(article.id) === String(news.id))
+            );
+
+            // Fallback: if ID comparison fails, try object reference comparison
+            if (articleIndex === -1) {
+                console.warn('⚠️ ID comparison failed, trying object reference for article:', news.id);
+                articleIndex = this.allNews.findIndex(article => article === news);
+            }
+
+            // Additional fallback: try finding by title if both above fail
+            if (articleIndex === -1) {
+                console.warn('⚠️ Object reference failed, trying title comparison for article:', news.id);
+                const newsTitle = news[`title_${this.currentLanguage}`] || news.title;
+                articleIndex = this.allNews.findIndex(article => {
+                    const articleTitle = article[`title_${this.currentLanguage}`] || article.title;
+                    return articleTitle === newsTitle;
+                });
+            }
+
+            console.log('🔍 Search results - Article ID:', news.id, 'Found index:', articleIndex, 'Total articles:', this.allNews.length);
 
             return `
                 <div class="news-block news-block-two-col d-flex mt-4" style="cursor: pointer;" onclick="window.noticiasIntegration.displaySelectedArticle(${articleIndex})">
@@ -814,7 +885,20 @@ class NoticiasIntegration {
             `;
         }).join('');
 
-        container.innerHTML = newsHtml;
+        // Add clear search option with consistent styling (matching eventos)
+        const clearSearchButton = `
+            <div class="text-center mt-3">
+                <button class="btn btn-sm" onclick="window.noticiasIntegration.clearSidebarSearch()" style="
+                    background-color: var(--secondary-color);
+                    border-color: var(--secondary-color);
+                    color: var(--white-color);
+                ">
+                    ← ${this.currentLanguage === 'en' ? 'View recent news' : 'Ver noticias recientes'}
+                </button>
+            </div>
+        `;
+
+        container.innerHTML = newsHtml + clearSearchButton;
         console.log('✅ Search results displayed in sidebar');
     }
 
@@ -823,6 +907,12 @@ class NoticiasIntegration {
         
         const container = document.getElementById('recent-news-sidebar-container');
         if (!container) return;
+
+        const noNewsTitle = this.currentLanguage === 'en' ? 'No news found' : 'No se encontraron noticias';
+        const noNewsText = this.currentLanguage === 'en' ? 
+            `No news match "${query}"` : 
+            `No hay noticias que coincidan con "${query}"`;
+        const backButtonText = this.currentLanguage === 'en' ? '← View recent news' : '← Ver noticias recientes';
 
         container.innerHTML = `
             <div class="no-results-message" style="
@@ -833,24 +923,66 @@ class NoticiasIntegration {
                 text-align: center;
                 margin: 10px 0;
             ">
-                <h5 style="color: var(--secondary-color); margin-bottom: 1rem;">No se encontraron noticias</h5>
-                <p style="color: var(--primary-color); margin-bottom: 1rem;">No hay noticias que coincidan con "${query}"</p>
-                <button class="btn" onclick="document.getElementById('news-search').value=''; window.noticiasIntegration.resetNewsSearch();" style="
+                <h5 style="color: var(--secondary-color); margin-bottom: 1rem;">${noNewsTitle}</h5>
+                <p style="color: var(--primary-color); margin-bottom: 1rem;">${noNewsText}</p>
+                <button class="btn" onclick="document.getElementById('news-search').value=''; window.noticiasIntegration.clearSidebarSearch();" style="
                     background-color: var(--secondary-color);
                     border-color: var(--secondary-color);
                     color: var(--white-color);
                 ">
-                    ← Ver noticias recientes
+                    ${backButtonText}
                 </button>
             </div>
         `;
     }
 
+    updateSearchTitle(isSearching, totalResults = 0, query = '') {
+        const titleElement = document.querySelector('h5.mt-5.mb-3');
+        if (!titleElement) return;
+        
+        if (isSearching) {
+            // Match eventos pattern: show results count in parentheses
+            const searchResultsText = this.currentLanguage === 'en' ? 
+                `Search Results (${totalResults})` : 
+                `Resultados de Búsqueda (${totalResults})`;
+            titleElement.textContent = searchResultsText;
+            titleElement.style.color = 'var(--primary-color)';
+        } else {
+            // Reset to default title
+            const recentNewsText = this.currentLanguage === 'en' ? 
+                'Recent News' : 
+                'Noticias Recientes';
+            titleElement.textContent = recentNewsText;
+            titleElement.style.color = '';
+        }
+    }
+
+    clearSidebarSearch() {
+        console.log('🔄 Clearing news sidebar search');
+        
+        const searchInput = document.getElementById('news-search');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        
+        // Reset to show recent news
+        this.loadRecentNewsSidebar();
+        this.updateSearchTitle(false);
+        
+        console.log('✅ News sidebar search cleared');
+    }
+
+    resetNewsSearch() {
+        // Method to match eventos pattern
+        this.clearSidebarSearch();
+    }
+
     displaySelectedArticle(articleIndex) {
         console.log('📰 Displaying selected article at index:', articleIndex);
+        console.log('📰 Total articles available:', this.allNews.length);
         
         if (articleIndex < 0 || articleIndex >= this.allNews.length) {
-            console.error('❌ Invalid article index:', articleIndex);
+            console.error('❌ Invalid article index:', articleIndex, 'Max index:', this.allNews.length - 1);
             return;
         }
         
@@ -863,6 +995,9 @@ class NoticiasIntegration {
         // Update categories based on selected article
         this.displayMainNewsCategories(selectedArticle);
         
+        // Refresh the sidebar to show recent news (excluding the now-selected main article)
+        this.refreshSidebarAfterSelection(articleIndex);
+        
         // Scroll to the beginning of the news section
         const newsSection = document.querySelector('.news-section.section-padding');
         if (newsSection) {
@@ -874,6 +1009,20 @@ class NoticiasIntegration {
                 top: sectionTop,
                 behavior: 'smooth'
             });
+        }
+    }
+    
+    refreshSidebarAfterSelection(selectedIndex) {
+        console.log('🔄 Refreshing sidebar after article selection, selected index:', selectedIndex);
+        
+        // Get all articles except the selected one
+        const otherArticles = this.allNews.filter((article, index) => index !== selectedIndex);
+        
+        // Take the first 2 articles for the sidebar
+        const sidebarArticles = otherArticles.slice(0, 2);
+        
+        if (sidebarArticles.length > 0) {
+            this.displayRecentNewsSidebar(sidebarArticles);
         }
     }
 
@@ -891,11 +1040,21 @@ class NoticiasIntegration {
         this.displayAllNewsGrid(this.allNews, true);
     }
 
-    resetNewsSearch() {
-        console.log('🔄 Resetting news search - showing recent news');
-        // Load recent news back into sidebar (skip the first one which is main news)
-        const recentNews = this.allNews.slice(1, 3);
-        this.displayRecentNewsSidebar(recentNews);
+
+    formatTags(news, category) {
+        // Get language-specific tags
+        const tags = this.currentLanguage === 'en' ? 
+            (news.tags_en || news.tags) : 
+            (news.tags_es || news.tags);
+        
+        if (tags && Array.isArray(tags) && tags.length > 0) {
+            return tags.map(tag => `
+                <a href="#" class="tags-block-link">${tag}</a>
+            `).join('');
+        } else {
+            // Fallback to category if no tags
+            return `<a href="#" class="tags-block-link">${category}</a>`;
+        }
     }
 
     // Utility methods
@@ -1360,5 +1519,6 @@ class NoticiasIntegration {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🎯 DOM loaded, initializing Noticias Integration...');
+    console.log('🚨 VERSION CHECK: Enhanced debugging version loaded!');
     window.noticiasIntegration = new NoticiasIntegration();
 });

@@ -150,7 +150,7 @@ class EventsIntegration {
             const marginClass = index > 0 ? 'mt-4' : '';
             
             eventsHTML += `
-                <div class="news-block news-block-two-col d-flex ${marginClass}">
+                <div class="news-block news-block-two-col d-flex ${marginClass}" style="cursor: pointer;" onclick="window.eventsIntegration.navigateToEvent('${event.id}')">
                     <div class="news-block-two-col-image-wrap">
                         <a href="#" onclick="return false;">
                             <img src="${imageUrl}" class="news-image img-fluid" alt="${title}" loading="lazy" onerror="this.src='images/eventos/ejemplo_evento.jpg'">
@@ -215,15 +215,20 @@ class EventsIntegration {
 
     showError(error) {
         if (this.recentEventsContainer) {
+            const errorTitle = this.currentLanguage === 'en' ? 'Error loading events' : 'Error al cargar eventos';
+            const errorMessage = error.message || (this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión');
+            const retryText = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
+            
             this.recentEventsContainer.innerHTML = `
-                <div class="error-state">
-                    <div class="alert alert-warning alert-sm" role="alert">
-                        <h6 class="alert-heading">${EFAPI.language.getUIText('error_loading')}</h6>
-                        <p class="small">${error.message || 'Error desconocido'}</p>
-                        <button class="btn btn-sm btn-primary" onclick="eventsIntegration.loadRecentEvents()">
-                            ${EFAPI.language.getUIText('try_again')}
-                        </button>
+                <div class="error-state network-error">
+                    <div class="error-icon">
+                        <i class="bi-wifi-off"></i>
                     </div>
+                    <h6>${errorTitle}</h6>
+                    <p class="small">${errorMessage}</p>
+                    <button class="btn-retry-sm" onclick="eventsIntegration.loadRecentEvents()">
+                        ${retryText}
+                    </button>
                 </div>
             `;
         }
@@ -240,6 +245,23 @@ class EventsIntegration {
                 </div>
             `;
         }
+    }
+
+    /**
+     * Navigate to eventos.html with specific event selected
+     * @param {string} eventId - The ID of the event to display
+     */
+    navigateToEvent(eventId) {
+        console.log('🎪 Navigating to event:', eventId);
+        
+        // Store the selected event ID in sessionStorage for the eventos page to use
+        sessionStorage.setItem('selectedEventId', eventId);
+        
+        // Also store the current language preference
+        sessionStorage.setItem('selectedLanguage', this.currentLanguage);
+        
+        // Navigate to eventos.html
+        window.location.href = 'eventos.html';
     }
 }
 

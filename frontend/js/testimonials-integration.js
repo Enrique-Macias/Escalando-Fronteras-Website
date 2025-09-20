@@ -174,18 +174,20 @@ class TestimonialsIntegration {
     showError(error) {
         const testimonialsTitle = this.currentLanguage === 'en' ? 'Testimonials' : 'Testimonios';
         const errorHeading = this.currentLanguage === 'en' ? 'Error loading testimonials' : 'Error al cargar los testimonios';
-        const errorUnknown = this.currentLanguage === 'en' ? 'Unknown error' : 'Error desconocido';
+        const errorMessage = error.message || (this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión');
         const retryButton = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
         
         this.testimonialsContainer.innerHTML = `
             <div class="col-lg-8 col-12 mx-auto">
                 <h2 class="mb-lg-3">${testimonialsTitle}</h2>
                 <div class="text-center">
-                    <div class="alert alert-warning" role="alert">
-                        <h4 class="alert-heading">${errorHeading}</h4>
-                        <p>${error.message || errorUnknown}</p>
-                        <hr>
-                        <button class="btn btn-primary" onclick="testimonialsIntegration.loadTestimonials()">
+                    <div class="error-modal network-error">
+                        <div class="error-modal-icon">
+                            <i class="bi-wifi-off"></i>
+                        </div>
+                        <h3>${errorHeading}</h3>
+                        <p>${errorMessage}</p>
+                        <button class="btn-retry" onclick="testimonialsIntegration.loadTestimonials()">
                             ${retryButton}
                         </button>
                     </div>

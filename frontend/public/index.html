@@ -80,7 +80,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">Voluntario</a>
+                            <a class="nav-link" href="historia.html">Nuestra Historia</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -177,18 +177,6 @@
                     </div>
                 </div>
             </section>
-            <!-- CAMPAÑA PAYPAL
-            <section>
-                <iframe
-                src="https://www.paypal.com/giving/campaigns?campaign_id=D5EVMHJT8A8Q6"
-                title="PayPal donate campaign card"
-                frameborder="0"
-                width=382
-                height=550
-                scrolling="no"
-            ></iframe>
-            </section>
-            -->
 
            <!-- ======================= SECOND SECTION ================== -->
             <section class="section-padding">
@@ -232,8 +220,8 @@
             <!-- ======================= "NUESTRA HISTORIA" SECTION ================== -->
             <section class="section-padding section-bg" id="section_2">
                 <div class="container">
+                    <!-- Introduction Section -->
                     <div class="row">
-
                         <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                             <img src="images/introEF.jpeg" class="custom-text-box-image img-fluid" alt="">
                         </div>
@@ -244,8 +232,9 @@
 
                                 <h5 class="mb-3">Escalando Fronteras, Organización sin fines de lucro</h5>
 
-                                <p class="mb-0">Asociación Civil radicada en Monterrey. Trabajamos con niñxs, adolescentes y sus familias en el marco de un programa deportivo y educativo que complementa salidas a escalar con talleres de prevención de adicciones y de convivencia familiar.
-                                </p>
+                                <p class="mb-3">Asociación Civil radicada en Monterrey. Trabajamos con niñxs, adolescentes y sus familias en el marco de un programa deportivo y educativo que complementa salidas a escalar con talleres de prevención de adicciones y de convivencia familiar.</p>
+                                
+                                <p id="organizacion-base-text">Somos una organización de base comunitaria que desde 2014 trabaja en el mismo barrio de Monterrey, Nuevo León. Sabemos que los desafíos estructurales de una sociedad tan desigual como es México no se arreglan con meras conferencias motivacionales sino que se trata de un trabajo de largo plazo.</p>
                             </div>
                             
                             <div class="row">
@@ -282,16 +271,121 @@
                                         <div class="counter-thumb mt-4"> 
                                             <div class="d-flex">
                                                 <span class="counter-number-text">+</span>
-                                                <span class="counter-number" data-from="1" data-to="120" data-speed="1000"></span>
+                                                <span class="counter-number" data-from="1" data-to="150" data-speed="1000"></span>
                                             </div>
 
-                                            <span class="counter-text">Donaciones</span>
+                                            <span class="counter-text" id="counter-text-program">Donaciones</span>
                                         </div> 
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    <!-- Climbing Section -->
+                    <div class="row mt-5">
+                        <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                            <div class="custom-text-box">
+                                <h3 id="escalada-montana-title" class="mb-3">Escalada en la montaña</h3>
+                                <p id="escalada-description-text">Escalar significa salud, cultura, comunidad y conquistar tus propias fronteras. Los domingos son los días más divertidos de la semana para Escalando Fronteras. A las 9 de la mañana recogemos a los niños y jóvenes y nos lanzamos al Parque Ecológico la Huasteca. Ahí nos esperan las y los voluntarios, listos para trabajar.</p>
+                                <p id="escalada-description-text2">Hacemos ejercicio, actividades recreativas y educativas. Durante todo el día, el equipo se esmera en reforzar valores como: responsabilidad, equidad, trabajo en equipo, congruencia, tolerancia, solidaridad, dignidad y empatía.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <img src="images/different-people-doing-volunteer-work.jpg" class="custom-text-box-image img-fluid" alt="Climbing activities">
+                        </div>
+                    </div>
+
+                    <!-- Community Section -->
+                    <div class="row mt-5">
+                        <div class="col-lg-6 col-12 mb-5 mb-lg-0 d-flex align-items-stretch">
+                            <img src="images/community.jpg" class="custom-text-box-image img-fluid w-100" alt="Community work" style="object-fit: cover;">
+                        </div>
+
+                        <div class="col-lg-6 col-12 d-flex flex-column">
+                            <div class="custom-text-box flex-fill mb-3">
+                                <h3 id="comunidad-title" class="mb-3">Comunidad</h3>
+                                <p id="comunidad-description-text">Trabajamos principalmente en la colonia Lomas Modelo Norte, una colonia del municipio de Monterrey que se encuentra dentro de uno de los "polígonos de pobreza" establecidos por el CONAPO. Es una comunidad de orígen Otomí, integrada por familias que se vieron obligadas a migrar de sus pueblos de origen en los estados de Querétaro, debido a condiciones económicas desfavorables.</p>
+                                <p id="comunidad-description-text2">Debido al racismo, y la desigualdad estructural que imperan en la ciudad de Monterrey, empuja a los jóvenes a dejar de estudiar y a consumir sustancias de una manera que afecta su salud y que constriñe aun más las posibilidades económicas de la comunidad.</p>
+                            </div>
+                            
+                            <div class="custom-text-box flex-fill stats-container">
+                                <div class="stats-content">
+                                    <div class="stats-icon mb-3">
+                                        <i class="bi-graph-up" style="font-size: 2.5rem; color: var(--custom-btn-bg-color);"></i>
+                                    </div>
+                                    <h5 id="comunidad-stats-title" class="mb-3">Impacto en la Comunidad</h5>
+                                    <p id="comunidad-stats-text" class="mb-0">El promedio de permanencia en el programa es de <strong>dos años</strong>, con más de <strong>20 niños y niñas</strong> que han permanecido en el programa por más de <strong>5 años</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Section -->
+                    <div class="row mt-5">
+                        <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                            <div class="custom-text-box">
+                                <h3 id="educacion-emocional-familiar-title" class="mb-3">Educación emocional y familiar</h3>
+                                <p id="educacion-emocional-familiar-description-text">Sabemos que la Escalada no es suficiente para hacer un cambio integral en la vida de los niños y jóvenes con los que trabajamos. Es por eso que hemos decidido emprender, de la mano de las madres de familia y otras organizaciones civiles, un esfuerzo por fortalecer las herramientas familiares en cuanto a la convivencia, prevención de adicciones y comunicación sobre la sexualidad responsable.</p>
+                                <p id="educacion-emocional-familiar-description-text2">Al menos una vez por semestre se realiza un taller de prevención al que se invita a padres de familia de Escalando Fronteras.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <img src="images/education-familiar-image.jpg" class="custom-text-box-image img-fluid" alt="Family education">
+                        </div>
+                    </div>
+
+                    <!-- Values Section -->
+                    <div class="row mt-5">
+                        <div class="col-lg-12 col-12">
+                            <div class="custom-text-box text-center">
+                                <h3 id="nuestros-valores-title" class="mb-4">Nuestros Valores</h3>
+                                
+                                <div class="row">
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <div class="value-card">
+                                    <div class="value-icon mb-3">
+                                        <i class="bi-shield-check" style="font-size: 3rem;"></i>
+                                    </div>
+                                    <h5 id="desarrollar-resiliencia-title" class="mb-2">Resiliencia</h5>
+                                    <p id="desarrollar-resiliencia-description" class="small">Desarrollamos la capacidad de adaptación y superación ante los desafíos estructurales que enfrentan diariamente los niños y niñas de la comunidad.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <div class="value-card">
+                                    <div class="value-icon mb-3">
+                                        <i class="bi-image" style="font-size: 3rem;"></i>
+                                    </div>
+                                    <h5 id="hacer-montana-accesible-title" class="mb-2">Accesibilidad</h5>
+                                    <p id="hacer-montana-accesible-description" class="small">Hacemos la montaña accesible para la juventud y sus familias, democratizando el acceso a espacios naturales y deportivos.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <div class="value-card">
+                                    <div class="value-icon mb-3">
+                                        <i class="bi-people" style="font-size: 3rem;"></i>
+                                    </div>
+                                    <h5 id="fortalecer-habilidades-title" class="mb-2">Habilidades</h5>
+                                    <p id="fortalecer-habilidades-description" class="small">Fortalecer las habilidades individuales y familiares para mantener relaciones sanas, constructivas y beneficiosas.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <div class="value-card">
+                                    <div class="value-icon mb-3">
+                                        <i class="bi-heart" style="font-size: 3rem;"></i>
+                                    </div>
+                                    <h5 id="construir-comunidad-title" class="mb-2">Comunidad</h5>
+                                    <p id="construir-comunidad-description" class="small">Construimos una comunidad más fuerte para combatir la pobreza, prevenir el uso problemático de sustancias y crear oportunidades de crecimiento.</p>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -376,6 +470,19 @@
                         <button class="btn btn-light btn-play" data-bs-toggle="modal" data-bs-target="#videoModal" role="button">
                             <i class="bi bi-play-fill"></i>
                         </button> 
+                        
+                        <!-- Historia Section -->
+                        <div class="mt-5 pt-4 border-top border-light">
+                            <h4 id="nuestra-historia-title" class="mb-3">Nuestra Historia</h4>
+                            <p id="nuestra-historia-description" class="mb-4">
+                                Conoce el origen y evolución de Escalando Fronteras, desde nuestros primeros pasos en 2014 hasta convertirnos en una asociación que transforma vidas a través del deporte y la educación.
+                            </p>
+                            <a href="#" id="historia-link" class="btn btn-outline-light">
+                                <i class="bi bi-book me-2"></i>
+                                <span id="leer-historia-button">Leer Historia Completa</span>
+                            </a>
+                        </div>
+                        
                         <!-- Modal -->
                         <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -858,7 +965,7 @@
                     inicio: "Inicio",
                     acercaDe: "Acerca de",
                     apoyo: "Apoyo", 
-                    voluntario: "Voluntario",
+                    voluntario: "Nuestra Historia",
                     mas: "Más",
                     noticias: "Noticias",
                     eventos: "Eventos",
@@ -883,12 +990,49 @@
                     nuestraHistoria: "Nuestra historia",
                     organizacionSubtitle: "Escalando Fronteras, Organización sin fines de lucro",
                     organizacionDescription: "Asociación Civil radicada en Monterrey. Trabajamos con niñxs, adolescentes y sus familias en el marco de un programa deportivo y educativo que complementa salidas a escalar con talleres de prevención de adicciones y de convivencia familiar.",
+                    organizacionBase: "Somos una organización de base comunitaria que desde 2014 trabaja en el mismo barrio de Monterrey, Nuevo León. Sabemos que los desafíos estructurales de una sociedad tan desigual como es México no se arreglan con meras conferencias motivacionales sino que se trata de un trabajo de largo plazo.",
                     nuestraMision: "Nuestra mision",
                     misionDescription: "Escalando Fronteras utiliza el deporte y la educación para fortalecer habilidades para la vida y prevenir conductas de riesgo en niños, niñas y adolescentes en contextos de vulnerabilidad.",
                     educacionEmocional: "Educación emocional",
                     educacionFamiliar: "Educacion familiar",
                     fundada: "Fundada",
                     donaciones: "Donaciones",
+                    
+                    // Climbing Section
+                    escaladaMontana: "Escalada en la montaña",
+                    escaladaDescription: "Escalar significa salud, cultura, comunidad y conquistar tus propias fronteras. Los domingos son los días más divertidos de la semana para Escalando Fronteras. A las 9 de la mañana recogemos a los niños y jóvenes y nos lanzamos al Parque Ecológico la Huasteca. Ahí nos esperan las y los voluntarios, listos para trabajar.",
+                    escaladaDescription2: "Hacemos ejercicio, actividades recreativas y educativas. Durante todo el día, el equipo se esmera en reforzar valores como: responsabilidad, equidad, trabajo en equipo, congruencia, tolerancia, solidaridad, dignidad y empatía.",
+
+                    // Community Section
+                    comunidad: "Comunidad",
+                    comunidadDescription: "Trabajamos principalmente en la colonia Lomas Modelo Norte, una colonia del municipio de Monterrey que se encuentra dentro de uno de los 'polígonos de pobreza' establecidos por el CONAPO. Es una comunidad de orígen Otomí, integrada por familias que se vieron obligadas a migrar de sus pueblos de origen en los estados de Querétaro, debido a condiciones económicas desfavorables.",
+                    comunidadDescription2: "Debido al racismo, y la desigualdad estructural que imperan en la ciudad de Monterrey, empuja a los jóvenes a dejar de estudiar y a consumir sustancias de una manera que afecta su salud y que constriñe aun más las posibilidades económicas de la comunidad.",
+                    comunidadStatsTitle: "Impacto en la Comunidad",
+                    comunidadStats: "El promedio de permanencia en el programa es de dos años, con más de 20 niños y niñas que han permanecido en el programa por más de 5 años.",
+
+                    // Education Section
+                    educacionEmocionalFamiliar: "Educación emocional y familiar",
+                    educacionEmocionalFamiliarDescription: "Sabemos que la Escalada no es suficiente para hacer un cambio integral en la vida de los niños y jóvenes con los que trabajamos. Es por eso que hemos decidido emprender, de la mano de las madres de familia y otras organizaciones civiles, un esfuerzo por fortalecer las herramientas familiares en cuanto a la convivencia, prevención de adicciones y comunicación sobre la sexualidad responsable.",
+                    educacionEmocionalFamiliarDescription2: "Al menos una vez por semestre se realiza un taller de prevención al que se invita a padres de familia de Escalando Fronteras.",
+                    
+                        // Values Section
+                        nuestrosValores: "Nuestros Valores",
+                        desarrollarResiliencia: "Resiliencia",
+                        desarrollarResilienciaDescription: "Desarrollamos la capacidad de adaptación y superación ante los desafíos estructurales que enfrentan diariamente los niños y niñas de la comunidad.",
+                        hacerMontanaAccesible: "Accesibilidad",
+                        hacerMontanaAccesibleDescription: "Hacemos la montaña accesible para la juventud y sus familias, democratizando el acceso a espacios naturales y deportivos.",
+                        fortalecerHabilidades: "Habilidades",
+                        fortalecerHabilidadesDescription: "Fortalecer las habilidades individuales y familiares para mantener relaciones sanas, constructivas y beneficiosas.",
+                        construirComunidad: "Comunidad",
+                        construirComunidadDescription: "Construimos una comunidad más fuerte para combatir la pobreza, prevenir el uso problemático de sustancias y crear oportunidades de crecimiento.",
+                        
+                        // Counter Section
+                        counterProgramText: "Niños, niñas y adolescentes que han participado en el programa.",
+                        
+                        // Historia Section
+                        nuestraHistoriaTitle: "Nuestra Historia",
+                        nuestraHistoriaDescription: "Conoce el origen y evolución de Escalando Fronteras, desde nuestros primeros pasos en 2014 hasta convertirnos en una asociación que transforma vidas a través del deporte y la educación.",
+                        leerHistoriaButton: "Leer Historia Completa",
                     
                     // Founder Section
                     cofundador: "Co-fundador de Escalando Fronteras",
@@ -971,7 +1115,7 @@
                     inicio: "Home",
                     acercaDe: "About",
                     apoyo: "Support",
-                    voluntario: "Volunteer",
+                    voluntario: "Our History",
                     mas: "More",
                     noticias: "News",
                     eventos: "Events",
@@ -996,12 +1140,49 @@
                     nuestraHistoria: "Our story",
                     organizacionSubtitle: "Escalando Fronteras, Non-profit organization",
                     organizacionDescription: "Civil Association based in Monterrey. We work with children, adolescents and their families within the framework of a sports and educational program that complements climbing outings with addiction prevention and family coexistence workshops.",
+                    organizacionBase: "We are a community-based organization that since 2014 has been working in the same neighborhood of Monterrey, Nuevo León. We know that the structural challenges of a society as unequal as Mexico are not fixed with mere motivational conferences but require long-term work.",
                     nuestraMision: "Our mission",
                     misionDescription: "Escalando Fronteras uses sport and education to strengthen life skills and prevent risky behaviors in children and adolescents in vulnerable contexts.",
                     educacionEmocional: "Emotional education",
                     educacionFamiliar: "Family education",
                     fundada: "Founded",
                     donaciones: "Donations",
+                    
+                    // Climbing Section
+                    escaladaMontana: "Mountain Climbing",
+                    escaladaDescription: "Climbing means health, culture, community and conquering your own frontiers. Sundays are the most fun days of the week for Escalando Fronteras. At 9 in the morning we pick up the children and youth and head to Parque Ecológico la Huasteca. There, volunteers await us, ready to work.",
+                    escaladaDescription2: "We exercise, engage in recreational and educational activities. Throughout the day, the team strives to reinforce values such as: responsibility, equity, teamwork, consistency, tolerance, solidarity, dignity and empathy.",
+
+                    // Community Section
+                    comunidad: "Community",
+                    comunidadDescription: "We work primarily in the Lomas Modelo Norte neighborhood, a neighborhood in the municipality of Monterrey that is located within one of the 'poverty polygons' established by CONAPO. It is an Otomi origin community, made up of families who were forced to migrate from their towns of origin in the states of Querétaro, due to unfavorable economic conditions.",
+                    comunidadDescription2: "Due to racism and structural inequality that prevail in the city of Monterrey, young people are pushed to drop out of school and consume substances in a way that affects their health and further constrains the economic possibilities of the community.",
+                    comunidadStatsTitle: "Community Impact",
+                    comunidadStats: "The average stay in the program is two years, with more than 20 children who have remained in the program for more than 5 years.",
+
+                    // Education Section
+                    educacionEmocionalFamiliar: "Emotional and family education",
+                    educacionEmocionalFamiliarDescription: "We know that climbing alone is not enough to make a comprehensive change in the lives of the children and youth we work with. That is why we have decided to undertake, hand in hand with mothers and other civil organizations, an effort to strengthen family tools regarding coexistence, addiction prevention and communication about responsible sexuality.",
+                    educacionEmocionalFamiliarDescription2: "At least once per semester, a prevention workshop is held to which parents of Escalando Fronteras are invited.",
+                    
+                        // Values Section
+                        nuestrosValores: "Our Values",
+                        desarrollarResiliencia: "Resilience",
+                        desarrollarResilienciaDescription: "We develop the capacity for adaptation and overcoming the structural challenges that children in the community face daily.",
+                        hacerMontanaAccesible: "Accessibility",
+                        hacerMontanaAccesibleDescription: "We make the mountain accessible for youth and their families, democratizing access to natural and sports spaces.",
+                        fortalecerHabilidades: "Skills",
+                        fortalecerHabilidadesDescription: "Strengthen individual and family skills to maintain healthy, constructive and beneficial relationships.",
+                        construirComunidad: "Community",
+                        construirComunidadDescription: "We build a stronger community to combat poverty, prevent problematic substance use and create growth opportunities.",
+                        
+                        // Counter Section
+                        counterProgramText: "Children and adolescents who have participated in the program.",
+                        
+                        // Historia Section
+                        nuestraHistoriaTitle: "Our History",
+                        nuestraHistoriaDescription: "Discover the origin and evolution of Escalando Fronteras, from our first steps in 2014 to becoming an association that transforms lives through sports and education.",
+                        leerHistoriaButton: "Read Complete History",
                     
                     // Founder Section
                     cofundador: "Co-founder of Escalando Fronteras",
@@ -1116,6 +1297,7 @@
                                 
                                 this.updateLanguageDisplay();
                                 this.translateStaticContent(); // Translate on initial load
+                                this.updateHistoriaLink(); // Update historia link on initial load
                             } else {
                                 setTimeout(checkAPI, 100);
                             }
@@ -1168,6 +1350,9 @@
                     
                     // Translate static content
                     this.translateStaticContent();
+                    
+                    // Update historia link with current language
+                    this.updateHistoriaLink();
                     
                     // Trigger content refresh
                     this.refreshContent();
@@ -1249,7 +1434,7 @@
                     // Navigation
                     updateText('a[href="#section_1"]', 'inicio');
                     updateText('a[href="#section_2"]', 'acercaDe');
-                    updateText('a[href="#section_4"]', 'voluntario');
+                    updateText('a[href="historia.html"]', 'voluntario');
                     updateText('#navbarLightDropdownMenuLink', 'mas');
                     updateText('a[href="noticias.html"]', 'noticias');
                     updateText('a[href="eventos.html"]', 'eventos');
@@ -1323,12 +1508,19 @@
                         aboutH5.textContent = t.organizacionSubtitle;
                     }
                     
-                    // Organization description (first p with mb-0)
-                    const aboutP = document.querySelector('#section_2 .custom-text-box p.mb-0');
+                    // Organization description (first p with mb-3)
+                    const aboutP = document.querySelector('#section_2 .custom-text-box p.mb-3');
                     console.log('About P found:', !!aboutP, aboutP?.textContent?.substring(0, 50) + '...');
                     if (aboutP && t.organizacionDescription) {
                         console.log('Updating About P to:', t.organizacionDescription.substring(0, 50) + '...');
                         aboutP.textContent = t.organizacionDescription;
+                    }
+                    
+                    // Organization base text (new paragraph)
+                    const organizacionBaseText = document.querySelector('#organizacion-base-text');
+                    if (organizacionBaseText && t.organizacionBase) {
+                        console.log('Updating organizacion base text to:', t.organizacionBase.substring(0, 50) + '...');
+                        organizacionBaseText.textContent = t.organizacionBase;
                     }
                     
                     // Mission section - target the specific mission h5 (second custom-text-box)
@@ -1360,7 +1552,150 @@
                     const counterTexts = document.querySelectorAll('.counter-text');
                     if (counterTexts.length >= 2) {
                         if (t.fundada) counterTexts[0].textContent = t.fundada;
-                        if (t.donaciones) counterTexts[1].textContent = t.donaciones;
+                        if (t.counterProgramText) counterTexts[1].textContent = t.counterProgramText;
+                    }
+                    
+                    // Climbing Section
+                    const escaladaTitle = document.querySelector('#escalada-montana-title');
+                    if (escaladaTitle && t.escaladaMontana) {
+                        console.log('Updating escalada title to:', t.escaladaMontana);
+                        escaladaTitle.textContent = t.escaladaMontana;
+                    }
+                    
+                    const escaladaDescription = document.querySelector('#escalada-description-text');
+                    if (escaladaDescription && t.escaladaDescription) {
+                        console.log('Updating escalada description to:', t.escaladaDescription.substring(0, 50) + '...');
+                        escaladaDescription.textContent = t.escaladaDescription;
+                    }
+                    
+                    const escaladaDescription2 = document.querySelector('#escalada-description-text2');
+                    if (escaladaDescription2 && t.escaladaDescription2) {
+                        console.log('Updating escalada description 2 to:', t.escaladaDescription2.substring(0, 50) + '...');
+                        escaladaDescription2.textContent = t.escaladaDescription2;
+                    }
+                    
+                    // Community Section
+                    const comunidadTitle = document.querySelector('#comunidad-title');
+                    if (comunidadTitle && t.comunidad) {
+                        console.log('Updating comunidad title to:', t.comunidad);
+                        comunidadTitle.textContent = t.comunidad;
+                    }
+                    
+                    const comunidadDescription = document.querySelector('#comunidad-description-text');
+                    if (comunidadDescription && t.comunidadDescription) {
+                        console.log('Updating comunidad description to:', t.comunidadDescription.substring(0, 50) + '...');
+                        comunidadDescription.textContent = t.comunidadDescription;
+                    }
+                    
+                    const comunidadDescription2 = document.querySelector('#comunidad-description-text2');
+                    if (comunidadDescription2 && t.comunidadDescription2) {
+                        console.log('Updating comunidad description 2 to:', t.comunidadDescription2.substring(0, 50) + '...');
+                        comunidadDescription2.textContent = t.comunidadDescription2;
+                    }
+                    
+                    const comunidadStatsTitle = document.querySelector('#comunidad-stats-title');
+                    if (comunidadStatsTitle && t.comunidadStatsTitle) {
+                        console.log('Updating comunidad stats title to:', t.comunidadStatsTitle);
+                        comunidadStatsTitle.textContent = t.comunidadStatsTitle;
+                    }
+                    
+                    const comunidadStats = document.querySelector('#comunidad-stats-text');
+                    if (comunidadStats && t.comunidadStats) {
+                        console.log('Updating comunidad stats to:', t.comunidadStats.substring(0, 50) + '...');
+                        comunidadStats.innerHTML = t.comunidadStats;
+                    }
+                    
+                    // Education Section
+                    const educacionTitle = document.querySelector('#educacion-emocional-familiar-title');
+                    if (educacionTitle && t.educacionEmocionalFamiliar) {
+                        console.log('Updating educacion title to:', t.educacionEmocionalFamiliar);
+                        educacionTitle.textContent = t.educacionEmocionalFamiliar;
+                    }
+                    
+                    const educacionDescription = document.querySelector('#educacion-emocional-familiar-description-text');
+                    if (educacionDescription && t.educacionEmocionalFamiliarDescription) {
+                        console.log('Updating educacion description to:', t.educacionEmocionalFamiliarDescription.substring(0, 50) + '...');
+                        educacionDescription.textContent = t.educacionEmocionalFamiliarDescription;
+                    }
+                    
+                    const educacionDescription2 = document.querySelector('#educacion-emocional-familiar-description-text2');
+                    if (educacionDescription2 && t.educacionEmocionalFamiliarDescription2) {
+                        console.log('Updating educacion description 2 to:', t.educacionEmocionalFamiliarDescription2.substring(0, 50) + '...');
+                        educacionDescription2.textContent = t.educacionEmocionalFamiliarDescription2;
+                    }
+                    
+                    // Values Section
+                    const valoresTitle = document.querySelector('#nuestros-valores-title');
+                    if (valoresTitle && t.nuestrosValores) {
+                        console.log('Updating valores title to:', t.nuestrosValores);
+                        valoresTitle.textContent = t.nuestrosValores;
+                    }
+                    
+                    const desarrollarResilienciaTitle = document.querySelector('#desarrollar-resiliencia-title');
+                    if (desarrollarResilienciaTitle && t.desarrollarResiliencia) {
+                        console.log('Updating desarrollar resiliencia title to:', t.desarrollarResiliencia);
+                        desarrollarResilienciaTitle.textContent = t.desarrollarResiliencia;
+                    }
+                    
+                    const desarrollarResilienciaDesc = document.querySelector('#desarrollar-resiliencia-description');
+                    if (desarrollarResilienciaDesc && t.desarrollarResilienciaDescription) {
+                        console.log('Updating desarrollar resiliencia description to:', t.desarrollarResilienciaDescription);
+                        desarrollarResilienciaDesc.textContent = t.desarrollarResilienciaDescription;
+                    }
+                    
+                    const hacerMontanaTitle = document.querySelector('#hacer-montana-accesible-title');
+                    if (hacerMontanaTitle && t.hacerMontanaAccesible) {
+                        console.log('Updating hacer montana title to:', t.hacerMontanaAccesible);
+                        hacerMontanaTitle.textContent = t.hacerMontanaAccesible;
+                    }
+                    
+                    const hacerMontanaDesc = document.querySelector('#hacer-montana-accesible-description');
+                    if (hacerMontanaDesc && t.hacerMontanaAccesibleDescription) {
+                        console.log('Updating hacer montana description to:', t.hacerMontanaAccesibleDescription);
+                        hacerMontanaDesc.textContent = t.hacerMontanaAccesibleDescription;
+                    }
+                    
+                    const fortalecerTitle = document.querySelector('#fortalecer-habilidades-title');
+                    if (fortalecerTitle && t.fortalecerHabilidades) {
+                        console.log('Updating fortalecer title to:', t.fortalecerHabilidades);
+                        fortalecerTitle.textContent = t.fortalecerHabilidades;
+                    }
+                    
+                    const fortalecerDesc = document.querySelector('#fortalecer-habilidades-description');
+                    if (fortalecerDesc && t.fortalecerHabilidadesDescription) {
+                        console.log('Updating fortalecer description to:', t.fortalecerHabilidadesDescription);
+                        fortalecerDesc.textContent = t.fortalecerHabilidadesDescription;
+                    }
+                    
+                    const construirTitle = document.querySelector('#construir-comunidad-title');
+                    if (construirTitle && t.construirComunidad) {
+                        console.log('Updating construir title to:', t.construirComunidad);
+                        construirTitle.textContent = t.construirComunidad;
+                    }
+                    
+                    const construirDesc = document.querySelector('#construir-comunidad-description');
+                    if (construirDesc && t.construirComunidadDescription) {
+                        console.log('Updating construir description to:', t.construirComunidadDescription);
+                        construirDesc.textContent = t.construirComunidadDescription;
+                    }
+                    
+                    // Historia Section
+                    const historiaTitle = document.querySelector('#nuestra-historia-title');
+                    if (historiaTitle && t.nuestraHistoriaTitle) {
+                        console.log('Updating historia title to:', t.nuestraHistoriaTitle);
+                        historiaTitle.textContent = t.nuestraHistoriaTitle;
+                    }
+                    
+                    const historiaDescription = document.querySelector('#nuestra-historia-description');
+                    if (historiaDescription && t.nuestraHistoriaDescription) {
+                        console.log('Updating historia description to:', t.nuestraHistoriaDescription.substring(0, 50) + '...');
+                        historiaDescription.textContent = t.nuestraHistoriaDescription;
+                    }
+                    
+                    const leerHistoriaButton = document.querySelector('#leer-historia-button');
+                    if (leerHistoriaButton && t.leerHistoriaButton) {
+                        console.log('Updating leer historia button to:', t.leerHistoriaButton);
+                        leerHistoriaButton.textContent = t.leerHistoriaButton;
                     }
                     
                     // Founder Section
@@ -1750,6 +2085,18 @@
                             window.articlesIntegration.currentLanguage = this.currentLanguage;
                             window.articlesIntegration.loadArticles();
                         }, 400);
+                    }
+                    
+                    // Update historia link with current language
+                    this.updateHistoriaLink();
+                }
+                
+                updateHistoriaLink() {
+                    const historiaLink = document.getElementById('historia-link');
+                    if (historiaLink) {
+                        const currentLang = this.currentLanguage || 'es';
+                        historiaLink.href = `historia.html?lang=${currentLang}`;
+                        console.log('🔗 Updated historia link with language:', currentLang);
                     }
                 }
             }

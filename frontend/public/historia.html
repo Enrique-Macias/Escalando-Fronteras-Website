@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Conoce la historia completa de Escalando Fronteras, desde nuestros inicios en 2014 hasta convertirnos en una asociación que transforma vidas.">
+    <meta name="author" content="Escalando Fronteras">
+    <title id="page-title">Nuestra Historia - Escalando Fronteras</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/icons/EF_LOGO.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--custom-btn-bg-color) 100%);
+            color: white;
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        
+        .hero-section .lead {
+            color: white !important;
+            opacity: 0.9;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--custom-btn-bg-color);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .timeline-content {
+            background: var(--section-bg-color);
+            padding: 40px;
+            border-radius: var(--border-radius-small);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 45%;
+        }
+        
+        .timeline-image {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .timeline-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-small);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* First timeline item - image left, content right */
+        .timeline-item:first-child .timeline-content {
+            margin-left: auto;
+            order: 2;
+        }
+        
+        .timeline-item:first-child .timeline-image {
+            margin-right: auto;
+            order: 1;
+        }
+        
+        /* Odd items (3rd, 5th) - image left, content right */
+        .timeline-item:nth-child(odd):not(:first-child) .timeline-content {
+            margin-left: auto;
+            order: 2;
+        }
+        
+        .timeline-item:nth-child(odd):not(:first-child) .timeline-image {
+            margin-right: auto;
+            order: 1;
+        }
+        
+        /* Even items (2nd, 4th) - content left, image right */
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: auto;
+            order: 1;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-image {
+            margin-left: auto;
+            order: 2;
+        }
+        
+        /* Video timeline item - centered */
+        .timeline-item:nth-child(3) {
+            display: block;
+            text-align: center;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--custom-btn-bg-color);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -60px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -60px;
+        }
+        
+        .video-container {
+            background: linear-gradient(135deg, var(--custom-btn-bg-color) 0%, var(--primary-color) 100%);
+            border-radius: var(--border-radius-small);
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin: 60px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 95%;
+            max-width: 800px;
+        }
+        
+        .video-container h3,
+        .video-container p {
+            color: white !important;
+        }
+        
+        .cta-section {
+            background: var(--section-bg-color) !important;
+        }
+        
+        .cta-section h2,
+        .cta-section .lead {
+            color: var(--primary-color) !important;
+        }
+        
+        .cta-section .btn-light {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .cta-section .btn-light:hover {
+            background-color: var(--custom-btn-bg-color);
+            border-color: var(--custom-btn-bg-color);
+            color: white;
+        }
+        
+        .cta-section .btn-outline-light {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .cta-section .btn-outline-light:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+                order: 2;
+            }
+            
+            .timeline-image {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+                order: 1;
+            }
+            
+            .video-container {
+                width: calc(100% - 60px) !important;
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+                max-width: none !important;
+            }
+            
+            .timeline-content::before {
+                left: -50px !important;
+                right: auto !important;
+            }
+            
+            .hero-section {
+                padding: 80px 0 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ======================= NAVIGATION BAR ================== -->
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Escalando_Fronteras_Official_Logo.png/220px-Escalando_Fronteras_Official_Logo.png">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_1" id="nav-inicio">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_2" id="nav-acerca">Acerca de</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="historia.html" id="nav-historia">Nuestra Historia</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
+
+                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                            <li><a class="dropdown-item" href="eventos.html" id="nav-eventos">Eventos</a></li>
+                            <li><a class="dropdown-item" href="noticias.html" id="nav-noticias">Noticias</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_6" id="nav-contacto">Contacto</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="faq.html" id="nav-faq">FAQ</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi-globe me-1"></i>
+                            <span id="current-language">ES</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item language-option" href="#" data-lang="es">
+                                <i class="bi-flag me-2"></i>Español (ES)
+                            </a></li>
+                            <li><a class="dropdown-item language-option" href="#" data-lang="en">
+                                <i class="bi-flag me-2"></i>English (EN)
+                            </a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item ms-3">
+                        <a class="nav-link custom-btn custom-border-btn btn" href="donate.html" id="nav-dona">Dona</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ======================= HERO SECTION ================== -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-4 mb-4" id="hero-title">Nuestra Historia</h1>
+                    <p class="lead" id="hero-subtitle">Conoce el viaje de Escalando Fronteras desde 2014 hasta hoy, transformando vidas a través del deporte y la educación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= TIMELINE SECTION ================== -->
+    <section class="timeline-section section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="timeline">
+                        <!-- Inicios -->
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="timeline-image">
+                                <img src="images/inicios.jpg" class="img-fluid" alt="Fundadores">
+                            </div>
+                            <div class="timeline-content">
+                                <h3 class="mb-3" id="inicios-title">Inicios</h3>
+                                <p id="inicios-description">EF comenzó a trabajar con la juventud de Lomas Modelo Norte a inicios de 2014. Los co-fundadores fueron Worral Mathews, un estadounidense investigador sobre pandillerismo y desarrollo juvenil, y Nadia Vázquez, doctora en Ciencias Sociales por el Tec de Monterrey.</p>
+                            </div>
+                        </div>
+
+                        <!-- Gimnasios y escaladores -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="timeline-content">
+                                <h3 class="mb-3" id="gimnasios-title">Gimnasios y escaladores se suman</h3>
+                                <p id="gimnasios-description">Para iniciar, el programa se apoyó en una campaña de recaudación de fondos virtual que logró atraer la mirada internacional. Escaladores profesionales de varias partes del mundo han venido a escalar con EF y se han convertido en embajadores del proyecto. El gimnasio de escalada Delta Climbing Gym decidió abrir sus puertas a los participantes de Escalando Fronteras de forma gratuita.</p>
+                            </div>
+                            <div class="timeline-image">
+                                <img src="images/suman.jpg" class="img-fluid" alt="Escaladores">
+                            </div>
+                        </div>
+
+                        <!-- Video Section -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="video-container">
+                                <h3 class="mb-4" id="video-title">Documental de Escalando Fronteras</h3>
+                                <p class="mb-4" id="video-description">Descubre la inspiradora historia de Escalando Fronteras a través de nuestro documental oficial.</p>
+                                <button class="btn btn-light btn-play" data-bs-toggle="modal" data-bs-target="#videoModal" role="button">
+                                    <i class="bi bi-play-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Por qué los domingos -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-image">
+                                <img src="images/domingos.jpg" class="img-fluid" alt="Actividades dominicales">
+                            </div>
+                            <div class="timeline-content">
+                                <h3 class="mb-3" id="domingos-title">¿Por qué los domingos?</h3>
+                                <p id="domingos-description">Los domingos era día de asueto, pero también uno de los días con mayor riesgo para la niñez, ya que los fines de semana presentan un mayor consumo de alcohol y drogas por los habitantes de la colonia. Las salidas a escalar significan una oportunidad para conocer opciones alternativas de esparcimiento y convivencia entre pares.</p>
+                            </div>
+                        </div>
+
+                        <!-- Más allá de la escalada -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="timeline-content">
+                                <h3 class="mb-3" id="mas-alla-title">Más allá de la escalada</h3>
+                                <p id="mas-alla-description">Con el apoyo de la comunidad nacional e internacional, así como las convocatorias para el desarrollo social del gobierno de Nuevo León, EF se ha convertido en una asociación que ha incorporado actividades adicionales a la escalada como los de sexualidad y convivencia familiar, dirigidos a las familias de los participantes. Más allá de formar buenos escaladores, nuestro objetivo es que los niños y niñas de hoy se conviertan en adultos felices y ciudadanos responsables.</p>
+                            </div>
+                            <div class="timeline-image">
+                                <img src="images/escalada.jpg" class="img-fluid" alt="Desarrollo integral">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= CTA SECTION ================== -->
+    <section class="cta-section section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4" id="cta-title">Únete a Nuestra Historia</h2>
+                    <p class="lead mb-4" id="cta-description">Sé parte del cambio y ayuda a transformar más vidas a través del deporte y la educación.</p>
+                    <a href="donate.html" class="btn btn-light btn-lg me-3" id="cta-dona">Dona Ahora</a>
+                    <a href="index.html" class="btn btn-outline-light btn-lg" id="cta-volver">Volver al Inicio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- ======================= FOOTER SECTION ================== -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-12 mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Escalando_Fronteras_Official_Logo.png/220px-Escalando_Fronteras_Official_Logo.png" class="logo img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                        <h5 class="site-footer-title mb-3" id="footer-enlaces">Enlaces</h5>
+
+                        <ul class="footer-menu">
+                            <li class="footer-menu-item"><a href="index.html#section_2" class="footer-menu-link" id="footer-nuestra-historia">Nuestra Historia</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link" id="footer-mirar-documental">Mirar Documental</a></li>
+
+                            <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link" id="footer-realizar-donacion">Realiza una Donación</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#section_4" class="footer-menu-link" id="footer-convertirse-voluntario">Conviértete en Voluntario</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#sponsors" class="footer-menu-link" id="footer-nuestros-patrocinadores">Nuestros Patrocinadores</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#articulos" class="footer-menu-link" id="footer-articulos">Artículos</a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mx-auto">
+                        <h5 class="site-footer-title mb-3" id="footer-contactanos">Contáctanos</h5>
+
+                        <p class="text-white d-flex mb-2">
+                            <i class="bi-telephone me-2"></i>
+
+                            <a href="tel: 120-240-9600" class="site-footer-link">
+                                120-240-9600
+                            </a>
+                        </p>
+
+                        <p class="text-white d-flex">
+                            <i class="bi-envelope me-2"></i>
+
+                            <a href="mailto:info@yourgmail.com" class="site-footer-link">
+                                Nadia@ClimbingBorders.org
+                            </a>
+                        </p>
+
+                        <p class="text-white d-flex mt-3">
+                            <i class="bi-geo-alt me-2"></i>
+                            Monterrey, Nuevo León, México
+                        </p>
+
+                        <a href="#" class="custom-btn btn mt-3" id="footer-obtener-direccion">Obtener Dirección</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="site-footer-bottom">
+                <div class="container">
+                    <div class="row">
+
+                        
+                        
+                        <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+                            <ul class="social-icon">
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-facebook"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-instagram"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-whatsapp"></a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Documental de Escalando Fronteras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="youtubeVideo" class="embed-responsive-item" src="" width="100%" height="480" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Popper.js for Bootstrap dropdowns and tooltips -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        // Language Switcher
+        class HistoriaLanguageSwitcher {
+            constructor() {
+                this.currentLanguage = 'es';
+                this.translations = {
+                    es: {
+                        // Navigation
+                        navInicio: "Inicio",
+                        navAcerca: "Acerca de",
+                        navHistoria: "Nuestra Historia",
+                        navMas: "Más",
+                        navEventos: "Eventos",
+                        navNoticias: "Noticias",
+                        navContacto: "Contacto",
+                        navFaq: "FAQ",
+                        navDona: "Dona",
+                        
+                        // Hero Section
+                        heroTitle: "Nuestra Historia",
+                        heroSubtitle: "Conoce el viaje de Escalando Fronteras desde 2014 hasta hoy, transformando vidas a través del deporte y la educación.",
+                        
+                        // Timeline Content
+                        iniciosTitle: "Inicios",
+                        iniciosDescription: "EF comenzó a trabajar con la juventud de Lomas Modelo Norte a inicios de 2014. Los co-fundadores fueron Worral Mathews, un estadounidense investigador sobre pandillerismo y desarrollo juvenil, y Nadia Vázquez, doctora en Ciencias Sociales por el Tec de Monterrey.",
+                        
+                        gimnasiosTitle: "Gimnasios y escaladores se suman",
+                        gimnasiosDescription: "Para iniciar, el programa se apoyó en una campaña de recaudación de fondos virtual que logró atraer la mirada internacional. Escaladores profesionales de varias partes del mundo han venido a escalar con EF y se han convertido en embajadores del proyecto. El gimnasio de escalada Delta Climbing Gym decidió abrir sus puertas a los participantes de Escalando Fronteras de forma gratuita.",
+                        
+                        videoTitle: "Documental de Escalando Fronteras",
+                        videoDescription: "Descubre la inspiradora historia de Escalando Fronteras a través de nuestro documental oficial.",
+                        
+                        domingosTitle: "¿Por qué los domingos?",
+                        domingosDescription: "Los domingos era día de asueto, pero también uno de los días con mayor riesgo para la niñez, ya que los fines de semana presentan un mayor consumo de alcohol y drogas por los habitantes de la colonia. Las salidas a escalar significan una oportunidad para conocer opciones alternativas de esparcimiento y convivencia entre pares.",
+                        
+                        masAllaTitle: "Más allá de la escalada",
+                        masAllaDescription: "Con el apoyo de la comunidad nacional e internacional, así como las convocatorias para el desarrollo social del gobierno de Nuevo León, EF se ha convertido en una asociación que ha incorporado actividades adicionales a la escalada como los de sexualidad y convivencia familiar, dirigidos a las familias de los participantes. Más allá de formar buenos escaladores, nuestro objetivo es que los niños y niñas de hoy se conviertan en adultos felices y ciudadanos responsables.",
+                        
+                        // CTA Section
+                        ctaTitle: "Únete a Nuestra Historia",
+                        ctaDescription: "Sé parte del cambio y ayuda a transformar más vidas a través del deporte y la educación.",
+                        ctaDona: "Dona Ahora",
+                        ctaVolver: "Volver al Inicio",
+                        
+                        // Footer
+                        footerEnlaces: "Enlaces",
+                        footerNuestraHistoria: "Nuestra Historia",
+                        footerMirarDocumental: "Mirar Documental",
+                        footerRealizarDonacion: "Realiza una Donación",
+                        footerConvertirseVoluntario: "Conviértete en Voluntario",
+                        footerNuestrosPatrocinadores: "Nuestros Patrocinadores",
+                        footerArticulos: "Artículos",
+                        footerContactanos: "Contáctanos",
+                        footerObtenerDireccion: "Obtener Dirección",
+                        
+                        // Page Title
+                        pageTitle: "Nuestra Historia - Escalando Fronteras"
+                    },
+                    en: {
+                        // Navigation
+                        navInicio: "Home",
+                        navAcerca: "About",
+                        navHistoria: "Our History",
+                        navMas: "More",
+                        navEventos: "Events",
+                        navNoticias: "News",
+                        navContacto: "Contact",
+                        navFaq: "FAQ",
+                        navDona: "Donate",
+                        
+                        // Hero Section
+                        heroTitle: "Our History",
+                        heroSubtitle: "Discover Escalando Fronteras' journey from 2014 to today, transforming lives through sports and education.",
+                        
+                        // Timeline Content
+                        iniciosTitle: "Beginnings",
+                        iniciosDescription: "EF began working with youth in Lomas Modelo Norte in early 2014. The co-founders were Worral Mathews, an American researcher on gang violence and youth development, and Nadia Vázquez, PhD in Social Sciences from Tec de Monterrey.",
+                        
+                        gimnasiosTitle: "Gyms and climbers join in",
+                        gimnasiosDescription: "To start, the program was supported by a virtual fundraising campaign that managed to attract international attention. Professional climbers from various parts of the world have come to climb with EF and have become ambassadors of the project. Delta Climbing Gym decided to open its doors to Escalando Fronteras participants free of charge.",
+                        
+                        videoTitle: "Escalando Fronteras Documentary",
+                        videoDescription: "Discover the inspiring story of Escalando Fronteras through our official documentary.",
+                        
+                        domingosTitle: "Why Sundays?",
+                        domingosDescription: "Sundays were a day off, but also one of the days with the highest risk for children, since weekends present higher alcohol and drug consumption by the neighborhood residents. Climbing outings represent an opportunity to learn about alternative recreation and peer interaction options.",
+                        
+                        masAllaTitle: "Beyond climbing",
+                        masAllaDescription: "With the support of the national and international community, as well as calls for social development from the government of Nuevo León, EF has become an association that has incorporated additional activities to climbing such as sexuality and family coexistence, directed at the families of the participants. Beyond forming good climbers, our goal is for today's children to become happy adults and responsible citizens.",
+                        
+                        // CTA Section
+                        ctaTitle: "Join Our History",
+                        ctaDescription: "Be part of the change and help transform more lives through sports and education.",
+                        ctaDona: "Donate Now",
+                        ctaVolver: "Back to Home",
+                        
+                        // Footer
+                        footerEnlaces: "Links",
+                        footerNuestraHistoria: "Our Story",
+                        footerMirarDocumental: "Watch Documentary",
+                        footerRealizarDonacion: "Make a Donation",
+                        footerConvertirseVoluntario: "Become a Volunteer",
+                        footerNuestrosPatrocinadores: "Our Sponsors",
+                        footerArticulos: "Articles",
+                        footerContactanos: "Contact Us",
+                        footerObtenerDireccion: "Get Directions",
+                        
+                        // Page Title
+                        pageTitle: "Our History - Escalando Fronteras"
+                    }
+                };
+                
+                this.init();
+            }
+            
+            init() {
+                // Get language from URL, localStorage, or default to Spanish
+                const urlParams = new URLSearchParams(window.location.search);
+                const langFromUrl = urlParams.get('lang');
+                const langFromStorage = localStorage.getItem('userLanguagePreference');
+                
+                // Priority: URL parameter > localStorage > default Spanish
+                if (langFromUrl && (langFromUrl === 'en' || langFromUrl === 'es')) {
+                    this.currentLanguage = langFromUrl;
+                    console.log('🌍 Language from URL:', langFromUrl);
+                } else if (langFromStorage && (langFromStorage === 'en' || langFromStorage === 'es')) {
+                    this.currentLanguage = langFromStorage;
+                    console.log('🌍 Language from localStorage:', langFromStorage);
+                } else {
+                    this.currentLanguage = 'es';
+                    console.log('🌍 Using default language: Spanish');
+                }
+                
+                // Store language preference for consistency
+                localStorage.setItem('userLanguagePreference', this.currentLanguage);
+                
+                // Update page title
+                this.updatePageTitle();
+                
+                // Translate content
+                this.translateContent();
+                
+                // Update language display
+                this.updateLanguageDisplay();
+                
+                console.log('🌍 Historia Language Switcher initialized with language:', this.currentLanguage);
+            }
+            
+            updatePageTitle() {
+                const title = this.translations[this.currentLanguage].pageTitle;
+                document.title = title;
+                document.querySelector('#page-title').textContent = title;
+            }
+            
+            translateContent() {
+                const t = this.translations[this.currentLanguage];
+                
+                // Navigation
+                this.updateText('#nav-inicio', t.navInicio);
+                this.updateText('#nav-acerca', t.navAcerca);
+                this.updateText('#nav-historia', t.navHistoria);
+                this.updateText('#navbarLightDropdownMenuLink', t.navMas);
+                this.updateText('#nav-eventos', t.navEventos);
+                this.updateText('#nav-noticias', t.navNoticias);
+                this.updateText('#nav-contacto', t.navContacto);
+                this.updateText('#nav-faq', t.navFaq);
+                this.updateText('#nav-dona', t.navDona);
+                
+                // Hero Section
+                this.updateText('#hero-title', t.heroTitle);
+                this.updateText('#hero-subtitle', t.heroSubtitle);
+                
+                // Timeline Content
+                this.updateText('#inicios-title', t.iniciosTitle);
+                this.updateText('#inicios-description', t.iniciosDescription);
+                this.updateText('#gimnasios-title', t.gimnasiosTitle);
+                this.updateText('#gimnasios-description', t.gimnasiosDescription);
+                this.updateText('#video-title', t.videoTitle);
+                this.updateText('#video-description', t.videoDescription);
+                this.updateText('#domingos-title', t.domingosTitle);
+                this.updateText('#domingos-description', t.domingosDescription);
+                this.updateText('#mas-alla-title', t.masAllaTitle);
+                this.updateText('#mas-alla-description', t.masAllaDescription);
+                
+                // CTA Section
+                this.updateText('#cta-title', t.ctaTitle);
+                this.updateText('#cta-description', t.ctaDescription);
+                this.updateText('#cta-dona', t.ctaDona);
+                this.updateText('#cta-volver', t.ctaVolver);
+                
+                // Footer
+                this.updateText('#footer-enlaces', t.footerEnlaces);
+                this.updateText('#footer-nuestra-historia', t.footerNuestraHistoria);
+                this.updateText('#footer-mirar-documental', t.footerMirarDocumental);
+                this.updateText('#footer-realizar-donacion', t.footerRealizarDonacion);
+                this.updateText('#footer-convertirse-voluntario', t.footerConvertirseVoluntario);
+                this.updateText('#footer-nuestros-patrocinadores', t.footerNuestrosPatrocinadores);
+                this.updateText('#footer-articulos', t.footerArticulos);
+                this.updateText('#footer-contactanos', t.footerContactanos);
+                this.updateText('#footer-obtener-direccion', t.footerObtenerDireccion);
+            }
+            
+            updateText(selector, text) {
+                const element = document.querySelector(selector);
+                if (element && text) {
+                    element.textContent = text;
+                }
+            }
+            
+            updateLanguageDisplay() {
+                const currentLanguageSpan = document.querySelector('#current-language');
+                if (currentLanguageSpan) {
+                    currentLanguageSpan.textContent = this.currentLanguage.toUpperCase();
+                }
+            }
+            
+            switchLanguage(newLang) {
+                if (newLang === this.currentLanguage) return;
+                
+                this.currentLanguage = newLang;
+                
+                // Store language preference in localStorage
+                localStorage.setItem('userLanguagePreference', newLang);
+                
+                // Update URL
+                const url = new URL(window.location);
+                url.searchParams.set('lang', newLang);
+                window.history.pushState({}, '', url);
+                
+                // Update content
+                this.updatePageTitle();
+                this.translateContent();
+                this.updateLanguageDisplay();
+                
+                console.log('🌍 Language switched to:', newLang);
+            }
+        }
+        
+        // Global function for language switching
+        window.switchLanguage = function(lang) {
+            if (window.historiaLanguageSwitcher) {
+                window.historiaLanguageSwitcher.switchLanguage(lang);
+            }
+        };
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            window.historiaLanguageSwitcher = new HistoriaLanguageSwitcher();
+            
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Language switcher event listeners
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    if (window.historiaLanguageSwitcher) {
+                        window.historiaLanguageSwitcher.switchLanguage(lang);
+                    }
+                });
+            });
+            
+            // Video modal functionality
+            const videoModal = document.getElementById('videoModal');
+            const youtubeVideo = document.getElementById('youtubeVideo');
+            
+            videoModal.addEventListener('show.bs.modal', function() {
+                // Add YouTube video URL here
+                youtubeVideo.src = 'https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1';
+            });
+            
+            videoModal.addEventListener('hide.bs.modal', function() {
+                youtubeVideo.src = '';
+            });
+        });
+    </script>
+    
+    <!-- Popper.js for Bootstrap dropdowns and tooltips -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+</body>
+</html>

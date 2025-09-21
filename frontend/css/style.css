@@ -81,6 +81,177 @@ html {
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
+/* Value Cards Styling */
+.value-card {
+  padding: 2rem 1.5rem;
+  background: var(--white-color);
+  border-radius: var(--border-radius-small);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid rgba(89, 112, 129, 0.1);
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: rgba(89, 112, 129, 0.2);
+}
+
+.value-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.value-icon i {
+  color: var(--custom-btn-bg-color) !important;
+  transition: color 0.3s ease;
+}
+
+.value-card:hover .value-icon i {
+  color: var(--primary-color) !important;
+}
+
+.value-card h5 {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1rem;
+}
+
+.value-card p {
+  color: var(--p-color);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments for value cards */
+@media (max-width: 768px) {
+  .value-card {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .value-card h5 {
+    font-size: 1rem;
+  }
+  
+  .value-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Equal height layout for Community section */
+.community-equal-height {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Ensure text boxes fill available space */
+.custom-text-box.flex-fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Enhanced Statistics Container */
+.stats-container {
+  background: linear-gradient(135deg, rgba(89, 112, 129, 0.05) 0%, rgba(89, 112, 129, 0.1) 100%);
+  border: 2px solid rgba(89, 112, 129, 0.2);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--custom-btn-bg-color), var(--primary-color), var(--custom-btn-bg-color));
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.stats-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.stats-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background: rgba(89, 112, 129, 0.1);
+  border-radius: 50%;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.stats-container:hover .stats-icon {
+  transform: scale(1.1);
+}
+
+.stats-container h5 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--custom-btn-bg-color);
+}
+
+.stats-container p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--p-color);
+}
+
+.stats-container strong {
+  color: var(--custom-btn-bg-color);
+  font-weight: 700;
+}
+
+/* Mobile responsiveness for community section */
+@media (max-width: 991px) {
+  .community-equal-height {
+    flex-direction: column;
+  }
+  
+  .custom-text-box.flex-fill {
+    flex: none;
+    margin-bottom: 1rem;
+  }
+  
+  .custom-text-box.flex-fill:last-child {
+    margin-bottom: 0;
+  }
+  
+  .stats-content {
+    padding: 0.75rem;
+  }
+  
+  .stats-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .stats-icon i {
+    font-size: 2rem !important;
+  }
+}
+
 
 /* ===================== Tipografía ===================== */
 
@@ -249,6 +420,365 @@ strong {
   border-radius: var(--border-radius-medium);
   margin-bottom: 24px;
   padding: 40px;
+}
+
+/* Historia section title styling */
+  #nuestra-historia-title {
+    color: white !important;
+    font-weight: semibold !important;
+  }
+
+/* FAQ Responsive Styling */
+faq .container-faq,
+.container-faq {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  padding: 40px 30px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.faq .heading h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--primary-color);
+}
+
+.faq .question {
+  background: #fff;
+  margin-bottom: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.faq .question:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.faq .question button {
+  width: 100%;
+  padding: 1.5rem;
+  text-align: left;
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.faq .question button:hover {
+  background-color: #f8f9fa;
+}
+
+.faq .question button span {
+  flex: 1;
+  margin-right: 1rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.faq .question .d-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  color: var(--secondary-color);
+  flex-shrink: 0;
+}
+
+.faq .question.active .d-arrow {
+  transform: rotate(180deg);
+}
+
+.faq .question p {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+  display: none;
+  animation: fadeIn 0.3s ease-in;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.faq .question.active p {
+  display: block;
+}
+
+/* FAQ Divider */
+.faq .question {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+
+.faq .question:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FAQ Section Background */
+faq {
+  display: block;
+  width: 100% !important;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 60px 0;
+  overflow-x: hidden;
+  margin: 0 !important;
+  position: relative !important;
+}
+
+/* Force FAQ white container to be much wider on mobile */
+@media (max-width: 768px) {
+  faq .container-faq {
+    width: 98% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 20px 15px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  faq .container-faq {
+    width: 99% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 15px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  faq .container-faq {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10px 8px !important;
+  }
+}
+
+/* Extra small devices - make it completely full width */
+@media (max-width: 360px) {
+  faq .container-faq {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 8px 5px !important;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  faq {
+    padding: 40px 0;
+  }
+  
+  faq .container-faq,
+  .container-faq {
+    padding: 20px 10px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    width: calc(100% - 20px) !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  .faq .heading h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding: 0 5px;
+  }
+  
+  .faq .question {
+    margin-bottom: 0.8rem;
+    width: 100%;
+  }
+  
+  .faq .question button {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .faq .question button span {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    margin-right: 0.8rem;
+  }
+  
+  .faq .question p {
+    padding: 1rem 1rem 1rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  faq {
+    padding: 20px 0;
+  }
+  
+  faq .container-faq,
+  .container-faq {
+    padding: 15px 8px !important;
+    width: calc(100% - 16px) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  .faq .heading h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding: 0 5px;
+  }
+  
+  .faq .question {
+    margin-bottom: 0.6rem;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  .faq .question button {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .faq .question button span {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    line-height: 1.2;
+  }
+  
+  .faq .question p {
+    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  .faq .question .d-arrow {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  faq {
+    padding: 15px 0;
+  }
+  
+  faq .container-faq,
+  .container-faq {
+    padding: 10px 5px !important;
+    width: calc(100% - 10px) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  .faq .heading h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+    padding: 0 3px;
+  }
+  
+  .faq .question {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  
+  .faq .question button {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+  
+  .faq .question button span {
+    font-size: 0.85rem;
+    margin-right: 0.4rem;
+  }
+  
+  .faq .question p {
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  
+  .faq .question .d-arrow {
+    font-size: 0.9rem;
+  }
+}
+
+/* Ensure body doesn't have horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* FAQ page specific responsive fixes */
+main {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure FAQ content is properly contained */
+.container-faq * {
+  box-sizing: border-box;
+}
+
+/* Override any Bootstrap container limitations */
+faq .container-faq.container,
+faq .container-faq[class*="container"] {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Force full width on mobile for the white container */
+@media (max-width: 768px) {
+  faq .container-faq.container,
+  faq .container-faq[class*="container"] {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 20px 15px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  faq .container-faq.container,
+  faq .container-faq[class*="container"] {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10px 8px !important;
+  }
 }
 
 .custom-text-box-image {

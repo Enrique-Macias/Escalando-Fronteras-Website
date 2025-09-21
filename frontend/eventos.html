@@ -76,25 +76,19 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link smoothscroll" href="index.html#section_2" id="nav-acerca">Acerca de</a>
+                            <a class="nav-link click-scroll" href="index.html#section_2" id="nav-acerca">Acerca de</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_3" id="nav-apoyo">Apoyo</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_4" id="nav-voluntario">Voluntario</a>
+                            <a class="nav-link" href="historia.html" id="nav-historia">Nuestra Historia</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span id="nav-mas">Más</span>
-                            </a>
+                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
 
-                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">         
-                                <li><a class="dropdown-item active" href="eventos.html" id="dropdown-eventos">Eventos</a></li>
-                                <li><a class="dropdown-item" href="noticias.html" id="dropdown-noticias">Noticias</a></li>
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item active" href="eventos.html" id="nav-eventos">Eventos</a></li>
+                                <li><a class="dropdown-item" href="noticias.html" id="nav-noticias">Noticias</a></li>
                             </ul>
                         </li>
 
@@ -322,8 +316,7 @@
                     headerLocation: "Monterrey, Nuevo León, México",
                     navInicio: "Inicio",
                     navAcerca: "Acerca de",
-                    navApoyo: "Apoyo",
-                    navVoluntario: "Voluntario",
+                    navHistoria: "Nuestra Historia",
                     navMas: "Más",
                     navContacto: "Contacto",
                     navDona: "Dona",
@@ -354,8 +347,7 @@
                     headerLocation: "Monterrey, Nuevo León, Mexico",
                     navInicio: "Home",
                     navAcerca: "About",
-                    navApoyo: "Support",
-                    navVoluntario: "Volunteer",
+                    navHistoria: "Our History",
                     navMas: "More",
                     navContacto: "Contact",
                     navDona: "Donate",
@@ -491,8 +483,7 @@
                     // Navigation
                     this.updateText('#nav-inicio', t.navInicio);
                     this.updateText('#nav-acerca', t.navAcerca);
-                    this.updateText('#nav-apoyo', t.navApoyo);
-                    this.updateText('#nav-voluntario', t.navVoluntario);
+                    this.updateText('#nav-historia', t.navHistoria);
                     this.updateText('#nav-mas', t.navMas);
                     this.updateText('#nav-contacto', t.navContacto);
                     this.updateText('#nav-dona', t.navDona);

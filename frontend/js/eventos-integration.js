@@ -43,6 +43,28 @@ class EventosIntegration {
         
         // Setup show more button
         this.setupShowMoreButton();
+        
+        // Setup language listener
+        this.setupLanguageListener();
+    }
+    
+    setupLanguageListener() {
+        // Listen for language changes
+        document.addEventListener('languageChanged', (event) => {
+            console.log('🌍 Eventos language changed to:', event.detail.language);
+            this.currentLanguage = event.detail.language;
+            this.loadEvents(); // Reload events with new language
+        });
+        
+        // Also listen for manual language updates from eventos.html
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if language was updated from the eventos.html language switcher
+            setTimeout(() => {
+                if (window.eventosLanguageSwitcher && window.eventosLanguageSwitcher.currentLanguage) {
+                    this.currentLanguage = window.eventosLanguageSwitcher.currentLanguage;
+                }
+            }, 1000);
+        });
     }
     
     async waitForAPI() {
@@ -50,6 +72,13 @@ class EventosIntegration {
             const checkAPI = () => {
                 if (typeof window.EFAPI !== 'undefined' && window.EFAPI.events) {
                     console.log('🎪 API ready');
+                    
+                    // Get current language from API service
+                    if (window.EFAPI.language) {
+                        this.currentLanguage = window.EFAPI.language.getCurrentLanguage();
+                        console.log('🎪 Language from API service:', this.currentLanguage);
+                    }
+                    
                     resolve();
                 } else {
                     console.log('🎪 Waiting for API...');
@@ -192,6 +221,7 @@ class EventosIntegration {
         const tagsHtml = Array.isArray(tags) ? 
             tags.map(tag => `<a href="#" class="tags-block-link">${tag}</a>`).join('') :
             `<a href="#" class="tags-block-link">${tags}</a>`;
+        
         
         const eventHtml = `
             <div class="news-block">
@@ -341,27 +371,227 @@ class EventosIntegration {
         // Add modal HTML to body if not exists
         if (!document.getElementById('imageModal')) {
             const modalHtml = `
-                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                        <div class="modal-content bg-dark">
-                            <div class="modal-header border-0">
-                                <h5 class="modal-title text-white" id="imageModalLabel">
-                                    <span id="modal-image-counter">1 / 1</span>
-                                </h5>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-center p-0 position-relative">
-                                <img id="modal-image" src="" class="img-fluid" alt="">
-                                <button class="btn btn-outline-light position-absolute start-0 top-50 translate-middle-y ms-3" id="modal-prev-btn">
-                                    <i class="bi-chevron-left"></i>
-                                </button>
-                                <button class="btn btn-outline-light position-absolute end-0 top-50 translate-middle-y me-3" id="modal-next-btn">
-                                    <i class="bi-chevron-right"></i>
-                                </button>
-                            </div>
+                <!-- ======================= IMAGE MODAL ================== -->
+                <div id="imageModal" class="image-modal" style="display: none;">
+                    <div class="modal-overlay"></div>
+                    <div class="modal-content">
+                        <button class="modal-close" onclick="closeImageModal()">&times;</button>
+                        <button class="modal-nav modal-prev" onclick="previousImage()">&#8249;</button>
+                        <img id="modalImage" src="" alt="" class="modal-image">
+                        <button class="modal-nav modal-next" onclick="nextImage()">&#8250;</button>
+                        <div class="modal-counter">
+                            <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
                         </div>
                     </div>
                 </div>
+                
+                <style>
+                    .image-modal {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 9999;
+                        background: rgba(0, 0, 0, 0.9);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    
+                    .modal-overlay {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        cursor: pointer;
+                    }
+                    
+                    .modal-content {
+                        position: relative;
+                        max-width: 90%;
+                        max-height: 90%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    
+                    .modal-image {
+                        max-width: 100%;
+                        max-height: 100%;
+                        object-fit: contain;
+                        border-radius: 8px;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                    }
+                    
+                    .modal-close {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: rgba(0, 0, 0, 0.7);
+                        border: 2px solid rgba(255, 255, 255, 0.3);
+                        color: white;
+                        font-size: 28px;
+                        cursor: pointer;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: all 0.3s ease;
+                        z-index: 10001;
+                    }
+                    
+                    .modal-close:hover {
+                        background: rgba(255, 255, 255, 0.2);
+                        border-color: rgba(255, 255, 255, 0.6);
+                        transform: scale(1.1);
+                    }
+                    
+                    .modal-nav {
+                        position: fixed;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background: rgba(0, 0, 0, 0.7);
+                        border: 2px solid rgba(255, 255, 255, 0.3);
+                        color: white;
+                        font-size: 24px;
+                        cursor: pointer;
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: all 0.3s ease;
+                        font-weight: bold;
+                        z-index: 10001;
+                    }
+                    
+                    .modal-nav:hover {
+                        background: rgba(255, 255, 255, 0.2);
+                        border-color: rgba(255, 255, 255, 0.6);
+                        transform: translateY(-50%) scale(1.1);
+                    }
+                    
+                    .modal-prev {
+                        left: 30px;
+                    }
+                    
+                    .modal-next {
+                        right: 30px;
+                    }
+                    
+                    .modal-counter {
+                        position: fixed;
+                        bottom: 30px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        color: white;
+                        font-size: 16px;
+                        font-weight: bold;
+                        background: rgba(0, 0, 0, 0.8);
+                        border: 2px solid rgba(255, 255, 255, 0.3);
+                        padding: 10px 20px;
+                        border-radius: 25px;
+                        z-index: 10001;
+                    }
+                    
+                    /* Tablet responsiveness */
+                    @media (max-width: 992px) {
+                        .modal-nav {
+                            width: 55px;
+                            height: 55px;
+                            font-size: 22px;
+                        }
+                        
+                        .modal-prev {
+                            left: 20px;
+                        }
+                        
+                        .modal-next {
+                            right: 20px;
+                        }
+                        
+                        .modal-close {
+                            top: 15px;
+                            right: 15px;
+                            width: 45px;
+                            height: 45px;
+                            font-size: 24px;
+                        }
+                        
+                        .modal-counter {
+                            bottom: 25px;
+                            font-size: 15px;
+                            padding: 8px 16px;
+                        }
+                    }
+                    
+                    /* Mobile responsiveness */
+                    @media (max-width: 768px) {
+                        .modal-nav {
+                            width: 50px;
+                            height: 50px;
+                            font-size: 20px;
+                        }
+                        
+                        .modal-prev {
+                            left: 15px;
+                        }
+                        
+                        .modal-next {
+                            right: 15px;
+                        }
+                        
+                        .modal-close {
+                            top: 15px;
+                            right: 15px;
+                            font-size: 22px;
+                            width: 42px;
+                            height: 42px;
+                        }
+                        
+                        .modal-counter {
+                            bottom: 20px;
+                            font-size: 14px;
+                            padding: 8px 14px;
+                        }
+                    }
+                    
+                    /* Small mobile responsiveness */
+                    @media (max-width: 480px) {
+                        .modal-nav {
+                            width: 45px;
+                            height: 45px;
+                            font-size: 18px;
+                        }
+                        
+                        .modal-prev {
+                            left: 10px;
+                        }
+                        
+                        .modal-next {
+                            right: 10px;
+                        }
+                        
+                        .modal-close {
+                            top: 10px;
+                            right: 10px;
+                            font-size: 20px;
+                            width: 38px;
+                            height: 38px;
+                        }
+                        
+                        .modal-counter {
+                            bottom: 15px;
+                            font-size: 13px;
+                            padding: 6px 12px;
+                        }
+                    }
+                </style>
             `;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
@@ -374,9 +604,32 @@ class EventosIntegration {
             });
         });
         
-        // Setup modal navigation
-        document.getElementById('modal-prev-btn')?.addEventListener('click', () => this.previousImage());
-        document.getElementById('modal-next-btn')?.addEventListener('click', () => this.nextImage());
+        // Setup keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('imageModal');
+            if (modal && modal.style.display === 'flex') {
+                switch(e.key) {
+                    case 'Escape':
+                        this.closeImageModal();
+                        break;
+                    case 'ArrowLeft':
+                        this.previousImage();
+                        break;
+                    case 'ArrowRight':
+                        this.nextImage();
+                        break;
+                }
+            }
+        });
+        
+        // Setup overlay click to close
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('imageModal');
+            const overlay = document.querySelector('.modal-overlay');
+            if (modal && modal.style.display === 'flex' && e.target === overlay) {
+                this.closeImageModal();
+            }
+        });
     }
     
     openImageModal(startIndex = 0) {
@@ -384,18 +637,20 @@ class EventosIntegration {
         this.modalImages = Array.from(document.querySelectorAll('.clickable-image'));
         this.updateModalImage();
         
-        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-        modal.show();
+        document.getElementById('imageModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
     
     updateModalImage() {
-        const modalImage = document.getElementById('modal-image');
-        const modalCounter = document.getElementById('modal-image-counter');
+        const modalImage = document.getElementById('modalImage');
+        const currentIndexSpan = document.getElementById('currentImageIndex');
+        const totalImagesSpan = document.getElementById('totalImages');
         
         if (this.modalImages && this.modalImages[this.currentImageIndex]) {
             modalImage.src = this.modalImages[this.currentImageIndex].src;
             modalImage.alt = this.modalImages[this.currentImageIndex].alt;
-            modalCounter.textContent = `${this.currentImageIndex + 1} / ${this.modalImages.length}`;
+            currentIndexSpan.textContent = this.currentImageIndex + 1;
+            totalImagesSpan.textContent = this.modalImages.length;
         }
     }
     
@@ -417,23 +672,55 @@ class EventosIntegration {
         this.updateModalImage();
     }
     
+    closeImageModal() {
+        document.getElementById('imageModal').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore background scrolling
+    }
+    
     async loadSidebarContent() {
         // Load recent events
         this.displayRecentEvents();
         
-        // Load categories and tags
+        // Load categories
         this.displayCategories();
-        this.displayTags();
     }
     
     displayRecentEvents() {
         const container = document.getElementById('recent-events-container');
         if (!container || this.allEvents.length === 0) return;
         
-        // Get first 3 events for recent events
-        const recentEvents = this.allEvents.slice(0, 3);
+        // Determine which event is currently displayed as main event
+        let mainEventId = null;
+        if (this.selectedEventId) {
+            mainEventId = this.selectedEventId;
+        } else if (this.allEvents.length > 0) {
+            // If no selected event, the main event is the first one (latest)
+            mainEventId = this.allEvents[0].id;
+        }
         
-        const eventsHtml = recentEvents.map(event => {
+        // Filter out the main event from sidebar and get next 3 events
+        const sidebarEvents = this.allEvents.filter(event => {
+            return event.id != mainEventId && parseInt(event.id) !== parseInt(mainEventId);
+        }).slice(0, 3);
+        
+        console.log('🎪 Main event ID:', mainEventId);
+        console.log('🎪 Total events:', this.allEvents.length);
+        console.log('🎪 Sidebar events (excluding main):', sidebarEvents.length);
+        
+        // If no events to show in sidebar, display a message
+        if (sidebarEvents.length === 0) {
+            const noEventsMessage = this.currentLanguage === 'en' 
+                ? 'No other events available' 
+                : 'No hay otros eventos disponibles';
+            container.innerHTML = `
+                <div class="text-center py-3">
+                    <p class="text-muted small">${noEventsMessage}</p>
+                </div>
+            `;
+            return;
+        }
+        
+        const eventsHtml = sidebarEvents.map(event => {
             const title = this.getLocalizedField(event, 'title') || 'Sin título';
             const date = this.formatDate(event.date || event.createdAt || event.created_at);
             const image = event.coverImageUrl || event.image || event.imageUrl || 'images/introEF.jpeg';
@@ -496,35 +783,6 @@ class EventosIntegration {
         container.innerHTML = categoriesHtml;
     }
     
-    displayTags() {
-        const container = document.getElementById('tags-container');
-        if (!container || this.allEvents.length === 0) return;
-        
-        // Extract unique tags
-        const tagsSet = new Set();
-        
-        this.allEvents.forEach(event => {
-            const tags = this.getLocalizedField(event, 'tags') || [];
-            if (Array.isArray(tags)) {
-                tags.forEach(tag => tagsSet.add(tag));
-            } else if (typeof tags === 'string' && tags.trim()) {
-                tagsSet.add(tags);
-            }
-        });
-        
-        const tagsArray = Array.from(tagsSet).slice(0, 10); // Limit to 10 tags
-        
-        if (tagsArray.length === 0) {
-            container.innerHTML = `<p class="text-muted">${this.currentLanguage === 'en' ? 'No tags available' : 'No hay etiquetas disponibles'}</p>`;
-            return;
-        }
-        
-        const tagsHtml = tagsArray.map(tag => `
-            <a href="#" class="tags-block-link">${tag}</a>
-        `).join('');
-        
-        container.innerHTML = tagsHtml;
-    }
     
     displayAllEventsGrid() {
         const container = document.getElementById('all-events-grid');
@@ -846,12 +1104,6 @@ class EventosIntegration {
             categoriesTitle.textContent = title;
         }
         
-        // Translate "Etiquetas" title
-        const tagsTitle = document.getElementById('tags-title');
-        if (tagsTitle) {
-            const title = this.currentLanguage === 'en' ? 'Tags' : 'Etiquetas';
-            tagsTitle.textContent = title;
-        }
         
         // Translate search placeholder
         const searchInput = document.getElementById('search-input');
@@ -1002,10 +1254,35 @@ class EventosIntegration {
         if (selectedEvent) {
             this.displayMainEvent(selectedEvent);
             
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Refresh sidebar to exclude the newly selected main event
+            this.displayRecentEvents();
+            
+            // Scroll to the main event section instead of top of page
+            this.scrollToMainEventSection();
         } else {
             console.warn('🎪 Selected event not found:', eventId);
+        }
+    }
+    
+    scrollToMainEventSection() {
+        // Find the main event section
+        const mainEventSection = document.querySelector('.news-section.section-padding');
+        
+        if (mainEventSection) {
+            // Calculate offset to account for fixed header/navigation
+            const headerOffset = 100; // Adjust this value based on your header height
+            const elementPosition = mainEventSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            console.log('🎪 Scrolling to main event section');
+        } else {
+            console.warn('🎪 Main event section not found, falling back to top');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
     
@@ -1013,29 +1290,36 @@ class EventosIntegration {
     getLocalizedField(item, field) {
         if (!item) return null;
         
+        
         // Handle different field mappings
         const fieldMappings = {
             'title': this.currentLanguage === 'en' ? 'title_en' : 'title_es',
             'description': this.currentLanguage === 'en' ? 'body_en' : 'body_es',
             'category': this.currentLanguage === 'en' ? 'category_en' : 'category',
             'tags': this.currentLanguage === 'en' ? 'tags_en' : 'tags',
-            'quote': this.currentLanguage === 'en' ? 'quote_en' : 'quote_es',
-            'phrase': this.currentLanguage === 'en' ? 'phrase_en' : 'phrase_es',
-            'credits': this.currentLanguage === 'en' ? 'credits_en' : 'credits_es'
+            'quote': this.currentLanguage === 'en' ? 'quote_en' : 'quote',
+            'phrase': this.currentLanguage === 'en' ? 'phrase_en' : 'phrase',
+            'credits': this.currentLanguage === 'en' ? 'credits_en' : 'credits'
         };
         
         // Get the mapped field name
         const mappedField = fieldMappings[field];
+        
         if (mappedField && item[mappedField]) {
             return item[mappedField];
         }
         
         // Try language-specific field first, then fallback to default
+        let result = null;
         if (this.currentLanguage === 'en') {
-            return item[`${field}_en`] || item[`${field}_es`] || item[field];
+            // For English: try _en suffix, then base field, then _es suffix
+            result = item[`${field}_en`] || item[field] || item[`${field}_es`];
         } else {
-            return item[`${field}_es`] || item[`${field}_en`] || item[field];
+            // For Spanish: try base field (no suffix), then _en suffix, then _es suffix
+            result = item[field] || item[`${field}_en`] || item[`${field}_es`];
         }
+        
+        return result;
     }
     
     getEventLocation(event) {
@@ -1126,5 +1410,30 @@ class EventosIntegration {
 
 // Initialize EventosIntegration
 window.eventosIntegration = new EventosIntegration();
+
+// Global functions for modal (to be called from onclick handlers)
+window.openImageModal = function(startIndex = 0) {
+    if (window.eventosIntegration) {
+        window.eventosIntegration.openImageModal(startIndex);
+    }
+};
+
+window.closeImageModal = function() {
+    if (window.eventosIntegration) {
+        window.eventosIntegration.closeImageModal();
+    }
+};
+
+window.previousImage = function() {
+    if (window.eventosIntegration) {
+        window.eventosIntegration.previousImage();
+    }
+};
+
+window.nextImage = function() {
+    if (window.eventosIntegration) {
+        window.eventosIntegration.nextImage();
+    }
+};
 
 console.log('🎪 EventosIntegration script loaded');

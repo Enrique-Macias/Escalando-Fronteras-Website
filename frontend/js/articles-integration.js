@@ -8,6 +8,8 @@ class ArticlesIntegration {
         this.articlesContainer = null;
         this.loadingElement = null;
         this.currentLanguage = 'es';
+        this.allArticles = [];
+        this.showingAllArticles = false;
         this.init();
     }
 
@@ -58,7 +60,11 @@ class ArticlesIntegration {
             
             console.log('✅ Articles loaded:', articlesList);
             
-            // Display articles
+            // Store all articles
+            this.allArticles = articlesList;
+            this.showingAllArticles = false;
+            
+            // Display articles (initially show only first 3)
             this.displayArticles(articlesList);
 
         } catch (error) {
@@ -89,14 +95,22 @@ class ArticlesIntegration {
             return;
         }
 
+        // Determine how many articles to show
+        const articlesToShow = this.showingAllArticles ? articles : articles.slice(0, 3);
+        
         let html = '';
         let delay = 100;
 
-        articles.forEach((article, index) => {
+        articlesToShow.forEach((article, index) => {
             const articleHtml = this.createArticleHTML(article, delay);
             html += articleHtml;
             delay += 100; // Increment delay for AOS animation
         });
+
+        // Add "More Articles" button if there are more than 3 articles and not showing all
+        if (articles.length > 3 && !this.showingAllArticles) {
+            html += this.createMoreArticlesButton();
+        }
 
         this.articlesContainer.innerHTML = html;
 
@@ -134,6 +148,33 @@ class ArticlesIntegration {
                 </div>
             </div>
         `;
+    }
+
+    createMoreArticlesButton() {
+        // Get translation from the language switcher if available
+        let buttonText = this.currentLanguage === 'en' ? 'More Articles' : 'Más Artículos';
+        
+        if (window.languageSwitcher && window.languageSwitcher.translations) {
+            const translations = window.languageSwitcher.translations;
+            const currentLang = this.currentLanguage;
+            if (translations[currentLang] && translations[currentLang].masArticulos) {
+                buttonText = translations[currentLang].masArticulos;
+            }
+        }
+        
+        return `
+            <div class="col-12 text-center mt-4" data-aos="fade-up" data-aos-delay="400">
+                <button class="btn btn-primary custom-btn" onclick="articlesIntegration.showAllArticles()">
+                    ${buttonText}
+                </button>
+            </div>
+        `;
+    }
+
+    showAllArticles() {
+        console.log('📖 Showing all articles');
+        this.showingAllArticles = true;
+        this.displayArticles(this.allArticles);
     }
 
     formatDate(dateString) {

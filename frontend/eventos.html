@@ -188,13 +188,6 @@
                                 </div>
                             </div>
 
-                            <!-- Tags -->
-                            <div class="tags-block">
-                                <h5 class="mb-3" id="tags-title">Etiquetas</h5>
-                                <div id="tags-container">
-                                    <!-- Tags will be loaded here -->
-                                </div>
-                            </div>
 
                         </div>
 
@@ -299,7 +292,8 @@
 
         <!-- JAVASCRIPT FILES -->
         <script src="js/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <!-- Popper.js for Bootstrap dropdowns and tooltips -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.sticky.js"></script>
         <script src="js/click-scroll.js"></script>
@@ -343,7 +337,6 @@
                     searchPlaceholder: "Buscar eventos",
                     recentEventsTitle: "Eventos Recientes",
                     categoriesTitle: "Categorías",
-                    tagsTitle: "Etiquetas",
                     allEventsTitle: "Todos los Eventos",
                     showMoreButton: "Mostrar más",
                     footerLinksTitle: "Enlaces",
@@ -376,7 +369,6 @@
                     searchPlaceholder: "Search events",
                     recentEventsTitle: "Recent Events",
                     categoriesTitle: "Categories",
-                    tagsTitle: "Tags",
                     allEventsTitle: "All Events",
                     showMoreButton: "Show more",
                     footerLinksTitle: "Links",
@@ -516,7 +508,6 @@
                     this.updatePlaceholder('#search-input', t.searchPlaceholder);
                     this.updateText('#recent-events-title', t.recentEventsTitle);
                     this.updateText('#categories-title', t.categoriesTitle);
-                    this.updateText('#tags-title', t.tagsTitle);
                     this.updateText('#all-events-title', t.allEventsTitle);
                     this.updateText('#show-more-btn', t.showMoreButton);
                     

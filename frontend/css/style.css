@@ -73,7 +73,12 @@
 
 body {
   background-color: var(--white-color);
-  font-family: var(--body-font-family); 
+  font-family: var(--body-font-family);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+html {
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 
@@ -777,6 +782,121 @@ strong {
   .about-section .right-column {
     min-height: 300px;
   }
+
+  /* Team Section Mobile Responsiveness - Match Other Sections Width */
+  .team {
+    padding: 40px 0; /* Remove section padding to match other sections */
+  }
+  
+  .team .container-team {
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+
+  /* Team cards width consistency for tablets */
+  .team .col-lg-3.col-md-6 {
+    max-width: 100% !important; /* Use full container width to match description */
+    width: 100% !important; /* Full width to match other sections */
+    padding: 0 15px; /* Add padding to match container padding */
+  }
+}
+
+/* Additional mobile responsiveness for Documentary section */
+@media (max-width: 991px) {
+  /* Documentary Section Mobile Responsiveness - Match Support Section Width */
+  #documentary.about-section {
+    padding: 0 !important;
+  }
+
+  #documentary .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  #documentary .row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  #documentary .col-lg-8,
+  #documentary .col-lg-4 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  #documentary .right-column {
+    padding: 30px 20px !important;
+  }
+
+  #documentary .right-column h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  #documentary .right-column h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  #documentary .right-column p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+/* Additional mobile responsiveness for smaller screens */
+@media (max-width: 768px) {
+  #documentary.about-section {
+    padding: 0 !important;
+  }
+
+  #documentary .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  #documentary .right-column {
+    padding: 25px 15px !important;
+  }
+
+  #documentary .right-column h2 {
+    font-size: 1.6rem;
+  }
+
+  #documentary .right-column h3 {
+    font-size: 1rem;
+  }
+
+  #documentary .right-column p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #documentary.about-section {
+    padding: 0 !important;
+  }
+
+  #documentary .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  #documentary .right-column {
+    padding: 20px 10px !important;
+  }
+
+  #documentary .right-column h2 {
+    font-size: 1.4rem;
+  }
+
+  #documentary .right-column h3 {
+    font-size: 0.95rem;
+  }
+
+  #documentary .right-column p {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
 }
 
 /* ===================== Nuestros patrocinadores ===================== */
@@ -1438,17 +1558,7 @@ blockquote::before {
   display: block !important; /* Show dropdown on hover like "More" */
 }
 
-#languageDropdown {
-  /* No custom styles - inherit all nav-link styles */
-}
-
-#languageDropdownMenu {
-  /* No custom positioning - let Bootstrap handle it */
-}
-
-#current-language {
-  /* No custom styles - inherit from parent */
-}
+/* Language dropdown styles are handled by Bootstrap and nav-link classes */
 
 /* ===================== Nuestro Equipo ===================== */
 .team {
@@ -1456,14 +1566,14 @@ blockquote::before {
   overflow: hidden;
 }
 
-/* Mobile responsiveness for team section */
+/* Mobile responsiveness for team section - Match Other Sections Width */
 @media (max-width: 768px) {
   .team {
-    padding: 40px 15px; /* Add padding on mobile */
+    padding: 40px 0; /* Remove section padding to match other sections */
   }
   
   .team .container-team {
-    padding: 0 10px; /* Additional container padding */
+    padding: 0 15px; /* Match other sections - 15px padding */
   }
   
   .team .section-title h2 {
@@ -1473,7 +1583,7 @@ blockquote::before {
   
   .team .section-title p {
     font-size: 14px; /* Smaller description text */
-    padding: 0 15px; /* Add side padding */
+    padding: 0; /* Remove extra padding to match other sections */
   }
 }
 
@@ -1586,10 +1696,10 @@ blockquote::before {
 /* Responsive adjustments for team member cards */
 @media (max-width: 768px) {
   .team .col-lg-3.col-md-6 {
-    max-width: 85% !important; /* Much wider on tablets - 85% of screen width */
+    max-width: 90% !important; /* Use full container width to match description */
     margin: 0 auto 30px auto !important; /* Center cards with bottom margin */
-    min-width: 300px !important; /* Ensure minimum width */
-    width: auto !important; /* Override any fixed width */
+    width: 90% !important; /* Full width to match other sections */
+    padding: 0 15px; /* Add padding to match container padding */
   }
   
   .team .member .member-img {
@@ -1613,10 +1723,10 @@ blockquote::before {
 
 @media (max-width: 576px) {
   .team .col-lg-3.col-md-6 {
-    max-width: 90% !important; /* Much wider - 90% of screen width */
-    width: auto !important; /* Let it size naturally */
+    max-width: 90% !important; /* Use full container width to match description */
+    width: 90% !important; /* Full width to match other sections */
     margin: 0 auto 25px auto !important; /* Center cards */
-    min-width: 280px !important; /* Ensure minimum width */
+    padding: 0 15px; /* Add padding to match container padding */
     flex: none !important; /* Override Bootstrap flex properties */
   }
   
@@ -1976,9 +2086,24 @@ blockquote::before {
 }
 
 @media screen and (max-width: 992px) {
+  /* Articles Section Tablet Responsiveness - Match Cards Width */
+  .blog-section .section-content {
+    width: 100%;
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+  
+  .blog-section .section-content .title {
+    width: 100%;
+  }
+  
+  .blog-section .section-content .title p {
+    max-width: 100%; /* Match article cards width */
+  }
+  
   .blog-section .section-content .cards {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 30px; /* Reduced gap on tablets */
+    width: 100%; /* Use full container width */
   }
   
   .blog-section .section-content .cards .card .image-section {
@@ -1987,9 +2112,24 @@ blockquote::before {
 }
 
 @media screen and (max-width: 768px) {
+  /* Articles Section Mobile Responsiveness - Match Cards Width */
+  .blog-section .section-content {
+    width: 100%;
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+  
+  .blog-section .section-content .title {
+    width: 100%;
+  }
+  
+  .blog-section .section-content .title p {
+    max-width: 100%; /* Match article cards width */
+  }
+  
   .blog-section .section-content .cards {
     grid-template-columns: 1fr;
     grid-gap: 25px; /* Reduced gap on mobile */
+    width: 100%; /* Use full container width */
   }
   
   .blog-section .section-content .cards .card .image-section {
@@ -2006,6 +2146,27 @@ blockquote::before {
   
   .blog-section .section-content .cards .card .blog-view {
     padding: 0 15px 12px 15px; /* Consistent mobile padding */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /* Articles Section Small Mobile Responsiveness - Match Cards Width */
+  .blog-section .section-content {
+    width: 100%;
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+  
+  .blog-section .section-content .title {
+    width: 100%;
+  }
+  
+  .blog-section .section-content .title p {
+    max-width: 100%; /* Match article cards width */
+    font-size: 16px; /* Slightly smaller text on small mobile */
+  }
+  
+  .blog-section .section-content .cards {
+    width: 100%; /* Use full container width */
   }
 }
 
@@ -2671,8 +2832,11 @@ faq {
   }
 
   .about-image {
-    width: inherit;
-    height: 450px;
+    width: 100% !important;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
   }
 
   .volunteer-image {
@@ -2682,7 +2846,140 @@ faq {
   }
 
   .custom-text-block {
-    padding: 20px 0 0 0;
+    padding: 20px 5px;
+    text-align: center;
+  }
+
+  /* Founder Section Mobile Responsiveness - Match Other Sections Width */
+  .about-section:not(#documentary) {
+    padding: 0 !important;
+  }
+
+  .about-section:not(#documentary) .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  .about-section .row {
+    flex-direction: column;
+    align-items: center;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .about-section .col-lg-6,
+  .about-section .col-lg-5 {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Center the image in Founder section */
+  .about-section:not(#documentary) .about-image {
+    margin: 0 auto !important;
+    display: block;
+  }
+
+  .about-section:not(#documentary) .col-lg-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-section .ms-lg-auto {
+    margin-left: 0 !important;
+  }
+
+  /* Ensure container doesn't cause overflow */
+  .about-section .container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* Additional mobile responsiveness for smaller screens */
+@media screen and (max-width: 576px) {
+  .about-image {
+    max-width: 280px !important;
+  }
+
+  /* Center the image in Founder section for small mobile */
+  .about-section:not(#documentary) .about-image {
+    margin: 0 auto !important;
+    display: block;
+  }
+
+  .about-section:not(#documentary) .col-lg-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Founder Section Mobile Responsiveness - Match Other Sections Width */
+  .about-section:not(#documentary) {
+    padding: 0 !important;
+  }
+
+  .about-section:not(#documentary) .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  .custom-text-block {
+    padding: 15px 5px;
+  }
+
+  /* Team Section Mobile Responsiveness - Match Other Sections Width */
+  .team {
+    padding: 40px 0; /* Remove section padding to match other sections */
+  }
+  
+  .team .container-team {
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+
+  .about-section h2 {
+    font-size: 28px;
+  }
+
+  .about-section .text-muted {
+    font-size: 16px;
+  }
+
+  .about-section p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Fix text overflow and ensure proper wrapping */
+  .about-section .custom-text-block {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .about-section .custom-text-block p {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-section h2 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .about-section .text-muted {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .custom-text-box,

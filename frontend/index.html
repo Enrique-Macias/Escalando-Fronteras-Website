@@ -301,33 +301,38 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-lg-6 col-md-5 col-12">
-                            <img src="images/alejandro_medina.jpeg" class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
+                        <!-- Image Column - Restore original positioning -->
+                        <div class="col-lg-6 col-md-5 col-12 mb-4 mb-lg-0">
+                            <img src="images/alejandro_medina.jpeg" class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="Alejandro Medina">
                         </div>
 
+                        <!-- Text Content Column - Improved mobile responsiveness -->
                         <div class="col-lg-5 col-md-7 col-12">
                             <div class="custom-text-block">
-                                <h2 class="mb-0">Alejandro Medina</h2>
+                                <!-- Name - Center on mobile, left-align on desktop -->
+                                <h2 class="mb-0 text-center text-lg-start">Alejandro Medina</h2>
 
-                                <p class="text-muted mb-lg-4 mb-md-4">Co-fundador de Escalando Fronteras</p>
+                                <!-- Title - Center on mobile, left-align on desktop -->
+                                <p class="text-muted mb-lg-4 mb-md-4 text-center text-lg-start">Co-fundador de Escalando Fronteras</p>
+                                
+                                <!-- Description Paragraphs - Center on mobile, left-align on desktop -->
+                                <div class="text-center text-lg-start">
+                                    <p id="alejandro-description-1" class="mb-3">Alejandro Medina es co-fundador de Escalando Fronteras, una asociación civil con sede en Monterrey dedicada a transformar vidas a través del deporte y la educación.</p>
+                                    <p id="alejandro-description-2" class="mb-4">Apasionado por la escalada y el trabajo social, Alejandro ha liderado iniciativas que inspiran a jóvenes y familias a superar barreras y descubrir nuevas oportunidades. Su visión y compromiso han sido clave para crear una comunidad inclusiva donde la montaña se convierte en un espacio de crecimiento, confianza y esperanza.</p>
+                                </div>
 
-                                <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito Professional charity theme based</p>
+                                <!-- Social Media Icons - Center on mobile, left-align on desktop -->
+                                <div class="text-center text-lg-start">
+                                    <ul class="social-icon mt-4 d-inline-block">
+                                        <li class="social-icon-item">
+                                            <a href="#" class="social-icon-link bi-facebook"></a>
+                                        </li>
 
-                                <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohLorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg koh.</p>
-
-                                <ul class="social-icon mt-4">
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-twitter"></a>
-                                    </li>
-
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-facebook"></a>
-                                    </li>
-
-                                    <li class="social-icon-item">
-                                        <a href="#" class="social-icon-link bi-instagram"></a>
-                                    </li>
-                                </ul>
+                                        <li class="social-icon-item">
+                                            <a href="#" class="social-icon-link bi-instagram"></a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
@@ -346,9 +351,7 @@
 
                         <!-- ======================= DONATION-VOLUNTEER BUTTON ================== -->
                         <div class="col-lg-5 col-12">
-                            <a href="donate.html" class="me-4">Hacer una donación</a>
-
-                            <a href="#section_4" class="custom-btn btn smoothscroll">Ser un voluntario</a>
+                            <a href="donate.html" class="custom-btn btn smoothscroll">Hacer una donación</a>
                         </div>
 
                     </div>
@@ -366,7 +369,9 @@
                       <div class="w-100">
                         <h3>Monkey Hands presenta el</h3>
                         <h2 class="display-4">Documental de Escalando Fronteras</h2>
-                        <p class="mb-4">Omnis iste natus error sit voluptatem accusantium dolorem que laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                        <p class="mb-4">
+                            Descubre la inspiradora historia de Escalando Fronteras, una asociación civil de Nuevo León que utiliza la escalada y la educación para transformar la vida de jóvenes en situación de riesgo. Este documental muestra cómo el deporte, la comunidad y la pasión pueden abrir nuevas oportunidades y romper barreras. ¡Acompáñanos a conocer el impacto real de este proyecto en la juventud regiomontana!
+                        </p>
                         <!-- Botón para abrir el modal -->
                         <button class="btn btn-light btn-play" data-bs-toggle="modal" data-bs-target="#videoModal" role="button">
                             <i class="bi bi-play-fill"></i>
@@ -808,6 +813,8 @@
 
         <!-- JAVASCRIPT FILES -->
         <script src="js/jquery.min.js"></script>
+        <!-- Popper.js for Bootstrap dropdowns and tooltips -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.sticky.js"></script>
         <script src="js/click-scroll.js"></script>
@@ -885,6 +892,8 @@
                     
                     // Founder Section
                     cofundador: "Co-fundador de Escalando Fronteras",
+                    alejandroDescription1: "Alejandro Medina es co-fundador de Escalando Fronteras, una asociación civil con sede en Monterrey dedicada a transformar vidas a través del deporte y la educación.",
+                    alejandroDescription2: "Apasionado por la escalada y el trabajo social, Alejandro ha liderado iniciativas que inspiran a jóvenes y familias a superar barreras y descubrir nuevas oportunidades. Su visión y compromiso han sido clave para crear una comunidad inclusiva donde la montaña se convierte en un espacio de crecimiento, confianza y esperanza.",
                     
                     // CTA Section
                     crearImpacto: "Crear un impacto.",
@@ -895,7 +904,7 @@
                     // Documentary Section
                     documentalTitle: "Monkey Hands presenta el",
                     documentalSubtitle: "Documental de Escalando Fronteras",
-                    documentalDescription: "Omnis iste natus error sit voluptatem accusantium dolorem que laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+                    documentalDescription: "Descubre la inspiradora historia de Escalando Fronteras. Este documental muestra cómo el deporte, la comunidad y la pasión abren oportunidades y derriban barreras para la juventud de Monterrey.",
                     documentalModalTitle: "Documental de Escalando Fronteras",
                     
                     // Support Section
@@ -937,6 +946,7 @@
                     articulos: "Artículos",
                     articulosDescription: "Descubre cómo la visión de Escalando Fronteras resuena más allá de nuestras paredes en esta selección de artículos y blogs. Estas publicaciones de diversas fuentes capturan el espíritu y el impacto de nuestra labor. Lee y comparte las historias que nos unen.",
                     cargandoArticulos: "Cargando artículos...",
+                    masArticulos: "Más Artículos",
                     
                     // Contact Section
                     contactanos: "Contáctanos",
@@ -995,6 +1005,8 @@
                     
                     // Founder Section
                     cofundador: "Co-founder of Escalando Fronteras",
+                    alejandroDescription1: "Alejandro Medina is co-founder of Escalando Fronteras, a civil association based in Monterrey dedicated to transforming lives through sports and education.",
+                    alejandroDescription2: "Passionate about climbing and social work, Alejandro has led initiatives that inspire youth and families to overcome barriers and discover new opportunities. His vision and commitment have been key to creating an inclusive community where the mountain becomes a space for growth, confidence, and hope.",
                     
                     // CTA Section
                     crearImpacto: "Create an impact.",
@@ -1005,7 +1017,7 @@
                     // Documentary Section
                     documentalTitle: "Monkey Hands presents the",
                     documentalSubtitle: "Escalando Fronteras Documentary",
-                    documentalDescription: "Omnis iste natus error sit voluptatem accusantium dolorem que laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+                    documentalDescription: "Discover the inspiring story of Escalando Fronteras. This documentary shows how sports, community, and passion open opportunities and break down barriers for the youth of Monterrey.",
                     documentalModalTitle: "Escalando Fronteras Documentary",
                     
                     // Support Section
@@ -1047,6 +1059,7 @@
                     articulos: "Articles",
                     articulosDescription: "Discover how the vision of Escalando Fronteras resonates beyond our walls in this selection of articles and blogs. These publications from various sources capture the spirit and impact of our work. Read and share the stories that unite us.",
                     cargandoArticulos: "Loading articles...",
+                    masArticulos: "More Articles",
                     
                     // Contact Section
                     contactanos: "Contact Us",
@@ -1239,7 +1252,7 @@
                     updateText('a[href="#section_4"]', 'voluntario');
                     updateText('#navbarLightDropdownMenuLink', 'mas');
                     updateText('a[href="noticias.html"]', 'noticias');
-                    updateText('a[href="eventos2024.html"]', 'eventos');
+                    updateText('a[href="eventos.html"]', 'eventos');
                     updateText('a[href="#section_6"]', 'contacto');
                     updateText('a[href="donate.html"].custom-btn', 'dona');
                     
@@ -1353,6 +1366,13 @@
                     // Founder Section
                     const founderTitle = document.querySelector('.about-section .text-muted');
                     if (founderTitle && t.cofundador) founderTitle.textContent = t.cofundador;
+                    
+                    // Alejandro Medina descriptions
+                    const alejandroDesc1 = document.querySelector('#alejandro-description-1');
+                    if (alejandroDesc1 && t.alejandroDescription1) alejandroDesc1.textContent = t.alejandroDescription1;
+                    
+                    const alejandroDesc2 = document.querySelector('#alejandro-description-2');
+                    if (alejandroDesc2 && t.alejandroDescription2) alejandroDesc2.textContent = t.alejandroDescription2;
                     
                     // CTA Section
                     const ctaH2 = document.querySelector('.cta-section h2');

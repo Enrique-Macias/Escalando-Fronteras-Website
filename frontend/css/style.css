@@ -431,19 +431,23 @@ strong {
 /* FAQ Responsive Styling */
 faq .container-faq,
 .container-faq {
-  max-width: 900px !important;
+  max-width: 1000px !important;
   margin: 0 auto !important;
-  padding: 40px 30px !important;
+  padding: 50px 40px !important;
   width: 100% !important;
   box-sizing: border-box !important;
 }
 
-.faq .heading h1 {
-  font-size: 2.5rem;
+.faq .heading h1,
+.container-faq .heading h1,
+#faq-title {
+  font-size: 3rem;
   font-weight: 700;
-  text-align: center;
-  margin-bottom: 3rem;
+  text-align: left !important;
+  margin-bottom: 4rem;
   color: var(--primary-color);
+  padding-left: 40px !important;
+  padding-right: 20px !important;
 }
 
 .faq .question {
@@ -556,6 +560,39 @@ faq {
   position: relative !important;
 }
 
+/* Desktop styling for FAQ container */
+@media (min-width: 1200px) {
+  faq .container-faq {
+    max-width: 1200px !important;
+    padding: 60px 50px !important;
+  }
+  
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
+    font-size: 3.5rem;
+    margin-bottom: 4.5rem;
+    padding-left: 50px !important;
+    padding-right: 30px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  faq .container-faq {
+    max-width: 1100px !important;
+    padding: 55px 45px !important;
+  }
+  
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
+    font-size: 3.2rem;
+    margin-bottom: 4.2rem;
+    padding-left: 45px !important;
+    padding-right: 25px !important;
+  }
+}
+
 /* Force FAQ white container to be much wider on mobile */
 @media (max-width: 768px) {
   faq .container-faq {
@@ -611,10 +648,14 @@ faq {
     right: 0 !important;
   }
   
-  .faq .heading h1 {
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
     font-size: 2rem;
     margin-bottom: 2rem;
-    padding: 0 5px;
+    padding-left: 25px !important;
+    padding-right: 15px !important;
+    padding-top: 30px !important;
   }
   
   .faq .question {
@@ -654,10 +695,14 @@ faq {
     right: 0 !important;
   }
   
-  .faq .heading h1 {
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    padding: 0 5px;
+    padding-left: 20px !important;
+    padding-right: 12px !important;
+    padding-top: 25px !important;
   }
   
   .faq .question {
@@ -703,10 +748,14 @@ faq {
     right: 0 !important;
   }
   
-  .faq .heading h1 {
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
     font-size: 1.6rem;
     margin-bottom: 1.2rem;
-    padding: 0 3px;
+    padding-left: 18px !important;
+    padding-right: 10px !important;
+    padding-top: 20px !important;
   }
   
   .faq .question {

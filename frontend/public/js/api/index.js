@@ -12,6 +12,7 @@
 // 5. team.js - Team API
 // 6. testimonials.js - Testimonials API
 // 7. articles.js - Articles API
+// 8. sponsors.js - Sponsors API
 
 console.log('🚀 Loading EF CMS API Services...');
 
@@ -24,7 +25,8 @@ function checkServicesLoaded() {
         'eventsAPI',
         'teamAPI',
         'testimonialsAPI',
-        'articlesAPI'
+        'articlesAPI',
+        'sponsorsAPI'
     ];
 
     const missingServices = requiredServices.filter(service => !window[service]);
@@ -61,7 +63,8 @@ window.EFAPI = {
     events: window.eventsAPI,
     team: window.teamAPI,
     testimonials: window.testimonialsAPI,
-    articles: window.articlesAPI
+    articles: window.articlesAPI,
+    sponsors: window.sponsorsAPI
 };
 
 console.log('📡 EF API Services initialized. Access via window.EFAPI');

@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Escalando Fronteras</title>
+        <title id="page-title">Escalando Fronteras - Donaciones</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
 
         <!-- ======================= CSS Styles ================== -->        
@@ -71,36 +71,51 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_1">Inicio</a>
+                            <a class="nav-link click-scroll" href="index.html#section_1" id="nav-inicio">Inicio</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_2">Acerca de</a>
+                            <a class="nav-link click-scroll" href="index.html#section_2" id="nav-acerca">Acerca de</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="historia.html">Nuestra Historia</a>
+                            <a class="nav-link" href="historia.html" id="nav-historia">Nuestra Historia</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
+                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="nav-mas">Más</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" href="eventos.html">Eventos</a></li>
-                                <li><a class="dropdown-item" href="noticias.html">Noticias</a></li>
+                                <li><a class="dropdown-item" href="eventos.html" id="nav-eventos">Eventos</a></li>
+                                <li><a class="dropdown-item" href="noticias.html" id="nav-noticias">Noticias</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_6">Contacto</a>
+                            <a class="nav-link click-scroll" href="index.html#section_6" id="nav-contacto">Contacto</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="faq.html">FAQ</a>
+                            <a class="nav-link" href="faq.html" id="nav-faq">FAQ</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-globe me-1"></i>
+                                <span id="current-language">ES</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item language-option" href="#" data-lang="es">
+                                    <i class="bi-flag me-2"></i>Español (ES)
+                                </a></li>
+                                <li><a class="dropdown-item language-option" href="#" data-lang="en">
+                                    <i class="bi-flag me-2"></i>English (EN)
+                                </a></li>
+                            </ul>
                         </li>
 
                         <li class="nav-item ms-3">
-                            <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Dona</a>
+                            <a class="nav-link custom-btn custom-border-btn btn" href="donate.html" id="nav-dona">Dona</a>
                         </li>
                     </ul>
                 </div>
@@ -116,7 +131,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-12 mx-auto">
                                 <form class="custom-form donate-form" action="#" method="get" role="form">
-                                    <h3 class="mb-4">Haz una donación</h3>
+                                    <h3 class="mb-4" id="donate-title">Haz una donación</h3>
                                         <div class="row">
                                             <!-- Stripe Buy Button -->
                                             <stripe-buy-button class="stripe-section"
@@ -124,7 +139,7 @@
                                                 publishable-key="pk_test_51P7OGRP5bZ1okdvj49DUCGSd3PlTcP9zXYjwGy5j99KmMYdfxh8MnuiEEgaBYRDOB3FiPXjqFXjQEDI4BlD2Elol00xVZN5w95">
                                             </stripe-buy-button>
                                             <div class="paypal-continue">
-                                                <p>O, continúa con</p>                                             
+                                                <p id="donate-continue">O, continúa con</p>                                             
                                             </div>
                                             <!-- PayPal Button Container -->
                                             <div class="paypal-button">
@@ -150,23 +165,23 @@
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <h5 class="site-footer-title mb-3">Enlaces</h5>
+                <h5 class="site-footer-title mb-3" id="footer-enlaces">Enlaces</h5>
 
                 <ul class="footer-menu">
-                    <li class="footer-menu-item"><a href="index.html#section_2" class="footer-menu-link">Nuestra Historia</a></li>
+                    <li class="footer-menu-item"><a href="index.html#section_2" class="footer-menu-link" id="footer-nuestra-historia">Nuestra Historia</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link">Mirar Documental</a></li>
+                    <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link" id="footer-mirar-documental">Mirar Documental</a></li>
 
-                    <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
+                    <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link" id="footer-realizar-donacion">Realiza una Donación</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#section_4" class="footer-menu-link">Conviértete en Voluntario</a></li>
+                    <li class="footer-menu-item"><a href="index.html#section_4" class="footer-menu-link" id="footer-convertirse-voluntario">Conviértete en Voluntario</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link">Asóciate con Nosotros</a></li>
+                    <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link" id="footer-nuestros-patrocinadores">Nuestros Patrocinadores</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mx-auto">
-                <h5 class="site-footer-title mb-3">Contáctanos</h5>
+                <h5 class="site-footer-title mb-3" id="footer-contactanos">Contáctanos</h5>
 
                 <p class="text-white d-flex mb-2">
                     <i class="bi-telephone me-2"></i>
@@ -189,7 +204,7 @@
                     Monterrey, Nuevo León, México
                 </p>
 
-                <a href="#" class="custom-btn btn mt-3">Obtener Dirección</a>
+                <a href="#" class="custom-btn btn mt-3" id="footer-obtener-direccion">Obtener Dirección</a>
             </div>
         </div>
     </div>
@@ -231,20 +246,220 @@
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
         <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <!-- Language Switcher Script -->
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-              var stripeBtn = document.querySelector('stripe-buy-button');
-              var paypalBtn = document.getElementById('flexRadioDefault10');
-            
-              paypalBtn.addEventListener('change', function () {
-                if (paypalBtn.checked) {
-                  stripeBtn.style.display = 'none'; // Hide Stripe button
-                  // Display PayPal specific elements here
-                } else {
-                  stripeBtn.style.display = 'block'; // Show Stripe button
-                  // Hide PayPal specific elements here
+            // Language Switcher
+            class DonateLanguageSwitcher {
+                constructor() {
+                    this.currentLanguage = 'es';
+                    this.translations = {
+                        es: {
+                            // Navigation
+                            navInicio: "Inicio",
+                            navAcerca: "Acerca de",
+                            navHistoria: "Nuestra Historia",
+                            navMas: "Más",
+                            navEventos: "Eventos",
+                            navNoticias: "Noticias",
+                            navContacto: "Contacto",
+                            navFaq: "FAQ",
+                            navDona: "Dona",
+                            
+                            // Donate Form
+                            donateTitle: "Haz una donación",
+                            donateContinue: "O, continúa con",
+                            
+                            // Footer
+                            footerEnlaces: "Enlaces",
+                            footerNuestraHistoria: "Nuestra Historia",
+                            footerMirarDocumental: "Mirar Documental",
+                            footerRealizarDonacion: "Realiza una Donación",
+                            footerConvertirseVoluntario: "Conviértete en Voluntario",
+                            footerNuestrosPatrocinadores: "Nuestros Patrocinadores",
+                            footerContactanos: "Contáctanos",
+                            footerObtenerDireccion: "Obtener Dirección",
+                            
+                            // Page Title
+                            pageTitle: "Escalando Fronteras - Donaciones"
+                        },
+                        en: {
+                            // Navigation
+                            navInicio: "Home",
+                            navAcerca: "About",
+                            navHistoria: "Our History",
+                            navMas: "More",
+                            navEventos: "Events",
+                            navNoticias: "News",
+                            navContacto: "Contact",
+                            navFaq: "FAQ",
+                            navDona: "Donate",
+                            
+                            // Donate Form
+                            donateTitle: "Make a donation",
+                            donateContinue: "Or, continue with",
+                            
+                            // Footer
+                            footerEnlaces: "Links",
+                            footerNuestraHistoria: "Our Story",
+                            footerMirarDocumental: "Watch Documentary",
+                            footerRealizarDonacion: "Make a Donation",
+                            footerConvertirseVoluntario: "Become a Volunteer",
+                            footerNuestrosPatrocinadores: "Our Sponsors",
+                            footerContactanos: "Contact Us",
+                            footerObtenerDireccion: "Get Directions",
+                            
+                            // Page Title
+                            pageTitle: "Escalando Fronteras - Donations"
+                        }
+                    };
+                    
+                    this.init();
                 }
-              });
+                
+                init() {
+                    // Get language from URL, localStorage, or default to Spanish
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const langFromUrl = urlParams.get('lang');
+                    const langFromStorage = localStorage.getItem('userLanguagePreference');
+                    
+                    // Priority: URL parameter > localStorage > default Spanish
+                    if (langFromUrl && (langFromUrl === 'en' || langFromUrl === 'es')) {
+                        this.currentLanguage = langFromUrl;
+                        console.log('🌍 Language from URL:', langFromUrl);
+                    } else if (langFromStorage && (langFromStorage === 'en' || langFromStorage === 'es')) {
+                        this.currentLanguage = langFromStorage;
+                        console.log('🌍 Language from localStorage:', langFromStorage);
+                    } else {
+                        this.currentLanguage = 'es';
+                        console.log('🌍 Using default language: Spanish');
+                    }
+                    
+                    // Store language preference for consistency
+                    localStorage.setItem('userLanguagePreference', this.currentLanguage);
+                    
+                    // Update page title
+                    this.updatePageTitle();
+                    
+                    // Translate content
+                    this.translateContent();
+                    
+                    // Update language display
+                    this.updateLanguageDisplay();
+                    
+                    console.log('🌍 Donate Language Switcher initialized with language:', this.currentLanguage);
+                }
+                
+                updatePageTitle() {
+                    const title = this.translations[this.currentLanguage].pageTitle;
+                    document.title = title;
+                    const titleElement = document.querySelector('#page-title');
+                    if (titleElement) {
+                        titleElement.textContent = title;
+                    }
+                }
+                
+                translateContent() {
+                    const t = this.translations[this.currentLanguage];
+                    
+                    // Navigation
+                    this.updateText('#nav-inicio', t.navInicio);
+                    this.updateText('#nav-acerca', t.navAcerca);
+                    this.updateText('#nav-historia', t.navHistoria);
+                    this.updateText('#nav-mas', t.navMas);
+                    this.updateText('#nav-eventos', t.navEventos);
+                    this.updateText('#nav-noticias', t.navNoticias);
+                    this.updateText('#nav-contacto', t.navContacto);
+                    this.updateText('#nav-faq', t.navFaq);
+                    this.updateText('#nav-dona', t.navDona);
+                    
+                    // Donate Form
+                    this.updateText('#donate-title', t.donateTitle);
+                    this.updateText('#donate-continue', t.donateContinue);
+                    
+                    // Footer
+                    this.updateText('#footer-enlaces', t.footerEnlaces);
+                    this.updateText('#footer-nuestra-historia', t.footerNuestraHistoria);
+                    this.updateText('#footer-mirar-documental', t.footerMirarDocumental);
+                    this.updateText('#footer-realizar-donacion', t.footerRealizarDonacion);
+                    this.updateText('#footer-convertirse-voluntario', t.footerConvertirseVoluntario);
+                    this.updateText('#footer-nuestros-patrocinadores', t.footerNuestrosPatrocinadores);
+                    this.updateText('#footer-contactanos', t.footerContactanos);
+                    this.updateText('#footer-obtener-direccion', t.footerObtenerDireccion);
+                }
+                
+                updateText(selector, text) {
+                    const element = document.querySelector(selector);
+                    if (element && text) {
+                        element.textContent = text;
+                    }
+                }
+                
+                updateLanguageDisplay() {
+                    const currentLanguageSpan = document.querySelector('#current-language');
+                    if (currentLanguageSpan) {
+                        currentLanguageSpan.textContent = this.currentLanguage.toUpperCase();
+                    }
+                }
+                
+                switchLanguage(newLang) {
+                    if (newLang === this.currentLanguage) return;
+                    
+                    this.currentLanguage = newLang;
+                    
+                    // Store language preference in localStorage
+                    localStorage.setItem('userLanguagePreference', newLang);
+                    
+                    // Update URL
+                    const url = new URL(window.location);
+                    url.searchParams.set('lang', newLang);
+                    window.history.pushState({}, '', url);
+                    
+                    // Update content
+                    this.updatePageTitle();
+                    this.translateContent();
+                    this.updateLanguageDisplay();
+                    
+                    console.log('🌍 Language switched to:', newLang);
+                }
+            }
+            
+            // Global function for language switching
+            window.switchLanguage = function(lang) {
+                if (window.donateLanguageSwitcher) {
+                    window.donateLanguageSwitcher.switchLanguage(lang);
+                }
+            };
+            
+            // Initialize when DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
+                window.donateLanguageSwitcher = new DonateLanguageSwitcher();
+                
+                // Language switcher event listeners
+                document.querySelectorAll('.language-option').forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const lang = this.getAttribute('data-lang');
+                        if (window.donateLanguageSwitcher) {
+                            window.donateLanguageSwitcher.switchLanguage(lang);
+                        }
+                    });
+                });
+                
+                // Original Stripe/PayPal functionality
+                var stripeBtn = document.querySelector('stripe-buy-button');
+                var paypalBtn = document.getElementById('flexRadioDefault10');
+                
+                if (paypalBtn) {
+                    paypalBtn.addEventListener('change', function () {
+                        if (paypalBtn.checked) {
+                            stripeBtn.style.display = 'none'; // Hide Stripe button
+                            // Display PayPal specific elements here
+                        } else {
+                            stripeBtn.style.display = 'block'; // Show Stripe button
+                            // Hide PayPal specific elements here
+                        }
+                    });
+                }
             });
         </script>
     </body>

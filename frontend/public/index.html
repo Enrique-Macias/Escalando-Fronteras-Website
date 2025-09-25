@@ -505,65 +505,21 @@
               </section>              
               
 
-            <!-- ======================= "Ultimos Eventos" SECTION ================== -->
+            <!-- ======================= "Apoyo" SECTION ================== -->
             <section class="section-padding" id="section_3">
-                <div class="container">
+                <div class="container" style="overflow: visible;">
                     <div class="row">
 
                         <div class="col-lg-12 col-12 text-center mb-4">
                             <h2>Apoyo</h2>
                         </div>
 
-                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                            <div class="custom-block-wrap">
-                                <img src="images/eventos/caminata.jpeg" class="custom-block-image img-fluid" alt="">
-
-                                <div class="custom-block">
-                                    <div class="custom-block-body">
-                                        <h5 class="mb-3">Caminata de San Lorenzo</h5>
-
-                                        <p>El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. 
-                                            Gracias a todas las personas que participaron.
-                                        </p>
-                                    </div>
-                                    <a href="donate.html" class="custom-btn btn">Dona ahora</a>
-                                </div>
+                        <!-- Apoyo widget content will be loaded dynamically by apoyo-integration.js -->
+                        <div class="col-12 text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
                             </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                            <div class="custom-block-wrap">
-                                <img src="images/eventos/salidaIntegracion.jpeg" class="custom-block-image img-fluid" alt="">
-
-                                <div class="custom-block">
-                                    <div class="custom-block-body">
-                                        <h5 class="mb-3">Salida de Integración</h5>
-
-                                        <p>El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. 
-                                            Gracias a todas las personas que participaron.
-                                        </p>
-                                    </div>
-
-                                    <a href="donate.html" class="custom-btn btn">Dona ahora</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="custom-block-wrap">
-                                <img src="images/eventos/northfaceEF.jpeg" class="custom-block-image img-fluid" alt="">
-
-                                <div class="custom-block">
-                                    <div class="custom-block-body">
-                                        <h5 class="mb-3">TOP 10 en revista Wogu</h5>
-
-                                        <p>El domingo pasado fuimos a caminar a este hermoso cañón, apto para toda la familia. Debido a las dos semanas consecutivas de lluvias que tuvimos en Monterrey no habíamos podido salir a la montaña pero la espera trajo su recompensa pues ahora todo está verde 🌵🌲🌳🍀. 
-                                            Gracias a todas las personas que participaron. </p>
-                                    </div>
-
-                                    <a href="donate.html" class="custom-btn btn">Dona ahora</a>
-                                </div>
-                            </div>
+                            <p class="mt-2 text-muted">Cargando widget de apoyo...</p>
                         </div>
 
                     </div>
@@ -928,6 +884,7 @@
         <script src="js/api/testimonials.js"></script>
         <script src="js/api/articles.js"></script>
         <script src="js/api/sponsors.js"></script>
+        <script src="js/api/apoyo.js"></script>
         <script src="js/api/index.js"></script>
         
         <!-- Team Integration Script -->
@@ -948,7 +905,68 @@
         <!-- Sponsors Integration Script -->
         <script src="js/sponsors-integration.js"></script>
         
+        <!-- Apoyo Integration Script -->
+        <script src="js/apoyo-integration.js"></script>
+        
         <!-- Language Switcher Script -->
+        <style>
+            /* Ensure Bootstrap grid works properly for Apoyo section */
+            #section_3 .row {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                margin-right: -15px !important;
+                margin-left: -15px !important;
+            }
+            #section_3 .col-lg-4, #section_3 .col-lg-6, #section_3 .col-md-6, #section_3 .col-md-8, #section_3 .col-12 {
+                position: relative !important;
+                width: 100% !important;
+                padding-right: 15px !important;
+                padding-left: 15px !important;
+            }
+            @media (min-width: 992px) {
+                #section_3 .col-lg-4 { flex: 0 0 33.333333% !important; max-width: 33.333333% !important; }
+                #section_3 .col-lg-6 { flex: 0 0 50% !important; max-width: 50% !important; }
+            }
+            @media (min-width: 768px) {
+                #section_3 .col-md-6 { flex: 0 0 50% !important; max-width: 50% !important; }
+                #section_3 .col-md-8 { flex: 0 0 66.666667% !important; max-width: 66.666667% !important; }
+            }
+            /* Optimize widget container height */
+            .apoyo-widget-container {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            .apoyo-widget-container .widget-content {
+                flex: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            .apoyo-widget-container iframe {
+                flex: 1 !important;
+            }
+            /* Mobile responsive adjustments */
+            @media (max-width: 768px) {
+                .apoyo-widget-container {
+                    padding: 5px !important;
+                    min-height: auto !important;
+                    margin: 0 auto !important;
+                    display: flex !important;
+                    justify-content: center !important;
+                    align-items: center !important;
+                }
+                .apoyo-widget-container iframe {
+                    height: 470px !important;
+                    min-height: 470px !important;
+                }
+                #section_3 .row {
+                    justify-content: center !important;
+                }
+            }
+        </style>
         <script>
             // Translation data
             const translations = {

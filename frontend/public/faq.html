@@ -208,7 +208,6 @@
 
                     <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#section_4" class="footer-menu-link">Conviértete en Voluntario</a></li>
 
                     <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link">Asóciate con Nosotros</a></li>
                 </ul>
@@ -238,7 +237,6 @@
                     Monterrey, Nuevo León, México
                 </p>
 
-                <a href="#" class="custom-btn btn mt-3">Obtener Dirección</a>
             </div>
         </div>
     </div>
@@ -320,10 +318,8 @@
                     nuestraHistoriaLink: "Nuestra Historia",
                     mirarDocumental: "Mirar Documental",
                     realizarDonacion: "Realiza una Donación",
-                    convertirseVoluntario: "Conviértete en Voluntario",
                     asociarseConNosotros: "Asóciate con Nosotros",
                     contactanos: "Contáctanos",
-                    obtenerDireccion: "Obtener Dirección"
                 },
                 en: {
                     // Navigation
@@ -359,7 +355,6 @@
                     nuestraHistoriaLink: "Our Story",
                     mirarDocumental: "Watch Documentary",
                     realizarDonacion: "Make a Donation",
-                    convertirseVoluntario: "Become a Volunteer",
                     asociarseConNosotros: "Partner with Us",
                     contactanos: "Contact Us",
                     obtenerDireccion: "Get Directions"
@@ -511,11 +506,6 @@
                         }
                     });
                     
-                    // Footer "Obtener Dirección" button
-                    const footerContactBtn = document.querySelector('.site-footer .custom-btn');
-                    if (footerContactBtn && t.obtenerDireccion) {
-                        footerContactBtn.textContent = t.obtenerDireccion;
-                    }
                     
                     // Footer links
                     const footerLinks = document.querySelectorAll('.footer-menu-link');
@@ -529,8 +519,6 @@
                             link.textContent = t.mirarDocumental;
                         } else if (href === 'donate.html' && t.realizarDonacion) {
                             link.textContent = t.realizarDonacion;
-                        } else if (href === 'index.html#section_4' && t.convertirseVoluntario) {
-                            link.textContent = t.convertirseVoluntario;
                         } else if (href === 'index.html#section_6' && t.asociarseConNosotros) {
                             link.textContent = t.asociarseConNosotros;
                         }

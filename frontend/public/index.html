@@ -538,7 +538,7 @@
             </section>
 
             <!-- ======================= "VOLUNTARIO" SECTION ================== -->
-            <section class="volunteer-section section-padding" id="section_4">
+            <section class="volunteer-section section-padding" id="section_4" style="display: none;">
                 <div class="container">
                     <div class="row">
 
@@ -546,7 +546,6 @@
                             <h2 class="text-white mb-4">Voluntario</h2>
 
                             <form action="https://api.web3forms.com/submit" method="POST" id="volunteer" class="custom-form volunteer-form mb-5 mb-lg-0" action="#" role="form">
-                                <h3 class="mb-4">Conviértete en Voluntario</h3>
 
                                 <div class="row">
 
@@ -705,7 +704,6 @@
                                         </a>
                                     </p>
 
-                                    <a href="#" class="custom-btn btn mt-3">Obtener Dirección</a>
                                 </div>
                             </div>
                         </div>
@@ -767,7 +765,6 @@
 
                             <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
 
-                            <li class="footer-menu-item"><a href="#section_4" class="footer-menu-link">Conviértete en Voluntario</a></li>
 
                             <li class="footer-menu-item"><a href="#sponsors" class="footer-menu-link">Nuestros Patrocinadores</a></li>
 
@@ -800,7 +797,6 @@
                             Monterrey, Nuevo León, México
                         </p>
 
-                        <a href="#" class="custom-btn btn mt-3">Obtener Dirección</a>
                     </div>
                 </div>
             </div>
@@ -987,7 +983,6 @@
                     
                     // Welcome Section
                     bienvenidos: "Bienvenidos a Escalando Fronteras",
-                    convertirseVoluntario: "Conviértete en Voluntario",
                     apoyarEF: "¡Apoya a Escalando Fronteras!",
                     hacerDonacion: "Haz una Donación",
                     
@@ -1073,7 +1068,6 @@
                     nuestrosPatrocinadores: "Nuestros Patrocinadores",
                     
                     // Volunteer Section
-                    convirtiendoVoluntario: "Conviértete en Voluntario",
                     nombre: "Nombre",
                     correoElectronico: "Correo Electrónico",
                     asunto: "Asunto",
@@ -1101,7 +1095,6 @@
                     contactanos: "Contáctanos",
                     directorGeneral: "Director General",
                     informacionContacto: "Información de Contacto",
-                    obtenerDireccion: "Obtener Dirección",
                     formularioContacto: "Formulario de Contacto",
                     enviarCorreo: "O, simplemente puede enviar un correo electrónico:",
                     enviarMensaje: "Enviar Mensaje",
@@ -1111,7 +1104,6 @@
                     nuestraHistoriaLink: "Nuestra Historia",
                     mirarDocumental: "Mirar Documental",
                     realizarDonacion: "Realiza una Donación",
-                    convirtiendoVoluntarioLink: "Conviértete en Voluntario",
                     nuestrosPatrocinadoresLink: "Nuestros Patrocinadores",
                     articulosLink: "Artículos"
                 },
@@ -1137,7 +1129,6 @@
                     
                     // Welcome Section
                     bienvenidos: "Welcome to Escalando Fronteras",
-                    convertirseVoluntario: "Become a Volunteer",
                     apoyarEF: "Support Climbing Borders!",
                     hacerDonacion: "Make a Donation",
                     
@@ -1223,7 +1214,6 @@
                     nuestrosPatrocinadores: "Our Sponsors",
                     
                     // Volunteer Section
-                    convirtiendoVoluntario: "Become a Volunteer",
                     nombre: "Name",
                     correoElectronico: "Email",
                     asunto: "Subject",
@@ -1261,7 +1251,6 @@
                     nuestraHistoriaLink: "Our Story",
                     mirarDocumental: "Watch Documentary",
                     realizarDonacion: "Make a Donation",
-                    convirtiendoVoluntarioLink: "Become a Volunteer",
                     nuestrosPatrocinadoresLink: "Our Sponsors",
                     articulosLink: "Articles"
                 }
@@ -1845,49 +1834,11 @@
                         sponsorsH2.textContent = t.nuestrosPatrocinadores;
                     }
                     
-                    // Volunteer Section
-                    console.log('🔍 Translating Volunteer section...');
-                    const volunteerH2 = document.querySelector('.volunteer-section h2');
-                    if (volunteerH2 && t.voluntario) {
-                        console.log('Updating volunteer H2 to:', t.voluntario);
-                        volunteerH2.textContent = t.voluntario;
-                    }
                     
-                    const volunteerH3 = document.querySelector('.volunteer-form h3');
-                    if (volunteerH3 && t.convirtiendoVoluntario) {
-                        console.log('Updating volunteer H3 to:', t.convirtiendoVoluntario);
-                        volunteerH3.textContent = t.convirtiendoVoluntario;
-                    }
                     
-                    // Form placeholders
-                    updatePlaceholder('#volunteer-name', 'nombre');
-                    updatePlaceholder('#volunteer-email', 'correoElectronico');
-                    updatePlaceholder('#volunteer-subject', 'asunto');
-                    updatePlaceholder('#volunteer-message', 'comentarios');
                     
-                    const cvLabel = document.querySelector('label[for="inputGroupFile02"]');
-                    if (cvLabel && t.subirCV) {
-                        console.log('Updating CV label to:', t.subirCV);
-                        cvLabel.textContent = t.subirCV;
-                    }
                     
-                    const volunteerBtn = document.querySelector('.volunteer-form button[type="submit"]');
-                    if (volunteerBtn && t.entregar) {
-                        console.log('Updating volunteer button to:', t.entregar);
-                        volunteerBtn.textContent = t.entregar;
-                    }
                     
-                    const volunteerAboutH4 = document.querySelector('.volunteer-section .custom-block-body h4');
-                    if (volunteerAboutH4 && t.acercaVoluntariado) {
-                        console.log('Updating volunteer about H4 to:', t.acercaVoluntariado);
-                        volunteerAboutH4.textContent = t.acercaVoluntariado;
-                    }
-                    
-                    const volunteerAboutP = document.querySelector('.volunteer-section .custom-block-body p');
-                    if (volunteerAboutP && t.voluntariadoDescription) {
-                        console.log('Updating volunteer about P to:', t.voluntariadoDescription.substring(0, 50) + '...');
-                        volunteerAboutP.textContent = t.voluntariadoDescription;
-                    }
                     
                     // News Section
                     console.log('🔍 Translating News section...');
@@ -1939,18 +1890,6 @@
                         contactInfoH5.textContent = t.informacionContacto;
                     }
                     
-                    const contactBtn = document.querySelector('.contact-info .custom-btn');
-                    if (contactBtn) {
-                        if (this.currentLanguage === 'en') {
-                            if (t.obtenerDireccion) {
-                                console.log('Updating contact button to EN:', t.obtenerDireccion);
-                                contactBtn.textContent = t.obtenerDireccion;
-                            }
-                        } else {
-                            console.log('Updating contact button to ES: Obtener Dirección');
-                            contactBtn.textContent = 'Obtener Dirección';
-                        }
-                    }
                     
                     const contactFormH2 = document.querySelector('.contact-form h2');
                     if (contactFormH2 && t.formularioContacto) {
@@ -1989,19 +1928,6 @@
                         }
                     });
                     
-                    // Footer "Obtener Dirección" button
-                    const footerContactBtn = document.querySelector('.site-footer .custom-btn');
-                    if (footerContactBtn) {
-                        if (this.currentLanguage === 'en') {
-                            if (t.obtenerDireccion) {
-                                console.log('Updating footer contact button to EN:', t.obtenerDireccion);
-                                footerContactBtn.textContent = t.obtenerDireccion;
-                            }
-                        } else {
-                            console.log('Updating footer contact button to ES: Obtener Dirección');
-                            footerContactBtn.textContent = 'Obtener Dirección';
-                        }
-                    }
                     
                     // Footer links
                     const footerLinks = document.querySelectorAll('.footer-menu-link');
@@ -2015,8 +1941,6 @@
                             link.textContent = t.mirarDocumental;
                         } else if (href === 'donate.html' && t.realizarDonacion) {
                             link.textContent = t.realizarDonacion;
-                        } else if (href === '#section_4' && t.convirtiendoVoluntarioLink) {
-                            link.textContent = t.convirtiendoVoluntarioLink;
                         } else if (href === '#sponsors' && t.nuestrosPatrocinadoresLink) {
                             link.textContent = t.nuestrosPatrocinadoresLink;
                         } else if (href === '#articulos' && t.articulosLink) {

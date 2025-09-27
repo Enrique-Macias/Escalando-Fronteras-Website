@@ -393,43 +393,14 @@
             <!-- ======================= "FUNDADOR" SECTION ================== -->
             <section class="about-section section-padding">
                 <div class="container">
+                    <!-- Fundador content will be loaded dynamically by fundador-integration.js -->
                     <div class="row">
-
-                        <!-- Image Column - Restore original positioning -->
-                        <div class="col-lg-6 col-md-5 col-12 mb-4 mb-lg-0">
-                            <img src="images/alejandro_medina.jpeg" class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="Alejandro Medina">
-                        </div>
-
-                        <!-- Text Content Column - Improved mobile responsiveness -->
-                        <div class="col-lg-5 col-md-7 col-12">
-                            <div class="custom-text-block">
-                                <!-- Name - Center on mobile, left-align on desktop -->
-                                <h2 class="mb-0 text-center text-lg-start">Alejandro Medina</h2>
-
-                                <!-- Title - Center on mobile, left-align on desktop -->
-                                <p class="text-muted mb-lg-4 mb-md-4 text-center text-lg-start">Co-fundador de Escalando Fronteras</p>
-                                
-                                <!-- Description Paragraphs - Center on mobile, left-align on desktop -->
-                                <div class="text-center text-lg-start">
-                                    <p id="alejandro-description-1" class="mb-3">Alejandro Medina es co-fundador de Escalando Fronteras, una asociación civil con sede en Monterrey dedicada a transformar vidas a través del deporte y la educación.</p>
-                                    <p id="alejandro-description-2" class="mb-4">Apasionado por la escalada y el trabajo social, Alejandro ha liderado iniciativas que inspiran a jóvenes y familias a superar barreras y descubrir nuevas oportunidades. Su visión y compromiso han sido clave para crear una comunidad inclusiva donde la montaña se convierte en un espacio de crecimiento, confianza y esperanza.</p>
-                                </div>
-
-                                <!-- Social Media Icons - Center on mobile, left-align on desktop -->
-                                <div class="text-center text-lg-start">
-                                    <ul class="social-icon mt-4 d-inline-block">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-facebook"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-instagram"></a>
-                                        </li>
-                                    </ul>
-                                </div>
+                        <div class="col-12 text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
                             </div>
+                            <p class="mt-2 text-muted">Cargando información del fundador...</p>
                         </div>
-
                     </div>
                 </div>
             </section>
@@ -885,6 +856,7 @@
         <script src="js/api/articles.js"></script>
         <script src="js/api/sponsors.js"></script>
         <script src="js/api/apoyo.js"></script>
+        <script src="js/api/fundadores.js"></script>
         <script src="js/api/index.js"></script>
         
         <!-- Team Integration Script -->
@@ -907,6 +879,9 @@
         
         <!-- Apoyo Integration Script -->
         <script src="js/apoyo-integration.js"></script>
+        
+        <!-- Fundador Integration Script -->
+        <script src="js/fundador-integration.js"></script>
         
         <!-- Language Switcher Script -->
         <style>
@@ -948,8 +923,28 @@
             .apoyo-widget-container iframe {
                 flex: 1 !important;
             }
+            /* Fundador section styling for multiple founders */
+            .about-section .row.mb-5 {
+                margin-bottom: 3rem !important;
+            }
+            .about-section .row.mb-5:not(:last-child) {
+                border-bottom: 1px solid #e9ecef;
+                padding-bottom: 3rem;
+            }
+            .about-section .about-image {
+                transition: transform 0.3s ease;
+            }
+            .about-section .about-image:hover {
+                transform: scale(1.02);
+            }
             /* Mobile responsive adjustments */
             @media (max-width: 768px) {
+                .about-section .row.mb-5 {
+                    margin-bottom: 2rem !important;
+                }
+                .about-section .row.mb-5:not(:last-child) {
+                    padding-bottom: 2rem;
+                }
                 .apoyo-widget-container {
                     padding: 5px !important;
                     min-height: auto !important;

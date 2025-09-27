@@ -24,29 +24,25 @@
                 <div class="row">
                     
                     <div class="col-lg-8 col-12 d-flex flex-wrap">
-                        <p class="d-flex me-4 mb-0">
-                            <i class="bi-geo-alt me-2"></i>
-                            Monterrey, Nuevo León, México
-                        </p>
+                    <p class="d-flex me-4 mb-0">
+                        <i class="bi-geo-alt me-2"></i>
+                        <!-- Location will be populated by API -->
+                    </p>
 
-                        <p class="d-flex mb-0">
-                            <i class="bi-envelope me-2"></i>
-
-                            <a href="mailto:Nadia@ClimbingBorders.org">
-                                Nadia@ClimbingBorders.org 
-                            </a>
-                        </p>
+                    <p class="d-flex mb-0">
+                        <i class="bi-envelope me-2"></i>
+                        <!-- Email will be populated by API -->
+                    </p>
                     </div>
 
                     <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                         <ul class="social-icon">
                             <li class="social-icon-item">
-                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
-
+                                <a href="#" class="social-icon-link bi-facebook" target="_blank"></a>
                             </li>
 
                             <li class="social-icon-item">
-                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                <a href="#" class="social-icon-link bi-instagram" target="_blank"></a>
                             </li>
 
                             <li class="social-icon-item">
@@ -189,18 +185,18 @@
 
                         <div class="col-lg-3 col-md-6 col-12 mb-4">
                             <div class="featured-block d-flex justify-content-center align-items-center">
-                                <a href="#section_4" class="d-block text-center"> 
-                                    <img src="images/icons/voluntario.png" class="featured-block-image img-fluid" alt="">
-                                    <p class="featured-block-text">Conviértete en <strong>Voluntario</strong></p>
+                                <a href="#team" class="d-block text-center"> 
+                                    <img src="images/icons/team.png" class="featured-block-image img-fluid" alt="">
+                                    <p class="featured-block-text" id="featured-team-text">Conoce nuestro <strong>Equipo</strong></p>
                                 </a>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-6 col-12 mb-4">
                             <div class="featured-block d-flex justify-content-center align-items-center">
-                                <a href="#section_6" class="d-block text-center">
-                                    <img src="images/icons/EF_LOGO.png" class="featured-block-image img-fluid" alt="">
-                                    <p class="featured-block-text">Apoya a <br><strong> EF</strong></p>
+                                <a href="#sponsors" class="d-block text-center">
+                                    <img src="images/icons/sponsors.png" class="featured-block-image img-fluid" alt="">
+                                    <p class="featured-block-text" id="featured-sponsors-text">Nuestros <strong>Patrocinadores</strong></p>
                                 </a>
                             </div>
                         </div>
@@ -683,25 +679,19 @@
                                 <div class="contact-info">
                                     <h5 class="mb-3">Información de Contacto</h5>
 
-                                    <p class="d-flex mb-2">
+                                    <p class="d-flex mb-2" id="contact-location">
                                         <i class="bi-geo-alt me-2"></i>
-                                        Monterrey, Nuevo León, México
+                                        <!-- Location will be populated by API -->
                                     </p>
 
-                                    <p class="d-flex mb-2">
+                                    <p class="d-flex mb-2" id="contact-phone">
                                         <i class="bi-telephone me-2"></i>
-
-                                        <a href="tel: 120-240-9600">
-                                            120-240-9600
-                                        </a>
+                                        <!-- Phone will be populated by API -->
                                     </p>
 
-                                    <p class="d-flex">
+                                    <p class="d-flex" id="contact-email">
                                         <i class="bi-envelope me-2"></i>
-
-                                        <a href="mailto:info@yourgmail.com">
-                                            Alejandro@ClimbingBorders.org
-                                        </a>
+                                        <!-- Email will be populated by API -->
                                     </p>
 
                                 </div>
@@ -722,15 +712,15 @@
                                     <input type="checkbox" name="botcheck" id="" style="display: none;">
 
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <input type="text" name="Contacto-Nombre" id="first-name" class="form-control" placeholder="Alejandro" autocomplete="given-name" required>
+                                        <input type="text" name="Contacto-Nombre" id="first-name" class="form-control" placeholder="Nombre" autocomplete="given-name" required>
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <input type="text" name="Contacto-Apellido" id="last-name" class="form-control" placeholder="Medina" autocomplete="family-name" required>
+                                        <input type="text" name="Contacto-Apellido" id="last-name" class="form-control" placeholder="Apellido" autocomplete="family-name" required>
                                     </div>
                                 </div>
 
-                                <input type="email" name="Contacto-Email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Alejandro@gmail.com" autocomplete="email" required>
+                                <input type="email" name="Contacto-Email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Tu Correo Electrónico" autocomplete="email" required>
 
                                 <textarea name="Contacto-Mensaje" rows="5" class="form-control" id="message" placeholder="Asunto" autocomplete="off"></textarea>
 
@@ -778,23 +768,17 @@
 
                         <p class="text-white d-flex mb-2">
                             <i class="bi-telephone me-2"></i>
-
-                            <a href="tel: 120-240-9600" class="site-footer-link">
-                                120-240-9600
-                            </a>
+                            <!-- Phone will be populated by API -->
                         </p>
 
                         <p class="text-white d-flex">
                             <i class="bi-envelope me-2"></i>
-
-                            <a href="mailto:info@yourgmail.com" class="site-footer-link">
-                                Nadia@ClimbingBorders.org
-                            </a>
+                            <!-- Email will be populated by API -->
                         </p>
 
                         <p class="text-white d-flex mt-3">
                             <i class="bi-geo-alt me-2"></i>
-                            Monterrey, Nuevo León, México
+                            <!-- Location will be populated by API -->
                         </p>
 
                     </div>
@@ -848,33 +832,58 @@
                     const response = await fetch('https://ef-cms-production.up.railway.app/api/global-settings');
                     const settings = await response.json();
                     
-                    // Update header location
-                    const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
-                    if (headerLocation) {
+                // Update header location
+                const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
+                if (headerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
                         headerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        headerLocation.style.display = 'flex';
+                    } else {
+                        headerLocation.style.display = 'none';
                     }
-                    
-                    // Update header email
-                    const headerEmail = document.querySelector('.site-header .bi-envelope').parentElement;
-                    if (headerEmail) {
+                }
+                
+                // Update header email
+                const headerEmail = document.querySelector('.site-header .bi-envelope').parentElement;
+                if (headerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
                         headerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}">${settings.mail}</a>`;
+                        headerEmail.style.display = 'flex';
+                    } else {
+                        headerEmail.style.display = 'none';
                     }
-                    
-                    // Update header social links
-                    const headerFacebook = document.querySelector('.site-header .bi-facebook');
-                    if (headerFacebook) {
+                }
+                
+                // Update header social links
+                const headerFacebook = document.querySelector('.site-header .bi-facebook');
+                if (headerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
                         headerFacebook.href = settings.facebookUrl;
+                        headerFacebook.style.display = 'block';
+                    } else {
+                        headerFacebook.style.display = 'none';
                     }
-                    
-                    const headerInstagram = document.querySelector('.site-header .bi-instagram');
-                    if (headerInstagram) {
+                }
+                
+                const headerInstagram = document.querySelector('.site-header .bi-instagram');
+                if (headerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
                         headerInstagram.href = settings.instagramUrl;
+                        headerInstagram.style.display = 'block';
+                    } else {
+                        headerInstagram.style.display = 'none';
                     }
-                    
-                    const headerWhatsapp = document.querySelector('.site-header .bi-whatsapp');
-                    if (headerWhatsapp) {
+                }
+                
+                const headerWhatsapp = document.querySelector('.site-header .bi-whatsapp');
+                if (headerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
                         headerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        headerWhatsapp.style.display = 'block';
+                    } else {
+                        headerWhatsapp.style.display = 'none';
                     }
+                }
                     
                     // Update navigation bar logo
                     const navLogo = document.querySelector('.navbar-brand img');
@@ -894,39 +903,100 @@
                         favicon.href = settings.mainLogo;
                     }
                     
-                    // Update footer phone
-                    const footerPhone = document.querySelector('.site-footer .bi-telephone').parentElement;
-                    if (footerPhone) {
+                // Update footer phone
+                const footerPhone = document.querySelector('.site-footer .bi-telephone').parentElement;
+                if (footerPhone) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
                         footerPhone.innerHTML = `<i class="bi-telephone me-2"></i><a href="tel:${settings.whatsappNumber}" class="site-footer-link">${settings.whatsappNumber}</a>`;
+                        footerPhone.style.display = 'flex';
+                    } else {
+                        footerPhone.style.display = 'none';
                     }
-                    
-                    // Update footer email
-                    const footerEmail = document.querySelector('.site-footer .bi-envelope').parentElement;
-                    if (footerEmail) {
+                }
+                
+                // Update footer email
+                const footerEmail = document.querySelector('.site-footer .bi-envelope').parentElement;
+                if (footerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
                         footerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}" class="site-footer-link">${settings.mail}</a>`;
+                        footerEmail.style.display = 'flex';
+                    } else {
+                        footerEmail.style.display = 'none';
                     }
-                    
-                    // Update footer location
-                    const footerLocation = document.querySelector('.site-footer .bi-geo-alt').parentElement;
-                    if (footerLocation) {
+                }
+                
+                // Update footer location
+                const footerLocation = document.querySelector('.site-footer .bi-geo-alt').parentElement;
+                if (footerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
                         footerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        footerLocation.style.display = 'flex';
+                    } else {
+                        footerLocation.style.display = 'none';
                     }
-                    
-                    // Update footer social links
-                    const footerFacebook = document.querySelector('.site-footer .bi-facebook');
-                    if (footerFacebook) {
+                }
+                
+                // Update footer social links
+                const footerFacebook = document.querySelector('.site-footer .bi-facebook');
+                if (footerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
                         footerFacebook.href = settings.facebookUrl;
+                        footerFacebook.style.display = 'block';
+                    } else {
+                        footerFacebook.style.display = 'none';
                     }
-                    
-                    const footerInstagram = document.querySelector('.site-footer .bi-instagram');
-                    if (footerInstagram) {
+                }
+                
+                const footerInstagram = document.querySelector('.site-footer .bi-instagram');
+                if (footerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
                         footerInstagram.href = settings.instagramUrl;
+                        footerInstagram.style.display = 'block';
+                    } else {
+                        footerInstagram.style.display = 'none';
                     }
-                    
-                    const footerWhatsapp = document.querySelector('.site-footer .bi-whatsapp');
-                    if (footerWhatsapp) {
+                }
+                
+                const footerWhatsapp = document.querySelector('.site-footer .bi-whatsapp');
+                if (footerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
                         footerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        footerWhatsapp.style.display = 'block';
+                    } else {
+                        footerWhatsapp.style.display = 'none';
                     }
+                }
+                
+                // Update contact section
+                const contactLocation = document.getElementById('contact-location');
+                if (contactLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
+                        contactLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        contactLocation.style.display = 'flex';
+                    } else {
+                        contactLocation.style.display = 'none';
+                    }
+                }
+                
+                const contactPhone = document.getElementById('contact-phone');
+                if (contactPhone) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        contactPhone.innerHTML = `<i class="bi-telephone me-2"></i><a href="tel:${settings.whatsappNumber}">${settings.whatsappNumber}</a>`;
+                        contactPhone.style.display = 'flex';
+                    } else {
+                        contactPhone.style.display = 'none';
+                    }
+                }
+                
+                const contactEmail = document.getElementById('contact-email');
+                if (contactEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        contactEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}">${settings.mail}</a>`;
+                        contactEmail.style.display = 'flex';
+                    } else {
+                        contactEmail.style.display = 'none';
+                    }
+                }
                     
                     console.log('Global settings updated successfully');
                 } catch (error) {
@@ -1081,7 +1151,8 @@
                     
                     // Welcome Section
                     bienvenidos: "Bienvenidos a Escalando Fronteras",
-                    apoyarEF: "¡Apoya a Escalando Fronteras!",
+                    conoceEquipo: "Conoce nuestro Equipo",
+                    nuestrosPatrocinadores: "Nuestros Patrocinadores",
                     hacerDonacion: "Haz una Donación",
                     
                     // About Section
@@ -1167,6 +1238,7 @@
                     
                     // Volunteer Section
                     nombre: "Nombre",
+                    apellido: "Apellido",
                     correoElectronico: "Correo Electrónico",
                     asunto: "Asunto",
                     subirCV: "Sube tu CV",
@@ -1227,7 +1299,8 @@
                     
                     // Welcome Section
                     bienvenidos: "Welcome to Escalando Fronteras",
-                    apoyarEF: "Support Climbing Borders!",
+                    conoceEquipo: "Meet our Team",
+                    nuestrosPatrocinadores: "Our Sponsors",
                     hacerDonacion: "Make a Donation",
                     
                     // About Section
@@ -1313,6 +1386,7 @@
                     
                     // Volunteer Section
                     nombre: "Name",
+                    apellido: "Last Name",
                     correoElectronico: "Email",
                     asunto: "Subject",
                     subirCV: "Upload your CV",
@@ -1549,37 +1623,38 @@
                         welcomeH2.textContent = t.bienvenidos;
                     }
                     
-                    // Featured blocks - need to find them by their text content
-                    const featuredBlocks = document.querySelectorAll('.featured-block-text');
-                    featuredBlocks.forEach((block, index) => {
-                        const text = block.textContent.trim();
-                        console.log('Featured block', index, 'current text:', text);
-                        console.log('Current language:', this.currentLanguage);
-                        
-                        // Check by index position instead of text content to avoid translation conflicts
-                        if (index === 0) { // First block - Volunteer
-                            console.log('Updating volunteer block to:', t.convertirseVoluntario);
-                            if (this.currentLanguage === 'en') {
-                                block.innerHTML = `<strong>${t.convertirseVoluntario}</strong>`;
-                            } else {
-                                block.innerHTML = `Conviértete en <strong>Voluntario</strong>`;
-                            }
-                        } else if (index === 1) { // Second block - Support EF
-                            console.log('Updating EF block to:', t.apoyarEF);
-                            if (this.currentLanguage === 'en') {
-                                block.innerHTML = `<strong>${t.apoyarEF}</strong>`;
-                            } else {
-                                block.innerHTML = `Apoya a <br><strong> EF</strong>`;
-                            }
-                        } else if (index === 2) { // Third block - Donation
-                            console.log('Updating donation block to:', t.hacerDonacion);
-                            if (this.currentLanguage === 'en') {
-                                block.innerHTML = `<strong>${t.hacerDonacion}</strong>`;
-                            } else {
-                                block.innerHTML = `Haz una <strong>Donación</strong>`;
-                            }
+                    // Featured blocks - update by ID for better targeting
+                    const featuredTeamText = document.getElementById('featured-team-text');
+                    if (featuredTeamText && t.conoceEquipo) {
+                        console.log('Updating team block to:', t.conoceEquipo);
+                        if (this.currentLanguage === 'en') {
+                            featuredTeamText.innerHTML = `<strong>${t.conoceEquipo}</strong>`;
+                        } else {
+                            featuredTeamText.innerHTML = `Conoce nuestro <strong>Equipo</strong>`;
                         }
-                    });
+                    }
+                    
+                    const featuredSponsorsText = document.getElementById('featured-sponsors-text');
+                    if (featuredSponsorsText && t.nuestrosPatrocinadores) {
+                        console.log('Updating sponsors block to:', t.nuestrosPatrocinadores);
+                        if (this.currentLanguage === 'en') {
+                            featuredSponsorsText.innerHTML = `<strong>${t.nuestrosPatrocinadores}</strong>`;
+                        } else {
+                            featuredSponsorsText.innerHTML = `Nuestros <strong>Patrocinadores</strong>`;
+                        }
+                    }
+                    
+                    // Third block - Donation (keep existing logic)
+                    const featuredBlocks = document.querySelectorAll('.featured-block-text');
+                    if (featuredBlocks.length >= 3) {
+                        const donationBlock = featuredBlocks[2];
+                        console.log('Updating donation block to:', t.hacerDonacion);
+                        if (this.currentLanguage === 'en') {
+                            donationBlock.innerHTML = `<strong>${t.hacerDonacion}</strong>`;
+                        } else {
+                            donationBlock.innerHTML = `Haz una <strong>Donación</strong>`;
+                        }
+                    }
                     
                     // About Section
                     console.log('🔍 Translating About section...');
@@ -1998,11 +2073,21 @@
                     const contactFormP = document.querySelector('.contact-form p');
                     if (contactFormP && t.enviarCorreo) {
                         console.log('Updating contact form P to:', t.enviarCorreo);
-                        contactFormP.innerHTML = t.enviarCorreo + ' <a href="#">Nadia@ClimbingBorders.org</a>';
+                        // Get email from global settings if available
+                        const contactEmail = document.getElementById('contact-email');
+                        let emailAddress = 'Nadia@ClimbingBorders.org'; // fallback
+                        if (contactEmail) {
+                            const emailLink = contactEmail.querySelector('a');
+                            if (emailLink) {
+                                emailAddress = emailLink.textContent;
+                            }
+                        }
+                        contactFormP.innerHTML = t.enviarCorreo + ` <a href="mailto:${emailAddress}">${emailAddress}</a>`;
                     }
                     
                     // Contact form placeholders
                     updatePlaceholder('#first-name', 'nombre');
+                    updatePlaceholder('#last-name', 'apellido');
                     updatePlaceholder('#email', 'correoElectronico');
                     updatePlaceholder('#message', 'asunto');
                     
@@ -2245,8 +2330,12 @@
                         try {
                             var target = document.querySelector(href);
                             if (target) {
+                                // Get navbar height to offset the scroll position
+                                const navbar = document.querySelector('.navbar');
+                                const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                                
                                 window.scrollTo({
-                                    top: target.offsetTop,
+                                    top: target.offsetTop - navbarHeight - 20, // 20px extra padding
                                     behavior: 'smooth'
                                 });
                             }

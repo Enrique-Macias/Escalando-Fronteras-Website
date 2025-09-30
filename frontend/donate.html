@@ -6,6 +6,7 @@
 
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta http-equiv="Permissions-Policy" content="payment=*">
 
         <title id="page-title">Escalando Fronteras - Donaciones</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
@@ -133,14 +134,14 @@
                                             <!-- Stripe Buy Button -->
                                             <stripe-buy-button class="stripe-section"
                                                 buy-button-id="buy_btn_1P7OZJP5bZ1okdvjSGSnO1gb"
-                                                publishable-key="pk_test_51P7OGRP5bZ1okdvj49DUCGSd3PlTcP9zXYjwGy5j99KmMYdfxh8MnuiEEgaBYRDOB3FiPXjqFXjQEDI4BlD2Elol00xVZN5w95">
+                                                publishable-key="">
                                             </stripe-buy-button>
                                             <div class="paypal-continue">
                                                 <p id="donate-continue">O, continúa con</p>                                             
                                             </div>
                                             <!-- PayPal Button Container -->
                                             <div class="paypal-button">
-                                                <a href="https://www.paypal.com/donate/?hosted_button_id=65B7AP588V5BC" target="_blank">
+                                                <a href="#" target="_blank">
                                                     <img src="images/paypal.png" alt="PayPal Button" class="img-fluid paypal-img" />
                                                 </a>
                                             </div>
@@ -234,7 +235,6 @@
         <script src="js/jquery.sticky.js"></script>
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
-        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
         
         <!-- Global Settings API Integration -->
         <script>
@@ -243,6 +243,9 @@
                 try {
                     const response = await fetch('https://ef-cms-production.up.railway.app/api/global-settings');
                     const settings = await response.json();
+                    
+                    // Store settings globally for access by other functions
+                    window.globalSettings = settings;
                     
                 // Update header location
                 const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
@@ -385,8 +388,63 @@
                 }
             }
             
-            // Call the function when the page loads
-            document.addEventListener('DOMContentLoaded', fetchGlobalSettings);
+            // Fetch and update payment settings
+            async function fetchPaymentSettings() {
+                try {
+                    const response = await fetch('https://ef-cms-production.up.railway.app/api/pagos');
+                    const paymentData = await response.json();
+                    
+                    // Store payment data globally for access by other functions
+                    window.paymentData = paymentData;
+                    
+                    // Update Stripe publishable key
+                    const stripeButton = document.querySelector('stripe-buy-button');
+                    if (stripeButton && paymentData.paystripeCode) {
+                        stripeButton.setAttribute('publishable-key', paymentData.paystripeCode);
+                        console.log('Stripe publishable key updated:', paymentData.paystripeCode);
+                        
+                        // Force re-render of the Stripe button
+                        const parent = stripeButton.parentNode;
+                        const newStripeButton = stripeButton.cloneNode(true);
+                        parent.replaceChild(newStripeButton, stripeButton);
+                    }
+                    
+                    // Update PayPal URL
+                    const paypalLink = document.querySelector('.paypal-button a');
+                    if (paypalLink && paymentData.paypalUrl) {
+                        paypalLink.href = paymentData.paypalUrl;
+                        console.log('PayPal URL updated:', paymentData.paypalUrl);
+                    }
+                    
+                    console.log('Payment settings updated successfully');
+                } catch (error) {
+                    console.error('Error fetching payment settings:', error);
+                }
+            }
+            
+            // Load Stripe script and initialize after payment settings are loaded
+            async function loadStripeAndInitialize() {
+                try {
+                    // First fetch payment settings
+                    await fetchPaymentSettings();
+                    
+                    // Then load Stripe script
+                    const script = document.createElement('script');
+                    script.src = 'https://js.stripe.com/v3/buy-button.js';
+                    script.async = true;
+                    document.head.appendChild(script);
+                    
+                    console.log('Stripe script loaded after payment settings');
+                } catch (error) {
+                    console.error('Error loading Stripe:', error);
+                }
+            }
+            
+            // Call the functions when the page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                fetchGlobalSettings();
+                loadStripeAndInitialize();
+            });
         </script>
         
         <!-- Language Switcher Script -->

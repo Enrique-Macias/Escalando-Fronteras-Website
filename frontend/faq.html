@@ -127,62 +127,7 @@
                     <div class="heading">
                         <h1 id="faq-title">FAQs</h1>
                     </div>
-                    <div class="question">
-                        <button>
-                            <span id="faq-q1">¿Cambiaron recientemente de página de internet?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p id="faq-a1">Sí. ¡Nuestro sitio web dejó de funcionar recientemente y estamos en proceso de restaurarlo! Esta es una solución temporal hasta que podamos reconstruir nuestro sitio.</p>
-                    </div>
-                    <div class="question">
-                        <button>
-                            <span id="faq-q2">¿Ayudaría recaudar fondos en el extranjero?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p id="faq-a2">¡Claro! Cualquier cantidad es buena. También nos sirven los donativos en especie, por ejemplo cuerdas, cascos, arneses y equipo de escalada en general.</p>
-                    </div>
-            
-                    <div class="question">
-                        <button>
-                            <span id="faq-q3">¿Hay otras maneras de apoyar?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p id="faq-a3">Email nadia@ClimbingBorders.org. <br>
-                            Existen otras maneras de apoyar. Si tienes alguna idea que pudiera servir para que Escalando Fronteras continúe con su labor, escríbenos.</p>
-                    </div>
-            
-                    <div class="question">
-                        <button>
-                            <span id="faq-q4">¿Son una asociación civil registrada?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p id="faq-a4">Sí, estamos dados de alta en hacienda desde 2014 y somos donataria autorizada desde 2020.</p>
-                    </div>
-
-                    <div class="question">
-                        <button>
-                            <span id="faq-q5">¿Qué problemáticas enfrenta la niñez y la juventud?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p id="faq-a5">Como resultado de su condición de colonia irregular e indígena, el barrio de Lomas Modelo Norte ha sido históricamente marginado y excluido de servicios públicos tan básicos como el agua, drenaje, e iluminación. Como un resultado de estas condiciones adversas, buena parte de la juventud recurre al consumo problemático de sustancias y la deserción escolar.</p>
-                    </div>
-
-                    <div class="question">
-                        <button>
-                            <span id="faq-q6">¿Mi donativo es deducible de impuestos?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p id="faq-a6">Sí. En México puedes solicitarnos un recibo deducible de impuestos. Si donas desde los estados unidos, puedes hacer tu donativo a través de MountainsBeyondBorders.org.
-                            <br>También puedes hacernos llegar equipo de escalada nuevo o en buenas condiciones para que podamos seguir eneseñando a niñes a escalar. </p>
-                    </div>
-
-                    <div class="question">
-                        <button>
-                            <span id="faq-q7">¿Puedo venir de visita?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p id="faq-a7">Sí, claro. Si estás de paso por Monterrey y quieres escalar con nosotrxs eres bienvenidx. Si tienes una idea para colaborar con nosotrxs y profundizar el impacto de la organización, escríbenos e intentaremos hacerlo realidad.</p>
-                    </div>
+                    <!-- FAQ content will be populated dynamically from API -->
                 </div>
             </faq>
         </main>
@@ -278,6 +223,9 @@
                 try {
                     const response = await fetch('https://ef-cms-production.up.railway.app/api/global-settings');
                     const settings = await response.json();
+                    
+                    // Store settings globally for access by other functions
+                    window.globalSettings = settings;
                     
                 // Update header location
                 const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
@@ -420,8 +368,102 @@
                 }
             }
             
-            // Call the function when the page loads
-            document.addEventListener('DOMContentLoaded', fetchGlobalSettings);
+            // Fetch and populate FAQ content
+            async function fetchFAQContent() {
+                try {
+                    const response = await fetch('https://ef-cms-production.up.railway.app/api/faq?page=1&limit=10&search=question');
+                    const faqData = await response.json();
+                    
+                    // Store FAQ data globally for access by other functions
+                    window.faqData = faqData;
+                    
+                    // Clear existing FAQ content
+                    const faqContainer = document.querySelector('.container-faq');
+                    if (faqContainer) {
+                        // Keep the heading, remove all question divs
+                        const heading = faqContainer.querySelector('.heading');
+                        const existingQuestions = faqContainer.querySelectorAll('.question');
+                        existingQuestions.forEach(question => question.remove());
+                        
+                        // Add FAQ items dynamically
+                        faqData.forEach((item, index) => {
+                            const questionDiv = document.createElement('div');
+                            questionDiv.className = 'question';
+                            questionDiv.innerHTML = `
+                                <button>
+                                    <span id="faq-q${index + 1}">${item.question_es}</span>
+                                    <i class="fas fa-chevron-down d-arrow"></i>
+                                </button>
+                                <p id="faq-a${index + 1}">${item.answer_es}</p>
+                            `;
+                            faqContainer.appendChild(questionDiv);
+                        });
+                        
+                        // Reinitialize FAQ functionality with a small delay
+                        setTimeout(() => {
+                            initFAQAccordion();
+                        }, 100);
+                    }
+                    
+                    console.log('FAQ content updated successfully');
+                } catch (error) {
+                    console.error('Error fetching FAQ content:', error);
+                }
+            }
+            
+            // Initialize FAQ accordion functionality
+            function initFAQAccordion() {
+                const faqButtons = document.querySelectorAll('.question button');
+                
+                faqButtons.forEach(button => {
+                    // Remove existing event listeners to prevent duplicates
+                    button.removeEventListener('click', handleFAQClick);
+                    // Add new event listener
+                    button.addEventListener('click', handleFAQClick);
+                });
+                
+                console.log('FAQ accordion initialized with', faqButtons.length, 'buttons');
+            }
+            
+            // FAQ accordion click handler
+            function handleFAQClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('FAQ button clicked');
+                
+                const question = this.closest('.question');
+                const answer = question.querySelector('p');
+                const icon = this.querySelector('.d-arrow');
+                
+                const isActive = answer.classList.contains('show');
+                console.log('Question is active:', isActive);
+                
+                // Close all questions first
+                const allFaqButtons = document.querySelectorAll('.question button');
+                allFaqButtons.forEach(otherButton => {
+                    const otherQuestion = otherButton.closest('.question');
+                    const otherAnswer = otherQuestion.querySelector('p');
+                    const otherIcon = otherButton.querySelector('.d-arrow');
+                    otherAnswer.classList.remove('show');
+                    otherIcon.classList.remove('rotate');
+                });
+                
+                // If the clicked question wasn't active, make it active
+                if (!isActive) {
+                    answer.classList.add('show');
+                    icon.classList.add('rotate');
+                    console.log('Question opened');
+                } else {
+                    console.log('Question closed');
+                }
+            }
+            
+            // Call the functions when the page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                fetchGlobalSettings();
+                fetchFAQContent();
+            });
         </script>
         
         <!-- Language Switcher Script -->
@@ -442,20 +484,6 @@
                     
                     // FAQ Section
                     faqTitle: "FAQs",
-                    faqQ1: "¿Cambiaron recientemente de página de internet?",
-                    faqA1: "Sí. ¡Nuestro sitio web dejó de funcionar recientemente y estamos en proceso de restaurarlo! Esta es una solución temporal hasta que podamos reconstruir nuestro sitio.",
-                    faqQ2: "¿Ayudaría recaudar fondos en el extranjero?",
-                    faqA2: "¡Claro! Cualquier cantidad es buena. También nos sirven los donativos en especie, por ejemplo cuerdas, cascos, arneses y equipo de escalada en general.",
-                    faqQ3: "¿Hay otras maneras de apoyar?",
-                    faqA3: "Email nadia@ClimbingBorders.org. Existen otras maneras de apoyar. Si tienes alguna idea que pudiera servir para que Escalando Fronteras continúe con su labor, escríbenos.",
-                    faqQ4: "¿Son una asociación civil registrada?",
-                    faqA4: "Sí, estamos dados de alta en hacienda desde 2014 y somos donataria autorizada desde 2020.",
-                    faqQ5: "¿Qué problemáticas enfrenta la niñez y la juventud?",
-                    faqA5: "Como resultado de su condición de colonia irregular e indígena, el barrio de Lomas Modelo Norte ha sido históricamente marginado y excluido de servicios públicos tan básicos como el agua, drenaje, e iluminación. Como un resultado de estas condiciones adversas, buena parte de la juventud recurre al consumo problemático de sustancias y la deserción escolar.",
-                    faqQ6: "¿Mi donativo es deducible de impuestos?",
-                    faqA6: "Sí. En México puedes solicitarnos un recibo deducible de impuestos. Si donas desde los estados unidos, puedes hacer tu donativo a través de MountainsBeyondBorders.org. También puedes hacernos llegar equipo de escalada nuevo o en buenas condiciones para que podamos seguir enseñando a niñes a escalar.",
-                    faqQ7: "¿Puedo venir de visita?",
-                    faqA7: "Sí, claro. Si estás de paso por Monterrey y quieres escalar con nosotrxs eres bienvenidx. Si tienes una idea para colaborar con nosotrxs y profundizar el impacto de la organización, escríbenos e intentaremos hacerlo realidad.",
                     
                     // Footer
                     enlaces: "Enlaces",
@@ -479,20 +507,6 @@
                     
                     // FAQ Section
                     faqTitle: "FAQs",
-                    faqQ1: "Did you recently change your website?",
-                    faqA1: "Yes. Our website recently stopped working and we are in the process of restoring it! This is a temporary solution until we can rebuild our site.",
-                    faqQ2: "Would fundraising abroad help?",
-                    faqA2: "Absolutely! Any amount is good. We also accept in-kind donations, for example ropes, helmets, harnesses and climbing equipment in general.",
-                    faqQ3: "Are there other ways to support?",
-                    faqA3: "Email nadia@ClimbingBorders.org. There are other ways to support. If you have any idea that could help Escalando Fronteras continue with its work, write to us.",
-                    faqQ4: "Are you a registered civil association?",
-                    faqA4: "Yes, we have been registered with the tax office since 2014 and we are an authorized donee since 2020.",
-                    faqQ5: "What problems do children and youth face?",
-                    faqA5: "As a result of their irregular and indigenous neighborhood condition, the Lomas Modelo Norte neighborhood has been historically marginalized and excluded from basic public services such as water, drainage, and lighting. As a result of these adverse conditions, much of the youth resorts to problematic substance use and school dropout.",
-                    faqQ6: "Is my donation tax deductible?",
-                    faqA6: "Yes. In Mexico you can request a tax deductible receipt from us. If you donate from the United States, you can make your donation through MountainsBeyondBorders.org. You can also send us new or good condition climbing equipment so we can continue teaching children to climb.",
-                    faqQ7: "Can I come visit?",
-                    faqA7: "Yes, of course. If you are passing through Monterrey and want to climb with us, you are welcome. If you have an idea to collaborate with us and deepen the impact of the organization, write to us and we will try to make it a reality.",
                     
                     // Footer
                     enlaces: "Links",
@@ -622,22 +636,26 @@
                     updateText('a[href="faq.html"]', 'faq');
                     updateText('a[href="donate.html"].custom-btn', 'dona');
                     
-                    // FAQ Content
+                    // FAQ Content - Update dynamic content from API
                     updateText('#faq-title', 'faqTitle');
-                    updateText('#faq-q1', 'faqQ1');
-                    updateText('#faq-a1', 'faqA1');
-                    updateText('#faq-q2', 'faqQ2');
-                    updateText('#faq-a2', 'faqA2');
-                    updateText('#faq-q3', 'faqQ3');
-                    updateHTML('#faq-a3', 'faqA3'); // Use HTML for line breaks
-                    updateText('#faq-q4', 'faqQ4');
-                    updateText('#faq-a4', 'faqA4');
-                    updateText('#faq-q5', 'faqQ5');
-                    updateText('#faq-a5', 'faqA5');
-                    updateText('#faq-q6', 'faqQ6');
-                    updateHTML('#faq-a6', 'faqA6'); // Use HTML for line breaks
-                    updateText('#faq-q7', 'faqQ7');
-                    updateText('#faq-a7', 'faqA7');
+                    
+                    // Update dynamic FAQ content from API data
+                    if (window.faqData && window.faqData.length > 0) {
+                        window.faqData.forEach((item, index) => {
+                            const questionElement = document.getElementById(`faq-q${index + 1}`);
+                            const answerElement = document.getElementById(`faq-a${index + 1}`);
+                            
+                            if (questionElement) {
+                                const questionText = this.currentLanguage === 'en' ? item.question_en : item.question_es;
+                                questionElement.textContent = questionText;
+                            }
+                            
+                            if (answerElement) {
+                                const answerText = this.currentLanguage === 'en' ? item.answer_en : item.answer_es;
+                                answerElement.textContent = answerText;
+                            }
+                        });
+                    }
                     
                     // Footer
                     const footerTitles = document.querySelectorAll('.site-footer-title');

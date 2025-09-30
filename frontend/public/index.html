@@ -545,7 +545,7 @@
 
                                 <div class="row">
 
-                                    <input type="hidden" name="access_key" value="ae4e13a2-c73a-4e1c-8ef8-64960acd354c">
+                                    <input type="hidden" name="access_key" id="volunteer-web3forms-key" value="ae4e13a2-c73a-4e1c-8ef8-64960acd354c">
                                     <input type="hidden" name="subject" value="New Submission from Web3Forms">
                                     <input type="checkbox" name="botcheck" id="" style="display: none;">
 
@@ -668,11 +668,11 @@
                                 <h2>Contáctanos</h2>
 
                                 <div class="contact-image-wrap d-flex flex-wrap">
-                                    <img src="images/alejandro_medina.jpeg" class="img-fluid avatar-image" alt="">
+                                    <img src="" class="img-fluid avatar-image" alt="" id="contact-person-image" style="display: none;">
 
                                     <div class="d-flex flex-column justify-content-center ms-3">
-                                        <p class="mb-0">Alejandro Medina Fuentes</p>
-                                        <p class="mb-0"><strong>Director General</strong></p>
+                                        <p class="mb-0" id="contact-person-name" style="display: none;"></p>
+                                        <p class="mb-0"><strong id="contact-person-role" style="display: none;"></strong></p>
                                     </div>
                                 </div>
 
@@ -703,11 +703,11 @@
                                 <h2>Formulario de Contacto</h2>
 
                                 <p class="mb-4">O, simplemente puede enviar un correo electrónico:
-                                    <a href="#">Nadia@ClimbingBorders.org</a>
+                                    <a href="#" id="contact-form-email"></a>
                                 </p>
                                 <div class="row">
 
-                                    <input type="hidden" name="access_key" value="ae4e13a2-c73a-4e1c-8ef8-64960acd354c">
+                                    <input type="hidden" name="access_key" id="web3forms-key">
                                     <input type="hidden" name="subject" value="New Submission from Web3Forms">
                                     <input type="checkbox" name="botcheck" id="" style="display: none;">
 
@@ -866,6 +866,9 @@
                 try {
                     const response = await fetch('https://ef-cms-production.up.railway.app/api/global-settings');
                     const settings = await response.json();
+                    
+                    // Store settings globally for access by other functions
+                    window.globalSettings = settings;
                     
                 // Update header location
                 const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
@@ -1030,6 +1033,80 @@
                         contactEmail.style.display = 'flex';
                     } else {
                         contactEmail.style.display = 'none';
+                    }
+                }
+                
+                // Update contact person information
+                const contactPersonImage = document.getElementById('contact-person-image');
+                if (contactPersonImage) {
+                    if (settings.contactPersonImageUrl && settings.contactPersonImageUrl.trim() !== '') {
+                        contactPersonImage.src = settings.contactPersonImageUrl;
+                        contactPersonImage.style.display = 'block';
+                    } else {
+                        contactPersonImage.style.display = 'none';
+                    }
+                }
+                
+                const contactPersonName = document.getElementById('contact-person-name');
+                if (contactPersonName) {
+                    if (settings.contactPersonName && settings.contactPersonName.trim() !== '') {
+                        contactPersonName.textContent = settings.contactPersonName;
+                        contactPersonName.style.display = 'block';
+                    } else {
+                        contactPersonName.style.display = 'none';
+                    }
+                }
+                
+                const contactPersonRole = document.getElementById('contact-person-role');
+                if (contactPersonRole) {
+                    // Get current language from language switcher instance
+                    const currentLang = window.languageSwitcher ? window.languageSwitcher.currentLanguage : 'es';
+                    let roleText = '';
+                    
+                    if (currentLang === 'en' && settings.contactPersonRoleEn && settings.contactPersonRoleEn.trim() !== '') {
+                        roleText = settings.contactPersonRoleEn;
+                    } else if (currentLang === 'es' && settings.contactPersonRoleEs && settings.contactPersonRoleEs.trim() !== '') {
+                        roleText = settings.contactPersonRoleEs;
+                    } else if (settings.contactPersonRoleEs && settings.contactPersonRoleEs.trim() !== '') {
+                        // Fallback to Spanish if English is not available
+                        roleText = settings.contactPersonRoleEs;
+                    } else if (settings.contactPersonRoleEn && settings.contactPersonRoleEn.trim() !== '') {
+                        // Fallback to English if Spanish is not available
+                        roleText = settings.contactPersonRoleEn;
+                    }
+                    
+                    if (roleText) {
+                        contactPersonRole.textContent = roleText;
+                        contactPersonRole.style.display = 'block';
+                    } else {
+                        contactPersonRole.style.display = 'none';
+                    }
+                }
+                
+                // Update web3forms key
+                const web3formsKey = document.getElementById('web3forms-key');
+                if (web3formsKey) {
+                    if (settings.web3formsKey && settings.web3formsKey.trim() !== '') {
+                        web3formsKey.value = settings.web3formsKey;
+                    }
+                }
+                
+                const volunteerWeb3formsKey = document.getElementById('volunteer-web3forms-key');
+                if (volunteerWeb3formsKey) {
+                    if (settings.web3formsKey && settings.web3formsKey.trim() !== '') {
+                        volunteerWeb3formsKey.value = settings.web3formsKey;
+                    }
+                }
+                
+                // Update contact form email
+                const contactFormEmail = document.getElementById('contact-form-email');
+                if (contactFormEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        contactFormEmail.href = `mailto:${settings.mail}`;
+                        contactFormEmail.textContent = settings.mail;
+                        contactFormEmail.style.display = 'inline';
+                    } else {
+                        contactFormEmail.style.display = 'none';
                     }
                 }
                     
@@ -1555,8 +1632,22 @@
                     // Update historia link with current language
                     this.updateHistoriaLink();
                     
+                    // Update contact person role with current language
+                    this.updateContactPersonRole();
+                    
                     // Trigger content refresh
                     this.refreshContent();
+                    
+                    // Dispatch language change event for other components
+                    const languageChangeEvent = new CustomEvent('languageChanged', {
+                        detail: { language: newLang }
+                    });
+                    document.dispatchEvent(languageChangeEvent);
+                    
+                    // Update fundador integration directly
+                    if (window.fundadorIntegration) {
+                        window.fundadorIntegration.updateLanguage(newLang);
+                    }
                     
                     console.log('✅ Language switched to:', newLang);
                 }
@@ -2244,6 +2335,33 @@
                         const currentLang = this.currentLanguage || 'es';
                         historiaLink.href = `historia.html?lang=${currentLang}`;
                         console.log('🔗 Updated historia link with language:', currentLang);
+                    }
+                }
+                
+                updateContactPersonRole() {
+                    const contactPersonRole = document.getElementById('contact-person-role');
+                    if (contactPersonRole && window.globalSettings) {
+                        const settings = window.globalSettings;
+                        let roleText = '';
+                        
+                        if (this.currentLanguage === 'en' && settings.contactPersonRoleEn && settings.contactPersonRoleEn.trim() !== '') {
+                            roleText = settings.contactPersonRoleEn;
+                        } else if (this.currentLanguage === 'es' && settings.contactPersonRoleEs && settings.contactPersonRoleEs.trim() !== '') {
+                            roleText = settings.contactPersonRoleEs;
+                        } else if (settings.contactPersonRoleEs && settings.contactPersonRoleEs.trim() !== '') {
+                            // Fallback to Spanish if English is not available
+                            roleText = settings.contactPersonRoleEs;
+                        } else if (settings.contactPersonRoleEn && settings.contactPersonRoleEn.trim() !== '') {
+                            // Fallback to English if Spanish is not available
+                            roleText = settings.contactPersonRoleEn;
+                        }
+                        
+                        if (roleText) {
+                            contactPersonRole.textContent = roleText;
+                            contactPersonRole.style.display = 'block';
+                        } else {
+                            contactPersonRole.style.display = 'none';
+                        }
                     }
                 }
             }

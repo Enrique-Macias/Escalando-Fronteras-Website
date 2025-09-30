@@ -11,6 +11,9 @@ class FundadorIntegration {
     }
 
     init() {
+        // Get current language from language switcher or localStorage
+        this.getCurrentLanguage();
+        
         // Wait for API services to be ready
         document.addEventListener('apiServicesReady', () => {
             this.fundadorContainer = document.querySelector('.about-section .container .row');
@@ -24,6 +27,32 @@ class FundadorIntegration {
             this.currentLanguage = event.detail.language;
             this.loadFundadores();
         });
+    }
+    
+    getCurrentLanguage() {
+        // Try to get language from language switcher instance
+        if (window.languageSwitcher && window.languageSwitcher.currentLanguage) {
+            this.currentLanguage = window.languageSwitcher.currentLanguage;
+        } else {
+            // Fallback to localStorage
+            const storedLang = localStorage.getItem('userLanguagePreference');
+            if (storedLang && (storedLang === 'en' || storedLang === 'es')) {
+                this.currentLanguage = storedLang;
+            } else {
+                // Default to Spanish
+                this.currentLanguage = 'es';
+            }
+        }
+        console.log('🌍 Fundador integration initialized with language:', this.currentLanguage);
+    }
+    
+    // Method to update language and refresh content
+    updateLanguage(newLanguage) {
+        if (this.currentLanguage !== newLanguage) {
+            this.currentLanguage = newLanguage;
+            console.log('🔄 Fundador language updated to:', newLanguage);
+            this.loadFundadores();
+        }
     }
 
     async loadFundadores() {

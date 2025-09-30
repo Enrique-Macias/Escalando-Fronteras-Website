@@ -32,14 +32,12 @@ class ApoyoIntegration {
             // Show loading state
             this.showLoading();
 
-            console.log('🔄 Loading apoyo widgets...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading apoyo widgets
 
             // Fetch apoyo items from API
             const apoyoItems = await EFAPI.apoyo.getActiveApoyo();
             
-            console.log('✅ Apoyo items loaded:', apoyoItems);
+            // Apoyo items loaded
             
             // Store items for layout decisions
             this.apoyoItems = apoyoItems;
@@ -123,7 +121,7 @@ class ApoyoIntegration {
             const section = document.querySelector('#section_3');
             if (section) {
                 section.style.display = 'none';
-                console.log('✅ Apoyo section hidden - no data available');
+                // Apoyo section hidden - no data available
             }
             return;
         }
@@ -152,14 +150,14 @@ class ApoyoIntegration {
         `;
 
         // Create widget elements
-        console.log(`🎯 Creating ${apoyoItems.length} widget elements`);
+        // Creating widget elements
         apoyoItems.forEach((apoyoItem, index) => {
             const widgetElement = this.createWidgetElement(apoyoItem, index);
             widgetsContainer.appendChild(widgetElement);
         });
 
         this.apoyoContainer.appendChild(widgetsContainer);
-        console.log(`✅ Added widgets container with ${widgetsContainer.children.length} elements`);
+        // Added widgets container
     }
 
     createWidgetElement(apoyoItem, index) {
@@ -169,7 +167,7 @@ class ApoyoIntegration {
         let columnClass = 'col-lg-4 col-md-6 col-12'; // 3 columns on desktop, 2 on tablet, 1 on mobile
         
         // Debug: log the number of items
-        console.log(`🎯 Creating widget ${index + 1} of ${this.apoyoItems ? this.apoyoItems.length : 'unknown'} items`);
+        // Creating widget
         
         if (this.apoyoItems && this.apoyoItems.length === 1) {
             // If only one item, center it
@@ -231,7 +229,7 @@ class ApoyoIntegration {
         
         // Insert the widget code
         widgetContent.innerHTML = apoyoItem.widgetCode;
-        console.log('📦 Widget code inserted:', apoyoItem.widgetCode);
+        // Widget code inserted
 
         // Append widget content
         widgetContainer.appendChild(widgetContent);
@@ -240,7 +238,7 @@ class ApoyoIntegration {
         // Execute any script tags that came with the widget code
         const scripts = widgetContent.querySelectorAll('script');
         scripts.forEach((script, index) => {
-            console.log(`📜 Executing script ${index + 1}:`, script.src || script.textContent.substring(0, 100));
+            // Executing script
             
             // Check if script is already loaded
             const existingScript = document.querySelector(`script[src="${script.src}"]`);
@@ -253,9 +251,9 @@ class ApoyoIntegration {
                 
                 // Add to document head
                 document.head.appendChild(newScript);
-                console.log(`📜 Script ${index + 1} added to document`);
+                // Script added to document
             } else if (existingScript) {
-                console.log(`📜 Script ${index + 1} already exists, skipping`);
+                // Script already exists, skipping
             }
         });
 
@@ -273,18 +271,18 @@ class ApoyoIntegration {
      * Reinitialize GoFundMe widgets after dynamic insertion
      */
     reinitializeGoFundMeWidgets() {
-        console.log('🔄 Reinitializing GoFundMe widgets...');
+        // Reinitializing GoFundMe widgets
         
         // Check if GoFundMe script is already loaded
         const existingScript = document.querySelector('script[src*="gofundme.com/static/js/embed.js"]');
         
         if (!existingScript) {
-            console.log('📦 Loading GoFundMe embed script...');
+            // Loading GoFundMe embed script
             const script = document.createElement('script');
             script.src = 'https://www.gofundme.com/static/js/embed.js';
             script.defer = true;
             script.onload = () => {
-                console.log('✅ GoFundMe script loaded, initializing widgets...');
+                // GoFundMe script loaded, initializing widgets
                 this.initializeWidgets();
             };
             script.onerror = () => {
@@ -292,7 +290,7 @@ class ApoyoIntegration {
             };
             document.head.appendChild(script);
         } else {
-            console.log('📦 GoFundMe script already loaded, initializing widgets...');
+            // GoFundMe script already loaded, initializing widgets
             this.initializeWidgets();
         }
     }
@@ -303,7 +301,7 @@ class ApoyoIntegration {
     initializeWidgets() {
         // Look for gfm-embed elements
         const embedElements = document.querySelectorAll('.gfm-embed');
-        console.log(`🎯 Found ${embedElements.length} GoFundMe embed elements`);
+        // Found GoFundMe embed elements
         
         if (embedElements.length > 0) {
             // Wait a bit more for the script to be fully loaded
@@ -321,11 +319,11 @@ class ApoyoIntegration {
         
         // Method 1: Try gfmEmbed.init()
         if (window.gfmEmbed && typeof window.gfmEmbed.init === 'function') {
-            console.log('🔄 Method 1: Using gfmEmbed.init()');
+            // Method 1: Using gfmEmbed.init()
             try {
                 window.gfmEmbed.init();
                 initialized = true;
-                console.log('✅ Widget initialized with gfmEmbed.init()');
+                // Widget initialized with gfmEmbed.init()
             } catch (error) {
                 console.error('❌ Error with gfmEmbed.init():', error);
             }
@@ -333,11 +331,11 @@ class ApoyoIntegration {
         
         // Method 2: Try gfmEmbed() directly
         if (!initialized && window.gfmEmbed && typeof window.gfmEmbed === 'function') {
-            console.log('🔄 Method 2: Using gfmEmbed() directly');
+            // Method 2: Using gfmEmbed() directly
             try {
                 window.gfmEmbed();
                 initialized = true;
-                console.log('✅ Widget initialized with gfmEmbed()');
+                // Widget initialized with gfmEmbed()
             } catch (error) {
                 console.error('❌ Error with gfmEmbed():', error);
             }
@@ -345,7 +343,7 @@ class ApoyoIntegration {
         
         // Method 3: Try to trigger DOM events
         if (!initialized) {
-            console.log('🔄 Method 3: Triggering DOM events');
+            // Method 3: Triggering DOM events
             try {
                 embedElements.forEach((element) => {
                     // Trigger various events that GoFundMe might listen for
@@ -360,7 +358,7 @@ class ApoyoIntegration {
                 setTimeout(() => {
                     const loadedWidgets = document.querySelectorAll('.gfm-embed iframe');
                     if (loadedWidgets.length > 0) {
-                        console.log('✅ Widgets loaded via DOM events');
+                        // Widgets loaded via DOM events
                         initialized = true;
                     }
                 }, 1000);
@@ -371,14 +369,14 @@ class ApoyoIntegration {
         
         // Method 4: Fallback to iframe
         if (!initialized) {
-            console.log('🔄 Method 4: Using iframe fallback');
+            // Method 4: Using iframe fallback
             embedElements.forEach((element, index) => {
-                console.log(`🎯 Processing embed element ${index + 1}:`, element);
+                // Processing embed element
                 
                 // Check if element has data-url attribute
                 const dataUrl = element.getAttribute('data-url');
                 if (dataUrl) {
-                    console.log(`🔗 Widget URL: ${dataUrl}`);
+                    // Widget URL found
                     
                     // Try to create an iframe manually as fallback
                     this.createFallbackWidget(element, dataUrl);
@@ -391,7 +389,7 @@ class ApoyoIntegration {
      * Create fallback widget if GoFundMe script fails
      */
     createFallbackWidget(element, dataUrl) {
-        console.log('🔄 Creating fallback widget for:', dataUrl);
+        // Creating fallback widget
         
         // Create iframe as fallback - keep the large widget size
         const iframe = document.createElement('iframe');
@@ -419,7 +417,7 @@ class ApoyoIntegration {
             targetContainer = element.parentNode;
             try {
                 element.parentNode.replaceChild(iframe, element);
-                console.log('✅ Replaced element with iframe');
+                // Replaced element with iframe
             } catch (error) {
                 console.warn('❌ Error replacing element:', error);
                 targetContainer = null;
@@ -434,7 +432,7 @@ class ApoyoIntegration {
                 // Clear the container and add iframe
                 widgetContainer.innerHTML = '';
                 widgetContainer.appendChild(iframe);
-                console.log('✅ Appended iframe to widget container');
+                // Appended iframe to widget container
             } else {
                 console.warn('❌ No widget container found, appending to body');
                 document.body.appendChild(iframe);
@@ -449,19 +447,19 @@ class ApoyoIntegration {
                 if (widgetContainer) {
                     this.adjustContainerHeight(widgetContainer);
                 } else {
-                    console.log('📏 No widget container found for height adjustment');
+                    // No widget container found for height adjustment
                 }
             }, 1000);
         };
         
-        console.log('✅ Fallback widget created with large size');
+        // Fallback widget created with large size
     }
 
     /**
      * Force refresh apoyo data
      */
     forceRefresh() {
-        console.log('🔄 Force refreshing apoyo...');
+        // Force refreshing apoyo
         this.loadApoyo();
     }
 
@@ -469,25 +467,25 @@ class ApoyoIntegration {
      * Try to force proper GoFundMe widget initialization
      */
     forceGoFundMeInitialization() {
-        console.log('🔄 Force initializing GoFundMe widgets...');
+        // Force initializing GoFundMe widgets
         
         // Remove any existing iframe fallbacks
         const iframes = document.querySelectorAll('.apoyo-widget-container iframe');
         iframes.forEach(iframe => {
-            console.log('🗑️ Removing iframe fallback');
+            // Removing iframe fallback
             iframe.remove();
         });
         
         // Find embed elements and try to initialize them properly
         const embedElements = document.querySelectorAll('.gfm-embed');
         if (embedElements.length > 0) {
-            console.log('🎯 Found embed elements, trying proper initialization...');
+            // Found embed elements, trying proper initialization
             
             // Wait for GoFundMe script to be ready
             const checkScript = setInterval(() => {
                 if (window.gfmEmbed) {
                     clearInterval(checkScript);
-                    console.log('✅ GoFundMe script ready, initializing...');
+                    // GoFundMe script ready, initializing
                     
                     try {
                         if (typeof window.gfmEmbed.init === 'function') {
@@ -500,9 +498,9 @@ class ApoyoIntegration {
                         setTimeout(() => {
                             const loadedWidgets = document.querySelectorAll('.gfm-embed iframe');
                             if (loadedWidgets.length > 0) {
-                                console.log('✅ GoFundMe widgets loaded properly!');
+                                // GoFundMe widgets loaded properly
                             } else {
-                                console.log('⚠️ GoFundMe widgets still not loaded, keeping fallback');
+                                // GoFundMe widgets still not loaded, keeping fallback
                             }
                         }, 2000);
                         
@@ -515,7 +513,7 @@ class ApoyoIntegration {
             // Timeout after 10 seconds
             setTimeout(() => {
                 clearInterval(checkScript);
-                console.log('⏰ GoFundMe initialization timeout');
+                // GoFundMe initialization timeout
             }, 10000);
         }
     }
@@ -529,12 +527,12 @@ class ApoyoIntegration {
             const iframe = container.querySelector('iframe');
             
             if (iframe) {
-                console.log('📏 Iframe loaded successfully:', iframe.src);
+                // Iframe loaded successfully
                 // Cross-origin restrictions prevent height adjustment for GoFundMe widgets
                 // Using optimized default heights instead
-                console.log('📏 Using optimized default height (520px) due to cross-origin restrictions');
+                // Using optimized default height due to cross-origin restrictions
             } else {
-                console.log('📏 No iframe found in container');
+                // No iframe found in container
             }
         }, 1000); // Reduced timeout since we're not doing dynamic adjustment
     }

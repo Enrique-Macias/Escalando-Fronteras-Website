@@ -43,14 +43,14 @@ class FundadorIntegration {
                 this.currentLanguage = 'es';
             }
         }
-        console.log('🌍 Fundador integration initialized with language:', this.currentLanguage);
+        // Fundador integration initialized
     }
     
     // Method to update language and refresh content
     updateLanguage(newLanguage) {
         if (this.currentLanguage !== newLanguage) {
             this.currentLanguage = newLanguage;
-            console.log('🔄 Fundador language updated to:', newLanguage);
+            // Fundador language updated
             this.loadFundadores();
         }
     }
@@ -62,14 +62,12 @@ class FundadorIntegration {
             // Show loading state
             this.showLoading();
 
-            console.log('🔄 Loading fundadores...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading fundadores
 
             // Fetch fundadores from API
             const fundadores = await EFAPI.fundadores.getActiveFundadores();
             
-            console.log('✅ Fundadores loaded:', fundadores);
+            // Fundadores loaded
             
             // Store fundadores for display
             this.fundadores = fundadores;
@@ -145,7 +143,7 @@ class FundadorIntegration {
             const section = document.querySelector('.about-section');
             if (section) {
                 section.style.display = 'none';
-                console.log('✅ Fundador section hidden - no data available');
+                // Fundador section hidden - no data available
             }
             return;
         }
@@ -167,7 +165,7 @@ class FundadorIntegration {
             this.displayFundador(fundador, index);
         });
 
-        console.log(`✅ Displayed ${sortedFundadores.length} fundadores with alternating layout`);
+        // Displayed fundadores with alternating layout
     }
 
     sortFundadores(fundadores) {
@@ -200,7 +198,7 @@ class FundadorIntegration {
     }
 
     displayFundador(fundador, index) {
-        console.log(`🎯 Displaying fundador ${index + 1}:`, fundador.name);
+        // Displaying fundador
 
         // Determine layout based on index (alternating pattern)
         const isEvenIndex = index % 2 === 0;
@@ -325,14 +323,14 @@ class FundadorIntegration {
         // Append row to container
         this.fundadorContainer.appendChild(fundadorRow);
 
-        console.log(`✅ Fundador ${index + 1} displayed successfully with ${isEvenIndex ? 'image-text' : 'text-image'} layout`);
+        // Fundador displayed successfully
     }
 
     /**
      * Force refresh fundadores data
      */
     forceRefresh() {
-        console.log('🔄 Force refreshing fundadores...');
+        // Force refreshing fundadores
         this.loadFundadores();
     }
 }

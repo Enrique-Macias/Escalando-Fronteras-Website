@@ -12,6 +12,11 @@ $.each(sectionArray, function(index, value){
     }
           
      $(document).scroll(function(){
+         // Skip if cross-page scroll is in progress
+         if (window.isCrossPageScroll) {
+             return;
+         }
+         
          var sectionOffset = sectionElement.offset();
          if (!sectionOffset) {
              return; // Exit if offset is undefined

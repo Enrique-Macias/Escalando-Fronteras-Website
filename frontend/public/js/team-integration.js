@@ -36,14 +36,12 @@ class TeamIntegration {
             // Show loading state
             this.showLoading();
 
-            console.log('🔄 Loading team members...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading team members
 
             // Fetch team members from API
             const teamMembers = await EFAPI.team.getAllTeamMembers(this.currentLanguage);
             
-            console.log('✅ Team members loaded:', teamMembers);
+            // Team members loaded
             
             // Display team members
             this.displayTeamMembers(teamMembers);
@@ -150,11 +148,11 @@ class TeamIntegration {
     }
 
     hideSection() {
-        console.log('🚫 No team data available, hiding team section');
+        // No team data available, hiding team section
         const teamSection = document.querySelector('#team');
         if (teamSection) {
             teamSection.style.display = 'none';
-            console.log('✅ Team section hidden successfully');
+            // Team section hidden successfully
         }
     }
 

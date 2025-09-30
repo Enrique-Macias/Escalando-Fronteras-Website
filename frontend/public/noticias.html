@@ -227,16 +227,16 @@
                         <h5 class="site-footer-title mb-3">Enlaces</h5>
 
                         <ul class="footer-menu">
-                            <li class="footer-menu-item"><a href="index.html#section_2" class="footer-menu-link">Nuestra Historia</a></li>
+                            <li class="footer-menu-item"><a href="index.html#about-section" class="footer-menu-link click-scroll">Nuestra Historia</a></li>
 
-                            <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link">Mirar Documental</a></li>
+                            <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link click-scroll">Mirar Documental</a></li>
 
                             <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
 
 
-                            <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link">Asóciate con Nosotros</a></li>
+                            <li class="footer-menu-item"><a href="index.html#contact-section" class="footer-menu-link click-scroll">Asóciate con Nosotros</a></li>
 
-                            <li class="footer-menu-item"><a href="index.html#articulos" class="footer-menu-link">Artículos</a></li>
+                            <li class="footer-menu-item"><a href="index.html#articles-section" class="footer-menu-link click-scroll">Artículos</a></li>
                         </ul>
                     </div>
 
@@ -468,6 +468,9 @@
         
         <!-- News Page Integration Script -->
         <script src="js/noticias-integration.js"></script>
+        
+        <!-- Global Scroll Handler -->
+        <script src="js/global-scroll.js"></script>
         
         <!-- Language Switcher Script for Noticias -->
         <script>
@@ -739,35 +742,9 @@
                             return;
                         }
                         
-                        // Extract the section ID from the href
-                        const sectionId = href.split('#')[1];
-                        if (!sectionId) return;
-                        
-                        // Store the section ID to scroll to after page load
-                        sessionStorage.setItem('scrollToSection', sectionId);
+                        // Footer links are now handled by global-scroll.js
                     });
                 });
-                
-                // Check if we need to scroll to a section after page load
-                const scrollToSection = sessionStorage.getItem('scrollToSection');
-                if (scrollToSection) {
-                    // Clear the stored section
-                    sessionStorage.removeItem('scrollToSection');
-                    
-                    // Wait a bit for the page to fully load, then scroll
-                    setTimeout(() => {
-                        const target = document.getElementById(scrollToSection);
-                        if (target) {
-                            const navbar = document.querySelector('.navbar');
-                            const navbarHeight = navbar ? navbar.offsetHeight : 0;
-                            
-                            window.scrollTo({
-                                top: target.offsetTop - navbarHeight - 20,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }, 500);
-                }
             });
         </script>
 

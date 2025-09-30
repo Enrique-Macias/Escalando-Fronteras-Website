@@ -15,11 +15,11 @@ class FundadoresAPI {
      */
     async getAllFundadores() {
         try {
-            console.log('🔄 Fetching all fundadores...');
+            // Fetching all fundadores
             const response = await this.client.get(this.endpoint);
             
             if (response && Array.isArray(response)) {
-                console.log(`✅ Found ${response.length} fundadores`);
+                // Found fundadores
                 return response;
             } else {
                 console.warn('⚠️ Unexpected response format for fundadores');
@@ -46,12 +46,12 @@ class FundadoresAPI {
      */
     async getFundadorById(id) {
         try {
-            console.log(`🔄 Fetching fundador with ID: ${id}`);
+            // Fetching fundador with ID
             const fundadores = await this.getAllFundadores();
             const fundador = fundadores.find(f => f.id === id);
             
             if (fundador) {
-                console.log(`✅ Found fundador: ${fundador.name}`);
+                // Found fundador
                 return fundador;
             } else {
                 console.warn(`⚠️ Fundador with ID ${id} not found`);
@@ -70,13 +70,13 @@ class FundadoresAPI {
      */
     async getFundadoresByRole(role) {
         try {
-            console.log(`🔄 Fetching fundadores with role: ${role}`);
+            // Fetching fundadores with role
             const fundadores = await this.getAllFundadores();
             const filtered = fundadores.filter(f => 
                 f.role_es === role || f.role_en === role
             );
             
-            console.log(`✅ Found ${filtered.length} fundadores with role: ${role}`);
+            // Found fundadores with role
             return filtered;
         } catch (error) {
             console.error(`❌ Error fetching fundadores by role ${role}:`, error);
@@ -98,13 +98,13 @@ class FundadoresAPI {
      */
     async getFundadoresWithSocial() {
         try {
-            console.log('🔄 Fetching fundadores with social media...');
+            // Fetching fundadores with social media
             const fundadores = await this.getAllFundadores();
             const withSocial = fundadores.filter(f => 
                 f.facebookUrl || f.instagramUrl
             );
             
-            console.log(`✅ Found ${withSocial.length} fundadores with social media`);
+            // Found fundadores with social media
             return withSocial;
         } catch (error) {
             console.error('❌ Error fetching fundadores with social media:', error);

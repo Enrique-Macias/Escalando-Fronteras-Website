@@ -166,14 +166,14 @@
                 <h5 class="site-footer-title mb-3" id="footer-enlaces">Enlaces</h5>
 
                 <ul class="footer-menu">
-                    <li class="footer-menu-item"><a href="index.html#section_2" class="footer-menu-link" id="footer-nuestra-historia">Nuestra Historia</a></li>
+                    <li class="footer-menu-item"><a href="index.html#about-section" class="footer-menu-link click-scroll" id="footer-nuestra-historia">Nuestra Historia</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link" id="footer-mirar-documental">Mirar Documental</a></li>
+                    <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link click-scroll" id="footer-mirar-documental">Mirar Documental</a></li>
 
                     <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link" id="footer-realizar-donacion">Realiza una Donación</a></li>
 
 
-                    <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link" id="footer-nuestros-patrocinadores">Nuestros Patrocinadores</a></li>
+                    <li class="footer-menu-item"><a href="index.html#sponsors" class="footer-menu-link click-scroll" id="footer-nuestros-patrocinadores">Nuestros Patrocinadores</a></li>
                 </ul>
             </div>
 
@@ -235,6 +235,7 @@
         <script src="js/jquery.sticky.js"></script>
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
+        <script src="js/global-scroll.js"></script>
         
         <!-- Global Settings API Integration -->
         <script>
@@ -672,35 +673,9 @@
                             return;
                         }
                         
-                        // Extract the section ID from the href
-                        const sectionId = href.split('#')[1];
-                        if (!sectionId) return;
-                        
-                        // Store the section ID to scroll to after page load
-                        sessionStorage.setItem('scrollToSection', sectionId);
+                        // Footer links are now handled by global-scroll.js
                     });
                 });
-                
-                // Check if we need to scroll to a section after page load
-                const scrollToSection = sessionStorage.getItem('scrollToSection');
-                if (scrollToSection) {
-                    // Clear the stored section
-                    sessionStorage.removeItem('scrollToSection');
-                    
-                    // Wait a bit for the page to fully load, then scroll
-                    setTimeout(() => {
-                        const target = document.getElementById(scrollToSection);
-                        if (target) {
-                            const navbar = document.querySelector('.navbar');
-                            const navbarHeight = navbar ? navbar.offsetHeight : 0;
-                            
-                            window.scrollTo({
-                                top: target.offsetTop - navbarHeight - 20,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }, 500);
-                }
             });
         </script>
     </body>

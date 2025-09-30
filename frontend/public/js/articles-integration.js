@@ -38,9 +38,7 @@ class ArticlesIntegration {
             // Show loading state
             this.showLoading();
 
-            console.log('🔄 Loading articles...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading articles
 
             // Fetch articles from API
             const articles = await EFAPI.articles.getArticles({
@@ -58,7 +56,7 @@ class ArticlesIntegration {
                 articlesList = [];
             }
             
-            console.log('✅ Articles loaded:', articlesList);
+            // Articles loaded
             
             // Store all articles
             this.allArticles = articlesList;
@@ -172,7 +170,7 @@ class ArticlesIntegration {
     }
 
     showAllArticles() {
-        console.log('📖 Showing all articles');
+        // Showing all articles
         this.showingAllArticles = true;
         this.displayArticles(this.allArticles);
     }
@@ -227,11 +225,11 @@ class ArticlesIntegration {
     }
 
     hideSection() {
-        console.log('🚫 No articles data available, hiding articles section');
+        // No articles data available, hiding articles section
         const articlesSection = document.querySelector('.blog-section');
         if (articlesSection) {
             articlesSection.style.display = 'none';
-            console.log('✅ Articles section hidden successfully');
+            // Articles section hidden successfully
         }
     }
 

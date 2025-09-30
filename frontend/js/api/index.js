@@ -16,7 +16,7 @@
 // 9. apoyo.js - Apoyo API
 // 10. fundadores.js - Fundadores API
 
-console.log('🚀 Loading EF CMS API Services...');
+// Loading EF CMS API Services
 
 // Check if all required services are loaded
 function checkServicesLoaded() {
@@ -36,8 +36,7 @@ function checkServicesLoaded() {
     const missingServices = requiredServices.filter(service => !window[service]);
     
     if (missingServices.length === 0) {
-        console.log('✅ All API services loaded successfully!');
-        console.log('Available services:', requiredServices);
+        // All API services loaded successfully
         
         // Initialize language service
         languageService.updatePageLanguage();
@@ -73,4 +72,4 @@ window.EFAPI = {
     fundadores: window.fundadoresAPI
 };
 
-console.log('📡 EF API Services initialized. Access via window.EFAPI');
+// EF API Services initialized

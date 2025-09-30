@@ -32,14 +32,12 @@ class SponsorsIntegration {
             // Show loading state
             this.showLoading();
 
-            console.log('🔄 Loading sponsors...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading sponsors
 
             // Fetch sponsors from API
             const sponsors = await EFAPI.sponsors.getAllSponsors();
             
-            console.log('✅ Sponsors loaded:', sponsors);
+            // Sponsors loaded
             
             // Display sponsors
             this.displaySponsors(sponsors);
@@ -164,7 +162,7 @@ class SponsorsIntegration {
      * Force refresh sponsors data
      */
     forceRefresh() {
-        console.log('🔄 Force refreshing sponsors...');
+        // Force refreshing sponsors
         this.loadSponsors();
     }
 }

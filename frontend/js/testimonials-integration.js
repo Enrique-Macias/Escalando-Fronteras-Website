@@ -36,9 +36,7 @@ class TestimonialsIntegration {
             // Show loading state
             this.showLoading();
 
-            console.log('🔄 Loading testimonials...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading testimonials
 
             // Fetch testimonials from API
             const testimonials = await EFAPI.testimonials.getTestimonials({
@@ -56,7 +54,7 @@ class TestimonialsIntegration {
                 testimonialsList = [];
             }
             
-            console.log('✅ Testimonials loaded:', testimonialsList);
+            // Testimonials loaded
             
             // Display testimonials
             this.displayTestimonials(testimonialsList);
@@ -197,11 +195,11 @@ class TestimonialsIntegration {
     }
 
     hideSection() {
-        console.log('🚫 No testimonials data available, hiding testimonials section');
+        // No testimonials data available, hiding testimonials section
         const testimonialsSection = document.querySelector('.testimonial-section');
         if (testimonialsSection) {
             testimonialsSection.style.display = 'none';
-            console.log('✅ Testimonials section hidden successfully');
+            // Testimonials section hidden successfully
         }
     }
 

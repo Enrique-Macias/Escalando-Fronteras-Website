@@ -12,16 +12,16 @@ class EventsIntegration {
     }
 
     init() {
-        console.log('🎪 Events integration init() called');
+        // Events integration init() called
         document.addEventListener('apiServicesReady', () => {
-            console.log('🎪 Events integration: API services ready');
+            // Events integration: API services ready
             this.recentEventsContainer = document.getElementById('recent-events-container');
-            console.log('🎪 Events container found:', this.recentEventsContainer);
+            // Events container found
             this.loadingElement = this.recentEventsContainer ? this.recentEventsContainer.querySelector('.spinner-border') : null;
             this.currentLanguage = EFAPI.language.getCurrentLanguage();
             
             // Load recent events
-            console.log('🎪 Starting to load recent events...');
+            // Starting to load recent events
             this.loadRecentEvents();
             
             // Listen for language changes
@@ -33,24 +33,22 @@ class EventsIntegration {
     }
 
     async loadRecentEvents() {
-        console.log('🎪 loadRecentEvents called, current language:', this.currentLanguage);
+        // loadRecentEvents called
         
         // Try to find the container if we don't have it yet
         if (!this.recentEventsContainer) {
             this.recentEventsContainer = document.getElementById('recent-events-container');
-            console.log('🎪 Trying to find events container again:', this.recentEventsContainer);
+            // Trying to find events container again
         }
         
         if (!this.recentEventsContainer) {
-            console.log('⚠️ Events container still not found, will try again later');
+            // Events container still not found, will try again later
             return;
         }
 
         try {
             this.showLoading();
-            console.log('🔄 Loading recent events...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading recent events
 
             const events = await EFAPI.events.getEvents({
                 limit: 2, // Get only the latest 2 events
@@ -58,7 +56,7 @@ class EventsIntegration {
                 published: true
             });
             
-            console.log('🎪 Events API response:', events);
+            // Events API response
             
             let eventsList = [];
             if (Array.isArray(events)) {
@@ -71,7 +69,7 @@ class EventsIntegration {
                 eventsList = [];
             }
             
-            console.log('✅ Recent events loaded:', eventsList);
+            // Recent events loaded
             
             this.displayRecentEvents(eventsList);
 
@@ -83,13 +81,13 @@ class EventsIntegration {
 
     // Method to force refresh events (useful for language changes)
     forceRefresh() {
-        console.log('🔄 Force refreshing events...');
+        // Force refreshing events
         
         // Clear any existing timeout or loading state
         this.recentEventsContainer = document.getElementById('recent-events-container');
         
         if (!this.recentEventsContainer) {
-            console.log('❌ Events container not found during force refresh');
+            // Events container not found during force refresh
             return;
         }
         
@@ -99,7 +97,7 @@ class EventsIntegration {
 
     // Method to reset and reload events (even more aggressive)
     resetAndReload() {
-        console.log('🔄 Reset and reload events...');
+        // Reset and reload events
         
         this.recentEventsContainer = document.getElementById('recent-events-container');
         
@@ -252,7 +250,7 @@ class EventsIntegration {
      * @param {string} eventId - The ID of the event to display
      */
     navigateToEvent(eventId) {
-        console.log('🎪 Navigating to event:', eventId);
+        // Navigating to event
         
         // Store the selected event ID in sessionStorage for the eventos page to use
         sessionStorage.setItem('selectedEventId', eventId);
@@ -267,9 +265,9 @@ class EventsIntegration {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎪 Initializing Events Integration...');
+    // Initializing Events Integration
     window.eventsIntegration = new EventsIntegration();
-    console.log('✅ Events Integration initialized:', window.eventsIntegration);
+    // Events Integration initialized
 });
 
 // Export for use in other scripts

@@ -9,7 +9,7 @@
       jQuery(document).ready(function() {
         if (jQuery('.counter-number').length > 0) {
           // Use the counter.js animation instead
-          console.log('Counter elements found, using counter.js animation');
+          // Counter elements found, using counter.js animation
         }
       });
     } else {
@@ -20,6 +20,11 @@
     
     // CUSTOM LINK
     $('.smoothscroll').click(function(){
+    // Skip if cross-page scroll is in progress
+    if (window.isCrossPageScroll) {
+        return false;
+    }
+    
     var el = $(this).attr('href');
     var elWrapped = $(el);
     var header_height = $('.navbar').height();

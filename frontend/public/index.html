@@ -17,7 +17,7 @@
 
     </head>
     <!-- ======================= HEADER ================== -->
-    <body id="section_1">
+    <body id="home-section">
 
         <header class="site-header">
             <div class="container">
@@ -68,11 +68,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_1">Inicio</a>
+                            <a class="nav-link click-scroll" href="#home-section">Inicio</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_2">Acerca de</a>
+                            <a class="nav-link click-scroll" href="#about-section">Acerca de</a>
                         </li>
 
                         <li class="nav-item">
@@ -80,7 +80,7 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link click-scroll dropdown-toggle" href="#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
+                            <a class="nav-link click-scroll dropdown-toggle" href="#news-section" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                 <li><a class="dropdown-item" href="eventos.html">Eventos</a></li>
@@ -89,7 +89,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_6">Contacto</a>
+                            <a class="nav-link click-scroll" href="#contact-section">Contacto</a>
                         </li>
 
                         <li class="nav-item">
@@ -214,7 +214,7 @@
             </section>
 
             <!-- ======================= "NUESTRA HISTORIA" SECTION ================== -->
-            <section class="section-padding section-bg" id="section_2">
+            <section class="section-padding section-bg" id="about-section">
                 <div class="container">
                     <!-- Introduction Section -->
                     <div class="row">
@@ -473,7 +473,7 @@
               
 
             <!-- ======================= "Apoyo" SECTION ================== -->
-            <section class="section-padding" id="section_3">
+            <section class="section-padding" id="support-section">
                 <div class="container" style="overflow: visible;">
                     <div class="row">
 
@@ -534,7 +534,7 @@
             </section>
 
             <!-- ======================= "VOLUNTARIO" SECTION ================== -->
-            <section class="volunteer-section section-padding" id="section_4" style="display: none;">
+            <section class="volunteer-section section-padding" id="volunteer-section" style="display: none;">
                 <div class="container">
                     <div class="row">
 
@@ -596,7 +596,7 @@
             </section>
 
             <!-- ======================= NOTICIAS SECTION ================== -->
-            <section class="news-section section-padding" id="section_5">
+            <section class="news-section section-padding" id="news-section">
                 <div class="container">
                     <div class="row" id="news-container">
                         <!-- News content will be loaded dynamically by news-integration.js -->
@@ -634,7 +634,7 @@
             </section>
 
             <!-- ======================= "Articulos/Blogs" SECTION ================== -->
-            <section class="blog-section" id="articulos">
+            <section class="blog-section" id="articles-section">
                 <div class="section-content blog">
                     <div class="title">
                         <h2>Artículos</h2>
@@ -659,7 +659,7 @@
             </section>
 
             <!-- ======================= CONTACT SECTION ================== -->
-            <section class="contact-section section-padding" id="section_6">
+            <section class="contact-section section-padding" id="contact-section">
                 <div class="container">
                     <div class="row">
 
@@ -749,7 +749,7 @@
                         <h5 class="site-footer-title mb-3">Enlaces</h5>
 
                         <ul class="footer-menu">
-                            <li class="footer-menu-item"><a href="#section_2" class="footer-menu-link">Nuestra Historia</a></li>
+                            <li class="footer-menu-item"><a href="#about-section" class="footer-menu-link">Nuestra Historia</a></li>
 
                             <li class="footer-menu-item"><a href="#documentary" class="footer-menu-link">Mirar Documental</a></li>
 
@@ -758,7 +758,7 @@
 
                             <li class="footer-menu-item"><a href="#sponsors" class="footer-menu-link">Nuestros Patrocinadores</a></li>
 
-                            <li class="footer-menu-item"><a href="#articulos" class="footer-menu-link">Artículos</a></li>
+                            <li class="footer-menu-item"><a href="#articles-section" class="footer-menu-link">Artículos</a></li>
 
                         </ul>
                     </div>
@@ -1110,7 +1110,7 @@
                     }
                 }
                     
-                    console.log('Global settings updated successfully');
+                    // Global settings updated successfully
                 } catch (error) {
                     console.error('Error fetching global settings:', error);
                 }
@@ -1564,9 +1564,7 @@
                                 // Priority: localStorage > API > default
                                 this.currentLanguage = storedLanguage || apiLanguage || 'es';
                                 
-                                console.log('🌍 Initial language setup:', this.currentLanguage);
-                                console.log('💾 From localStorage:', storedLanguage);
-                                console.log('🔧 From API:', apiLanguage);
+                                // Initial language setup
                                 
                                 // Set API language to match user preference
                                 if (storedLanguage && storedLanguage !== apiLanguage) {
@@ -1592,7 +1590,7 @@
                             e.preventDefault();
                             
                             const selectedLang = option.getAttribute('data-lang');
-                            console.log('🌍 Language option clicked:', selectedLang);
+                            // Language option clicked
                             
                             this.switchLanguage(selectedLang);
                         });
@@ -1600,20 +1598,19 @@
                 }
                 
                 switchLanguage(newLang) {
-                    console.log('🌍 Switching language to:', newLang);
-                    console.log('🌍 Current language before switch:', this.currentLanguage);
+                    // Switching language
                     
                     if (this.currentLanguage === newLang) {
-                        console.log('🌍 Language already selected:', newLang);
+                        // Language already selected
                         return;
                     }
                     
-                    console.log('🔄 Language change confirmed, updating from', this.currentLanguage, 'to', newLang);
+                    // Language change confirmed
                     this.currentLanguage = newLang;
                     
                     // Store language preference in localStorage for persistence
                     localStorage.setItem('userLanguagePreference', newLang);
-                    console.log('💾 Language preference saved to localStorage:', newLang);
+                    // Language preference saved to localStorage
                     
                     // Also store in sessionStorage for immediate navigation
                     sessionStorage.setItem('selectedLanguage', newLang);
@@ -1649,7 +1646,7 @@
                         window.fundadorIntegration.updateLanguage(newLang);
                     }
                     
-                    console.log('✅ Language switched to:', newLang);
+                    // Language switched
                 }
                 
                 updateLanguageDisplay() {
@@ -1671,7 +1668,7 @@
                 }
                 
                 translateStaticContent() {
-                    console.log('🔄 Translating static content to:', this.currentLanguage);
+                    // Translating static content
                     
                     const t = this.translations[this.currentLanguage];
                     if (!t) {
@@ -1679,7 +1676,7 @@
                         return;
                     }
                     
-                    console.log('📖 Using translations:', Object.keys(t).length, 'keys available');
+                    // Using translations
                     
                     // Helper function to safely update text content
                     const updateText = (selector, key) => {
@@ -1687,10 +1684,10 @@
                             if (!selector || selector === '#') return; // Skip invalid selectors
                             const element = document.querySelector(selector);
                             if (element && t[key]) {
-                                console.log('✅ Updating', selector, 'to:', t[key]);
+                                // Updating element
                                 element.textContent = t[key];
                             } else {
-                                console.log('⚠️ Element not found or no translation:', selector, 'key:', key);
+                                // Element not found or no translation
                             }
                         } catch (error) {
                             console.error('❌ Error updating', selector, ':', error);
@@ -1702,7 +1699,7 @@
                             if (!selector || selector === '#') return; // Skip invalid selectors
                             const element = document.querySelector(selector);
                             if (element && t[key]) {
-                                console.log('✅ Updating HTML', selector, 'to:', t[key]);
+                                // Updating HTML element
                                 element.innerHTML = t[key];
                             }
                         } catch (error) {
@@ -1715,7 +1712,7 @@
                             if (!selector || selector === '#') return; // Skip invalid selectors
                             const element = document.querySelector(selector);
                             if (element && t[key]) {
-                                console.log('✅ Updating placeholder', selector, 'to:', t[key]);
+                                // Updating placeholder
                                 element.placeholder = t[key];
                             }
                         } catch (error) {
@@ -1742,17 +1739,17 @@
                     updateText('.carousel-item:nth-child(3) p', 'humanidadSubtitle');
                     
                     // Welcome Section
-                    console.log('🔍 Translating Welcome section...');
+                    // Translating Welcome section
                     const welcomeH2 = document.querySelector('.section-padding h2');
                     if (welcomeH2 && t.bienvenidos) {
-                        console.log('Updating welcome H2 from:', welcomeH2.textContent, 'to:', t.bienvenidos);
+                        // Updating welcome H2
                         welcomeH2.textContent = t.bienvenidos;
                     }
                     
                     // Featured blocks - update by ID for better targeting
                     const featuredTeamText = document.getElementById('featured-team-text');
                     if (featuredTeamText && t.conoceEquipo) {
-                        console.log('Updating team block to:', t.conoceEquipo);
+                        // Updating team block
                         if (this.currentLanguage === 'en') {
                             featuredTeamText.innerHTML = `<strong>${t.conoceEquipo}</strong>`;
                         } else {
@@ -1762,7 +1759,7 @@
                     
                     const featuredSponsorsText = document.getElementById('featured-sponsors-text');
                     if (featuredSponsorsText && t.nuestrosPatrocinadores) {
-                        console.log('Updating sponsors block to:', t.nuestrosPatrocinadores);
+                        // Updating sponsors block
                         if (this.currentLanguage === 'en') {
                             featuredSponsorsText.innerHTML = `<strong>${t.nuestrosPatrocinadores}</strong>`;
                         } else {
@@ -1774,7 +1771,7 @@
                     const featuredBlocks = document.querySelectorAll('.featured-block-text');
                     if (featuredBlocks.length >= 3) {
                         const donationBlock = featuredBlocks[2];
-                        console.log('Updating donation block to:', t.hacerDonacion);
+                        // Updating donation block
                         if (this.currentLanguage === 'en') {
                             donationBlock.innerHTML = `<strong>${t.hacerDonacion}</strong>`;
                         } else {
@@ -1783,36 +1780,36 @@
                     }
                     
                     // About Section
-                    console.log('🔍 Translating About section...');
+                    // Translating About section
                     
                     // Main "Nuestra historia" title (first h2 in the section)
                     const aboutH2 = document.querySelector('#section_2 .custom-text-box h2');
-                    console.log('About H2 found:', !!aboutH2, aboutH2?.textContent);
+                    // About H2 found
                     if (aboutH2 && t.nuestraHistoria) {
-                        console.log('Updating About H2 to:', t.nuestraHistoria);
+                        // Updating About H2
                         aboutH2.textContent = t.nuestraHistoria;
                     }
                     
                     // Organization subtitle (first h5 in the section)
                     const aboutH5 = document.querySelector('#section_2 .custom-text-box h5');
-                    console.log('About H5 found:', !!aboutH5, aboutH5?.textContent);
+                    // About H5 found
                     if (aboutH5 && t.organizacionSubtitle) {
-                        console.log('Updating About H5 to:', t.organizacionSubtitle);
+                        // Updating About H5
                         aboutH5.textContent = t.organizacionSubtitle;
                     }
                     
                     // Organization description (first p with mb-3)
                     const aboutP = document.querySelector('#section_2 .custom-text-box p.mb-3');
-                    console.log('About P found:', !!aboutP, aboutP?.textContent?.substring(0, 50) + '...');
+                    // About P found
                     if (aboutP && t.organizacionDescription) {
-                        console.log('Updating About P to:', t.organizacionDescription.substring(0, 50) + '...');
+                        // Updating About P
                         aboutP.textContent = t.organizacionDescription;
                     }
                     
                     // Organization base text (new paragraph)
                     const organizacionBaseText = document.querySelector('#organizacion-base-text');
                     if (organizacionBaseText && t.organizacionBase) {
-                        console.log('Updating organizacion base text to:', t.organizacionBase.substring(0, 50) + '...');
+                        // Updating organizacion base text
                         organizacionBaseText.textContent = t.organizacionBase;
                     }
                     
@@ -1820,16 +1817,16 @@
                     const missionBoxes = document.querySelectorAll('#section_2 .custom-text-box');
                     if (missionBoxes.length >= 2) {
                         const missionH5 = missionBoxes[1].querySelector('h5.mb-3');
-                        console.log('Mission H5 found:', !!missionH5, missionH5?.textContent);
+                        // Mission H5 found
                         if (missionH5 && t.nuestraMision) {
-                            console.log('Updating Mission H5 to:', t.nuestraMision);
+                            // Updating Mission H5
                             missionH5.textContent = t.nuestraMision;
                         }
                         
                         const missionP = missionBoxes[1].querySelector('p');
-                        console.log('Mission P found:', !!missionP, missionP?.textContent?.substring(0, 50) + '...');
+                        // Mission P found
                         if (missionP && t.misionDescription) {
-                            console.log('Updating Mission P to:', t.misionDescription.substring(0, 50) + '...');
+                            // Updating Mission P
                             missionP.textContent = t.misionDescription;
                         }
                     }
@@ -1851,143 +1848,143 @@
                     // Climbing Section
                     const escaladaTitle = document.querySelector('#escalada-montana-title');
                     if (escaladaTitle && t.escaladaMontana) {
-                        console.log('Updating escalada title to:', t.escaladaMontana);
+                        // Updating escalada title
                         escaladaTitle.textContent = t.escaladaMontana;
                     }
                     
                     const escaladaDescription = document.querySelector('#escalada-description-text');
                     if (escaladaDescription && t.escaladaDescription) {
-                        console.log('Updating escalada description to:', t.escaladaDescription.substring(0, 50) + '...');
+                        // Updating escalada description
                         escaladaDescription.textContent = t.escaladaDescription;
                     }
                     
                     const escaladaDescription2 = document.querySelector('#escalada-description-text2');
                     if (escaladaDescription2 && t.escaladaDescription2) {
-                        console.log('Updating escalada description 2 to:', t.escaladaDescription2.substring(0, 50) + '...');
+                        // Updating escalada description 2
                         escaladaDescription2.textContent = t.escaladaDescription2;
                     }
                     
                     // Community Section
                     const comunidadTitle = document.querySelector('#comunidad-title');
                     if (comunidadTitle && t.comunidad) {
-                        console.log('Updating comunidad title to:', t.comunidad);
+                        // Updating comunidad title
                         comunidadTitle.textContent = t.comunidad;
                     }
                     
                     const comunidadDescription = document.querySelector('#comunidad-description-text');
                     if (comunidadDescription && t.comunidadDescription) {
-                        console.log('Updating comunidad description to:', t.comunidadDescription.substring(0, 50) + '...');
+                        // Updating comunidad description
                         comunidadDescription.textContent = t.comunidadDescription;
                     }
                     
                     const comunidadDescription2 = document.querySelector('#comunidad-description-text2');
                     if (comunidadDescription2 && t.comunidadDescription2) {
-                        console.log('Updating comunidad description 2 to:', t.comunidadDescription2.substring(0, 50) + '...');
+                        // Updating comunidad description 2
                         comunidadDescription2.textContent = t.comunidadDescription2;
                     }
                     
                     const comunidadStatsTitle = document.querySelector('#comunidad-stats-title');
                     if (comunidadStatsTitle && t.comunidadStatsTitle) {
-                        console.log('Updating comunidad stats title to:', t.comunidadStatsTitle);
+                        // Updating comunidad stats title
                         comunidadStatsTitle.textContent = t.comunidadStatsTitle;
                     }
                     
                     const comunidadStats = document.querySelector('#comunidad-stats-text');
                     if (comunidadStats && t.comunidadStats) {
-                        console.log('Updating comunidad stats to:', t.comunidadStats.substring(0, 50) + '...');
+                        // Updating comunidad stats
                         comunidadStats.innerHTML = t.comunidadStats;
                     }
                     
                     // Education Section
                     const educacionTitle = document.querySelector('#educacion-emocional-familiar-title');
                     if (educacionTitle && t.educacionEmocionalFamiliar) {
-                        console.log('Updating educacion title to:', t.educacionEmocionalFamiliar);
+                        // Updating educacion title
                         educacionTitle.textContent = t.educacionEmocionalFamiliar;
                     }
                     
                     const educacionDescription = document.querySelector('#educacion-emocional-familiar-description-text');
                     if (educacionDescription && t.educacionEmocionalFamiliarDescription) {
-                        console.log('Updating educacion description to:', t.educacionEmocionalFamiliarDescription.substring(0, 50) + '...');
+                        // Updating educacion description
                         educacionDescription.textContent = t.educacionEmocionalFamiliarDescription;
                     }
                     
                     const educacionDescription2 = document.querySelector('#educacion-emocional-familiar-description-text2');
                     if (educacionDescription2 && t.educacionEmocionalFamiliarDescription2) {
-                        console.log('Updating educacion description 2 to:', t.educacionEmocionalFamiliarDescription2.substring(0, 50) + '...');
+                        // Updating educacion description 2
                         educacionDescription2.textContent = t.educacionEmocionalFamiliarDescription2;
                     }
                     
                     // Values Section
                     const valoresTitle = document.querySelector('#nuestros-valores-title');
                     if (valoresTitle && t.nuestrosValores) {
-                        console.log('Updating valores title to:', t.nuestrosValores);
+                        // Updating valores title
                         valoresTitle.textContent = t.nuestrosValores;
                     }
                     
                     const desarrollarResilienciaTitle = document.querySelector('#desarrollar-resiliencia-title');
                     if (desarrollarResilienciaTitle && t.desarrollarResiliencia) {
-                        console.log('Updating desarrollar resiliencia title to:', t.desarrollarResiliencia);
+                        // Updating desarrollar resiliencia title
                         desarrollarResilienciaTitle.textContent = t.desarrollarResiliencia;
                     }
                     
                     const desarrollarResilienciaDesc = document.querySelector('#desarrollar-resiliencia-description');
                     if (desarrollarResilienciaDesc && t.desarrollarResilienciaDescription) {
-                        console.log('Updating desarrollar resiliencia description to:', t.desarrollarResilienciaDescription);
+                        // Updating desarrollar resiliencia description
                         desarrollarResilienciaDesc.textContent = t.desarrollarResilienciaDescription;
                     }
                     
                     const hacerMontanaTitle = document.querySelector('#hacer-montana-accesible-title');
                     if (hacerMontanaTitle && t.hacerMontanaAccesible) {
-                        console.log('Updating hacer montana title to:', t.hacerMontanaAccesible);
+                        // Updating hacer montana title
                         hacerMontanaTitle.textContent = t.hacerMontanaAccesible;
                     }
                     
                     const hacerMontanaDesc = document.querySelector('#hacer-montana-accesible-description');
                     if (hacerMontanaDesc && t.hacerMontanaAccesibleDescription) {
-                        console.log('Updating hacer montana description to:', t.hacerMontanaAccesibleDescription);
+                        // Updating hacer montana description
                         hacerMontanaDesc.textContent = t.hacerMontanaAccesibleDescription;
                     }
                     
                     const fortalecerTitle = document.querySelector('#fortalecer-habilidades-title');
                     if (fortalecerTitle && t.fortalecerHabilidades) {
-                        console.log('Updating fortalecer title to:', t.fortalecerHabilidades);
+                        // Updating fortalecer title
                         fortalecerTitle.textContent = t.fortalecerHabilidades;
                     }
                     
                     const fortalecerDesc = document.querySelector('#fortalecer-habilidades-description');
                     if (fortalecerDesc && t.fortalecerHabilidadesDescription) {
-                        console.log('Updating fortalecer description to:', t.fortalecerHabilidadesDescription);
+                        // Updating fortalecer description
                         fortalecerDesc.textContent = t.fortalecerHabilidadesDescription;
                     }
                     
                     const construirTitle = document.querySelector('#construir-comunidad-title');
                     if (construirTitle && t.construirComunidad) {
-                        console.log('Updating construir title to:', t.construirComunidad);
+                        // Updating construir title
                         construirTitle.textContent = t.construirComunidad;
                     }
                     
                     const construirDesc = document.querySelector('#construir-comunidad-description');
                     if (construirDesc && t.construirComunidadDescription) {
-                        console.log('Updating construir description to:', t.construirComunidadDescription);
+                        // Updating construir description
                         construirDesc.textContent = t.construirComunidadDescription;
                     }
                     
                     // Historia Section
                     const historiaTitle = document.querySelector('#nuestra-historia-title');
                     if (historiaTitle && t.nuestraHistoriaTitle) {
-                        console.log('Updating historia title to:', t.nuestraHistoriaTitle);
+                        // Updating historia title
                         historiaTitle.textContent = t.nuestraHistoriaTitle;
                     }
                     
                     const historiaDescription = document.querySelector('#nuestra-historia-description');
                     if (historiaDescription && t.nuestraHistoriaDescription) {
-                        console.log('Updating historia description to:', t.nuestraHistoriaDescription.substring(0, 50) + '...');
+                        // Updating historia description
                         historiaDescription.textContent = t.nuestraHistoriaDescription;
                     }
                     
                     const leerHistoriaButton = document.querySelector('#leer-historia-button');
                     if (leerHistoriaButton && t.leerHistoriaButton) {
-                        console.log('Updating leer historia button to:', t.leerHistoriaButton);
+                        // Updating leer historia button
                         leerHistoriaButton.textContent = t.leerHistoriaButton;
                     }
                     
@@ -2028,10 +2025,10 @@
                     if (modalTitle && t.documentalModalTitle) modalTitle.textContent = t.documentalModalTitle;
                     
                     // Support Section
-                    console.log('🔍 Translating Support section...');
+                    // Translating Support section
                     const supportH2 = document.querySelector('#section_3 h2');
                     if (supportH2 && t.apoyo) {
-                        console.log('Updating support H2 to:', t.apoyo);
+                        // Updating support H2
                         supportH2.textContent = t.apoyo;
                     }
                     
@@ -2112,24 +2109,24 @@
                     });
                     
                     // Team Section
-                    console.log('🔍 Translating Team section...');
+                    // Translating Team section
                     const teamH2 = document.querySelector('.section-title h2');
                     if (teamH2 && t.conoceEquipo) {
-                        console.log('Updating team H2 to:', t.conoceEquipo);
+                        // Updating team H2
                         teamH2.textContent = t.conoceEquipo;
                     }
                     
                     const teamP = document.querySelector('.section-title p');
                     if (teamP && t.equipoDescription) {
-                        console.log('Updating team description to:', t.equipoDescription.substring(0, 50) + '...');
+                        // Updating team description
                         teamP.textContent = t.equipoDescription;
                     }
                     
                     // Sponsors Section
-                    console.log('🔍 Translating Sponsors section...');
+                    // Translating Sponsors section
                     const sponsorsH2 = document.querySelector('#sponsors h2');
                     if (sponsorsH2 && t.nuestrosPatrocinadores) {
-                        console.log('Updating sponsors H2 to:', t.nuestrosPatrocinadores);
+                        // Updating sponsors H2
                         sponsorsH2.textContent = t.nuestrosPatrocinadores;
                     }
                     
@@ -2140,65 +2137,65 @@
                     
                     
                     // News Section
-                    console.log('🔍 Translating News section...');
+                    // Translating News section
                     const newsH2 = document.querySelector('.news-section h2');
                     if (newsH2 && t.ultimasNoticias) {
-                        console.log('Updating news H2 to:', t.ultimasNoticias);
+                        // Updating news H2
                         newsH2.textContent = t.ultimasNoticias;
                     }
                     
                     // Testimonials Section
-                    console.log('🔍 Translating Testimonials section...');
+                    // Translating Testimonials section
                     const testimonialsH2 = document.querySelector('.testimonial-section h2');
                     if (testimonialsH2 && t.testimonios) {
-                        console.log('Updating testimonials H2 to:', t.testimonios);
+                        // Updating testimonials H2
                         testimonialsH2.textContent = t.testimonios;
                     }
                     
                     // Articles Section
-                    console.log('🔍 Translating Articles section...');
+                    // Translating Articles section
                     const articlesH2 = document.querySelector('.blog-section h2');
                     if (articlesH2 && t.articulos) {
-                        console.log('Updating articles H2 to:', t.articulos);
+                        // Updating articles H2
                         articlesH2.textContent = t.articulos;
                     }
                     
                     const articlesP = document.querySelector('.blog-section .title p');
                     if (articlesP && t.articulosDescription) {
-                        console.log('Updating articles description to:', t.articulosDescription.substring(0, 50) + '...');
+                        // Updating articles description
                         articlesP.textContent = t.articulosDescription;
                     }
                     
                     // Contact Section
-                    console.log('🔍 Translating Contact section...');
+                    // Translating Contact section
                     const contactH2 = document.querySelector('.contact-section h2');
                     if (contactH2 && t.contactanos) {
-                        console.log('Updating contact H2 to:', t.contactanos);
+                        // Updating contact H2
                         contactH2.textContent = t.contactanos;
                     }
                     
                     const directorStrong = document.querySelector('.contact-section strong');
                     if (directorStrong && t.directorGeneral) {
-                        console.log('Updating director title to:', t.directorGeneral);
+                        // Updating director title
                         directorStrong.textContent = t.directorGeneral;
                     }
                     
                     const contactInfoH5 = document.querySelector('.contact-info h5');
                     if (contactInfoH5 && t.informacionContacto) {
-                        console.log('Updating contact info H5 to:', t.informacionContacto);
+                        // Updating contact info H5
                         contactInfoH5.textContent = t.informacionContacto;
                     }
                     
                     
                     const contactFormH2 = document.querySelector('.contact-form h2');
                     if (contactFormH2 && t.formularioContacto) {
-                        console.log('Updating contact form H2 to:', t.formularioContacto);
+                        // Updating contact form H2
                         contactFormH2.textContent = t.formularioContacto;
                     }
                     
                     const contactFormP = document.querySelector('.contact-form p');
                     if (contactFormP && t.enviarCorreo) {
-                        console.log('Updating contact form P to:', t.enviarCorreo);
+                        // Updating contact form P
                         // Get email from global settings if available
                         const contactEmail = document.getElementById('contact-email');
                         let emailAddress = 'Nadia@ClimbingBorders.org'; // fallback
@@ -2219,20 +2216,20 @@
                     
                     const contactSubmitBtn = document.querySelector('.contact-form button[type="submit"]');
                     if (contactSubmitBtn && t.enviarMensaje) {
-                        console.log('Updating contact submit button to:', t.enviarMensaje);
+                        // Updating contact submit button
                         contactSubmitBtn.textContent = t.enviarMensaje;
                     }
                     
                     // Footer
-                    console.log('🔍 Translating Footer section...');
+                    // Translating Footer section
                     const footerTitles = document.querySelectorAll('.site-footer-title');
                     footerTitles.forEach((title, index) => {
                         const text = title.textContent.trim();
                         if (text.includes('Enlaces') && t.enlaces) {
-                            console.log('Updating footer title to:', t.enlaces);
+                            // Updating footer title
                             title.textContent = t.enlaces;
                         } else if (text.includes('Contáctanos') && t.contactanos) {
-                            console.log('Updating footer contact title to:', t.contactanos);
+                            // Updating footer contact title
                             title.textContent = t.contactanos;
                         }
                     });
@@ -2257,11 +2254,11 @@
                         }
                     });
                     
-                    console.log('✅ Static content translated to:', this.currentLanguage);
+                    // Static content translated
                 }
                 
                 refreshContent() {
-                    console.log('🔄 Refreshing content for language:', this.currentLanguage);
+                    // Refreshing content for language
                     
                     // Refresh news content
                     if (window.newsIntegration && typeof window.newsIntegration.loadNews === 'function') {
@@ -2334,7 +2331,7 @@
                     if (historiaLink) {
                         const currentLang = this.currentLanguage || 'es';
                         historiaLink.href = `historia.html?lang=${currentLang}`;
-                        console.log('🔗 Updated historia link with language:', currentLang);
+                        // Updated historia link with language
                     }
                 }
                 
@@ -2518,6 +2515,11 @@
                 var btn = document.getElementById('scrollToTopBtn');
 
                 window.addEventListener('scroll', function() {
+                    // Skip if cross-page scroll is in progress
+                    if (window.isCrossPageScroll) {
+                        return;
+                    }
+                    
                     // Check the scroll position
                     if (window.scrollY > window.innerHeight) { // Adjust threshold as needed
                         btn.style.display = 'flex'; // Show button when scrolled beyond first viewport height
@@ -2533,6 +2535,9 @@
                     });
                 });
             });
-        </script>  
+        </script>
+        
+        <!-- Global Scroll Handler -->
+        <script src="js/global-scroll.js"></script>  
     </body>
 </html>

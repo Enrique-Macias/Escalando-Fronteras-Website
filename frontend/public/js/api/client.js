@@ -23,14 +23,14 @@ class APIClient {
         if (typeof window !== 'undefined' && window.EF_ENV_VARS) {
             const envURL = window.EF_ENV_VARS.EF_CMS_API_URL;
             if (envURL) {
-                console.log('🌐 Using API URL from environment:', envURL);
+                // Using API URL from environment
                 return envURL;
             }
         }
 
         // Fallback to Railway URL
         const fallbackURL = 'https://ef-cms-production.up.railway.app/api';
-        console.log('🌐 Using fallback API URL:', fallbackURL);
+        // Using fallback API URL
         return fallbackURL;
     }
 

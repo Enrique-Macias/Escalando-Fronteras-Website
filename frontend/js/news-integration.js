@@ -32,9 +32,7 @@ class NewsIntegration {
 
         try {
             this.showLoading();
-            console.log('🔄 Loading news...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading news
 
             const news = await EFAPI.news.getNews({
                 limit: 2, // Get only the latest 2 news
@@ -53,7 +51,7 @@ class NewsIntegration {
                 newsList = [];
             }
             
-            console.log('✅ News loaded:', newsList);
+            // News loaded
             
             this.displayNews(newsList);
 
@@ -232,18 +230,18 @@ class NewsIntegration {
         this.setupNewsClickHandlers();
 
         // Trigger events integration for the recent events section
-        console.log('🔄 Attempting to trigger events integration...');
+        // Attempting to trigger events integration
         
         // Use a more robust approach with multiple retries
         const triggerEventsIntegration = (retryCount = 0) => {
             if (window.eventsIntegration) {
-                console.log('✅ Events integration found, loading events...');
+                // Events integration found, loading events
                 window.eventsIntegration.loadRecentEvents();
             } else if (retryCount < 5) {
-                console.log(`⚠️ Events integration not found, retry ${retryCount + 1}/5...`);
+                // Events integration not found, retrying
                 setTimeout(() => triggerEventsIntegration(retryCount + 1), 500);
             } else {
-                console.log('❌ Events integration not found after 5 retries');
+                // Events integration not found after 5 retries
             }
         };
         
@@ -256,7 +254,7 @@ class NewsIntegration {
     }
 
     setupNewsClickHandlers() {
-        console.log('🖱️ Setting up news click handlers...');
+        // Setting up news click handlers
         
         // Add click handlers to all clickable news elements
         const clickableElements = document.querySelectorAll('.clickable-news-card, .clickable-news-image, .clickable-news-title');
@@ -267,7 +265,7 @@ class NewsIntegration {
                 event.stopPropagation();
                 
                 const newsId = element.getAttribute('data-news-id');
-                console.log('🔗 News clicked, ID:', newsId);
+                // News clicked
                 
                 if (newsId) {
                     this.navigateToNewsArticle(newsId);
@@ -277,19 +275,17 @@ class NewsIntegration {
             });
         });
         
-        console.log('✅ Click handlers set up for', clickableElements.length, 'elements');
+        // Click handlers set up
     }
 
     setupSearchFunctionality() {
         const searchForm = document.querySelector('.search-form');
         const searchInput = document.getElementById('search');
         
-        console.log('🔍 Setting up search in news integration...');
-        console.log('🔍 Search form found:', !!searchForm);
-        console.log('🔍 Search input found:', !!searchInput);
+        // Setting up search in news integration
         
         if (!searchForm || !searchInput) {
-            console.log('⚠️ Search elements not found, retrying...');
+            // Search elements not found, retrying
             setTimeout(() => this.setupSearchFunctionality(), 500);
             return;
         }
@@ -308,7 +304,7 @@ class NewsIntegration {
         searchForm.addEventListener('submit', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('🔍 Form submission prevented');
+            // Form submission prevented
             this.performEventSearch();
             return false;
         });
@@ -318,7 +314,7 @@ class NewsIntegration {
             submitButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('🔍 Search button clicked');
+                // Search button clicked
                 this.performEventSearch();
                 return false;
             });
@@ -327,7 +323,7 @@ class NewsIntegration {
         // Real-time search
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim();
-            console.log('🔍 Input changed:', query);
+            // Input changed
             if (query.length >= 2) {
                 this.performEventSearch();
             } else if (query.length === 0) {
@@ -340,7 +336,7 @@ class NewsIntegration {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('🔍 Enter key pressed');
+                // Enter key pressed
                 this.performEventSearch();
                 return false;
             } else if (e.key === 'Escape') {
@@ -349,7 +345,7 @@ class NewsIntegration {
             }
         });
 
-        console.log('✅ Search functionality set up successfully');
+        // Search functionality set up successfully
     }
 
     async performEventSearch() {
@@ -361,7 +357,7 @@ class NewsIntegration {
             return;
         }
 
-        console.log('🔍 Performing search for:', query);
+        // Performing search
 
         try {
             // Load all events for search
@@ -403,7 +399,7 @@ class NewsIntegration {
                        tags.includes(query);
             });
 
-            console.log('✅ Search results:', filteredEvents.length);
+            // Search results
             
             this.displaySearchResults(filteredEvents, query);
 
@@ -516,7 +512,7 @@ class NewsIntegration {
     }
 
     resetEventSearch() {
-        console.log('🔍 Resetting event search...');
+        // Resetting event search
         const searchInput = document.getElementById('search');
         if (searchInput) {
             searchInput.value = '';
@@ -640,11 +636,11 @@ class NewsIntegration {
     }
 
     hideSection() {
-        console.log('🚫 No news data available, hiding news section');
+        // No news data available, hiding news section
         const newsSection = document.querySelector('.news-section');
         if (newsSection) {
             newsSection.style.display = 'none';
-            console.log('✅ News section hidden successfully');
+            // News section hidden successfully
         }
     }
 
@@ -668,9 +664,7 @@ class NewsIntegration {
 
     // Navigate to noticias.html with selected article
     navigateToNewsArticle(articleId) {
-        console.log('📰 Navigating to news article:', articleId);
-        console.log('📰 Article ID type:', typeof articleId);
-        console.log('📰 Current language:', this.currentLanguage);
+        // Navigating to news article
         
         // Store the selected article ID and language
         sessionStorage.setItem('selectedNewsArticleId', articleId);
@@ -682,9 +676,7 @@ class NewsIntegration {
         // Verify storage
         const storedId = sessionStorage.getItem('selectedNewsArticleId');
         const storedLang = sessionStorage.getItem('selectedLanguage');
-        console.log('📰 Stored article ID:', storedId);
-        console.log('📰 Stored language:', storedLang);
-        console.log('💾 Language preference saved for persistence');
+        // Stored article ID and language
         
         // Navigate to noticias.html with language parameter
         window.location.href = `noticias.html?lang=${this.currentLanguage}`;

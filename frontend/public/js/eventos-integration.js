@@ -26,14 +26,14 @@ class EventosIntegration {
     }
     
     async init() {
-        console.log('🎪 EventosIntegration initializing...');
+        // EventosIntegration initializing
         
         // Wait for API to be ready
         await this.waitForAPI();
         
         // Check if specific event was selected
         this.selectedEventId = sessionStorage.getItem('selectedEventId');
-        console.log('🎪 Selected event ID:', this.selectedEventId);
+        // Selected event ID
         
         // Load events
         await this.loadEvents();
@@ -51,7 +51,7 @@ class EventosIntegration {
     setupLanguageListener() {
         // Listen for language changes
         document.addEventListener('languageChanged', (event) => {
-            console.log('🌍 Eventos language changed to:', event.detail.language);
+            // Eventos language changed
             this.currentLanguage = event.detail.language;
             this.loadEvents(); // Reload events with new language
         });
@@ -71,17 +71,17 @@ class EventosIntegration {
         return new Promise((resolve) => {
             const checkAPI = () => {
                 if (typeof window.EFAPI !== 'undefined' && window.EFAPI.events) {
-                    console.log('🎪 API ready');
+                    // API ready
                     
                     // Get current language from API service
                     if (window.EFAPI.language) {
                         this.currentLanguage = window.EFAPI.language.getCurrentLanguage();
-                        console.log('🎪 Language from API service:', this.currentLanguage);
+                        // Language from API service
                     }
                     
                     resolve();
                 } else {
-                    console.log('🎪 Waiting for API...');
+                    // Waiting for API
                     setTimeout(checkAPI, 100);
                 }
             };
@@ -106,11 +106,11 @@ class EventosIntegration {
         this.isLoading = true;
         
         try {
-            console.log('🎪 Loading events...');
+            // Loading events
             
             // Load events from API
             const response = await window.EFAPI.events.getEvents(100); // Get more events for better selection
-            console.log('🎪 Events API response:', response);
+            // Events API response
             
             // Handle different response formats
             let events;
@@ -129,7 +129,7 @@ class EventosIntegration {
             }
             
             this.allEvents = events;
-            console.log('🎪 Total events loaded:', this.allEvents.length);
+            // Total events loaded
             
             // Load main event (selected or latest)
             await this.loadMainEvent();
@@ -155,7 +155,7 @@ class EventosIntegration {
         let mainEvent = null;
         
         if (this.selectedEventId) {
-            console.log('🎪 Looking for selected event:', this.selectedEventId);
+            // Looking for selected event
             
             // Try to find the event in loaded events first
             mainEvent = this.allEvents.find(event => 
@@ -165,7 +165,7 @@ class EventosIntegration {
             // If not found in loaded events, try to get it directly from API
             if (!mainEvent) {
                 try {
-                    console.log('🎪 Event not found in list, fetching directly...');
+                    // Event not found in list, fetching directly
                     mainEvent = await window.EFAPI.events.getEventById(this.selectedEventId);
                 } catch (error) {
                     console.warn('🎪 Could not fetch selected event:', error);
@@ -176,7 +176,7 @@ class EventosIntegration {
         // If no selected event or not found, use the latest event
         if (!mainEvent && this.allEvents.length > 0) {
             mainEvent = this.allEvents[0]; // Assuming events are ordered by date
-            console.log('🎪 Using latest event as main event');
+            // Using latest event as main event
         }
         
         if (mainEvent) {
@@ -187,12 +187,12 @@ class EventosIntegration {
     }
     
     displayMainEvent(event) {
-        console.log('🎪 Displaying main event:', event);
+        // Displaying main event
         
         // Clear the selected event ID from sessionStorage after displaying it
         if (this.selectedEventId) {
             sessionStorage.removeItem('selectedEventId');
-            console.log('🎪 Cleared selectedEventId from sessionStorage');
+            // Cleared selectedEventId from sessionStorage
         }
         
         const container = document.getElementById('main-event-content');
@@ -302,7 +302,7 @@ class EventosIntegration {
             return '';
         }
         
-        console.log('🎪 Formatting additional images:', images);
+        // Formatting additional images
         
         let imagesHtml = '';
         const leftColumnImages = [];
@@ -703,9 +703,7 @@ class EventosIntegration {
             return event.id != mainEventId && parseInt(event.id) !== parseInt(mainEventId);
         }).slice(0, 3);
         
-        console.log('🎪 Main event ID:', mainEventId);
-        console.log('🎪 Total events:', this.allEvents.length);
-        console.log('🎪 Sidebar events (excluding main):', sidebarEvents.length);
+        // Main event ID, total events, and sidebar events
         
         // If no events to show in sidebar, display a message
         if (sidebarEvents.length === 0) {
@@ -794,7 +792,7 @@ class EventosIntegration {
         const eventsToShow = this.currentPage * this.eventsPerPage;
         const eventsToDisplay = this.allEvents.slice(0, eventsToShow);
         
-        console.log('🎪 Displaying events:', eventsToDisplay.length, 'of', this.allEvents.length);
+        // Displaying events
         
         const eventsHtml = eventsToDisplay.map(event => {
             const title = this.getLocalizedField(event, 'title') || 'Sin título';
@@ -1240,7 +1238,7 @@ class EventosIntegration {
     }
     
     selectEvent(eventId) {
-        console.log('🎪 Event selected:', eventId);
+        // Event selected
         
         // Store selected event
         this.selectedEventId = eventId;
@@ -1279,7 +1277,7 @@ class EventosIntegration {
                 behavior: 'smooth'
             });
             
-            console.log('🎪 Scrolling to main event section');
+            // Scrolling to main event section
         } else {
             console.warn('🎪 Main event section not found, falling back to top');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1436,4 +1434,4 @@ window.nextImage = function() {
     }
 };
 
-console.log('🎪 EventosIntegration script loaded');
+// EventosIntegration script loaded

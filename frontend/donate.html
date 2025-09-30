@@ -1,14 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Apoya a Escalando Fronteras con tu donación. Contribuye al desarrollo comunitario, programas de escalada y educación en Monterrey, Nuevo León. Cada donación hace la diferencia.">
+        <meta name="keywords" content="donar Escalando Fronteras, donaciones, apoyo comunitario, escalada, educación, Monterrey, Nuevo León, organización sin fines de lucro">
+        <meta name="author" content="Escalando Fronteras">
+        <meta name="robots" content="index, follow">
         <meta http-equiv="Permissions-Policy" content="payment=*">
 
-        <title id="page-title">Escalando Fronteras - Donaciones</title>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="Donar - Escalando Fronteras | Apoya Nuestra Misión">
+        <meta property="og:description" content="Apoya a Escalando Fronteras con tu donación. Contribuye al desarrollo comunitario y programas educativos en Monterrey.">
+        <meta property="og:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+        <meta property="og:url" content="https://climbingborders.org/donate.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Escalando Fronteras">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Donar - Escalando Fronteras | Apoya Nuestra Misión">
+        <meta name="twitter:description" content="Apoya a Escalando Fronteras con tu donación. Contribuye al desarrollo comunitario y programas educativos en Monterrey.">
+        <meta name="twitter:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://climbingborders.org/donate.html">
+
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="es" href="https://climbingborders.org/donate.html">
+        <link rel="alternate" hreflang="en" href="https://climbingborders.org/donate.html?lang=en">
+
+        <title id="page-title">Donar - Escalando Fronteras | Apoya Nuestra Misión Comunitária</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
 
         <!-- ======================= CSS Styles ================== -->        
@@ -38,12 +62,12 @@
                     <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                         <ul class="social-icon">
                             <li class="social-icon-item">
-                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
 
                             </li>
 
                             <li class="social-icon-item">
-                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
                             </li>
 
                             <li class="social-icon-item">
@@ -141,7 +165,7 @@
                                             </div>
                                             <!-- PayPal Button Container -->
                                             <div class="paypal-button">
-                                                <a href="#" target="_blank">
+                                                <a href="#" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer">
                                                     <img src="images/paypal.png" alt="PayPal Button" class="img-fluid paypal-img" />
                                                 </a>
                                             </div>
@@ -383,7 +407,6 @@
                     }
                 }
                     
-                    console.log('Global settings updated successfully');
                 } catch (error) {
                     console.error('Error fetching global settings:', error);
                 }
@@ -402,7 +425,6 @@
                     const stripeButton = document.querySelector('stripe-buy-button');
                     if (stripeButton && paymentData.paystripeCode) {
                         stripeButton.setAttribute('publishable-key', paymentData.paystripeCode);
-                        console.log('Stripe publishable key updated:', paymentData.paystripeCode);
                         
                         // Force re-render of the Stripe button
                         const parent = stripeButton.parentNode;
@@ -414,10 +436,8 @@
                     const paypalLink = document.querySelector('.paypal-button a');
                     if (paypalLink && paymentData.paypalUrl) {
                         paypalLink.href = paymentData.paypalUrl;
-                        console.log('PayPal URL updated:', paymentData.paypalUrl);
                     }
                     
-                    console.log('Payment settings updated successfully');
                 } catch (error) {
                     console.error('Error fetching payment settings:', error);
                 }
@@ -435,7 +455,6 @@
                     script.async = true;
                     document.head.appendChild(script);
                     
-                    console.log('Stripe script loaded after payment settings');
                 } catch (error) {
                     console.error('Error loading Stripe:', error);
                 }
@@ -524,13 +543,10 @@
                     // Priority: URL parameter > localStorage > default Spanish
                     if (langFromUrl && (langFromUrl === 'en' || langFromUrl === 'es')) {
                         this.currentLanguage = langFromUrl;
-                        console.log('🌍 Language from URL:', langFromUrl);
                     } else if (langFromStorage && (langFromStorage === 'en' || langFromStorage === 'es')) {
                         this.currentLanguage = langFromStorage;
-                        console.log('🌍 Language from localStorage:', langFromStorage);
                     } else {
                         this.currentLanguage = 'es';
-                        console.log('🌍 Using default language: Spanish');
                     }
                     
                     // Store language preference for consistency
@@ -545,7 +561,6 @@
                     // Update language display
                     this.updateLanguageDisplay();
                     
-                    console.log('🌍 Donate Language Switcher initialized with language:', this.currentLanguage);
                 }
                 
                 updatePageTitle() {
@@ -617,7 +632,6 @@
                     this.translateContent();
                     this.updateLanguageDisplay();
                     
-                    console.log('🌍 Language switched to:', newLang);
                 }
             }
             

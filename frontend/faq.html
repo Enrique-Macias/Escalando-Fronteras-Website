@@ -1,20 +1,78 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Preguntas frecuentes sobre Escalando Fronteras. Encuentra respuestas sobre nuestros programas de escalada, educación comunitaria y actividades en Monterrey, Nuevo León.">
+        <meta name="keywords" content="FAQ Escalando Fronteras, preguntas frecuentes, escalada, educación comunitaria, Monterrey, Nuevo León, programas juveniles, organización sin fines de lucro">
+        <meta name="author" content="Escalando Fronteras">
+        <meta name="robots" content="index, follow">
 
-        <title>Escalando Fronteras</title>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="FAQ - Escalando Fronteras | Preguntas Frecuentes">
+        <meta property="og:description" content="Encuentra respuestas a las preguntas más frecuentes sobre Escalando Fronteras. Programas de escalada, educación y desarrollo comunitario.">
+        <meta property="og:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+        <meta property="og:url" content="https://climbingborders.org/faq.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Escalando Fronteras">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="FAQ - Escalando Fronteras | Preguntas Frecuentes">
+        <meta name="twitter:description" content="Encuentra respuestas sobre Escalando Fronteras. Programas de escalada y educación en Monterrey.">
+        <meta name="twitter:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://climbingborders.org/faq.html">
+
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="es" href="https://climbingborders.org/faq.html">
+        <link rel="alternate" hreflang="en" href="https://climbingborders.org/faq.html?lang=en">
+
+        <title>FAQ - Escalando Fronteras | Preguntas Frecuentes sobre Nuestros Programas</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
+        <link rel="apple-touch-icon" href="images/icons/EF_LOGO.png">
+        <link rel="shortcut icon" href="images/icons/EF_LOGO.png">
 
         <!-- ======================= CSS Styles ================== -->        
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap-icons.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+        
+        <!-- JSON-LD Structured Data for FAQ Page -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": {
+                "@type": "Organization",
+                "name": "Escalando Fronteras",
+                "alternateName": "Climbing Borders",
+                "description": "Organización comunitaria que promueve la educación, escalada en montaña y desarrollo comunitario en Monterrey, Nuevo León",
+                "url": "https://climbingborders.org",
+                "logo": "https://climbingborders.org/images/icons/EF_LOGO.png",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Monterrey",
+                    "addressRegion": "Nuevo León",
+                    "addressCountry": "MX"
+                },
+                "areaServed": {
+                    "@type": "Place",
+                    "name": "Monterrey, Nuevo León"
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "contactType": "General Information",
+                    "email": "info@climbingborders.org",
+                    "availableLanguage": ["Spanish", "English"]
+                }
+            }
+        }
+        </script>
 
     </head>
     <!-- ======================= HEADER ================== -->
@@ -38,12 +96,12 @@
                     <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                         <ul class="social-icon">
                             <li class="social-icon-item">
-                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
 
                             </li>
 
                             <li class="social-icon-item">
-                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
                             </li>
 
                             <li class="social-icon-item">
@@ -362,7 +420,6 @@
                     }
                 }
                     
-                    console.log('Global settings updated successfully');
                 } catch (error) {
                     console.error('Error fetching global settings:', error);
                 }
@@ -405,7 +462,6 @@
                         }, 100);
                     }
                     
-                    console.log('FAQ content updated successfully');
                 } catch (error) {
                     console.error('Error fetching FAQ content:', error);
                 }
@@ -422,7 +478,6 @@
                     button.addEventListener('click', handleFAQClick);
                 });
                 
-                console.log('FAQ accordion initialized with', faqButtons.length, 'buttons');
             }
             
             // FAQ accordion click handler
@@ -430,14 +485,12 @@
                 e.preventDefault();
                 e.stopPropagation();
                 
-                console.log('FAQ button clicked');
                 
                 const question = this.closest('.question');
                 const answer = question.querySelector('p');
                 const icon = this.querySelector('.d-arrow');
                 
                 const isActive = answer.classList.contains('show');
-                console.log('Question is active:', isActive);
                 
                 // Close all questions first
                 const allFaqButtons = document.querySelectorAll('.question button');
@@ -453,7 +506,6 @@
                 if (!isActive) {
                     answer.classList.add('show');
                     icon.classList.add('rotate');
-                    console.log('Question opened');
                 } else {
                     console.log('Question closed');
                 }
@@ -541,7 +593,6 @@
                             e.preventDefault();
                             
                             const selectedLang = option.getAttribute('data-lang');
-                            console.log('🌍 FAQ Language option clicked:', selectedLang);
                             
                             this.switchLanguage(selectedLang);
                         });
@@ -549,10 +600,8 @@
                 }
                 
                 switchLanguage(newLang) {
-                    console.log('🌍 FAQ Switching language to:', newLang);
                     
                     if (this.currentLanguage === newLang) {
-                        console.log('🌍 Language already selected:', newLang);
                         return;
                     }
                     
@@ -560,7 +609,7 @@
                     
                     // Store language preference in localStorage for persistence
                     localStorage.setItem('userLanguagePreference', newLang);
-                    console.log('💾 Language preference saved to localStorage:', newLang);
+                    
                     
                     // Update display
                     this.updateLanguageDisplay();
@@ -568,7 +617,6 @@
                     // Translate content
                     this.translateContent();
                     
-                    console.log('✅ FAQ Language switched to:', newLang);
                 }
                 
                 updateLanguageDisplay() {
@@ -590,7 +638,6 @@
                 }
                 
                 translateContent() {
-                    console.log('🔄 Translating FAQ content to:', this.currentLanguage);
                     
                     const t = this.translations[this.currentLanguage];
                     if (!t) {
@@ -603,7 +650,6 @@
                         try {
                             const element = document.querySelector(selector);
                             if (element && t[key]) {
-                                console.log('✅ Updating', selector, 'to:', t[key]);
                                 element.textContent = t[key];
                             } else {
                                 console.log('⚠️ Element not found or no translation:', selector, 'key:', key);
@@ -617,7 +663,6 @@
                         try {
                             const element = document.querySelector(selector);
                             if (element && t[key]) {
-                                console.log('✅ Updating HTML', selector, 'to:', t[key]);
                                 element.innerHTML = t[key];
                             }
                         } catch (error) {
@@ -685,8 +730,6 @@
                             link.textContent = t.asociarseConNosotros;
                         }
                     });
-                    
-                    console.log('✅ FAQ content translated to:', this.currentLanguage);
                 }
             }
             

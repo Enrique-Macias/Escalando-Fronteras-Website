@@ -17,18 +17,15 @@
      */
     function scrollToElement(target, offset = 20) {
         if (isScrolling) {
-            console.log('🚫 Scroll already in progress, ignoring request');
             return;
         }
 
         const element = typeof target === 'string' ? document.getElementById(target) : target;
         if (!element) {
-            console.error('❌ Target element not found:', target);
             return;
         }
 
         isScrolling = true;
-        console.log('🎯 Global scroll to:', element.id || target);
 
         // Get navbar height for offset
         const navbar = document.querySelector('.navbar');
@@ -40,13 +37,6 @@
         const targetTop = rect.top + scrollTop;
         const finalPosition = targetTop - navbarHeight - offset;
 
-        console.log('📍 Scroll details:', {
-            element: element.id,
-            navbarHeight,
-            targetTop,
-            finalPosition
-        });
-
         // Perform smooth scroll
         window.scrollTo({
             top: finalPosition,
@@ -57,7 +47,6 @@
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             isScrolling = false;
-            console.log('✅ Global scroll completed');
         }, 1000);
     }
 
@@ -66,8 +55,6 @@
      * @param {string} sectionId - Section ID to scroll to
      */
     function handleCrossPageScroll(sectionId) {
-        console.log('🌐 Cross-page scroll requested:', sectionId);
-        
         // Store the section ID for after page load
         sessionStorage.setItem('globalScrollTarget', sectionId);
         
@@ -81,7 +68,6 @@
     function checkStoredScrollTarget() {
         const storedTarget = sessionStorage.getItem('globalScrollTarget');
         if (storedTarget) {
-            console.log('🔄 Found stored scroll target:', storedTarget);
             sessionStorage.removeItem('globalScrollTarget');
             
             // Wait for page to be fully loaded
@@ -95,8 +81,6 @@
      * Initialize global scroll handlers
      */
     function init() {
-        console.log('🚀 Initializing Global Scroll Handler');
-
         // Check for stored scroll target on page load
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', checkStoredScrollTarget);
@@ -130,8 +114,6 @@
                 scrollToElement(sectionId);
             }
         });
-
-        console.log('✅ Global Scroll Handler initialized');
     }
 
     // Initialize when DOM is ready

@@ -31,7 +31,8 @@ $.each(sectionArray, function(index, value){
          
      });
     
-    $('.click-scroll').eq(index).click(function(e){
+    // Find the specific click-scroll link that targets this section
+    $('.click-scroll[href="#section_' + value + '"]').click(function(e){
         var clickOffset = sectionElement.offset();
         if (!clickOffset) {
             return; // Exit if offset is undefined

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Página no encontrada - Escalando Fronteras">
+    <meta name="author" content="Escalando Fronteras">
+    <title>Página no encontrada - Escalando Fronteras</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/templatemo-kind-heart-charity.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Custom 404 Styles -->
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e3f2fd 100%);
+            padding: 2rem 1rem;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--custom-btn-bg-color);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .error-description {
+            font-size: 1.2rem;
+            color: var(--p-color);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-home {
+            background: var(--custom-btn-bg-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-home:hover {
+            background: var(--custom-btn-bg-hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .btn-back {
+            background: transparent;
+            color: var(--custom-btn-bg-color);
+            padding: 12px 30px;
+            border: 2px solid var(--custom-btn-bg-color);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            background: var(--custom-btn-bg-color);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .error-illustration {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            background: var(--section-bg-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--custom-btn-bg-color);
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-description {
+                font-size: 1rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-home, .btn-back {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-page">
+        <div class="error-container">
+            <div class="error-illustration">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            
+            <div class="error-code">404</div>
+            
+            <h1 class="error-title" data-translate="errorTitle">Página no encontrada</h1>
+            
+            <p class="error-description" data-translate="errorDescription">
+                Lo sentimos, la página que estás buscando no existe o ha sido movida. 
+                Puede que hayas escrito mal la dirección o que la página haya sido eliminada.
+            </p>
+            
+            <div class="error-actions">
+                <a href="index.html" class="btn-home" data-translate="goHome">Ir al Inicio</a>
+                <button onclick="history.back()" class="btn-back" data-translate="goBack">Volver Atrás</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-globe"></i> <span id="currentLanguage">ES</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                <li><a class="dropdown-item language-option" href="#" data-lang="es">Español</a></li>
+                <li><a class="dropdown-item language-option" href="#" data-lang="en">English</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    <!-- Language Support -->
+    <script>
+        class LanguageManager {
+            constructor() {
+                this.currentLang = localStorage.getItem('language') || 'es';
+                this.translations = {
+                    es: {
+                        errorTitle: "Página no encontrada",
+                        errorDescription: "Lo sentimos, la página que estás buscando no existe o ha sido movida. Puede que hayas escrito mal la dirección o que la página haya sido eliminada.",
+                        goHome: "Ir al Inicio",
+                        goBack: "Volver Atrás"
+                    },
+                    en: {
+                        errorTitle: "Page Not Found",
+                        errorDescription: "Sorry, the page you are looking for does not exist or has been moved. You may have mistyped the address or the page may have been deleted.",
+                        goHome: "Go Home",
+                        goBack: "Go Back"
+                    }
+                };
+                this.init();
+            }
+
+            init() {
+                this.updateLanguage();
+                this.setupEventListeners();
+            }
+
+            updateLanguage() {
+                const t = this.translations[this.currentLang];
+                
+                // Update document language
+                document.documentElement.lang = this.currentLang;
+                
+                // Update current language indicator
+                document.getElementById('currentLanguage').textContent = this.currentLang.toUpperCase();
+                
+                // Update all translatable elements
+                Object.keys(t).forEach(key => {
+                    const elements = document.querySelectorAll(`[data-translate="${key}"]`);
+                    elements.forEach(element => {
+                        element.textContent = t[key];
+                    });
+                });
+            }
+
+            setupEventListeners() {
+                document.querySelectorAll('.language-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = e.target.getAttribute('data-lang');
+                        if (lang && lang !== this.currentLang) {
+                            this.currentLang = lang;
+                            localStorage.setItem('language', lang);
+                            this.updateLanguage();
+                        }
+                    });
+                });
+            }
+        }
+
+        // Initialize language manager when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            new LanguageManager();
+        });
+    </script>
+</body>
+</html>

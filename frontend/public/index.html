@@ -576,7 +576,7 @@
 
                                 <button type="submit" class="form-control">Entregar</button>
 
-                                    <div id="resultado"></div>
+                                    <div id="resultado" class="form-message"></div>
 
                             </form>
                         </div>
@@ -726,7 +726,7 @@
 
                                 <button type="submit" class="form-control">Enviar Mensaje</button>
 
-                                <div id="resultado2"></div>
+                                <div id="resultado2" class="form-message"></div>
 
                             </form>
                         </div>
@@ -824,6 +824,41 @@
         <script src="js/custom.js"></script>
         <script src="js/youtube.js"></script>
         
+        <!-- Form Message Styling -->
+        <style>
+            .form-message {
+                margin-top: 1rem;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-weight: 500;
+                text-align: center;
+                transition: all 0.3s ease;
+                display: none;
+            }
+            
+            .form-message.loading {
+                background-color: #e3f2fd;
+                color: #1976d2;
+                border: 1px solid #bbdefb;
+                display: block;
+            }
+            
+            .form-message.success {
+                background-color: #e8f5e8;
+                color: #2e7d32;
+                border: 1px solid #c8e6c9;
+                display: block;
+            }
+            
+            .form-message.error {
+                background-color: #ffebee;
+                color: #c62828;
+                border: 1px solid #ffcdd2;
+                display: block;
+            }
+            
+        </style>
+
         <!-- Global Settings API Integration -->
         <script>
             // Fetch and update global settings
@@ -2231,7 +2266,10 @@
             const formData = new FormData(volunteer);
             const object = Object.fromEntries(formData);
             const json = JSON.stringify(object);
-            resultado.innerHTML = "Por favor, espere..."
+            
+            // Show loading message
+            resultado.className = "form-message loading";
+            resultado.innerHTML = "Enviando email...";
 
                 fetch('https://api.web3forms.com/submit', {
                         method: 'POST',
@@ -2244,21 +2282,25 @@
                     .then(async (response) => {
                         let json = await response.json();
                         if (response.status == 200) {
+                            resultado.className = "form-message success";
                             resultado.innerHTML = "Email enviado exitosamente!";
                         } else {
                             console.log(response);
+                            resultado.className = "form-message error";
                             resultado.innerHTML = "Algo salió mal! Por favor, inténtelo de nuevo.";
                         }
                     })
                     .catch(error => {
                         console.log(error);
+                        resultado.className = "form-message error";
                         resultado.innerHTML = "Algo salió mal! Por favor, inténtelo de nuevo.";
                     })
                     .then(function() {
                         volunteer.reset();
                         setTimeout(() => {
                             resultado.style.display = "none";
-                        }, 3000);
+                            resultado.className = "form-message";
+                        }, 5000);
                     });
             });
         </script>
@@ -2280,7 +2322,10 @@
                 const formData2 = new FormData(volunteerForm2);
                 const object2 = Object.fromEntries(formData2);
                 const json2 = JSON.stringify(object2);
-                resultArea2.innerHTML = "Por favor, espere..."
+                
+                // Show loading message
+                resultArea2.className = "form-message loading";
+                resultArea2.innerHTML = "Enviando email...";
 
                 fetch('https://api.web3forms.com/submit', {
                         method: 'POST',
@@ -2293,21 +2338,25 @@
                     .then(async (response) => {
                         let jsonResp2 = await response.json();
                         if (response.status == 200) {
+                            resultArea2.className = "form-message success";
                             resultArea2.innerHTML = "Email enviado exitosamente!";
                         } else {
                             console.log(response);
+                            resultArea2.className = "form-message error";
                             resultArea2.innerHTML = "Algo salió mal! Por favor, inténtelo de nuevo.";
                         }
                     })
                     .catch(error => {
                         console.log(error);
+                        resultArea2.className = "form-message error";
                         resultArea2.innerHTML = "Algo salió mal! Por favor, inténtelo de nuevo.";
                     })
                     .then(function() {
                         volunteerForm2.reset();
                         setTimeout(() => {
                             resultArea2.style.display = "none";
-                        }, 3000);
+                            resultArea2.className = "form-message";
+                        }, 5000);
                     });
             });
         </script>
@@ -2320,9 +2369,9 @@
                     link.addEventListener('click', function(e) {
                         const href = this.getAttribute('href');
                         
-                        // Skip invalid hrefs or language dropdown links
-                        if (!href || href === '#' || this.classList.contains('language-option')) {
-                            return; // Don't prevent default for language options
+                        // Skip invalid hrefs, language dropdown links, or click-scroll links
+                        if (!href || href === '#' || this.classList.contains('language-option') || this.classList.contains('click-scroll')) {
+                            return; // Don't prevent default for language options or click-scroll links
                         }
                         
                         e.preventDefault(); // Prevent default anchor click behavior only for in-page navigation

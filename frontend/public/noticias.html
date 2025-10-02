@@ -1,13 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Últimas noticias y actualizaciones de Escalando Fronteras. Mantente informado sobre nuestros programas de escalada, eventos comunitarios, y el impacto en Monterrey, Nuevo León.">
+        <meta name="keywords" content="Escalando Fronteras noticias, actualizaciones, eventos, escalada, comunidad, Monterrey, Nuevo León, programas educativos, desarrollo juvenil">
+        <meta name="author" content="Escalando Fronteras">
+        <meta name="robots" content="index, follow">
 
-        <title>Escalando Fronteras - Noticias</title>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="Noticias - Escalando Fronteras | Últimas Actualizaciones">
+        <meta property="og:description" content="Mantente informado sobre las últimas noticias y actualizaciones de Escalando Fronteras. Programas, eventos y el impacto en nuestra comunidad en Monterrey.">
+        <meta property="og:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+        <meta property="og:url" content="https://climbingborders.org/noticias.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Escalando Fronteras">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Noticias - Escalando Fronteras | Últimas Actualizaciones">
+        <meta name="twitter:description" content="Mantente informado sobre las últimas noticias y actualizaciones de Escalando Fronteras en Monterrey.">
+        <meta name="twitter:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://climbingborders.org/noticias.html">
+
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="es" href="https://climbingborders.org/noticias.html">
+        <link rel="alternate" hreflang="en" href="https://climbingborders.org/noticias.html?lang=en">
+
+        <title>Noticias - Escalando Fronteras | Últimas Actualizaciones y Eventos</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
 
         <!-- ======================= CSS Styles ================== -->           
@@ -39,10 +63,10 @@
                         <ul class="social-icon">
 
                             <li class="social-icon-item">
-                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer"></a>
                             </li>
                             <li class="social-icon-item">
-                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer"></a>
                             </li>
 
                             <li class="social-icon-item">
@@ -272,11 +296,11 @@
                             <ul class="social-icon">
 
                                 <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                    <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer"></a>
                                 </li>
 
                                 <li class="social-icon-item">
-                                    <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                    <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer"></a>
                                 </li>
 
                                 <li class="social-icon-item">
@@ -443,8 +467,7 @@
                         footerWhatsapp.style.display = 'none';
                     }
                 }
-                    
-                    console.log('Global settings updated successfully');
+        
                 } catch (error) {
                     console.error('Error fetching global settings:', error);
                 }
@@ -562,9 +585,7 @@
                         
                         // Store the final language choice in localStorage for persistence
                         localStorage.setItem('userLanguagePreference', this.currentLanguage);
-                        
-                        console.log('🌍 Noticias page language:', this.currentLanguage);
-                        
+                                                
                         this.setupLanguageSwitcher();
                         this.updateLanguageDisplay();
                         this.translateStaticContent();
@@ -583,19 +604,14 @@
                         option.addEventListener('click', (e) => {
                             e.preventDefault();
                             
-                            const selectedLang = option.getAttribute('data-lang');
-                            console.log('🌍 Language option clicked:', selectedLang);
-                            
+                            const selectedLang = option.getAttribute('data-lang');                            
                             this.switchLanguage(selectedLang);
                         });
                     });
                 }
                 
                 switchLanguage(newLang) {
-                    console.log('🌍 Switching noticias language to:', newLang);
-                    
                     if (this.currentLanguage === newLang) {
-                        console.log('🌍 Language already selected:', newLang);
                         return;
                     }
                     
@@ -603,8 +619,6 @@
                     
                     // Store language preference in localStorage for persistence
                     localStorage.setItem('userLanguagePreference', newLang);
-                    console.log('💾 Language preference saved to localStorage:', newLang);
-                    
                     // Also store in sessionStorage for immediate navigation
                     sessionStorage.setItem('selectedLanguage', newLang);
                     
@@ -627,8 +641,6 @@
                             window.noticiasIntegration.loadContent();
                         }, 100);
                     }
-                    
-                    console.log('✅ Noticias language switched to:', newLang);
                 }
                 
                 updateLanguageDisplay() {
@@ -650,8 +662,6 @@
                 }
                 
                 translateStaticContent() {
-                    console.log('🔄 Translating noticias static content to:', this.currentLanguage);
-                    
                     const t = this.translations[this.currentLanguage];
                     if (!t) return;
                     
@@ -721,8 +731,6 @@
                             link.textContent = text;
                         }
                     });
-                    
-                    console.log('✅ Noticias static content translated to:', this.currentLanguage);
                 }
             }
             

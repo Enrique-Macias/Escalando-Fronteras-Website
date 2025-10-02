@@ -1,13 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Descubre los eventos y actividades de Escalando Fronteras. Únete a nuestros programas de escalada, talleres educativos y eventos comunitarios en Monterrey, Nuevo León.">
+        <meta name="keywords" content="Escalando Fronteras eventos, escalada, talleres, actividades comunitarias, Monterrey, Nuevo León, programas educativos, eventos deportivos">
+        <meta name="author" content="Escalando Fronteras">
+        <meta name="robots" content="index, follow">
 
-        <title>Escalando Fronteras - Eventos</title>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="Eventos - Escalando Fronteras | Actividades y Programas">
+        <meta property="og:description" content="Descubre los eventos y actividades de Escalando Fronteras. Únete a nuestros programas de escalada y eventos comunitarios en Monterrey.">
+        <meta property="og:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+        <meta property="og:url" content="https://climbingborders.org/eventos.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Escalando Fronteras">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Eventos - Escalando Fronteras | Actividades y Programas">
+        <meta name="twitter:description" content="Descubre los eventos y actividades de Escalando Fronteras en Monterrey. Únete a nuestros programas de escalada.">
+        <meta name="twitter:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://climbingborders.org/eventos.html">
+
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="es" href="https://climbingborders.org/eventos.html">
+        <link rel="alternate" hreflang="en" href="https://climbingborders.org/eventos.html?lang=en">
+
+        <title>Eventos - Escalando Fronteras | Actividades, Talleres y Programas</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
 
         <!-- ======================= CSS Styles ================== -->           
@@ -39,10 +63,10 @@
                         <ul class="social-icon">
 
                             <li class="social-icon-item">
-                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer"></a>
                             </li>
                             <li class="social-icon-item">
-                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer"></a>
                             </li>
 
                             <li class="social-icon-item">
@@ -260,10 +284,10 @@
                         <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
                             <ul class="social-icon">
                                 <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                    <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer"></a>
                                 </li>
                                 <li class="social-icon-item">
-                                    <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                    <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer"></a>
                                 </li>
                                 <li class="social-icon-item">
                                     <a href="#" class="social-icon-link bi-whatsapp"></a>
@@ -428,7 +452,6 @@
                     }
                 }
                     
-                    console.log('Global settings updated successfully');
                 } catch (error) {
                     console.error('Error fetching global settings:', error);
                 }
@@ -544,7 +567,6 @@
                         // Store the final language choice in localStorage for persistence
                         localStorage.setItem('userLanguagePreference', this.currentLanguage);
                         
-                        console.log('🌍 Eventos page language:', this.currentLanguage);
                         
                         this.setupLanguageSwitcher();
                         this.updateLanguageDisplay();
@@ -571,7 +593,6 @@
                 
                 switchLanguage(newLang) {
                     if (this.currentLanguage === newLang) {
-                        console.log('🌍 Language already selected:', newLang);
                         return;
                     }
                     
@@ -579,7 +600,6 @@
                     
                     // Store language preference in localStorage for persistence
                     localStorage.setItem('userLanguagePreference', newLang);
-                    console.log('💾 Language preference saved to localStorage:', newLang);
                     
                     // Also store in sessionStorage for immediate navigation
                     sessionStorage.setItem('selectedLanguage', newLang);

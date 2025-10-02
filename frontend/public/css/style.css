@@ -990,6 +990,13 @@ faq .container-faq[class*="container"] {
   color: #31363F;
 }
 
+/* Ensure language dropdown items are visible */
+.language-option {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 .dropdown-toggle::after {
   content: "\f282";
   display: inline-block;
@@ -3838,4 +3845,126 @@ faq {
   color: var(--p-color);
   margin-top: 1rem;
   font-size: var(--p-font-size);
+}
+
+/* ===================== Acknowledgments Section ===================== */
+
+.acknowledgments-section {
+  background: var(--section-bg-color);
+  position: relative;
+}
+
+.acknowledgments-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.acknowledgments-title {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.acknowledgments-text {
+  margin-bottom: 2.5rem;
+}
+
+.acknowledgments-text p {
+  font-size: var(--p-font-size);
+  color: var(--p-color);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.acknowledgments-logo-container {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.acknowledgments-logo-placeholder {
+  background: var(--white-color);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius-small);
+  padding: 2rem;
+  min-height: 120px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.acknowledgments-logo-placeholder:hover {
+  border-color: var(--custom-btn-bg-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo-placeholder {
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+}
+
+.acknowledgments-logo {
+  max-height: 150px;
+  max-width: 350px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.acknowledgments-subtitle {
+  margin-top: 1.5rem;
+}
+
+.acknowledgments-subtitle p {
+  font-size: 1rem;
+  color: var(--primary-color);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments for acknowledgments section */
+@media screen and (max-width: 768px) {
+  .acknowledgments-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .acknowledgments-text p {
+    font-size: 0.95rem;
+  }
+  
+  .acknowledgments-logo-placeholder {
+    min-height: 100px;
+    min-width: 150px;
+    padding: 1.5rem;
+  }
+  
+  .logo-placeholder {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .acknowledgments-title {
+    font-size: 1.75rem;
+  }
+  
+  .acknowledgments-text p {
+    font-size: 0.9rem;
+  }
+  
+  .acknowledgments-logo-placeholder {
+    min-height: 80px;
+    min-width: 120px;
+    padding: 1rem;
+  }
 }

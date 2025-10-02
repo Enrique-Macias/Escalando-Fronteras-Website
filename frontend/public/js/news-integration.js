@@ -459,7 +459,7 @@ class NewsIntegration {
             const marginClass = index > 0 ? 'mt-4' : '';
             
             eventsHTML += `
-                <div class="news-block news-block-two-col d-flex ${marginClass}">
+                <div class="news-block news-block-two-col d-flex ${marginClass}" style="cursor: pointer;" onclick="window.newsIntegration.navigateToEvent('${event.id}')">
                     <div class="news-block-two-col-image-wrap">
                         <a href="#" onclick="return false;">
                             <img src="${imageUrl}" class="news-image img-fluid" alt="${title}" loading="lazy" onerror="this.src='images/eventos/ejemplo_evento.jpg'">
@@ -680,6 +680,23 @@ class NewsIntegration {
         
         // Navigate to noticias.html with language parameter
         window.location.href = `noticias.html?lang=${this.currentLanguage}`;
+    }
+
+    /**
+     * Navigate to eventos.html with specific event selected
+     * @param {string} eventId - The ID of the event to display
+     */
+    navigateToEvent(eventId) {
+        console.log('📰 Navigating to event from news integration:', eventId);
+        
+        // Store the selected event ID in sessionStorage for the eventos page to use
+        sessionStorage.setItem('selectedEventId', eventId);
+        
+        // Also store the current language preference
+        sessionStorage.setItem('selectedLanguage', this.currentLanguage);
+        
+        // Navigate to eventos.html
+        window.location.href = 'eventos.html';
     }
 }
 

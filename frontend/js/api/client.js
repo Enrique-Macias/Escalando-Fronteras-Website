@@ -66,7 +66,7 @@ class APIClient {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error(`API Error (${endpoint}):`, error);
+            // API Error
             
             if (error.name === 'AbortError') {
                 throw new Error('Request timeout - please try again');

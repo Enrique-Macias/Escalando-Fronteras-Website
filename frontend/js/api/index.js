@@ -51,7 +51,7 @@ function checkServicesLoaded() {
         document.dispatchEvent(event);
         
     } else {
-        console.error('❌ Missing API services:', missingServices);
+        // Missing API services
     }
 }
 

@@ -158,9 +158,10 @@
                                             <!-- Stripe Buy Button -->
                                             <stripe-buy-button class="stripe-section"
                                                 buy-button-id="buy_btn_1P7OZJP5bZ1okdvjSGSnO1gb"
-                                                publishable-key="">
+                                                publishable-key=""
+                                                style="display: none;">
                                             </stripe-buy-button>
-                                            <div class="paypal-continue">
+                                            <div class="paypal-continue" style="display: none;">
                                                 <p id="donate-continue">O, continúa con</p>                                             
                                             </div>
                                             <!-- PayPal Button Container -->
@@ -423,13 +424,32 @@
                     
                     // Update Stripe publishable key
                     const stripeButton = document.querySelector('stripe-buy-button');
-                    if (stripeButton && paymentData.paystripeCode) {
-                        stripeButton.setAttribute('publishable-key', paymentData.paystripeCode);
-                        
-                        // Force re-render of the Stripe button
-                        const parent = stripeButton.parentNode;
-                        const newStripeButton = stripeButton.cloneNode(true);
-                        parent.replaceChild(newStripeButton, stripeButton);
+                    if (stripeButton) {
+                        if (paymentData.paystripeCode && paymentData.paystripeCode.trim() !== '') {
+                            // Show Stripe button and set publishable key
+                            stripeButton.setAttribute('publishable-key', paymentData.paystripeCode);
+                            stripeButton.style.display = 'block';
+                            
+                            // Show "O, continúa con" text
+                            const continueText = document.querySelector('.paypal-continue');
+                            if (continueText) {
+                                continueText.style.display = 'block';
+                            }
+                            
+                            // Force re-render of the Stripe button
+                            const parent = stripeButton.parentNode;
+                            const newStripeButton = stripeButton.cloneNode(true);
+                            parent.replaceChild(newStripeButton, stripeButton);
+                        } else {
+                            // Hide Stripe button if no publishable key
+                            stripeButton.style.display = 'none';
+                            
+                            // Hide "O, continúa con" text
+                            const continueText = document.querySelector('.paypal-continue');
+                            if (continueText) {
+                                continueText.style.display = 'none';
+                            }
+                        }
                     }
                     
                     // Update PayPal URL
@@ -439,7 +459,16 @@
                     }
                     
                 } catch (error) {
-                    console.error('Error fetching payment settings:', error);
+                    // Error fetching payment settings - hide Stripe button and continue text
+                    const stripeButton = document.querySelector('stripe-buy-button');
+                    if (stripeButton) {
+                        stripeButton.style.display = 'none';
+                    }
+                    
+                    const continueText = document.querySelector('.paypal-continue');
+                    if (continueText) {
+                        continueText.style.display = 'none';
+                    }
                 }
             }
             

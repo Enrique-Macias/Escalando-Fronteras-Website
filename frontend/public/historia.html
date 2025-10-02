@@ -1115,14 +1115,17 @@
             const videoModal = document.getElementById('videoModal');
             const youtubeVideo = document.getElementById('youtubeVideo');
             
-            videoModal.addEventListener('show.bs.modal', function() {
-                // Add YouTube video URL here
-                youtubeVideo.src = 'https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1';
-            });
-            
-            videoModal.addEventListener('hide.bs.modal', function() {
-                youtubeVideo.src = '';
-            });
+            // Only add event listeners if elements exist
+            if (videoModal && youtubeVideo) {
+                videoModal.addEventListener('show.bs.modal', function() {
+                    // Add YouTube video URL here
+                    youtubeVideo.src = 'https://www.youtube.com/embed/hm5C2sV3f-U?autoplay=1&modestbranding=1&rel=0';
+                });
+                
+                videoModal.addEventListener('hide.bs.modal', function() {
+                    youtubeVideo.src = '';
+                });
+            }
         });
     </script>
     

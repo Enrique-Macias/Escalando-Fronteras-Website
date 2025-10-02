@@ -29,13 +29,12 @@ class EF_LanguageSwitcher {
                 this.currentLanguage = storedLang;
             }
         } catch (error) {
-            console.warn('Could not access localStorage:', error);
+            // Could not access localStorage
         }
     }
 
     setCurrentLanguage(lang) {
         if (!this.supportedLanguages.includes(lang)) {
-            console.warn(`Unsupported language: ${lang}`);
             return;
         }
 
@@ -44,7 +43,7 @@ class EF_LanguageSwitcher {
         try {
             localStorage.setItem('ef-language', lang);
         } catch (error) {
-            console.warn('Could not store language preference:', error);
+            // Could not store language preference
         }
 
         this.updateLanguageDisplay();
@@ -57,7 +56,6 @@ class EF_LanguageSwitcher {
         const languageOptions = document.querySelectorAll('.language-option');
         
         if (languageOptions.length === 0) {
-            console.warn('No language options found in dropdown');
             return;
         }
         

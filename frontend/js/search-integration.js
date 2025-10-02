@@ -15,7 +15,7 @@ class SearchIntegration {
     init() {
         // Listen for API services to be ready first
         document.addEventListener('apiServicesReady', () => {
-            console.log('🔍 API services ready, initializing search...');
+            // API services ready, initializing search
             this.currentLanguage = EFAPI.language.getCurrentLanguage();
             this.loadAllEvents();
             
@@ -36,22 +36,21 @@ class SearchIntegration {
         this.searchForm = document.querySelector('.search-form');
         this.searchInput = document.getElementById('search');
         
-        console.log(`🔍 Attempt ${attempts + 1}: Search form found:`, !!this.searchForm);
-        console.log(`🔍 Attempt ${attempts + 1}: Search input found:`, !!this.searchInput);
+        // Search form and input check
         
         if (this.searchForm && this.searchInput) {
             this.setupSearchListeners();
-            console.log('✅ Search integration initialized successfully');
+            // Search integration initialized successfully
         } else if (attempts < maxAttempts) {
-            console.log(`⚠️ Search form not ready, retrying in 500ms... (${attempts + 1}/${maxAttempts})`);
+            // Search form not ready, retrying
             setTimeout(() => this.waitForSearchForm(attempts + 1), 500);
         } else {
-            console.log('❌ Search form not found after maximum attempts');
+            // Search form not found after maximum attempts
         }
     }
 
     setupSearchListeners() {
-        console.log('🔍 Setting up search listeners...');
+        // Setting up search listeners
         
         // Remove form action and method to prevent navigation
         this.searchForm.removeAttribute('action');
@@ -62,7 +61,7 @@ class SearchIntegration {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
-            console.log('🔍 Form submitted, performing search...');
+            // Form submitted, performing search
             this.performSearch();
             return false;
         });
@@ -77,7 +76,7 @@ class SearchIntegration {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
-                console.log('🔍 Search button clicked, performing search...');
+                // Search button clicked, performing search
                 this.performSearch();
                 return false;
             });
@@ -86,7 +85,7 @@ class SearchIntegration {
         // Real-time search as user types
         this.searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim();
-            console.log('🔍 Input changed:', query);
+            // Input changed
             if (query.length >= 2) {
                 this.performSearch();
             } else if (query.length === 0) {
@@ -99,7 +98,7 @@ class SearchIntegration {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('🔍 Enter key pressed, performing search...');
+                // Enter key pressed, performing search
                 this.performSearch();
                 return false;
             } else if (e.key === 'Escape') {
@@ -107,12 +106,12 @@ class SearchIntegration {
             }
         });
         
-        console.log('✅ Search listeners set up successfully');
+        // Search listeners set up successfully
     }
 
     async loadAllEvents() {
         try {
-            console.log('🔍 Loading all events for search...');
+            // Loading all events for search
             
             const events = await EFAPI.events.getEvents({
                 limit: 50, // Load more events for comprehensive search
@@ -130,10 +129,10 @@ class SearchIntegration {
                 this.allEvents = [];
             }
             
-            console.log('✅ Loaded events for search:', this.allEvents.length);
+            // Loaded events for search
             
         } catch (error) {
-            console.error('❌ Error loading events for search:', error);
+            // Error loading events for search
             this.allEvents = [];
         }
     }
@@ -146,7 +145,7 @@ class SearchIntegration {
             return;
         }
 
-        console.log('🔍 Searching for:', query);
+        // Searching for events
 
         // Filter events based on search query
         const filteredEvents = this.allEvents.filter(event => {
@@ -169,7 +168,7 @@ class SearchIntegration {
                    tags.includes(query);
         });
 
-        console.log('✅ Found events:', filteredEvents.length);
+        // Found events
 
         // Display filtered results
         this.displaySearchResults(filteredEvents, query);
@@ -179,7 +178,7 @@ class SearchIntegration {
         const recentEventsContainer = document.getElementById('recent-events-container');
         
         if (!recentEventsContainer) {
-            console.log('⚠️ Recent events container not found');
+            // Recent events container not found
             return;
         }
 
@@ -301,7 +300,7 @@ class SearchIntegration {
      * @param {string} eventId - The ID of the event to display
      */
     navigateToEvent(eventId) {
-        console.log('🔍 Navigating to event:', eventId);
+        // Navigating to event
         
         // Store the selected event ID in sessionStorage for the eventos page to use
         sessionStorage.setItem('selectedEventId', eventId);

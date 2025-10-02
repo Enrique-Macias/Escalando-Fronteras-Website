@@ -56,7 +56,7 @@ class NewsIntegration {
             this.displayNews(newsList);
 
         } catch (error) {
-            console.error('❌ Error loading news:', error);
+            // Error loading news
             this.showError(error);
         }
     }
@@ -270,7 +270,7 @@ class NewsIntegration {
                 if (newsId) {
                     this.navigateToNewsArticle(newsId);
                 } else {
-                    console.error('❌ No news ID found on clicked element');
+                    // No news ID found on clicked element
                 }
             });
         });
@@ -404,7 +404,7 @@ class NewsIntegration {
             this.displaySearchResults(filteredEvents, query);
 
         } catch (error) {
-            console.error('❌ Search error:', error);
+            // Search error
         }
     }
 
@@ -687,7 +687,7 @@ class NewsIntegration {
      * @param {string} eventId - The ID of the event to display
      */
     navigateToEvent(eventId) {
-        console.log('📰 Navigating to event from news integration:', eventId);
+        // Navigating to event from news integration
         
         // Store the selected event ID in sessionStorage for the eventos page to use
         sessionStorage.setItem('selectedEventId', eventId);

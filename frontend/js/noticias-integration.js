@@ -32,16 +32,16 @@ class NoticiasIntegration {
         // Only update if values have changed (to avoid unnecessary re-renders)
         if (this.articlesPerPage !== newArticlesPerPage) {
             this.articlesPerPage = newArticlesPerPage;
-            console.log('📱 Updated articles per page to:', this.articlesPerPage);
+            // Updated articles per page
         }
     }
 
     async init() {
-        console.log('🚀 Initializing Noticias Integration...');
+        // Initializing Noticias Integration
         
         // Wait for API services to be ready
         if (typeof window.EFAPI === 'undefined') {
-            console.log('⏳ Waiting for API services...');
+            // Waiting for API services
             document.addEventListener('apiServicesReady', () => {
                 this.setupLanguageListener();
                 this.loadContent();
@@ -55,15 +55,14 @@ class NoticiasIntegration {
     setupLanguageListener() {
         // Listen for language changes
         document.addEventListener('languageChanged', (event) => {
-            console.log('🌍 Language changed to:', event.detail.language);
+            // Language changed
             this.currentLanguage = event.detail.language;
             this.loadContent(); // Reload content with new language
         });
     }
 
     async loadContent() {
-        console.log('📰 Loading news content...');
-        console.log('🌍 Current language:', this.currentLanguage);
+        // Loading news content
         
         try {
             // First, load all news to populate this.allNews array
@@ -77,7 +76,7 @@ class NoticiasIntegration {
             ]);
 
             // Setup search functionality AFTER data is loaded
-            console.log('🔍 Setting up search with', this.allNews.length, 'news articles loaded');
+            // Setting up search with loaded news articles
             this.setupSearchFunctionality();
             this.setupWindowResize(); // Add window resize listener
             
@@ -85,12 +84,12 @@ class NoticiasIntegration {
             this.translateSidebarContent();
             
         } catch (error) {
-            console.error('❌ Error loading news content:', error);
+            // Error loading news content
         }
     }
 
     translateSidebarContent() {
-        console.log('🔄 Translating sidebar content to:', this.currentLanguage);
+        // Translating sidebar content
         
         // Translate "Noticias Recientes" title
         const recentNewsTitle = document.querySelector('h5.mt-5.mb-3');
@@ -99,7 +98,7 @@ class NoticiasIntegration {
             if (!recentNewsTitle.textContent.includes('Search Results') && !recentNewsTitle.textContent.includes('Resultados de Búsqueda')) {
                 const title = this.currentLanguage === 'en' ? 'Recent News' : 'Noticias Recientes';
                 recentNewsTitle.textContent = title;
-                console.log('✅ Updated recent news title to:', title);
+                // Updated recent news title
             }
         }
         
@@ -108,7 +107,7 @@ class NoticiasIntegration {
         if (categoriesTitle) {
             const title = this.currentLanguage === 'en' ? 'Categories' : 'Categorías';
             categoriesTitle.textContent = title;
-            console.log('✅ Updated categories title to:', title);
+            // Updated categories title
         }
         
         // Translate search placeholder
@@ -116,7 +115,7 @@ class NoticiasIntegration {
         if (searchInput) {
             const placeholder = this.currentLanguage === 'en' ? 'Search news' : 'Buscar noticias';
             searchInput.placeholder = placeholder;
-            console.log('✅ Updated search placeholder to:', placeholder);
+            // Updated search placeholder
         }
         
         // Translate main news grid title
@@ -124,7 +123,7 @@ class NoticiasIntegration {
         if (mainGridTitle) {
             const title = this.currentLanguage === 'en' ? 'News' : 'Noticias';
             mainGridTitle.textContent = title;
-            console.log('✅ Updated main grid title to:', title);
+            // Updated main grid title
         }
     }
 
@@ -140,7 +139,7 @@ class NoticiasIntegration {
     }
 
     async loadMainNews() {
-        console.log('📋 Loading main news article...');
+        // Loading main news article
         
         // Check if there's a selected article ID from sessionStorage
         const selectedArticleId = sessionStorage.getItem('selectedNewsArticleId');
@@ -149,7 +148,7 @@ class NoticiasIntegration {
             let response;
             
             if (selectedArticleId) {
-                console.log('🎯 Loading specific news article:', selectedArticleId);
+                // Loading specific news article
                 
                 // First, try to find the article in the full news list
                 const allNewsResponse = await window.EFAPI.news.getNews({ 
@@ -176,30 +175,30 @@ class NoticiasIntegration {
                 sessionStorage.removeItem('selectedNewsArticleId');
                 
                 if (selectedArticle) {
-                    console.log('📰 Selected news article found:', selectedArticle);
+                    // Selected news article found
                     this.displayMainNews(selectedArticle);
                     this.displayMainNewsCategories(selectedArticle);
                     return;
                 } else {
-                    console.warn('⚠️ Selected article not found in news list, trying direct API call...');
+                    // Selected article not found in news list, trying direct API call
                     
                     // Fallback: try direct API call
                     try {
                         response = await window.EFAPI.news.getNewsById(selectedArticleId);
                         if (response) {
-                            console.log('📰 Selected news article loaded via direct call:', response);
+                            // Selected news article loaded via direct call
                             this.displayMainNews(response);
                             this.displayMainNewsCategories(response);
                             return;
                         }
                     } catch (error) {
-                        console.error('❌ Error loading specific article:', error);
+                        // Error loading specific article
                     }
                 }
             }
             
             // Fallback to latest news if no specific article or if loading specific article failed
-            console.log('📋 Loading latest news article...');
+            // Loading latest news article
             response = await window.EFAPI.news.getNews({ 
                 limit: 1, 
                 lang: this.currentLanguage 
@@ -214,7 +213,7 @@ class NoticiasIntegration {
                 newsList = response.data;
             }
 
-            console.log('📰 Main news response:', newsList);
+            // Main news response
 
             if (newsList && newsList.length > 0) {
                 this.displayMainNews(newsList[0]);
@@ -224,13 +223,13 @@ class NoticiasIntegration {
                 this.showMainNewsError();
             }
         } catch (error) {
-            console.error('❌ Error loading main news:', error);
+            // Error loading main news
             this.showMainNewsError();
         }
     }
 
     displayMainNews(news) {
-        console.log('🖼️ Displaying main news:', news);
+        // Displaying main news
         
         const container = document.getElementById('main-news-container');
         if (!container) return;
@@ -300,11 +299,11 @@ class NoticiasIntegration {
     }
 
     displayMainNewsCategories(news) {
-        console.log('📂 Displaying categories for main news article:', news);
+        // Displaying categories for main news article
         
         const container = document.getElementById('categories-sidebar-container');
         if (!container) {
-            console.warn('⚠️ Categories container not found');
+            // Categories container not found
             return;
         }
 
@@ -320,7 +319,7 @@ class NoticiasIntegration {
             categories.push(category);
         }
 
-        console.log('📂 Found categories for main article in', this.currentLanguage, ':', categories);
+        // Found categories for main article
 
         if (categories.length > 0) {
             const categoriesHtml = `
@@ -360,38 +359,35 @@ class NoticiasIntegration {
     }
 
     async loadRecentNewsSidebar() {
-        console.log('📋 Loading recent news for sidebar...');
+        // Loading recent news for sidebar
         
         try {
             // Use already loaded allNews array (populated by loadAllNewsGrid)
             if (this.allNews && this.allNews.length > 0) {
-                console.log('📋 Using already loaded news for sidebar, total articles:', this.allNews.length);
+                // Using already loaded news for sidebar
                 
                 // Skip the first one (it's the main news) and take next 2
                 const recentNews = this.allNews.slice(1, 3);
                 
                 if (recentNews && recentNews.length > 0) {
-                    console.log('📋 Displaying recent news sidebar with', recentNews.length, 'articles');
+                    // Displaying recent news sidebar
                     this.displayRecentNewsSidebar(recentNews);
                 } else {
-                    console.warn('⚠️ No recent news available after skipping main article');
+                    // No recent news available after skipping main article
                     this.showRecentNewsError();
                 }
             } else {
-                console.error('❌ allNews array is empty, cannot load recent news sidebar');
+                // allNews array is empty, cannot load recent news sidebar
                 this.showRecentNewsError();
             }
         } catch (error) {
-            console.error('❌ Error loading recent news:', error);
+            // Error loading recent news
             this.showRecentNewsError();
         }
     }
 
     displayRecentNewsSidebar(newsList) {
-        console.log('🚨 ENHANCED DEBUGGING - displayRecentNewsSidebar called!');
-        console.log('📰 Displaying recent news sidebar:', newsList);
-        console.log('📰 AllNews array:', this.allNews);
-        console.log('📰 AllNews length:', this.allNews.length);
+        // Displaying recent news sidebar
         
         const container = document.getElementById('recent-news-sidebar-container');
         if (!container) return;
@@ -401,12 +397,7 @@ class NoticiasIntegration {
             const imageUrl = news.coverImageUrl || news.imageUrl || 'images/introEF.jpeg';
             const formattedDate = this.formatDate(news.createdAt || news.publishDate);
             
-            console.log('🔍 Processing recent news article:', {
-                index: index,
-                id: news.id,
-                title: title,
-                allNewsLength: this.allNews.length
-            });
+            // Processing recent news article
             
             // Find the index in allNews array using ID comparison (more reliable than object reference)
             let articleIndex = this.allNews.findIndex(article => 
@@ -415,37 +406,37 @@ class NoticiasIntegration {
                 (article.id && news.id && String(article.id) === String(news.id))
             );
 
-            console.log('🔍 ID comparison result:', articleIndex);
+            // ID comparison result
 
             // Fallback: if ID comparison fails, try object reference comparison
             if (articleIndex === -1) {
-                console.warn('⚠️ ID comparison failed, trying object reference for article:', news.id);
+                // ID comparison failed, trying object reference
                 articleIndex = this.allNews.findIndex(article => article === news);
-                console.log('🔍 Object reference result:', articleIndex);
+                // Object reference result
             }
 
             // Additional fallback: try finding by title if both above fail
             if (articleIndex === -1) {
-                console.warn('⚠️ Object reference failed, trying title comparison for article:', news.id);
+                // Object reference failed, trying title comparison
                 const newsTitle = news[`title_${this.currentLanguage}`] || news.title;
                 articleIndex = this.allNews.findIndex(article => {
                     const articleTitle = article[`title_${this.currentLanguage}`] || article.title;
                     return articleTitle === newsTitle;
                 });
-                console.log('🔍 Title comparison result:', articleIndex);
+                // Title comparison result
             }
 
-            console.log('📰 Recent news sidebar - Article ID:', news.id, 'Found index:', articleIndex, 'Total articles:', this.allNews.length);
+            // Recent news sidebar article processing
 
             // If we still can't find the article, use the sidebar index + 1 as fallback
             // (since recent news shows articles 1 and 2 from allNews, and we skip index 0)
             if (articleIndex === -1) {
-                console.warn('⚠️ Could not find article in allNews, using fallback index:', index + 1);
+                // Could not find article in allNews, using fallback index
                 articleIndex = index + 1; // Recent news shows articles at indices 1 and 2
             }
 
             return `
-                <div class="news-block news-block-two-col d-flex mt-4" style="cursor: pointer;" onclick="console.log('🚨 CLICK DEBUG: Article index =', ${articleIndex}); window.noticiasIntegration.displaySelectedArticle(${articleIndex})">
+                <div class="news-block news-block-two-col d-flex mt-4" style="cursor: pointer;" onclick="window.noticiasIntegration.displaySelectedArticle(${articleIndex})">
                     <div class="news-block-two-col-image-wrap">
                         <div>
                             <img src="${imageUrl}" class="news-image img-fluid" alt="${title}" onerror="this.src='images/introEF.jpeg'">
@@ -494,7 +485,7 @@ class NoticiasIntegration {
     }
 
     async loadAllNewsGrid() {
-        console.log('📋 Loading all news for grid...');
+        // Loading all news for grid
         
         try {
             const response = await window.EFAPI.news.getNews({ 
@@ -511,7 +502,7 @@ class NoticiasIntegration {
                 newsList = response.data;
             }
 
-            console.log('📰 All news response:', newsList);
+            // All news response
 
             this.allNews = newsList || [];
             this.filteredNews = [...this.allNews];
@@ -522,22 +513,21 @@ class NoticiasIntegration {
                 this.showAllNewsError();
             }
         } catch (error) {
-            console.error('❌ Error loading all news:', error);
+            // Error loading all news
             this.showAllNewsError();
         }
     }
 
     displayAllNewsGrid(newsList, append = false) {
-        console.log('🖼️ Displaying news grid:', newsList.length, 'articles');
-        console.log('📋 Append mode:', append);
+        // Displaying news grid
         
         const container = document.getElementById('all-news-grid-container');
         if (!container) {
-            console.error('❌ Container "all-news-grid-container" not found!');
+            // Container not found
             return;
         }
         
-        console.log('✅ Container found:', container);
+        // Container found
 
         // Reset displayed count if not appending
         if (!append) {
@@ -549,7 +539,7 @@ class NoticiasIntegration {
             newsList.slice(this.displayedArticlesCount - this.articlesPerPage, this.displayedArticlesCount) :
             newsList.slice(0, this.displayedArticlesCount);
 
-        console.log('📰 Showing articles:', articlesToShow.length, 'of', newsList.length, 'total');
+        // Showing articles
 
         const newsColumns = articlesToShow.map((news, index) => {
             const title = news[`title_${this.currentLanguage}`] || news.title || 'Sin título';
@@ -621,7 +611,7 @@ class NoticiasIntegration {
 
         const fullHtml = newsHtml + showMoreButton;
 
-        console.log('📝 Generated HTML for', articlesToShow.length, 'articles (showing', this.displayedArticlesCount, 'of', newsList.length, 'total)');
+        // Generated HTML for articles
         
         if (append) {
             // Append new articles to existing grid
@@ -642,7 +632,7 @@ class NoticiasIntegration {
             container.innerHTML = fullHtml;
         }
         
-        console.log('✅ HTML inserted into main grid container');
+        // HTML inserted into main grid container
     }
 
     showAllNewsError() {
@@ -672,33 +662,33 @@ class NoticiasIntegration {
     }
 
     async loadSidebarData() {
-        console.log('📋 Loading sidebar data...');
+        // Loading sidebar data
         
         try {
             // Categories are now handled by displayMainNewsCategories()
             // Tags section has been removed as requested
-            console.log('✅ Sidebar data loading completed');
+            // Sidebar data loading completed
         } catch (error) {
-            console.error('❌ Error loading sidebar data:', error);
+            // Error loading sidebar data
         }
     }
 
 
     setupSearchFunctionality() {
-        console.log('🔍 Setting up search functionality...');
+        // Setting up search functionality
         
         const searchForm = document.querySelector('.search-form');
         const searchInput = document.getElementById('news-search');
 
         if (!searchForm || !searchInput) {
-            console.warn('⚠️ Search form or input not found, retrying in 500ms...');
+            // Search form or input not found, retrying
             setTimeout(() => {
                 this.setupSearchFunctionality();
             }, 500);
             return;
         }
 
-        console.log('✅ Search form and input found, setting up listeners');
+        // Search form and input found, setting up listeners
 
         // Remove form action to prevent page navigation
         searchForm.removeAttribute('action');
@@ -715,7 +705,7 @@ class NoticiasIntegration {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
-            console.log('🔍 Form submission prevented');
+            // Form submission prevented
             this.performNewsSearch();
             return false;
         });
@@ -723,7 +713,7 @@ class NoticiasIntegration {
         // Real-time search - immediate like events search
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim();
-            console.log('🔍 Input changed:', query);
+            // Input changed
             
             if (query.length >= 2) {
                 this.performNewsSearch();
@@ -737,7 +727,7 @@ class NoticiasIntegration {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
-                console.log('🔍 Enter key pressed');
+                // Enter key pressed
                 
                 // Clear timeout and search immediately
                 if (searchTimeout) {
@@ -756,32 +746,31 @@ class NoticiasIntegration {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
-                console.log('🔍 Search button clicked');
+                // Search button clicked
                 this.performNewsSearch();
                 return false;
             });
         }
 
-        console.log('✅ Search functionality setup complete');
+        // Search functionality setup complete
     }
 
     performNewsSearch() {
         const searchInput = document.getElementById('news-search');
         if (!searchInput) {
-            console.warn('⚠️ Search input not found');
+            // Search input not found
             return;
         }
         
         const query = searchInput.value.trim().toLowerCase();
-        console.log('🔍 Performing news search for:', query);
-        console.log('📊 Available news articles:', this.allNews.length);
+        // Performing news search
 
         // Check if news data is loaded
         if (!this.allNews || this.allNews.length === 0) {
-            console.warn('⚠️ No news data available for search, waiting for data to load...');
+            // No news data available for search, waiting for data to load
             // Try to trigger a reload of news data
             this.loadAllNewsGrid().then(() => {
-                console.log('📊 News data reloaded, retrying search...');
+                // News data reloaded, retrying search
                 this.performNewsSearch();
             });
             return;
@@ -789,7 +778,7 @@ class NoticiasIntegration {
 
         if (!query || query.length < 2) {
             // Show recent news if search is empty
-            console.log('🔄 Empty query, showing recent news');
+            // Empty query, showing recent news
             this.clearSidebarSearch();
             return;
         }
@@ -807,7 +796,7 @@ class NoticiasIntegration {
                    location.includes(query);
         });
 
-        console.log(`📰 Found ${this.filteredNews.length} matching news articles`);
+        // Found matching news articles
 
         if (this.filteredNews.length > 0) {
             this.displayNewsSearchResults(this.filteredNews, query);
@@ -820,11 +809,8 @@ class NoticiasIntegration {
 
 
     displayNewsSearchResults(newsList, query) {
-        console.log('🔍 Displaying news search results in sidebar:', newsList.length);
-        
         const container = document.getElementById('recent-news-sidebar-container');
         if (!container) {
-            console.error('❌ Recent news sidebar container not found!');
             return;
         }
 
@@ -845,21 +831,18 @@ class NoticiasIntegration {
 
             // Fallback: if ID comparison fails, try object reference comparison
             if (articleIndex === -1) {
-                console.warn('⚠️ ID comparison failed, trying object reference for article:', news.id);
                 articleIndex = this.allNews.findIndex(article => article === news);
             }
 
             // Additional fallback: try finding by title if both above fail
             if (articleIndex === -1) {
-                console.warn('⚠️ Object reference failed, trying title comparison for article:', news.id);
+                // Object reference failed, trying title comparison
                 const newsTitle = news[`title_${this.currentLanguage}`] || news.title;
                 articleIndex = this.allNews.findIndex(article => {
                     const articleTitle = article[`title_${this.currentLanguage}`] || article.title;
                     return articleTitle === newsTitle;
                 });
             }
-
-            console.log('🔍 Search results - Article ID:', news.id, 'Found index:', articleIndex, 'Total articles:', this.allNews.length);
 
             return `
                 <div class="news-block news-block-two-col d-flex mt-4" style="cursor: pointer;" onclick="window.noticiasIntegration.displaySelectedArticle(${articleIndex})">
@@ -899,12 +882,9 @@ class NoticiasIntegration {
         `;
 
         container.innerHTML = newsHtml + clearSearchButton;
-        console.log('✅ Search results displayed in sidebar');
     }
 
     displayNoNewsSearchResults(query) {
-        console.log('❌ No news search results found for:', query);
-        
         const container = document.getElementById('recent-news-sidebar-container');
         if (!container) return;
 
@@ -958,7 +938,7 @@ class NoticiasIntegration {
     }
 
     clearSidebarSearch() {
-        console.log('🔄 Clearing news sidebar search');
+        // Clearing news sidebar search
         
         const searchInput = document.getElementById('news-search');
         if (searchInput) {
@@ -969,7 +949,6 @@ class NoticiasIntegration {
         this.loadRecentNewsSidebar();
         this.updateSearchTitle(false);
         
-        console.log('✅ News sidebar search cleared');
     }
 
     resetNewsSearch() {
@@ -978,16 +957,15 @@ class NoticiasIntegration {
     }
 
     displaySelectedArticle(articleIndex) {
-        console.log('📰 Displaying selected article at index:', articleIndex);
-        console.log('📰 Total articles available:', this.allNews.length);
+        // Displaying selected article at index
         
         if (articleIndex < 0 || articleIndex >= this.allNews.length) {
-            console.error('❌ Invalid article index:', articleIndex, 'Max index:', this.allNews.length - 1);
+            // Invalid article index
             return;
         }
         
         const selectedArticle = this.allNews[articleIndex];
-        console.log('📰 Selected article:', selectedArticle);
+        // Selected article
         
         // Display the selected article in the main news section
         this.displayMainNews(selectedArticle);
@@ -1013,7 +991,7 @@ class NoticiasIntegration {
     }
     
     refreshSidebarAfterSelection(selectedIndex) {
-        console.log('🔄 Refreshing sidebar after article selection, selected index:', selectedIndex);
+        // Refreshing sidebar after article selection, selected index
         
         // Get all articles except the selected one
         const otherArticles = this.allNews.filter((article, index) => index !== selectedIndex);
@@ -1027,14 +1005,14 @@ class NoticiasIntegration {
     }
 
     loadMoreArticles() {
-        console.log('📰 Loading more articles...');
+        // Loading more articles
         
         // Update articles per page in case screen size changed
         this.articlesPerPage = this.getArticlesPerPage();
         
         // Increase the displayed count
         this.displayedArticlesCount += this.articlesPerPage;
-        console.log('📱 Loading', this.articlesPerPage, 'more articles. Total displayed:', this.displayedArticlesCount);
+        // Loading more articles. Total displayed
         
         // Display all news with append mode
         this.displayAllNewsGrid(this.allNews, true);
@@ -1110,26 +1088,26 @@ class NoticiasIntegration {
     }
 
     formatAdditionalImages(news) {
-        console.log('🖼️ Checking for additional images in news:', news);
-        console.log('🖼️ Available fields:', Object.keys(news));
+        // Checking for additional images in news
+        // Available fields
         
         // Check if news has additional images
         const additionalImages = news.newsImages || news.images || news.additionalImages || news.gallery || [];
         
-        console.log('🖼️ newsImages field:', news.newsImages);
-        console.log('🖼️ images field:', news.images);
-        console.log('🖼️ additionalImages field:', news.additionalImages);
-        console.log('🖼️ gallery field:', news.gallery);
-        console.log('🖼️ Final additionalImages:', additionalImages);
+        // newsImages field
+        // images field
+        // additionalImages field
+        // gallery field
+        // Final additionalImages
         
         if (!additionalImages || additionalImages.length === 0) {
-            console.log('❌ No additional images found');
+            // No additional images found
             return ''; // No additional images
         }
 
-        console.log('✅ Found additional images:', additionalImages.length);
-        console.log('🖼️ Additional images data:', additionalImages);
-        console.log('🖼️ First image structure:', additionalImages[0]);
+        // Found additional images
+        // Additional images data
+        // First image structure
 
         // Create image grid similar to eventos2024.html
         let imagesHtml = '';
@@ -1518,7 +1496,5 @@ class NoticiasIntegration {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎯 DOM loaded, initializing Noticias Integration...');
-    console.log('🚨 VERSION CHECK: Enhanced debugging version loaded!');
     window.noticiasIntegration = new NoticiasIntegration();
 });

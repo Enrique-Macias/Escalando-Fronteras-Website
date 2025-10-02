@@ -22,11 +22,11 @@ class FundadoresAPI {
                 // Found fundadores
                 return response;
             } else {
-                console.warn('⚠️ Unexpected response format for fundadores');
+                // Unexpected response format for fundadores
                 return [];
             }
         } catch (error) {
-            console.error('❌ Error fetching fundadores:', error);
+            // Error fetching fundadores
             throw error;
         }
     }
@@ -54,7 +54,7 @@ class FundadoresAPI {
                 // Found fundador
                 return fundador;
             } else {
-                console.warn(`⚠️ Fundador with ID ${id} not found`);
+                // Fundador with ID not found
                 return null;
             }
         } catch (error) {

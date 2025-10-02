@@ -74,7 +74,6 @@ class EventsIntegration {
             this.displayRecentEvents(eventsList);
 
         } catch (error) {
-            console.error('❌ Error loading recent events:', error);
             this.showError(error);
         }
     }

@@ -144,7 +144,6 @@ class EventosIntegration {
             this.displayAllEventsGrid();
             
         } catch (error) {
-            console.error('🚨 Error loading events:', error);
             this.showError('Error loading events');
         } finally {
             this.isLoading = false;
@@ -168,7 +167,7 @@ class EventosIntegration {
                     // Event not found in list, fetching directly
                     mainEvent = await window.EFAPI.events.getEventById(this.selectedEventId);
                 } catch (error) {
-                    console.warn('🎪 Could not fetch selected event:', error);
+                    // Could not fetch selected event
                 }
             }
         }
@@ -911,7 +910,7 @@ class EventosIntegration {
         const searchInput = document.getElementById('search-input');
         const query = searchInput?.value.toLowerCase().trim() || '';
         
-        console.log('🔍 Sidebar search query:', query);
+        // Sidebar search query
         
         if (!query) {
             // Reset to show recent events (first 3)
@@ -941,7 +940,7 @@ class EventosIntegration {
             return searchableText.includes(query);
         });
         
-        console.log('🔍 Found events:', filteredEvents.length);
+        // Found events
         
         // Display up to 3 search results
         this.displaySearchResults(filteredEvents.slice(0, 3), query);
@@ -949,11 +948,10 @@ class EventosIntegration {
     }
     
     displaySearchResults(events, query) {
-        console.log('🔍 Displaying events search results in sidebar:', events.length);
+        // Displaying events search results in sidebar
         
         const container = document.getElementById('recent-events-container');
         if (!container) {
-            console.error('❌ Recent events container not found!');
             return;
         }
         
@@ -1007,11 +1005,11 @@ class EventosIntegration {
         
         container.innerHTML = eventsHtml + clearSearchButton;
         
-        console.log('✅ Events search results displayed successfully');
+        // Events search results displayed successfully
     }
     
     displayNoEventsSearchResults(query) {
-        console.log('❌ No events search results found for:', query);
+        // No events search results found
         
         const container = document.getElementById('recent-events-container');
         if (!container) return;
@@ -1066,7 +1064,7 @@ class EventosIntegration {
     }
     
     clearSidebarSearch() {
-        console.log('🔄 Clearing events sidebar search');
+        // Clearing events sidebar search
         
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
@@ -1077,7 +1075,7 @@ class EventosIntegration {
         this.displayRecentEvents();
         this.updateSearchTitle(false);
         
-        console.log('✅ Events sidebar search cleared');
+        // Events sidebar search cleared
     }
     
     resetEventsSearch() {
@@ -1086,7 +1084,7 @@ class EventosIntegration {
     }
     
     translateSidebarContent() {
-        console.log('🌍 Translating events sidebar content to:', this.currentLanguage);
+        // Translating events sidebar content
         
         // Translate "Eventos Recientes" title
         const recentEventsTitle = document.getElementById('recent-events-title');
@@ -1110,7 +1108,7 @@ class EventosIntegration {
             searchInput.placeholder = placeholder;
         }
         
-        console.log('✅ Events sidebar content translated');
+        // Events sidebar content translated
     }
     
     performSearch() {
@@ -1258,7 +1256,7 @@ class EventosIntegration {
             // Scroll to the main event section instead of top of page
             this.scrollToMainEventSection();
         } else {
-            console.warn('🎪 Selected event not found:', eventId);
+            // Selected event not found
         }
     }
     
@@ -1279,7 +1277,6 @@ class EventosIntegration {
             
             // Scrolling to main event section
         } else {
-            console.warn('🎪 Main event section not found, falling back to top');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
@@ -1362,7 +1359,6 @@ class EventosIntegration {
                 return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
             }
         } catch (error) {
-            console.error('🚨 Error formatting date:', error);
             return this.currentLanguage === 'en' ? 'Date not available' : 'Fecha no disponible';
         }
     }

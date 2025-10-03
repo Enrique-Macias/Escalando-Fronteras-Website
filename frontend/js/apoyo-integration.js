@@ -12,7 +12,7 @@ class ApoyoIntegration {
     init() {
         // Wait for API services to be ready
         document.addEventListener('apiServicesReady', () => {
-            this.apoyoContainer = document.querySelector('#section_3 .row');
+            this.apoyoContainer = document.querySelector('#support-section .row');
             if (this.apoyoContainer) {
                 this.loadApoyo();
             }
@@ -47,7 +47,11 @@ class ApoyoIntegration {
 
         } catch (error) {
             console.error('❌ Error loading apoyo:', error);
-            this.showError(error);
+            // Hide the section when there's an error fetching data
+            const section = document.querySelector('#support-section');
+            if (section) {
+                section.style.display = 'none';
+            }
         }
     }
 
@@ -118,7 +122,7 @@ class ApoyoIntegration {
 
         if (apoyoItems.length === 0) {
             // Hide the entire section when there's no data
-            const section = document.querySelector('#section_3');
+            const section = document.querySelector('#support-section');
             if (section) {
                 section.style.display = 'none';
                 // Apoyo section hidden - no data available
@@ -127,7 +131,7 @@ class ApoyoIntegration {
         }
 
         // Show the section if it was previously hidden
-        const section = document.querySelector('#section_3');
+        const section = document.querySelector('#support-section');
         if (section) {
             section.style.display = 'block';
         }

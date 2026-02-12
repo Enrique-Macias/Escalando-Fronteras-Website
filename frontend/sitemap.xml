@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Homepage - Spanish (default) -->
+    <url>
+        <loc>https://climbingborders.org/</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/"/>
+    </url>
+    
+    <!-- Homepage - English -->
+    <url>
+        <loc>https://climbingborders.org/?lang=en</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/?lang=en"/>
+    </url>
+    
+    <!-- About/History Page - Spanish -->
+    <url>
+        <loc>https://climbingborders.org/historia.html</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/historia.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/historia.html"/>
+    </url>
+    
+    <!-- About/History Page - English -->
+    <url>
+        <loc>https://climbingborders.org/historia.html?lang=en</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/historia.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/historia.html?lang=en"/>
+    </url>
+    
+    <!-- News Page - Spanish -->
+    <url>
+        <loc>https://climbingborders.org/noticias.html</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/noticias.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/noticias.html"/>
+    </url>
+    
+    <!-- News Page - English -->
+    <url>
+        <loc>https://climbingborders.org/noticias.html?lang=en</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/noticias.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/noticias.html?lang=en"/>
+    </url>
+    
+    <!-- Events Page - Spanish -->
+    <url>
+        <loc>https://climbingborders.org/eventos.html</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/eventos.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/eventos.html"/>
+    </url>
+    
+    <!-- Events Page - English -->
+    <url>
+        <loc>https://climbingborders.org/eventos.html?lang=en</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/eventos.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/eventos.html?lang=en"/>
+    </url>
+    
+    <!-- Donate Page - Spanish -->
+    <url>
+        <loc>https://climbingborders.org/donate.html</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/donate.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/donate.html"/>
+    </url>
+    
+    <!-- Donate Page - English -->
+    <url>
+        <loc>https://climbingborders.org/donate.html?lang=en</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/donate.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/donate.html?lang=en"/>
+    </url>
+    
+    <!-- FAQ Page - Spanish -->
+    <url>
+        <loc>https://climbingborders.org/faq.html</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/faq.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/faq.html"/>
+    </url>
+    
+    <!-- FAQ Page - English -->
+    <url>
+        <loc>https://climbingborders.org/faq.html?lang=en</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="es" href="https://climbingborders.org/faq.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://climbingborders.org/faq.html?lang=en"/>
+    </url>
+    
+</urlset>

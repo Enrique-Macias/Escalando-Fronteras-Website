@@ -8,6 +8,8 @@ class ArticlesIntegration {
         this.articlesContainer = null;
         this.loadingElement = null;
         this.currentLanguage = 'es';
+        this.allArticles = [];
+        this.showingAllArticles = false;
         this.init();
     }
 
@@ -36,9 +38,7 @@ class ArticlesIntegration {
             // Show loading state
             this.showLoading();
 
-            console.log('🔄 Loading articles...');
-            console.log('🌐 API Base URL:', EFAPI.client.baseURL);
-            console.log('🌍 Current Language:', this.currentLanguage);
+            // Loading articles
 
             // Fetch articles from API
             const articles = await EFAPI.articles.getArticles({
@@ -56,9 +56,13 @@ class ArticlesIntegration {
                 articlesList = [];
             }
             
-            console.log('✅ Articles loaded:', articlesList);
+            // Articles loaded
             
-            // Display articles
+            // Store all articles
+            this.allArticles = articlesList;
+            this.showingAllArticles = false;
+            
+            // Display articles (initially show only first 3)
             this.displayArticles(articlesList);
 
         } catch (error) {
@@ -85,18 +89,26 @@ class ArticlesIntegration {
 
     displayArticles(articles) {
         if (!articles || articles.length === 0) {
-            this.showEmptyState();
+            this.hideSection();
             return;
         }
 
+        // Determine how many articles to show
+        const articlesToShow = this.showingAllArticles ? articles : articles.slice(0, 3);
+        
         let html = '';
         let delay = 100;
 
-        articles.forEach((article, index) => {
+        articlesToShow.forEach((article, index) => {
             const articleHtml = this.createArticleHTML(article, delay);
             html += articleHtml;
             delay += 100; // Increment delay for AOS animation
         });
+
+        // Add "More Articles" button if there are more than 3 articles and not showing all
+        if (articles.length > 3 && !this.showingAllArticles) {
+            html += this.createMoreArticlesButton();
+        }
 
         this.articlesContainer.innerHTML = html;
 
@@ -136,6 +148,33 @@ class ArticlesIntegration {
         `;
     }
 
+    createMoreArticlesButton() {
+        // Get translation from the language switcher if available
+        let buttonText = this.currentLanguage === 'en' ? 'More Articles' : 'Más Artículos';
+        
+        if (window.languageSwitcher && window.languageSwitcher.translations) {
+            const translations = window.languageSwitcher.translations;
+            const currentLang = this.currentLanguage;
+            if (translations[currentLang] && translations[currentLang].masArticulos) {
+                buttonText = translations[currentLang].masArticulos;
+            }
+        }
+        
+        return `
+            <div class="col-12 text-center mt-4" data-aos="fade-up" data-aos-delay="400">
+                <button class="btn btn-primary custom-btn" onclick="articlesIntegration.showAllArticles()">
+                    ${buttonText}
+                </button>
+            </div>
+        `;
+    }
+
+    showAllArticles() {
+        // Showing all articles
+        this.showingAllArticles = true;
+        this.displayArticles(this.allArticles);
+    }
+
     formatDate(dateString) {
         if (!dateString) return 'Fecha no disponible';
         
@@ -165,20 +204,33 @@ class ArticlesIntegration {
     }
 
     showError(error) {
+        const errorTitle = this.currentLanguage === 'en' ? 'Error loading articles' : 'Error al cargar los artículos';
+        const errorMessage = error.message || (this.currentLanguage === 'en' ? 'Network error - please check your connection' : 'Error de red - por favor verifica tu conexión');
+        const retryText = this.currentLanguage === 'en' ? 'Try again' : 'Intentar de nuevo';
+        
         this.articlesContainer.innerHTML = `
             <div class="col-12 text-center">
-                <div class="error-state">
-                    <div class="alert alert-warning" role="alert">
-                        <h4 class="alert-heading">Error al cargar los artículos</h4>
-                        <p>${error.message || 'Error desconocido'}</p>
-                        <hr>
-                        <button class="btn btn-primary" onclick="articlesIntegration.loadArticles()">
-                            Intentar de nuevo
-                        </button>
+                <div class="error-modal network-error">
+                    <div class="error-modal-icon">
+                        <i class="bi-wifi-off"></i>
                     </div>
+                    <h3>${errorTitle}</h3>
+                    <p>${errorMessage}</p>
+                    <button class="btn-retry" onclick="articlesIntegration.loadArticles()">
+                        ${retryText}
+                    </button>
                 </div>
             </div>
         `;
+    }
+
+    hideSection() {
+        // No articles data available, hiding articles section
+        const articlesSection = document.querySelector('.blog-section');
+        if (articlesSection) {
+            articlesSection.style.display = 'none';
+            // Articles section hidden successfully
+        }
     }
 
     showEmptyState() {

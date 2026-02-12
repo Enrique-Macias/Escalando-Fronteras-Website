@@ -18,7 +18,7 @@ class LanguageService {
         try {
             return localStorage.getItem('ef-language');
         } catch (error) {
-            console.warn('Could not access localStorage:', error);
+            // Could not access localStorage
             return null;
         }
     }
@@ -31,7 +31,7 @@ class LanguageService {
         try {
             localStorage.setItem('ef-language', lang);
         } catch (error) {
-            console.warn('Could not store language preference:', error);
+            // Could not store language preference
         }
     }
 
@@ -49,7 +49,7 @@ class LanguageService {
      */
     setLanguage(lang) {
         if (!this.supportedLanguages.includes(lang)) {
-            console.warn(`Unsupported language: ${lang}. Using default: ${this.defaultLanguage}`);
+            // Unsupported language, using default
             lang = this.defaultLanguage;
         }
 

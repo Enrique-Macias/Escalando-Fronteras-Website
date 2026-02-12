@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Últimas noticias y actualizaciones de Escalando Fronteras. Mantente informado sobre nuestros programas de escalada, eventos comunitarios, y el impacto en Monterrey, Nuevo León.">
+        <meta name="keywords" content="Escalando Fronteras noticias, actualizaciones, eventos, escalada, comunidad, Monterrey, Nuevo León, programas educativos, desarrollo juvenil">
+        <meta name="author" content="Escalando Fronteras">
+        <meta name="robots" content="index, follow">
+
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="Noticias - Escalando Fronteras | Últimas Actualizaciones">
+        <meta property="og:description" content="Mantente informado sobre las últimas noticias y actualizaciones de Escalando Fronteras. Programas, eventos y el impacto en nuestra comunidad en Monterrey.">
+        <meta property="og:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+        <meta property="og:url" content="https://climbingborders.org/noticias.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Escalando Fronteras">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Noticias - Escalando Fronteras | Últimas Actualizaciones">
+        <meta name="twitter:description" content="Mantente informado sobre las últimas noticias y actualizaciones de Escalando Fronteras en Monterrey.">
+        <meta name="twitter:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://climbingborders.org/noticias.html">
+
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="es" href="https://climbingborders.org/noticias.html">
+        <link rel="alternate" hreflang="en" href="https://climbingborders.org/noticias.html?lang=en">
+
+        <title>Noticias - Escalando Fronteras | Últimas Actualizaciones y Eventos</title>
+        <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
+
+        <!-- ======================= CSS Styles ================== -->           
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+    </head>
+    
+    <body>
+
+        <header class="site-header">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="col-lg-8 col-12 d-flex flex-wrap">
+                    <p class="d-flex me-4 mb-0">
+                        <i class="bi-geo-alt me-2"></i>
+                        <!-- Location will be populated by API -->
+                    </p>
+
+                    <p class="d-flex mb-0">
+                        <i class="bi-envelope me-2"></i>
+                        <!-- Email will be populated by API -->
+                    </p>
+                    </div>
+
+                    <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                        <ul class="social-icon">
+
+                            <li class="social-icon-item">
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer"></a>
+                            </li>
+                            <li class="social-icon-item">
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-whatsapp" title="WhatsApp"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        
+        <!-- ======================= NAVIGATION BAR ================== -->
+        <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Escalando_Fronteras_Official_Logo.png/220px-Escalando_Fronteras_Official_Logo.png">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_1">Inicio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_2">Acerca de</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="historia.html">Nuestra Historia</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
+
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item" href="eventos.html">Eventos</a></li>
+                                <li><a class="dropdown-item active" href="noticias.html">Noticias</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_6">Contacto</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="faq.html">FAQ</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-globe me-1"></i>
+                                <span id="current-language">ES</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item language-option" href="#" data-lang="es">
+                                    <i class="bi-flag me-2"></i>Español (ES)
+                                </a></li>
+                                <li><a class="dropdown-item language-option" href="#" data-lang="en">
+                                    <i class="bi-flag me-2"></i>English (EN)
+                                </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item ms-3">
+                            <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Dona</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ======================= Main Section ================== -->
+        <main>
+
+            <section class="news-detail-header-section text-center">
+                <div class="section-overlay"></div>
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-12">
+                            <h1 class="text-white">Noticias</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================= Main News Section ================== -->
+            <section class="news-section section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-7 col-12">
+                            <!-- Main News Article (Dynamic Content) -->
+                            <div id="main-news-container">
+                                <div class="d-flex justify-content-center align-items-center" style="min-height: 400px;">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando noticia principal...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ======================= SIDEBAR SECTION ================== -->
+                        <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
+                            <form class="custom-form search-form" action="#" method="post" role="form">
+                                <input class="form-control" type="search" placeholder="Buscar noticias" aria-label="Search" id="news-search">
+
+                                <button type="submit" class="form-control">
+                                    <i class="bi-search"></i>
+                                </button>
+                            </form>
+
+                            <h5 class="mt-5 mb-3">Noticias Recientes</h5>
+
+                            <!-- Recent News Container (Dynamic Content) -->
+                            <div id="recent-news-sidebar-container">
+                                <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando noticias recientes...</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Categories Section (Dynamic Content) -->
+                            <div class="category-block d-flex flex-column">
+                                <h5 class="mb-3">Categorías</h5>
+                                <div id="categories-sidebar-container">
+                                    <div class="d-flex justify-content-center align-items-center" style="min-height: 100px;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Cargando categorías...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================= All News Section ================== -->
+            <section class="news-section section-padding section-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-12 mb-4">
+                            <h2>Noticias</h2>
+                        </div>
+                    </div>
+
+                    <!-- News Grid Container (Dynamic Content) -->
+                    <div id="all-news-grid-container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center" style="min-height: 300px;">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando todas las noticias...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ======================= FOOTER SECTION ================== -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-12 mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Escalando_Fronteras_Official_Logo.png/220px-Escalando_Fronteras_Official_Logo.png" class="logo img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                        <h5 class="site-footer-title mb-3">Enlaces</h5>
+
+                        <ul class="footer-menu">
+                            <li class="footer-menu-item"><a href="index.html#about-section" class="footer-menu-link click-scroll">Nuestra Historia</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link click-scroll">Mirar Documental</a></li>
+
+                            <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
+
+
+                            <li class="footer-menu-item"><a href="index.html#contact-section" class="footer-menu-link click-scroll">Asóciate con Nosotros</a></li>
+
+                            <li class="footer-menu-item"><a href="index.html#articles-section" class="footer-menu-link click-scroll">Artículos</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mx-auto">
+                        <h5 class="site-footer-title mb-3">Contáctanos</h5>
+
+                        <p class="text-white d-flex mb-2">
+                            <i class="bi-telephone me-2"></i>
+                            <!-- Phone will be populated by API -->
+                        </p>
+
+                        <p class="text-white d-flex">
+                            <i class="bi-envelope me-2"></i>
+                            <!-- Email will be populated by API -->
+                        </p>
+
+                        <p class="text-white d-flex mt-3">
+                            <i class="bi-geo-alt me-2"></i>
+                            <!-- Location will be populated by API -->
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="site-footer-bottom">
+                <div class="container">
+                    <div class="row">
+
+                        
+                        
+                        <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+                            <ul class="social-icon">
+
+                                <li class="social-icon-item">
+                                    <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-whatsapp" title="WhatsApp"></a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <!-- Popper.js for Bootstrap dropdowns and tooltips -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/counter.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="js/youtube.js"></script>
+        
+        <!-- Global Settings API Integration -->
+        <script>
+            // Fetch and update global settings
+            async function fetchGlobalSettings() {
+                try {
+                    const response = await fetch('https://ef-cms-production.up.railway.app/api/global-settings');
+                    const settings = await response.json();
+                    
+                // Update header location
+                const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
+                if (headerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
+                        headerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        headerLocation.style.display = 'flex';
+                    } else {
+                        headerLocation.style.display = 'none';
+                    }
+                }
+                
+                // Update header email
+                const headerEmail = document.querySelector('.site-header .bi-envelope').parentElement;
+                if (headerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        headerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}">${settings.mail}</a>`;
+                        headerEmail.style.display = 'flex';
+                    } else {
+                        headerEmail.style.display = 'none';
+                    }
+                }
+                
+                // Update header social links
+                const headerFacebook = document.querySelector('.site-header .bi-facebook');
+                if (headerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
+                        headerFacebook.href = settings.facebookUrl;
+                        headerFacebook.style.display = 'block';
+                    } else {
+                        headerFacebook.style.display = 'none';
+                    }
+                }
+                
+                const headerInstagram = document.querySelector('.site-header .bi-instagram');
+                if (headerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
+                        headerInstagram.href = settings.instagramUrl;
+                        headerInstagram.style.display = 'block';
+                    } else {
+                        headerInstagram.style.display = 'none';
+                    }
+                }
+                
+                const headerWhatsapp = document.querySelector('.site-header .bi-whatsapp');
+                if (headerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        headerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        headerWhatsapp.style.display = 'block';
+                    } else {
+                        headerWhatsapp.style.display = 'none';
+                    }
+                }
+                    
+                    // Update navigation bar logo
+                    const navLogo = document.querySelector('.navbar-brand img');
+                    if (navLogo) {
+                        navLogo.src = settings.mainLogo;
+                    }
+                    
+                    // Update footer logo
+                    const footerLogo = document.querySelector('.site-footer .logo');
+                    if (footerLogo) {
+                        footerLogo.src = settings.mainLogo;
+                    }
+                    
+                    // Update favicon
+                    const favicon = document.querySelector('link[rel="icon"]');
+                    if (favicon) {
+                        favicon.href = settings.mainLogo;
+                    }
+                    
+                // Update footer phone
+                const footerPhone = document.querySelector('.site-footer .bi-telephone').parentElement;
+                if (footerPhone) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        footerPhone.innerHTML = `<i class="bi-telephone me-2"></i><a href="tel:${settings.whatsappNumber}" class="site-footer-link">${settings.whatsappNumber}</a>`;
+                        footerPhone.style.display = 'flex';
+                    } else {
+                        footerPhone.style.display = 'none';
+                    }
+                }
+                
+                // Update footer email
+                const footerEmail = document.querySelector('.site-footer .bi-envelope').parentElement;
+                if (footerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        footerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}" class="site-footer-link">${settings.mail}</a>`;
+                        footerEmail.style.display = 'flex';
+                    } else {
+                        footerEmail.style.display = 'none';
+                    }
+                }
+                
+                // Update footer location
+                const footerLocation = document.querySelector('.site-footer .bi-geo-alt').parentElement;
+                if (footerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
+                        footerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        footerLocation.style.display = 'flex';
+                    } else {
+                        footerLocation.style.display = 'none';
+                    }
+                }
+                
+                // Update footer social links
+                const footerFacebook = document.querySelector('.site-footer .bi-facebook');
+                if (footerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
+                        footerFacebook.href = settings.facebookUrl;
+                        footerFacebook.style.display = 'block';
+                    } else {
+                        footerFacebook.style.display = 'none';
+                    }
+                }
+                
+                const footerInstagram = document.querySelector('.site-footer .bi-instagram');
+                if (footerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
+                        footerInstagram.href = settings.instagramUrl;
+                        footerInstagram.style.display = 'block';
+                    } else {
+                        footerInstagram.style.display = 'none';
+                    }
+                }
+                
+                const footerWhatsapp = document.querySelector('.site-footer .bi-whatsapp');
+                if (footerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        footerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        footerWhatsapp.style.display = 'block';
+                    } else {
+                        footerWhatsapp.style.display = 'none';
+                    }
+                }
+        
+                } catch (error) {
+                    console.error('Error fetching global settings:', error);
+                }
+            }
+            
+            // Call the function when the page loads
+            document.addEventListener('DOMContentLoaded', fetchGlobalSettings);
+        </script>
+        
+        <!-- EF CMS API Services -->
+        <script src="js/api/env-vars.js"></script>
+        <script src="js/api/config.js"></script>
+        <script src="js/api/client.js"></script>
+        <script src="js/api/language.js"></script>
+        <script src="js/api/news.js"></script>
+        <script src="js/api/events.js"></script>
+        <script src="js/api/team.js"></script>
+        <script src="js/api/testimonials.js"></script>
+        <script src="js/api/articles.js"></script>
+        <script src="js/api/index.js"></script>
+        
+        <!-- News Page Integration Script -->
+        <script src="js/noticias-integration.js"></script>
+        
+        <!-- Global Scroll Handler -->
+        <script src="js/global-scroll.js"></script>
+        
+        <!-- Language Switcher Script for Noticias -->
+        <script>
+            // Translation data for noticias.html
+            const noticiasTranslations = {
+                es: {
+                    // Navigation
+                    inicio: "Inicio",
+                    acercaDe: "Acerca de",
+                    voluntario: "Nuestra Historia",
+                    mas: "Más",
+                    noticias: "Noticias",
+                    eventos: "Eventos",
+                    contacto: "Contacto",
+                    dona: "Dona",
+                    
+                    // Page content
+                    noticiasTitle: "Noticias",
+                    buscarNoticias: "Buscar noticias",
+                    noticiasRecientes: "Noticias Recientes",
+                    categorias: "Categorías",
+                    noHayCategorias: "No hay categorías disponibles.",
+                    cargandoNoticia: "Cargando noticia principal...",
+                    cargandoNoticias: "Cargando noticias recientes...",
+                    cargandoTodasNoticias: "Cargando todas las noticias...",
+                    mostrarMas: "Mostrar más",
+                    
+                    // Footer
+                    enlaces: "Enlaces",
+                    contactanos: "Contáctanos",
+                    nuestraHistoria: "Nuestra Historia",
+                    mirarDocumental: "Mirar Documental",
+                    realizarDonacion: "Realiza una Donación",
+                    articulos: "Artículos"
+                },
+                en: {
+                    // Navigation
+                    inicio: "Home",
+                    acercaDe: "About",
+                    voluntario: "Our History",
+                    mas: "More",
+                    noticias: "News",
+                    eventos: "Events",
+                    contacto: "Contact",
+                    dona: "Donate",
+                    
+                    // Page content
+                    noticiasTitle: "News",
+                    buscarNoticias: "Search news",
+                    noticiasRecientes: "Recent News",
+                    categorias: "Categories",
+                    noHayCategorias: "No categories available.",
+                    cargandoNoticia: "Loading main news...",
+                    cargandoNoticias: "Loading recent news...",
+                    cargandoTodasNoticias: "Loading all news...",
+                    mostrarMas: "Show more",
+                    
+                    // Footer
+                    enlaces: "Links",
+                    contactanos: "Contact Us",
+                    obtenerDireccion: "Get Directions",
+                    nuestraHistoria: "Our Story",
+                    mirarDocumental: "Watch Documentary",
+                    realizarDonacion: "Make a Donation",
+                    articulos: "Articles"
+                }
+            };
+
+            // Language Switcher for Noticias Page
+            class NoticiasLanguageSwitcher {
+                constructor() {
+                    // Get language from localStorage for persistence
+                    this.currentLanguage = localStorage.getItem('userLanguagePreference') || 'es';
+                    this.translations = noticiasTranslations;
+                    this.init();
+                }
+                
+                init() {
+                    // Wait for DOM to be ready
+                    document.addEventListener('DOMContentLoaded', () => {
+                        // Check language from multiple sources
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const langFromUrl = urlParams.get('lang');
+                        const langFromSession = sessionStorage.getItem('selectedLanguage');
+                        const langFromLocal = localStorage.getItem('userLanguagePreference');
+                        
+                        // Priority: URL > sessionStorage > localStorage > default
+                        this.currentLanguage = langFromUrl || langFromSession || langFromLocal || 'es';
+                        
+                        // Store the final language choice in localStorage for persistence
+                        localStorage.setItem('userLanguagePreference', this.currentLanguage);
+                                                
+                        this.setupLanguageSwitcher();
+                        this.updateLanguageDisplay();
+                        this.translateStaticContent();
+                        
+                        // Update noticias integration language
+                        if (window.noticiasIntegration) {
+                            window.noticiasIntegration.currentLanguage = this.currentLanguage;
+                        }
+                    });
+                }
+                
+                setupLanguageSwitcher() {
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    
+                    languageOptions.forEach(option => {
+                        option.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            
+                            const selectedLang = option.getAttribute('data-lang');                            
+                            this.switchLanguage(selectedLang);
+                        });
+                    });
+                }
+                
+                switchLanguage(newLang) {
+                    if (this.currentLanguage === newLang) {
+                        return;
+                    }
+                    
+                    this.currentLanguage = newLang;
+                    
+                    // Store language preference in localStorage for persistence
+                    localStorage.setItem('userLanguagePreference', newLang);
+                    // Also store in sessionStorage for immediate navigation
+                    sessionStorage.setItem('selectedLanguage', newLang);
+                    
+                    // Update API language if available
+                    if (typeof window.EFAPI !== 'undefined' && window.EFAPI.language) {
+                        window.EFAPI.language.setLanguage(newLang);
+                    }
+                    
+                    // Update display
+                    this.updateLanguageDisplay();
+                    
+                    // Translate static content
+                    this.translateStaticContent();
+                    
+                    // Update noticias integration language and refresh content
+                    if (window.noticiasIntegration) {
+                        window.noticiasIntegration.currentLanguage = newLang;
+                        // Trigger a complete reload of content
+                        setTimeout(() => {
+                            window.noticiasIntegration.loadContent();
+                        }, 100);
+                    }
+                }
+                
+                updateLanguageDisplay() {
+                    const currentLanguageSpan = document.getElementById('current-language');
+                    if (currentLanguageSpan) {
+                        currentLanguageSpan.textContent = this.currentLanguage.toUpperCase();
+                    }
+                    
+                    // Update active state in dropdown
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    languageOptions.forEach(option => {
+                        const lang = option.getAttribute('data-lang');
+                        if (lang === this.currentLanguage) {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                }
+                
+                translateStaticContent() {
+                    const t = this.translations[this.currentLanguage];
+                    if (!t) return;
+                    
+                    // Navigation
+                    const navLinks = {
+                        'index.html#section_1': t.inicio,
+                        'index.html#section_2': t.acercaDe,
+                        'historia.html': t.voluntario,
+                        'index.html#section_6': t.contacto,
+                        'faq.html': 'FAQ'
+                    };
+                    
+                    Object.entries(navLinks).forEach(([href, text]) => {
+                        const link = document.querySelector(`a[href="${href}"]`);
+                        if (link && text) {
+                            link.textContent = text;
+                        }
+                    });
+                    
+                    // Dropdown items
+                    const masDropdown = document.getElementById('navbarLightDropdownMenuLink');
+                    if (masDropdown) masDropdown.textContent = t.mas;
+                    
+                    const noticiasLink = document.querySelector('a[href="noticias.html"]');
+                    if (noticiasLink) noticiasLink.textContent = t.noticias;
+                    
+                    const eventosLink = document.querySelector('a[href="eventos.html"]');
+                    if (eventosLink) eventosLink.textContent = t.eventos;
+                    
+                    const donateBtn = document.querySelector('.custom-btn.custom-border-btn');
+                    if (donateBtn) donateBtn.textContent = t.dona;
+                    
+                    // Page content
+                    const pageTitle = document.querySelector('.news-detail-header-section h1');
+                    if (pageTitle) pageTitle.textContent = t.noticiasTitle;
+                    
+                    const searchInput = document.getElementById('news-search');
+                    if (searchInput) searchInput.placeholder = t.buscarNoticias;
+                    
+                    // Footer
+                    const footerTitles = document.querySelectorAll('.site-footer-title');
+                    footerTitles.forEach(title => {
+                        const text = title.textContent.trim();
+                        if (text.includes('Enlaces') || text.includes('Links')) {
+                            title.textContent = t.enlaces;
+                        } else if (text.includes('Contáctanos') || text.includes('Contact')) {
+                            title.textContent = t.contactanos;
+                        }
+                    });
+                    
+                    const footerContactBtn = document.querySelector('.site-footer .custom-btn');
+                    if (footerContactBtn) {
+                        footerContactBtn.textContent = t.obtenerDireccion;
+                    }
+                    
+                    // Footer links
+                    const footerLinksMap = {
+                        'index.html#section_2': t.nuestraHistoria,
+                        'index.html#documentary': t.mirarDocumental,
+                        'donate.html': t.realizarDonacion,
+                        'index.html#articulos': t.articulos
+                    };
+                    
+                    Object.entries(footerLinksMap).forEach(([href, text]) => {
+                        const link = document.querySelector(`.footer-menu-link[href="${href}"]`);
+                        if (link && text) {
+                            link.textContent = text;
+                        }
+                    });
+                }
+            }
+            
+            // Initialize noticias language switcher
+            window.noticiasLanguageSwitcher = new NoticiasLanguageSwitcher();
+        </script>
+        
+        <!-- Handle cross-page navigation with proper scroll offset -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll('a[href^="index.html#"]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        
+                        // Skip if not a valid section link
+                        if (!href || href === 'index.html#' || this.classList.contains('language-option')) {
+                            return;
+                        }
+                        
+                        // Footer links are now handled by global-scroll.js
+                    });
+                });
+            });
+        </script>
+
+    </body>
+</html>

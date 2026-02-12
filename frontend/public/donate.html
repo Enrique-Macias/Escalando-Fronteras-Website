@@ -1,13 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Apoya a Escalando Fronteras con tu donación. Contribuye al desarrollo comunitario, programas de escalada y educación en Monterrey, Nuevo León. Cada donación hace la diferencia.">
+        <meta name="keywords" content="donar Escalando Fronteras, donaciones, apoyo comunitario, escalada, educación, Monterrey, Nuevo León, organización sin fines de lucro">
+        <meta name="author" content="Escalando Fronteras">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Permissions-Policy" content="payment=*">
 
-        <title>Escalando Fronteras</title>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="Donar - Escalando Fronteras | Apoya Nuestra Misión">
+        <meta property="og:description" content="Apoya a Escalando Fronteras con tu donación. Contribuye al desarrollo comunitario y programas educativos en Monterrey.">
+        <meta property="og:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+        <meta property="og:url" content="https://climbingborders.org/donate.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Escalando Fronteras">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Donar - Escalando Fronteras | Apoya Nuestra Misión">
+        <meta name="twitter:description" content="Apoya a Escalando Fronteras con tu donación. Contribuye al desarrollo comunitario y programas educativos en Monterrey.">
+        <meta name="twitter:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://climbingborders.org/donate.html">
+
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="es" href="https://climbingborders.org/donate.html">
+        <link rel="alternate" hreflang="en" href="https://climbingborders.org/donate.html?lang=en">
+
+        <title id="page-title">Donar - Escalando Fronteras | Apoya Nuestra Misión Comunitária</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
 
         <!-- ======================= CSS Styles ================== -->        
@@ -23,29 +48,26 @@
                 <div class="row">
                     
                     <div class="col-lg-8 col-12 d-flex flex-wrap">
-                        <p class="d-flex me-4 mb-0">
-                            <i class="bi-geo-alt me-2"></i>
-                            Monterrey, Nuevo León, México
-                        </p>
+                    <p class="d-flex me-4 mb-0">
+                        <i class="bi-geo-alt me-2"></i>
+                        <!-- Location will be populated by API -->
+                    </p>
 
-                        <p class="d-flex mb-0">
-                            <i class="bi-envelope me-2"></i>
-
-                            <a href="mailto:Nadia@ClimbingBorders.org">
-                                Nadia@ClimbingBorders.org 
-                            </a>
-                        </p>
+                    <p class="d-flex mb-0">
+                        <i class="bi-envelope me-2"></i>
+                        <!-- Email will be populated by API -->
+                    </p>
                     </div>
 
                     <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                         <ul class="social-icon">
                             <li class="social-icon-item">
-                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
 
                             </li>
 
                             <li class="social-icon-item">
-                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
                             </li>
 
                             <li class="social-icon-item">
@@ -71,41 +93,51 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_1">Inicio</a>
+                            <a class="nav-link click-scroll" href="index.html#section_1" id="nav-inicio">Inicio</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_2">Acerca de</a>
+                            <a class="nav-link click-scroll" href="index.html#section_2" id="nav-acerca">Acerca de</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_3">Apoyo</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_4">Voluntario</a>
+                            <a class="nav-link" href="historia.html" id="nav-historia">Nuestra Historia</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Eventos</a>
+                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="nav-mas">Más</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" href="eventos2023.html">Eventos 2023</a></li>
-
-                                <li><a class="dropdown-item" href="eventos2024.html">Eventos 2024</a></li>
+                                <li><a class="dropdown-item" href="eventos.html" id="nav-eventos">Eventos</a></li>
+                                <li><a class="dropdown-item" href="noticias.html" id="nav-noticias">Noticias</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_6">Contacto</a>
+                            <a class="nav-link click-scroll" href="index.html#section_6" id="nav-contacto">Contacto</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="faq.html">FAQ</a>
+                            <a class="nav-link" href="faq.html" id="nav-faq">FAQ</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-globe me-1"></i>
+                                <span id="current-language">ES</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item language-option" href="#" data-lang="es">
+                                    <i class="bi-flag me-2"></i>Español (ES)
+                                </a></li>
+                                <li><a class="dropdown-item language-option" href="#" data-lang="en">
+                                    <i class="bi-flag me-2"></i>English (EN)
+                                </a></li>
+                            </ul>
                         </li>
 
                         <li class="nav-item ms-3">
-                            <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Dona</a>
+                            <a class="nav-link custom-btn custom-border-btn btn" href="donate.html" id="nav-dona">Dona</a>
                         </li>
                     </ul>
                 </div>
@@ -121,19 +153,20 @@
                         <div class="row">
                             <div class="col-lg-6 col-12 mx-auto">
                                 <form class="custom-form donate-form" action="#" method="get" role="form">
-                                    <h3 class="mb-4">Haz una donación</h3>
+                                    <h3 class="mb-4" id="donate-title">Haz una donación</h3>
                                         <div class="row">
                                             <!-- Stripe Buy Button -->
                                             <stripe-buy-button class="stripe-section"
                                                 buy-button-id="buy_btn_1P7OZJP5bZ1okdvjSGSnO1gb"
-                                                publishable-key="pk_test_51P7OGRP5bZ1okdvj49DUCGSd3PlTcP9zXYjwGy5j99KmMYdfxh8MnuiEEgaBYRDOB3FiPXjqFXjQEDI4BlD2Elol00xVZN5w95">
+                                                publishable-key=""
+                                                style="display: none;">
                                             </stripe-buy-button>
-                                            <div class="paypal-continue">
-                                                <p>O, continúa con</p>                                             
+                                            <div class="paypal-continue" style="display: none;">
+                                                <p id="donate-continue">O, continúa con</p>                                             
                                             </div>
                                             <!-- PayPal Button Container -->
                                             <div class="paypal-button">
-                                                <a href="https://www.paypal.com/donate/?hosted_button_id=65B7AP588V5BC" target="_blank">
+                                                <a href="#" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer">
                                                     <img src="images/paypal.png" alt="PayPal Button" class="img-fluid paypal-img" />
                                                 </a>
                                             </div>
@@ -155,46 +188,38 @@
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <h5 class="site-footer-title mb-3">Enlaces</h5>
+                <h5 class="site-footer-title mb-3" id="footer-enlaces">Enlaces</h5>
 
                 <ul class="footer-menu">
-                    <li class="footer-menu-item"><a href="index.html#section_2" class="footer-menu-link">Nuestra Historia</a></li>
+                    <li class="footer-menu-item"><a href="index.html#about-section" class="footer-menu-link click-scroll" id="footer-nuestra-historia">Nuestra Historia</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link">Mirar Documental</a></li>
+                    <li class="footer-menu-item"><a href="index.html#documentary" class="footer-menu-link click-scroll" id="footer-mirar-documental">Mirar Documental</a></li>
 
-                    <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
+                    <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link" id="footer-realizar-donacion">Realiza una Donación</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#section_4" class="footer-menu-link">Conviértete en Voluntario</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link">Asóciate con Nosotros</a></li>
+                    <li class="footer-menu-item"><a href="index.html#sponsors" class="footer-menu-link click-scroll" id="footer-nuestros-patrocinadores">Nuestros Patrocinadores</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mx-auto">
-                <h5 class="site-footer-title mb-3">Contáctanos</h5>
+                <h5 class="site-footer-title mb-3" id="footer-contactanos">Contáctanos</h5>
 
-                <p class="text-white d-flex mb-2">
-                    <i class="bi-telephone me-2"></i>
+                        <p class="text-white d-flex mb-2">
+                            <i class="bi-telephone me-2"></i>
+                            <!-- Phone will be populated by API -->
+                        </p>
 
-                    <a href="tel: 120-240-9600" class="site-footer-link">
-                        120-240-9600
-                    </a>
-                </p>
+                        <p class="text-white d-flex">
+                            <i class="bi-envelope me-2"></i>
+                            <!-- Email will be populated by API -->
+                        </p>
 
-                <p class="text-white d-flex">
-                    <i class="bi-envelope me-2"></i>
+                        <p class="text-white d-flex mt-3">
+                            <i class="bi-geo-alt me-2"></i>
+                            <!-- Location will be populated by API -->
+                        </p>
 
-                    <a href="mailto:info@yourgmail.com" class="site-footer-link">
-                        Nadia@ClimbingBorders.org
-                    </a>
-                </p>
-
-                <p class="text-white d-flex mt-3">
-                    <i class="bi-geo-alt me-2"></i>
-                    Monterrey, Nuevo León, México
-                </p>
-
-                <a href="#" class="custom-btn btn mt-3">Obtener Dirección</a>
             </div>
         </div>
     </div>
@@ -229,25 +254,471 @@
 
         <!-- JAVASCRIPT FILES -->
         <script src="js/jquery.min.js"></script>
+        <!-- Popper.js for Bootstrap dropdowns and tooltips -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.sticky.js"></script>
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
-        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <script src="js/global-scroll.js"></script>
+        
+        <!-- Global Settings API Integration -->
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-              var stripeBtn = document.querySelector('stripe-buy-button');
-              var paypalBtn = document.getElementById('flexRadioDefault10');
-            
-              paypalBtn.addEventListener('change', function () {
-                if (paypalBtn.checked) {
-                  stripeBtn.style.display = 'none'; // Hide Stripe button
-                  // Display PayPal specific elements here
-                } else {
-                  stripeBtn.style.display = 'block'; // Show Stripe button
-                  // Hide PayPal specific elements here
+            // Fetch and update global settings
+            async function fetchGlobalSettings() {
+                try {
+                    const response = await fetch('https://ef-cms-production.up.railway.app/api/global-settings');
+                    const settings = await response.json();
+                    
+                    // Store settings globally for access by other functions
+                    window.globalSettings = settings;
+                    
+                // Update header location
+                const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
+                if (headerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
+                        headerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        headerLocation.style.display = 'flex';
+                    } else {
+                        headerLocation.style.display = 'none';
+                    }
                 }
-              });
+                
+                // Update header email
+                const headerEmail = document.querySelector('.site-header .bi-envelope').parentElement;
+                if (headerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        headerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}">${settings.mail}</a>`;
+                        headerEmail.style.display = 'flex';
+                    } else {
+                        headerEmail.style.display = 'none';
+                    }
+                }
+                
+                // Update header social links
+                const headerFacebook = document.querySelector('.site-header .bi-facebook');
+                if (headerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
+                        headerFacebook.href = settings.facebookUrl;
+                        headerFacebook.style.display = 'block';
+                    } else {
+                        headerFacebook.style.display = 'none';
+                    }
+                }
+                
+                const headerInstagram = document.querySelector('.site-header .bi-instagram');
+                if (headerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
+                        headerInstagram.href = settings.instagramUrl;
+                        headerInstagram.style.display = 'block';
+                    } else {
+                        headerInstagram.style.display = 'none';
+                    }
+                }
+                
+                const headerWhatsapp = document.querySelector('.site-header .bi-whatsapp');
+                if (headerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        headerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        headerWhatsapp.style.display = 'block';
+                    } else {
+                        headerWhatsapp.style.display = 'none';
+                    }
+                }
+                    
+                    // Update navigation bar logo
+                    const navLogo = document.querySelector('.navbar-brand img');
+                    if (navLogo) {
+                        navLogo.src = settings.mainLogo;
+                    }
+                    
+                    // Update footer logo
+                    const footerLogo = document.querySelector('.site-footer .logo');
+                    if (footerLogo) {
+                        footerLogo.src = settings.mainLogo;
+                    }
+                    
+                    // Update favicon
+                    const favicon = document.querySelector('link[rel="icon"]');
+                    if (favicon) {
+                        favicon.href = settings.mainLogo;
+                    }
+                    
+                // Update footer phone
+                const footerPhone = document.querySelector('.site-footer .bi-telephone').parentElement;
+                if (footerPhone) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        footerPhone.innerHTML = `<i class="bi-telephone me-2"></i><a href="tel:${settings.whatsappNumber}" class="site-footer-link">${settings.whatsappNumber}</a>`;
+                        footerPhone.style.display = 'flex';
+                    } else {
+                        footerPhone.style.display = 'none';
+                    }
+                }
+                
+                // Update footer email
+                const footerEmail = document.querySelector('.site-footer .bi-envelope').parentElement;
+                if (footerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        footerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}" class="site-footer-link">${settings.mail}</a>`;
+                        footerEmail.style.display = 'flex';
+                    } else {
+                        footerEmail.style.display = 'none';
+                    }
+                }
+                
+                // Update footer location
+                const footerLocation = document.querySelector('.site-footer .bi-geo-alt').parentElement;
+                if (footerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
+                        footerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        footerLocation.style.display = 'flex';
+                    } else {
+                        footerLocation.style.display = 'none';
+                    }
+                }
+                
+                // Update footer social links
+                const footerFacebook = document.querySelector('.site-footer .bi-facebook');
+                if (footerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
+                        footerFacebook.href = settings.facebookUrl;
+                        footerFacebook.style.display = 'block';
+                    } else {
+                        footerFacebook.style.display = 'none';
+                    }
+                }
+                
+                const footerInstagram = document.querySelector('.site-footer .bi-instagram');
+                if (footerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
+                        footerInstagram.href = settings.instagramUrl;
+                        footerInstagram.style.display = 'block';
+                    } else {
+                        footerInstagram.style.display = 'none';
+                    }
+                }
+                
+                const footerWhatsapp = document.querySelector('.site-footer .bi-whatsapp');
+                if (footerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        footerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        footerWhatsapp.style.display = 'block';
+                    } else {
+                        footerWhatsapp.style.display = 'none';
+                    }
+                }
+                    
+                } catch (error) {
+                    console.error('Error fetching global settings:', error);
+                }
+            }
+            
+            // Fetch and update payment settings
+            async function fetchPaymentSettings() {
+                try {
+                    const response = await fetch('https://ef-cms-production.up.railway.app/api/pagos');
+                    const paymentData = await response.json();
+                    
+                    // Store payment data globally for access by other functions
+                    window.paymentData = paymentData;
+                    
+                    // Update Stripe publishable key
+                    const stripeButton = document.querySelector('stripe-buy-button');
+                    if (stripeButton) {
+                        if (paymentData.paystripeCode && paymentData.paystripeCode.trim() !== '') {
+                            // Show Stripe button and set publishable key
+                            stripeButton.setAttribute('publishable-key', paymentData.paystripeCode);
+                            stripeButton.style.display = 'block';
+                            
+                            // Show "O, continúa con" text
+                            const continueText = document.querySelector('.paypal-continue');
+                            if (continueText) {
+                                continueText.style.display = 'block';
+                            }
+                            
+                            // Force re-render of the Stripe button
+                            const parent = stripeButton.parentNode;
+                            const newStripeButton = stripeButton.cloneNode(true);
+                            parent.replaceChild(newStripeButton, stripeButton);
+                        } else {
+                            // Hide Stripe button if no publishable key
+                            stripeButton.style.display = 'none';
+                            
+                            // Hide "O, continúa con" text
+                            const continueText = document.querySelector('.paypal-continue');
+                            if (continueText) {
+                                continueText.style.display = 'none';
+                            }
+                        }
+                    }
+                    
+                    // Update PayPal URL
+                    const paypalLink = document.querySelector('.paypal-button a');
+                    if (paypalLink && paymentData.paypalUrl) {
+                        paypalLink.href = paymentData.paypalUrl;
+                    }
+                    
+                } catch (error) {
+                    // Error fetching payment settings - hide Stripe button and continue text
+                    const stripeButton = document.querySelector('stripe-buy-button');
+                    if (stripeButton) {
+                        stripeButton.style.display = 'none';
+                    }
+                    
+                    const continueText = document.querySelector('.paypal-continue');
+                    if (continueText) {
+                        continueText.style.display = 'none';
+                    }
+                }
+            }
+            
+            // Load Stripe script and initialize after payment settings are loaded
+            async function loadStripeAndInitialize() {
+                try {
+                    // First fetch payment settings
+                    await fetchPaymentSettings();
+                    
+                    // Then load Stripe script
+                    const script = document.createElement('script');
+                    script.src = 'https://js.stripe.com/v3/buy-button.js';
+                    script.async = true;
+                    document.head.appendChild(script);
+                    
+                } catch (error) {
+                    console.error('Error loading Stripe:', error);
+                }
+            }
+            
+            // Call the functions when the page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                fetchGlobalSettings();
+                loadStripeAndInitialize();
+            });
+        </script>
+        
+        <!-- Language Switcher Script -->
+        <script>
+            // Language Switcher
+            class DonateLanguageSwitcher {
+                constructor() {
+                    this.currentLanguage = 'es';
+                    this.translations = {
+                        es: {
+                            // Navigation
+                            navInicio: "Inicio",
+                            navAcerca: "Acerca de",
+                            navHistoria: "Nuestra Historia",
+                            navMas: "Más",
+                            navEventos: "Eventos",
+                            navNoticias: "Noticias",
+                            navContacto: "Contacto",
+                            navFaq: "FAQ",
+                            navDona: "Dona",
+                            
+                            // Donate Form
+                            donateTitle: "Haz una donación",
+                            donateContinue: "O, continúa con",
+                            
+                            // Footer
+                            footerEnlaces: "Enlaces",
+                            footerNuestraHistoria: "Nuestra Historia",
+                            footerMirarDocumental: "Mirar Documental",
+                            footerRealizarDonacion: "Realiza una Donación",
+                            footerNuestrosPatrocinadores: "Nuestros Patrocinadores",
+                            footerContactanos: "Contáctanos",
+                            
+                            // Page Title
+                            pageTitle: "Escalando Fronteras - Donaciones"
+                        },
+                        en: {
+                            // Navigation
+                            navInicio: "Home",
+                            navAcerca: "About",
+                            navHistoria: "Our History",
+                            navMas: "More",
+                            navEventos: "Events",
+                            navNoticias: "News",
+                            navContacto: "Contact",
+                            navFaq: "FAQ",
+                            navDona: "Donate",
+                            
+                            // Donate Form
+                            donateTitle: "Make a donation",
+                            donateContinue: "Or, continue with",
+                            
+                            // Footer
+                            footerEnlaces: "Links",
+                            footerNuestraHistoria: "Our Story",
+                            footerMirarDocumental: "Watch Documentary",
+                            footerRealizarDonacion: "Make a Donation",
+                            footerNuestrosPatrocinadores: "Our Sponsors",
+                            footerContactanos: "Contact Us",
+                            footerObtenerDireccion: "Get Directions",
+                            
+                            // Page Title
+                            pageTitle: "Escalando Fronteras - Donations"
+                        }
+                    };
+                    
+                    this.init();
+                }
+                
+                init() {
+                    // Get language from URL, localStorage, or default to Spanish
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const langFromUrl = urlParams.get('lang');
+                    const langFromStorage = localStorage.getItem('userLanguagePreference');
+                    
+                    // Priority: URL parameter > localStorage > default Spanish
+                    if (langFromUrl && (langFromUrl === 'en' || langFromUrl === 'es')) {
+                        this.currentLanguage = langFromUrl;
+                    } else if (langFromStorage && (langFromStorage === 'en' || langFromStorage === 'es')) {
+                        this.currentLanguage = langFromStorage;
+                    } else {
+                        this.currentLanguage = 'es';
+                    }
+                    
+                    // Store language preference for consistency
+                    localStorage.setItem('userLanguagePreference', this.currentLanguage);
+                    
+                    // Update page title
+                    this.updatePageTitle();
+                    
+                    // Translate content
+                    this.translateContent();
+                    
+                    // Update language display
+                    this.updateLanguageDisplay();
+                    
+                }
+                
+                updatePageTitle() {
+                    const title = this.translations[this.currentLanguage].pageTitle;
+                    document.title = title;
+                    const titleElement = document.querySelector('#page-title');
+                    if (titleElement) {
+                        titleElement.textContent = title;
+                    }
+                }
+                
+                translateContent() {
+                    const t = this.translations[this.currentLanguage];
+                    
+                    // Navigation
+                    this.updateText('#nav-inicio', t.navInicio);
+                    this.updateText('#nav-acerca', t.navAcerca);
+                    this.updateText('#nav-historia', t.navHistoria);
+                    this.updateText('#nav-mas', t.navMas);
+                    this.updateText('#nav-eventos', t.navEventos);
+                    this.updateText('#nav-noticias', t.navNoticias);
+                    this.updateText('#nav-contacto', t.navContacto);
+                    this.updateText('#nav-faq', t.navFaq);
+                    this.updateText('#nav-dona', t.navDona);
+                    
+                    // Donate Form
+                    this.updateText('#donate-title', t.donateTitle);
+                    this.updateText('#donate-continue', t.donateContinue);
+                    
+                    // Footer
+                    this.updateText('#footer-enlaces', t.footerEnlaces);
+                    this.updateText('#footer-nuestra-historia', t.footerNuestraHistoria);
+                    this.updateText('#footer-mirar-documental', t.footerMirarDocumental);
+                    this.updateText('#footer-realizar-donacion', t.footerRealizarDonacion);
+                    this.updateText('#footer-nuestros-patrocinadores', t.footerNuestrosPatrocinadores);
+                    this.updateText('#footer-contactanos', t.footerContactanos);
+                    this.updateText('#footer-obtener-direccion', t.footerObtenerDireccion);
+                }
+                
+                updateText(selector, text) {
+                    const element = document.querySelector(selector);
+                    if (element && text) {
+                        element.textContent = text;
+                    }
+                }
+                
+                updateLanguageDisplay() {
+                    const currentLanguageSpan = document.querySelector('#current-language');
+                    if (currentLanguageSpan) {
+                        currentLanguageSpan.textContent = this.currentLanguage.toUpperCase();
+                    }
+                }
+                
+                switchLanguage(newLang) {
+                    if (newLang === this.currentLanguage) return;
+                    
+                    this.currentLanguage = newLang;
+                    
+                    // Store language preference in localStorage
+                    localStorage.setItem('userLanguagePreference', newLang);
+                    
+                    // Update URL
+                    const url = new URL(window.location);
+                    url.searchParams.set('lang', newLang);
+                    window.history.pushState({}, '', url);
+                    
+                    // Update content
+                    this.updatePageTitle();
+                    this.translateContent();
+                    this.updateLanguageDisplay();
+                    
+                }
+            }
+            
+            // Global function for language switching
+            window.switchLanguage = function(lang) {
+                if (window.donateLanguageSwitcher) {
+                    window.donateLanguageSwitcher.switchLanguage(lang);
+                }
+            };
+            
+            // Initialize when DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
+                window.donateLanguageSwitcher = new DonateLanguageSwitcher();
+                
+                // Language switcher event listeners
+                document.querySelectorAll('.language-option').forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const lang = this.getAttribute('data-lang');
+                        if (window.donateLanguageSwitcher) {
+                            window.donateLanguageSwitcher.switchLanguage(lang);
+                        }
+                    });
+                });
+                
+                // Original Stripe/PayPal functionality
+                var stripeBtn = document.querySelector('stripe-buy-button');
+                var paypalBtn = document.getElementById('flexRadioDefault10');
+                
+                if (paypalBtn) {
+                    paypalBtn.addEventListener('change', function () {
+                        if (paypalBtn.checked) {
+                            stripeBtn.style.display = 'none'; // Hide Stripe button
+                            // Display PayPal specific elements here
+                        } else {
+                            stripeBtn.style.display = 'block'; // Show Stripe button
+                            // Hide PayPal specific elements here
+                        }
+                    });
+                }
+            });
+        </script>
+        
+        <!-- Handle cross-page navigation with proper scroll offset -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll('a[href^="index.html#"]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        
+                        // Skip if not a valid section link
+                        if (!href || href === 'index.html#' || this.classList.contains('language-option')) {
+                            return;
+                        }
+                        
+                        // Footer links are now handled by global-scroll.js
+                    });
+                });
             });
         </script>
     </body>

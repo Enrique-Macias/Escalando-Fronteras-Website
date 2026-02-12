@@ -1,20 +1,78 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Preguntas frecuentes sobre Escalando Fronteras. Encuentra respuestas sobre nuestros programas de escalada, educación comunitaria y actividades en Monterrey, Nuevo León.">
+        <meta name="keywords" content="FAQ Escalando Fronteras, preguntas frecuentes, escalada, educación comunitaria, Monterrey, Nuevo León, programas juveniles, organización sin fines de lucro">
+        <meta name="author" content="Escalando Fronteras">
+        <meta name="robots" content="index, follow">
 
-        <title>Escalando Fronteras</title>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="FAQ - Escalando Fronteras | Preguntas Frecuentes">
+        <meta property="og:description" content="Encuentra respuestas a las preguntas más frecuentes sobre Escalando Fronteras. Programas de escalada, educación y desarrollo comunitario.">
+        <meta property="og:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+        <meta property="og:url" content="https://climbingborders.org/faq.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Escalando Fronteras">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="FAQ - Escalando Fronteras | Preguntas Frecuentes">
+        <meta name="twitter:description" content="Encuentra respuestas sobre Escalando Fronteras. Programas de escalada y educación en Monterrey.">
+        <meta name="twitter:image" content="https://climbingborders.org/images/EscalandoFronteras_1.jpg">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://climbingborders.org/faq.html">
+
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="es" href="https://climbingborders.org/faq.html">
+        <link rel="alternate" hreflang="en" href="https://climbingborders.org/faq.html?lang=en">
+
+        <title>FAQ - Escalando Fronteras | Preguntas Frecuentes sobre Nuestros Programas</title>
         <link rel="icon" type="image/png" href="images/icons/EF_LOGO.png">
+        <link rel="apple-touch-icon" href="images/icons/EF_LOGO.png">
+        <link rel="shortcut icon" href="images/icons/EF_LOGO.png">
 
         <!-- ======================= CSS Styles ================== -->        
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap-icons.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+        
+        <!-- JSON-LD Structured Data for FAQ Page -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": {
+                "@type": "Organization",
+                "name": "Escalando Fronteras",
+                "alternateName": "Climbing Borders",
+                "description": "Organización comunitaria que promueve la educación, escalada en montaña y desarrollo comunitario en Monterrey, Nuevo León",
+                "url": "https://climbingborders.org",
+                "logo": "https://climbingborders.org/images/icons/EF_LOGO.png",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Monterrey",
+                    "addressRegion": "Nuevo León",
+                    "addressCountry": "MX"
+                },
+                "areaServed": {
+                    "@type": "Place",
+                    "name": "Monterrey, Nuevo León"
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "contactType": "General Information",
+                    "email": "info@climbingborders.org",
+                    "availableLanguage": ["Spanish", "English"]
+                }
+            }
+        }
+        </script>
 
     </head>
     <!-- ======================= HEADER ================== -->
@@ -24,29 +82,26 @@
                 <div class="row">
                     
                     <div class="col-lg-8 col-12 d-flex flex-wrap">
-                        <p class="d-flex me-4 mb-0">
-                            <i class="bi-geo-alt me-2"></i>
-                            Monterrey, Nuevo León, México
-                        </p>
+                    <p class="d-flex me-4 mb-0">
+                        <i class="bi-geo-alt me-2"></i>
+                        <!-- Location will be populated by API -->
+                    </p>
 
-                        <p class="d-flex mb-0">
-                            <i class="bi-envelope me-2"></i>
-
-                            <a href="mailto:Nadia@ClimbingBorders.org">
-                                Nadia@ClimbingBorders.org 
-                            </a>
-                        </p>
+                    <p class="d-flex mb-0">
+                        <i class="bi-envelope me-2"></i>
+                        <!-- Email will be populated by API -->
+                    </p>
                     </div>
 
                     <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                         <ul class="social-icon">
                             <li class="social-icon-item">
-                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank"></a>
+                                <a href="https://www.facebook.com/EscalandoFronteras/" class="social-icon-link bi-facebook" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
 
                             </li>
 
                             <li class="social-icon-item">
-                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank"></a>
+                                <a href="https://www.instagram.com/escalando_fronteras/" class="social-icon-link bi-instagram" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer"></a>
                             </li>
 
                             <li class="social-icon-item">
@@ -80,20 +135,15 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_3">Apoyo</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_4">Voluntario</a>
+                            <a class="nav-link" href="historia.html">Nuestra Historia</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Eventos</a>
+                            <a class="nav-link click-scroll dropdown-toggle" href="index.html#section_5" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" href="eventos2023.html">Eventos 2023</a></li>
-
-                                <li><a class="dropdown-item" href="eventos2024.html">Eventos 2024</a></li>
+                                <li><a class="dropdown-item" href="eventos.html">Eventos</a></li>
+                                <li><a class="dropdown-item" href="noticias.html">Noticias</a></li>
                             </ul>
                         </li>
 
@@ -103,6 +153,21 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="faq.html">FAQ</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-globe me-1"></i>
+                                <span id="current-language">ES</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item language-option" href="#" data-lang="es">
+                                    <i class="bi-flag me-2"></i>Español (ES)
+                                </a></li>
+                                <li><a class="dropdown-item language-option" href="#" data-lang="en">
+                                    <i class="bi-flag me-2"></i>English (EN)
+                                </a></li>
+                            </ul>
                         </li>
 
                         <li class="nav-item ms-3">
@@ -118,64 +183,9 @@
             <faq>
                 <div class="container-faq">
                     <div class="heading">
-                        <h1>FAQs</h1>
+                        <h1 id="faq-title">FAQs</h1>
                     </div>
-                    <div class="question">
-                        <button>
-                            <span>¿Cambiaron recientemente de página de internet?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p>Sí. ¡Nuestro sitio web dejó de funcionar recientemente y estamos en proceso de restaurarlo! Esta es una solución temporal hasta que podamos reconstruir nuestro sitio.</p>
-                    </div>
-                    <div class="question">
-                        <button>
-                            <span>¿Ayudaría recaudar fondos en el extranjero?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p>¡Claro! Cualquier cantidad es buena. También nos sirven los donativos en especie, por ejemplo cuerdas, cascos, arneses y equipo de escalada en general.</p>
-                    </div>
-            
-                    <div class="question">
-                        <button>
-                            <span>¿Hay otras maneras de apoyar?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p>Email nadia@ClimbingBorders.org. <br>
-                            Existen otras maneras de apoyar. Si tienes alguna idea que pudiera servir para que Escalando Fronteras continúe con su labor, escríbenos.</p>
-                    </div>
-            
-                    <div class="question">
-                        <button>
-                            <span>¿Son una asociación civil registrada?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p>Sí, estamos dados de alta en hacienda desde 2014 y somos donataria autorizada desde 2020.</p>
-                    </div>
-
-                    <div class="question">
-                        <button>
-                            <span>¿Qué problemáticas enfrenta la niñez y la juventud?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p>Como resultado de su condición de colonia irregular e indígena, el barrio de Lomas Modelo Norte ha sido históricamente marginado y excluido de servicios públicos tan básicos como el agua, drenaje, e iluminación. Como un resultado de estas condiciones adversas, buena parte de la juventud recurre al consumo problemático de sustancias y la deserción escolar.</p>
-                    </div>
-
-                    <div class="question">
-                        <button>
-                            <span>¿Mi donativo es deducible de impuestos?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p>Sí. En México puedes solicitarnos un recibo deducible de impuestos. Si donas desde los estados unidos, puedes hacer tu donativo a través de MountainsBeyondBorders.org.
-                            <br>También puedes hacernos llegar equipo de escalada nuevo o en buenas condiciones para que podamos seguir eneseñando a niñes a escalar. </p>
-                    </div>
-
-                    <div class="question">
-                        <button>
-                            <span>¿Puedo venir de visita?</span>
-                            <i class="fas fa-chevron-down d-arrow"></i>
-                        </button>
-                        <p>Sí, claro. Si estás de paso por Monterrey y quieres escalar con nosotrxs eres bienvenidx. Si tienes una idea para colaborar con nosotrxs y profundizar el impacto de la organización, escríbenos e intentaremos hacerlo realidad.</p>
-                    </div>
+                    <!-- FAQ content will be populated dynamically from API -->
                 </div>
             </faq>
         </main>
@@ -198,7 +208,6 @@
 
                     <li class="footer-menu-item"><a href="donate.html" class="footer-menu-link">Realiza una Donación</a></li>
 
-                    <li class="footer-menu-item"><a href="index.html#section_4" class="footer-menu-link">Conviértete en Voluntario</a></li>
 
                     <li class="footer-menu-item"><a href="index.html#section_6" class="footer-menu-link">Asóciate con Nosotros</a></li>
                 </ul>
@@ -207,28 +216,21 @@
             <div class="col-lg-4 col-md-6 col-12 mx-auto">
                 <h5 class="site-footer-title mb-3">Contáctanos</h5>
 
-                <p class="text-white d-flex mb-2">
-                    <i class="bi-telephone me-2"></i>
+                        <p class="text-white d-flex mb-2">
+                            <i class="bi-telephone me-2"></i>
+                            <!-- Phone will be populated by API -->
+                        </p>
 
-                    <a href="tel: 120-240-9600" class="site-footer-link">
-                        120-240-9600
-                    </a>
-                </p>
+                        <p class="text-white d-flex">
+                            <i class="bi-envelope me-2"></i>
+                            <!-- Email will be populated by API -->
+                        </p>
 
-                <p class="text-white d-flex">
-                    <i class="bi-envelope me-2"></i>
+                        <p class="text-white d-flex mt-3">
+                            <i class="bi-geo-alt me-2"></i>
+                            <!-- Location will be populated by API -->
+                        </p>
 
-                    <a href="mailto:info@yourgmail.com" class="site-footer-link">
-                        Nadia@ClimbingBorders.org
-                    </a>
-                </p>
-
-                <p class="text-white d-flex mt-3">
-                    <i class="bi-geo-alt me-2"></i>
-                    Monterrey, Nuevo León, México
-                </p>
-
-                <a href="#" class="custom-btn btn mt-3">Obtener Dirección</a>
             </div>
         </div>
     </div>
@@ -263,26 +265,540 @@
 
         <!-- JAVASCRIPT FILES -->
         <script src="js/jquery.min.js"></script>
+        <!-- Popper.js for Bootstrap dropdowns and tooltips -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.sticky.js"></script>
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
         <script async src="https://js.stripe.com/v3/buy-button.js"></script>
         <script src="js/faq.js"></script>
+        
+        <!-- Global Settings API Integration -->
+        <script>
+            // Fetch and update global settings
+            async function fetchGlobalSettings() {
+                try {
+                    const response = await fetch('https://ef-cms-production.up.railway.app/api/global-settings');
+                    const settings = await response.json();
+                    
+                    // Store settings globally for access by other functions
+                    window.globalSettings = settings;
+                    
+                // Update header location
+                const headerLocation = document.querySelector('.site-header .bi-geo-alt').parentElement;
+                if (headerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
+                        headerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        headerLocation.style.display = 'flex';
+                    } else {
+                        headerLocation.style.display = 'none';
+                    }
+                }
+                
+                // Update header email
+                const headerEmail = document.querySelector('.site-header .bi-envelope').parentElement;
+                if (headerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        headerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}">${settings.mail}</a>`;
+                        headerEmail.style.display = 'flex';
+                    } else {
+                        headerEmail.style.display = 'none';
+                    }
+                }
+                
+                // Update header social links
+                const headerFacebook = document.querySelector('.site-header .bi-facebook');
+                if (headerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
+                        headerFacebook.href = settings.facebookUrl;
+                        headerFacebook.style.display = 'block';
+                    } else {
+                        headerFacebook.style.display = 'none';
+                    }
+                }
+                
+                const headerInstagram = document.querySelector('.site-header .bi-instagram');
+                if (headerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
+                        headerInstagram.href = settings.instagramUrl;
+                        headerInstagram.style.display = 'block';
+                    } else {
+                        headerInstagram.style.display = 'none';
+                    }
+                }
+                
+                const headerWhatsapp = document.querySelector('.site-header .bi-whatsapp');
+                if (headerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        headerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        headerWhatsapp.style.display = 'block';
+                    } else {
+                        headerWhatsapp.style.display = 'none';
+                    }
+                }
+                    
+                    // Update navigation bar logo
+                    const navLogo = document.querySelector('.navbar-brand img');
+                    if (navLogo) {
+                        navLogo.src = settings.mainLogo;
+                    }
+                    
+                    // Update footer logo
+                    const footerLogo = document.querySelector('.site-footer .logo');
+                    if (footerLogo) {
+                        footerLogo.src = settings.mainLogo;
+                    }
+                    
+                    // Update favicon
+                    const favicon = document.querySelector('link[rel="icon"]');
+                    if (favicon) {
+                        favicon.href = settings.mainLogo;
+                    }
+                    
+                // Update footer phone
+                const footerPhone = document.querySelector('.site-footer .bi-telephone').parentElement;
+                if (footerPhone) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        footerPhone.innerHTML = `<i class="bi-telephone me-2"></i><a href="tel:${settings.whatsappNumber}" class="site-footer-link">${settings.whatsappNumber}</a>`;
+                        footerPhone.style.display = 'flex';
+                    } else {
+                        footerPhone.style.display = 'none';
+                    }
+                }
+                
+                // Update footer email
+                const footerEmail = document.querySelector('.site-footer .bi-envelope').parentElement;
+                if (footerEmail) {
+                    if (settings.mail && settings.mail.trim() !== '') {
+                        footerEmail.innerHTML = `<i class="bi-envelope me-2"></i><a href="mailto:${settings.mail}" class="site-footer-link">${settings.mail}</a>`;
+                        footerEmail.style.display = 'flex';
+                    } else {
+                        footerEmail.style.display = 'none';
+                    }
+                }
+                
+                // Update footer location
+                const footerLocation = document.querySelector('.site-footer .bi-geo-alt').parentElement;
+                if (footerLocation) {
+                    if (settings.location && settings.location.trim() !== '') {
+                        footerLocation.innerHTML = `<i class="bi-geo-alt me-2"></i>${settings.location}`;
+                        footerLocation.style.display = 'flex';
+                    } else {
+                        footerLocation.style.display = 'none';
+                    }
+                }
+                
+                // Update footer social links
+                const footerFacebook = document.querySelector('.site-footer .bi-facebook');
+                if (footerFacebook) {
+                    if (settings.facebookUrl && settings.facebookUrl.trim() !== '') {
+                        footerFacebook.href = settings.facebookUrl;
+                        footerFacebook.style.display = 'block';
+                    } else {
+                        footerFacebook.style.display = 'none';
+                    }
+                }
+                
+                const footerInstagram = document.querySelector('.site-footer .bi-instagram');
+                if (footerInstagram) {
+                    if (settings.instagramUrl && settings.instagramUrl.trim() !== '') {
+                        footerInstagram.href = settings.instagramUrl;
+                        footerInstagram.style.display = 'block';
+                    } else {
+                        footerInstagram.style.display = 'none';
+                    }
+                }
+                
+                const footerWhatsapp = document.querySelector('.site-footer .bi-whatsapp');
+                if (footerWhatsapp) {
+                    if (settings.whatsappNumber && settings.whatsappNumber.trim() !== '') {
+                        footerWhatsapp.href = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`;
+                        footerWhatsapp.style.display = 'block';
+                    } else {
+                        footerWhatsapp.style.display = 'none';
+                    }
+                }
+                    
+                } catch (error) {
+                    console.error('Error fetching global settings:', error);
+                }
+            }
+            
+            // Fetch and populate FAQ content
+            async function fetchFAQContent() {
+                try {
+                    const response = await fetch('https://ef-cms-production.up.railway.app/api/faq?page=1&limit=10&search=question');
+                    const faqData = await response.json();
+                    
+                    // Store FAQ data globally for access by other functions
+                    window.faqData = faqData;
+                    
+                    // Clear existing FAQ content
+                    const faqContainer = document.querySelector('.container-faq');
+                    if (faqContainer) {
+                        // Keep the heading, remove all question divs
+                        const heading = faqContainer.querySelector('.heading');
+                        const existingQuestions = faqContainer.querySelectorAll('.question');
+                        existingQuestions.forEach(question => question.remove());
+                        
+                        // Add FAQ items dynamically
+                        faqData.forEach((item, index) => {
+                            const questionDiv = document.createElement('div');
+                            questionDiv.className = 'question';
+                            questionDiv.innerHTML = `
+                                <button>
+                                    <span id="faq-q${index + 1}">${item.question_es}</span>
+                                    <i class="fas fa-chevron-down d-arrow"></i>
+                                </button>
+                                <p id="faq-a${index + 1}">${item.answer_es}</p>
+                            `;
+                            faqContainer.appendChild(questionDiv);
+                        });
+                        
+                        // Reinitialize FAQ functionality with a small delay
+                        setTimeout(() => {
+                            initFAQAccordion();
+                        }, 100);
+                    }
+                    
+                } catch (error) {
+                    console.error('Error fetching FAQ content:', error);
+                }
+            }
+            
+            // Initialize FAQ accordion functionality
+            function initFAQAccordion() {
+                const faqButtons = document.querySelectorAll('.question button');
+                
+                faqButtons.forEach(button => {
+                    // Remove existing event listeners to prevent duplicates
+                    button.removeEventListener('click', handleFAQClick);
+                    // Add new event listener
+                    button.addEventListener('click', handleFAQClick);
+                });
+                
+            }
+            
+            // FAQ accordion click handler
+            function handleFAQClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const question = this.closest('.question');
+                const answer = question.querySelector('p');
+                const icon = this.querySelector('.d-arrow');
+                
+                const isActive = answer.classList.contains('show');
+                
+                // Close all questions first
+                const allFaqButtons = document.querySelectorAll('.question button');
+                allFaqButtons.forEach(otherButton => {
+                    const otherQuestion = otherButton.closest('.question');
+                    const otherAnswer = otherQuestion.querySelector('p');
+                    const otherIcon = otherButton.querySelector('.d-arrow');
+                    otherAnswer.classList.remove('show');
+                    otherIcon.classList.remove('rotate');
+                });
+                
+                // If the clicked question wasn't active, make it active
+                if (!isActive) {
+                    answer.classList.add('show');
+                    icon.classList.add('rotate');
+                } else {
+                    console.log('Question closed');
+                }
+            }
+            
+            // Call the functions when the page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                fetchGlobalSettings();
+                fetchFAQContent();
+            });
+        </script>
+        
+        <!-- Language Switcher Script -->
+        <script>
+            // Translation data
+            const faqTranslations = {
+                es: {
+                    // Navigation
+                    inicio: "Inicio",
+                    acercaDe: "Acerca de",
+                    voluntario: "Nuestra Historia",
+                    mas: "Más",
+                    noticias: "Noticias",
+                    eventos: "Eventos",
+                    contacto: "Contacto",
+                    faq: "FAQ",
+                    dona: "Dona",
+                    
+                    // FAQ Section
+                    faqTitle: "FAQs",
+                    
+                    // Footer
+                    enlaces: "Enlaces",
+                    nuestraHistoriaLink: "Nuestra Historia",
+                    mirarDocumental: "Mirar Documental",
+                    realizarDonacion: "Realiza una Donación",
+                    asociarseConNosotros: "Asóciate con Nosotros",
+                    contactanos: "Contáctanos",
+                },
+                en: {
+                    // Navigation
+                    inicio: "Home",
+                    acercaDe: "About",
+                    voluntario: "Our History",
+                    mas: "More",
+                    noticias: "News",
+                    eventos: "Events",
+                    contacto: "Contact",
+                    faq: "FAQ",
+                    dona: "Donate",
+                    
+                    // FAQ Section
+                    faqTitle: "FAQs",
+                    
+                    // Footer
+                    enlaces: "Links",
+                    nuestraHistoriaLink: "Our Story",
+                    mirarDocumental: "Watch Documentary",
+                    realizarDonacion: "Make a Donation",
+                    asociarseConNosotros: "Partner with Us",
+                    contactanos: "Contact Us",
+                    obtenerDireccion: "Get Directions"
+                }
+            };
+
+            // FAQ Language Switcher Functionality
+            class FAQLanguageSwitcher {
+                constructor() {
+                    // Get language from localStorage or default to Spanish
+                    this.currentLanguage = localStorage.getItem('userLanguagePreference') || 'es';
+                    this.translations = faqTranslations;
+                }
+                
+                init() {
+                    this.setupLanguageSwitcher();
+                    this.updateLanguageDisplay();
+                    this.translateContent();
+                }
+                
+                setupLanguageSwitcher() {
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    
+                    languageOptions.forEach(option => {
+                        option.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            
+                            const selectedLang = option.getAttribute('data-lang');
+                            
+                            this.switchLanguage(selectedLang);
+                        });
+                    });
+                }
+                
+                switchLanguage(newLang) {
+                    
+                    if (this.currentLanguage === newLang) {
+                        return;
+                    }
+                    
+                    this.currentLanguage = newLang;
+                    
+                    // Store language preference in localStorage for persistence
+                    localStorage.setItem('userLanguagePreference', newLang);
+                    
+                    
+                    // Update display
+                    this.updateLanguageDisplay();
+                    
+                    // Translate content
+                    this.translateContent();
+                    
+                }
+                
+                updateLanguageDisplay() {
+                    const currentLanguageSpan = document.getElementById('current-language');
+                    if (currentLanguageSpan) {
+                        currentLanguageSpan.textContent = this.currentLanguage.toUpperCase();
+                    }
+                    
+                    // Update active state in dropdown
+                    const languageOptions = document.querySelectorAll('.language-option');
+                    languageOptions.forEach(option => {
+                        const lang = option.getAttribute('data-lang');
+                        if (lang === this.currentLanguage) {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                }
+                
+                translateContent() {
+                    
+                    const t = this.translations[this.currentLanguage];
+                    if (!t) {
+                        console.error('❌ No translations found for language:', this.currentLanguage);
+                        return;
+                    }
+                    
+                    // Helper function to safely update text content
+                    const updateText = (selector, key) => {
+                        try {
+                            const element = document.querySelector(selector);
+                            if (element && t[key]) {
+                                element.textContent = t[key];
+                            } else {
+                                console.log('⚠️ Element not found or no translation:', selector, 'key:', key);
+                            }
+                        } catch (error) {
+                            console.error('❌ Error updating', selector, ':', error);
+                        }
+                    };
+                    
+                    const updateHTML = (selector, key) => {
+                        try {
+                            const element = document.querySelector(selector);
+                            if (element && t[key]) {
+                                element.innerHTML = t[key];
+                            }
+                        } catch (error) {
+                            console.error('❌ Error updating HTML', selector, ':', error);
+                        }
+                    };
+                    
+                    // Navigation
+                    updateText('a[href="index.html#section_1"]', 'inicio');
+                    updateText('a[href="index.html#section_2"]', 'acercaDe');
+                    updateText('a[href="historia.html"]', 'voluntario');
+                    updateText('#navbarLightDropdownMenuLink', 'mas');
+                    updateText('a[href="noticias.html"]', 'noticias');
+                    updateText('a[href="eventos.html"]', 'eventos');
+                    updateText('a[href="index.html#section_6"]', 'contacto');
+                    updateText('a[href="faq.html"]', 'faq');
+                    updateText('a[href="donate.html"].custom-btn', 'dona');
+                    
+                    // FAQ Content - Update dynamic content from API
+                    updateText('#faq-title', 'faqTitle');
+                    
+                    // Update dynamic FAQ content from API data
+                    if (window.faqData && window.faqData.length > 0) {
+                        window.faqData.forEach((item, index) => {
+                            const questionElement = document.getElementById(`faq-q${index + 1}`);
+                            const answerElement = document.getElementById(`faq-a${index + 1}`);
+                            
+                            if (questionElement) {
+                                const questionText = this.currentLanguage === 'en' ? item.question_en : item.question_es;
+                                questionElement.textContent = questionText;
+                            }
+                            
+                            if (answerElement) {
+                                const answerText = this.currentLanguage === 'en' ? item.answer_en : item.answer_es;
+                                answerElement.textContent = answerText;
+                            }
+                        });
+                    }
+                    
+                    // Footer
+                    const footerTitles = document.querySelectorAll('.site-footer-title');
+                    footerTitles.forEach((title, index) => {
+                        const text = title.textContent.trim();
+                        if (text.includes('Enlaces') && t.enlaces) {
+                            title.textContent = t.enlaces;
+                        } else if (text.includes('Contáctanos') && t.contactanos) {
+                            title.textContent = t.contactanos;
+                        }
+                    });
+                    
+                    
+                    // Footer links
+                    const footerLinks = document.querySelectorAll('.footer-menu-link');
+                    footerLinks.forEach((link, index) => {
+                        const href = link.getAttribute('href');
+                        const text = link.textContent.trim();
+                        
+                        if (href === 'index.html#section_2' && t.nuestraHistoriaLink) {
+                            link.textContent = t.nuestraHistoriaLink;
+                        } else if (href === 'index.html#documentary' && t.mirarDocumental) {
+                            link.textContent = t.mirarDocumental;
+                        } else if (href === 'donate.html' && t.realizarDonacion) {
+                            link.textContent = t.realizarDonacion;
+                        } else if (href === 'index.html#section_6' && t.asociarseConNosotros) {
+                            link.textContent = t.asociarseConNosotros;
+                        }
+                    });
+                }
+            }
+            
+            // Initialize FAQ language switcher when DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
+                window.faqLanguageSwitcher = new FAQLanguageSwitcher();
+                window.faqLanguageSwitcher.init();
+            });
+        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
               var stripeBtn = document.querySelector('stripe-buy-button');
               var paypalBtn = document.getElementById('flexRadioDefault10');
             
-              paypalBtn.addEventListener('change', function () {
-                if (paypalBtn.checked) {
-                  stripeBtn.style.display = 'none'; // Hide Stripe button
-                  // Display PayPal specific elements here
-                } else {
-                  stripeBtn.style.display = 'block'; // Show Stripe button
-                  // Hide PayPal specific elements here
+              if (paypalBtn) {
+                paypalBtn.addEventListener('change', function () {
+                  if (paypalBtn.checked) {
+                    stripeBtn.style.display = 'none'; // Hide Stripe button
+                    // Display PayPal specific elements here
+                  } else {
+                    stripeBtn.style.display = 'block'; // Show Stripe button
+                    // Hide PayPal specific elements here
+                  }
+                });
+              }
+            });
+        </script>
+        
+        <!-- Handle cross-page navigation with proper scroll offset -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll('a[href^="index.html#"]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        
+                        // Skip if not a valid section link
+                        if (!href || href === 'index.html#' || this.classList.contains('language-option')) {
+                            return;
+                        }
+                        
+                        // Extract the section ID from the href
+                        const sectionId = href.split('#')[1];
+                        if (!sectionId) return;
+                        
+                        // Store the section ID to scroll to after page load
+                        sessionStorage.setItem('scrollToSection', sectionId);
+                    });
+                });
+                
+                // Check if we need to scroll to a section after page load
+                const scrollToSection = sessionStorage.getItem('scrollToSection');
+                if (scrollToSection) {
+                    // Clear the stored section
+                    sessionStorage.removeItem('scrollToSection');
+                    
+                    // Wait a bit for the page to fully load, then scroll
+                    setTimeout(() => {
+                        const target = document.getElementById(scrollToSection);
+                        if (target) {
+                            const navbar = document.querySelector('.navbar');
+                            const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                            
+                            window.scrollTo({
+                                top: target.offsetTop - navbarHeight - 20,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 500);
                 }
-              });
             });
         </script>
     </body>

@@ -98,5 +98,4 @@ window.updateAPIBaseURL = function(newURL) {
     }
 };
 
-console.log('⚙️ EF CMS Configuration loaded');
-console.log('📡 API Base URL:', window.getAPIBaseURL());
+// EF CMS Configuration loaded

@@ -73,7 +73,183 @@
 
 body {
   background-color: var(--white-color);
-  font-family: var(--body-font-family); 
+  font-family: var(--body-font-family);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+html {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Value Cards Styling */
+.value-card {
+  padding: 2rem 1.5rem;
+  background: var(--white-color);
+  border-radius: var(--border-radius-small);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid rgba(89, 112, 129, 0.1);
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: rgba(89, 112, 129, 0.2);
+}
+
+.value-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.value-icon i {
+  color: var(--custom-btn-bg-color) !important;
+  transition: color 0.3s ease;
+}
+
+.value-card:hover .value-icon i {
+  color: var(--primary-color) !important;
+}
+
+.value-card h5 {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1rem;
+}
+
+.value-card p {
+  color: var(--p-color);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments for value cards */
+@media (max-width: 768px) {
+  .value-card {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .value-card h5 {
+    font-size: 1rem;
+  }
+  
+  .value-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Equal height layout for Community section */
+.community-equal-height {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Ensure text boxes fill available space */
+.custom-text-box.flex-fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Enhanced Statistics Container */
+.stats-container {
+  background: linear-gradient(135deg, rgba(89, 112, 129, 0.05) 0%, rgba(89, 112, 129, 0.1) 100%);
+  border: 2px solid rgba(89, 112, 129, 0.2);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--custom-btn-bg-color), var(--primary-color), var(--custom-btn-bg-color));
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.stats-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.stats-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background: rgba(89, 112, 129, 0.1);
+  border-radius: 50%;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.stats-container:hover .stats-icon {
+  transform: scale(1.1);
+}
+
+.stats-container h5 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--custom-btn-bg-color);
+}
+
+.stats-container p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--p-color);
+}
+
+.stats-container strong {
+  color: var(--custom-btn-bg-color);
+  font-weight: 700;
+}
+
+/* Mobile responsiveness for community section */
+@media (max-width: 991px) {
+  .community-equal-height {
+    flex-direction: column;
+  }
+  
+  .custom-text-box.flex-fill {
+    flex: none;
+    margin-bottom: 1rem;
+  }
+  
+  .custom-text-box.flex-fill:last-child {
+    margin-bottom: 0;
+  }
+  
+  .stats-content {
+    padding: 0.75rem;
+  }
+  
+  .stats-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .stats-icon i {
+    font-size: 2rem !important;
+  }
 }
 
 
@@ -246,6 +422,414 @@ strong {
   padding: 40px;
 }
 
+/* Historia section title styling */
+  #nuestra-historia-title {
+    color: white !important;
+    font-weight: semibold !important;
+  }
+
+/* FAQ Responsive Styling */
+faq .container-faq,
+.container-faq {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 50px 40px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.faq .heading h1,
+.container-faq .heading h1,
+#faq-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: left !important;
+  margin-bottom: 4rem;
+  color: var(--primary-color);
+  padding-left: 40px !important;
+  padding-right: 20px !important;
+}
+
+.faq .question {
+  background: #fff;
+  margin-bottom: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.faq .question:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.faq .question button {
+  width: 100%;
+  padding: 1.5rem;
+  text-align: left;
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.faq .question button:hover {
+  background-color: #f8f9fa;
+}
+
+.faq .question button span {
+  flex: 1;
+  margin-right: 1rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.faq .question .d-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  color: var(--secondary-color);
+  flex-shrink: 0;
+}
+
+.faq .question.active .d-arrow {
+  transform: rotate(180deg);
+}
+
+.faq .question p {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+  display: none;
+  animation: fadeIn 0.3s ease-in;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.faq .question.active p {
+  display: block;
+}
+
+/* FAQ Divider */
+.faq .question {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+
+.faq .question:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FAQ Section Background */
+faq {
+  display: block;
+  width: 100% !important;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 60px 0;
+  overflow-x: hidden;
+  margin: 0 !important;
+  position: relative !important;
+}
+
+/* Desktop styling for FAQ container */
+@media (min-width: 1200px) {
+  faq .container-faq {
+    max-width: 1200px !important;
+    padding: 60px 50px !important;
+  }
+  
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
+    font-size: 3.5rem;
+    margin-bottom: 4.5rem;
+    padding-left: 50px !important;
+    padding-right: 30px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  faq .container-faq {
+    max-width: 1100px !important;
+    padding: 55px 45px !important;
+  }
+  
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
+    font-size: 3.2rem;
+    margin-bottom: 4.2rem;
+    padding-left: 45px !important;
+    padding-right: 25px !important;
+  }
+}
+
+/* Force FAQ white container to be much wider on mobile */
+@media (max-width: 768px) {
+  faq .container-faq {
+    width: 98% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 20px 15px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  faq .container-faq {
+    width: 99% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 15px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  faq .container-faq {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10px 8px !important;
+  }
+}
+
+/* Extra small devices - make it completely full width */
+@media (max-width: 360px) {
+  faq .container-faq {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 8px 5px !important;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  faq {
+    padding: 40px 0;
+  }
+  
+  faq .container-faq,
+  .container-faq {
+    padding: 20px 10px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    width: calc(100% - 20px) !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 25px !important;
+    padding-right: 15px !important;
+    padding-top: 30px !important;
+  }
+  
+  .faq .question {
+    margin-bottom: 0.8rem;
+    width: 100%;
+  }
+  
+  .faq .question button {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .faq .question button span {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    margin-right: 0.8rem;
+  }
+  
+  .faq .question p {
+    padding: 1rem 1rem 1rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  faq {
+    padding: 20px 0;
+  }
+  
+  faq .container-faq,
+  .container-faq {
+    padding: 15px 8px !important;
+    width: calc(100% - 16px) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-left: 20px !important;
+    padding-right: 12px !important;
+    padding-top: 25px !important;
+  }
+  
+  .faq .question {
+    margin-bottom: 0.6rem;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  .faq .question button {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .faq .question button span {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    line-height: 1.2;
+  }
+  
+  .faq .question p {
+    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  .faq .question .d-arrow {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  faq {
+    padding: 15px 0;
+  }
+  
+  faq .container-faq,
+  .container-faq {
+    padding: 10px 5px !important;
+    width: calc(100% - 10px) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  .faq .heading h1,
+  .container-faq .heading h1,
+  #faq-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+    padding-left: 18px !important;
+    padding-right: 10px !important;
+    padding-top: 20px !important;
+  }
+  
+  .faq .question {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  
+  .faq .question button {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+  
+  .faq .question button span {
+    font-size: 0.85rem;
+    margin-right: 0.4rem;
+  }
+  
+  .faq .question p {
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  
+  .faq .question .d-arrow {
+    font-size: 0.9rem;
+  }
+}
+
+/* Ensure body doesn't have horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* FAQ page specific responsive fixes */
+main {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure FAQ content is properly contained */
+.container-faq * {
+  box-sizing: border-box;
+}
+
+/* Override any Bootstrap container limitations */
+faq .container-faq.container,
+faq .container-faq[class*="container"] {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Force full width on mobile for the white container */
+@media (max-width: 768px) {
+  faq .container-faq.container,
+  faq .container-faq[class*="container"] {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 20px 15px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  faq .container-faq.container,
+  faq .container-faq[class*="container"] {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10px 8px !important;
+  }
+}
+
 .custom-text-box-image {
   border-radius: var(--border-radius-medium);
   width: 100%;
@@ -404,6 +988,13 @@ strong {
 .dropdown-item:hover {
   background: transparent;
   color: #31363F;
+}
+
+/* Ensure language dropdown items are visible */
+.language-option {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .dropdown-toggle::after {
@@ -777,6 +1368,121 @@ strong {
   .about-section .right-column {
     min-height: 300px;
   }
+
+  /* Team Section Mobile Responsiveness - Match Other Sections Width */
+  .team {
+    padding: 40px 0; /* Remove section padding to match other sections */
+  }
+  
+  .team .container-team {
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+
+  /* Team cards width consistency for tablets */
+  .team .col-lg-3.col-md-6 {
+    max-width: 100% !important; /* Use full container width to match description */
+    width: 100% !important; /* Full width to match other sections */
+    padding: 0 15px; /* Add padding to match container padding */
+  }
+}
+
+/* Additional mobile responsiveness for Documentary section */
+@media (max-width: 991px) {
+  /* Documentary Section Mobile Responsiveness - Match Support Section Width */
+  #documentary.about-section {
+    padding: 0 !important;
+  }
+
+  #documentary .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  #documentary .row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  #documentary .col-lg-8,
+  #documentary .col-lg-4 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  #documentary .right-column {
+    padding: 30px 20px !important;
+  }
+
+  #documentary .right-column h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  #documentary .right-column h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  #documentary .right-column p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+/* Additional mobile responsiveness for smaller screens */
+@media (max-width: 768px) {
+  #documentary.about-section {
+    padding: 0 !important;
+  }
+
+  #documentary .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  #documentary .right-column {
+    padding: 25px 15px !important;
+  }
+
+  #documentary .right-column h2 {
+    font-size: 1.6rem;
+  }
+
+  #documentary .right-column h3 {
+    font-size: 1rem;
+  }
+
+  #documentary .right-column p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #documentary.about-section {
+    padding: 0 !important;
+  }
+
+  #documentary .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  #documentary .right-column {
+    padding: 20px 10px !important;
+  }
+
+  #documentary .right-column h2 {
+    font-size: 1.4rem;
+  }
+
+  #documentary .right-column h3 {
+    font-size: 0.95rem;
+  }
+
+  #documentary .right-column p {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
 }
 
 /* ===================== Nuestros patrocinadores ===================== */
@@ -962,6 +1668,10 @@ strong {
 .news-category-block .category-block-link {
   color: var(--white-color);
   margin-right: 10px;
+  border-radius: 0 !important; /* Remove border radius from location overlay */
+  background: transparent !important; /* Remove background since parent has background */
+  border: none !important; /* Remove border since parent handles styling */
+  padding: 0 !important; /* Remove padding since parent handles spacing */
 }
 
 .news-block-info {
@@ -976,6 +1686,236 @@ strong {
 .news-detail-image {
   display: block;
   border-radius: var(--border-radius-medium);
+}
+
+/* ===================== News Images Responsive Styling ===================== */
+
+.news-block-top {
+  position: relative;
+  height: 420px; /* Further increased height for maximum visual impact */
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--border-radius-medium);
+}
+
+/* ===================== Compact News Grid Styling ===================== */
+/* For news grid at bottom of noticias.html - 3 columns on desktop */
+.news-section.section-bg .news-block-top {
+  height: 250px; /* Smaller height for grid layout */
+}
+
+.news-section.section-bg .news-block {
+  margin-bottom: 30px; /* Consistent spacing between cards */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow for cards */
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-section.section-bg .news-block:hover {
+  transform: translateY(-5px); /* Subtle lift on hover */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+}
+
+.news-section.section-bg .news-block-info {
+  padding: 20px; /* Compact padding for grid cards */
+}
+
+.news-section.section-bg .news-block-title h4 {
+  font-size: 18px; /* Smaller title for compact layout */
+  line-height: 1.3;
+  margin-bottom: 0;
+}
+
+.news-section.section-bg .news-block-date p,
+.news-section.section-bg .news-block-author p {
+  font-size: 13px; /* Smaller metadata text */
+  margin-bottom: 0;
+}
+
+.news-section.section-bg .news-block-author {
+  margin-left: 20px !important; /* Adjust author spacing for smaller layout */
+}
+
+/* Responsive adjustments for compact news grid */
+@media screen and (max-width: 992px) {
+  .news-section.section-bg .news-block-top {
+    height: 220px; /* Smaller on tablets */
+  }
+  
+  .news-section.section-bg .news-block-title h4 {
+    font-size: 16px; /* Smaller title on tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .news-section.section-bg .news-block-top {
+    height: 200px; /* Smaller on mobile */
+  }
+  
+  .news-section.section-bg .news-block-info {
+    padding: 15px; /* Less padding on mobile */
+  }
+  
+  .news-section.section-bg .news-block-title h4 {
+    font-size: 15px; /* Smaller title on mobile */
+  }
+  
+  .news-section.section-bg .news-block-author {
+    margin-left: 15px !important; /* Less spacing on mobile */
+  }
+}
+
+.news-block-top img.news-image {
+  width: 100%;
+  height: 100%; /* Fill the fixed container height */
+  object-fit: cover; /* Ensures image fills container while maintaining aspect ratio */
+  object-position: center; /* Centers the image within the container */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  display: block; /* Removes any inline spacing */
+}
+
+.news-block-top:hover img.news-image {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.news-block-two-col-image-wrap {
+  position: relative;
+  height: 100px; /* Fixed height for sidebar events */
+  width: 150px;
+  overflow: hidden;
+  border-radius: var(--border-radius-small);
+  margin-right: 20px;
+  flex-shrink: 0; /* Prevents shrinking */
+}
+
+.news-block-two-col-image-wrap img.news-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.news-block-two-col-image-wrap:hover img.news-image {
+  transform: scale(1.03); /* Subtle zoom for smaller images */
+}
+
+/* Responsive adjustments for news images */
+@media screen and (max-width: 768px) {
+  .news-block-top {
+    height: 320px; /* Further increased height on tablets */
+  }
+  
+  .news-block-two-col-image-wrap {
+    height: 80px; /* Smaller sidebar images on tablets */
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .news-block-top {
+    height: 280px; /* Further increased height on mobile */
+  }
+  
+  .news-block-two-col-image-wrap {
+    height: 70px; /* Smaller sidebar images on mobile */
+    width: 100px;
+    margin-right: 15px;
+  }
+}
+
+/* ===================== Compact Events Sidebar Styling ===================== */
+
+.news-block-two-col-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0; /* Remove default padding */
+}
+
+.news-block-two-col-info .news-block-title {
+  margin-bottom: 4px; /* Reduced from default */
+}
+
+.news-block-two-col-info .news-block-title h6 {
+  font-size: 16px; /* Increased title size for better readability */
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.news-block-two-col-info .news-block-title a {
+  color: var(--dark-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.news-block-two-col-info .news-block-title a:hover {
+  color: var(--primary-color);
+}
+
+.news-block-two-col-info .news-block-date {
+  margin: 0;
+}
+
+.news-block-two-col-info .news-block-date p {
+  font-size: 14px; /* Increased date text size */
+  color: #666;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.news-block-two-col-info .news-block-location {
+  margin: 2px 0 0 0; /* Minimal top margin */
+}
+
+.news-block-two-col-info .news-block-location p {
+  font-size: 13px; /* Increased location text size */
+  color: #888;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.news-block-two-col {
+  margin-bottom: 15px; /* Reduced spacing between events */
+}
+
+/* Responsive adjustments for compact events */
+@media screen and (max-width: 768px) {
+  .news-block-two-col-info .news-block-title h6 {
+    font-size: 15px; /* Slightly smaller on tablets but more readable */
+  }
+  
+  .news-block-two-col-info .news-block-date p {
+    font-size: 13px; /* Increased date size on tablets */
+  }
+  
+  .news-block-two-col-info .news-block-location p {
+    font-size: 12px; /* Increased location size on tablets */
+  }
+  
+  .news-block-two-col {
+    margin-bottom: 12px; /* Less spacing on tablets */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .news-block-two-col-info .news-block-title h6 {
+    font-size: 14px; /* Better readability on mobile */
+  }
+  
+  .news-block-two-col-info .news-block-date p {
+    font-size: 12px; /* Increased date size on mobile */
+  }
+  
+  .news-block-two-col-info .news-block-location p {
+    font-size: 11px; /* Increased location size on mobile */
+  }
+  
+  .news-block-two-col {
+    margin-bottom: 10px; /* Minimal spacing on mobile */
+  }
 }
 
 blockquote {
@@ -1021,6 +1961,50 @@ blockquote::before {
 
 .category-block-link:hover {
   color: var(--primary-color);
+}
+
+/* ===================== Styled Category Links ===================== */
+
+.category-block {
+  display: flex !important;
+  flex-direction: column !important; /* Keep column for heading + links */
+}
+
+.category-block h5 {
+  margin-bottom: 15px; /* Space between heading and categories */
+}
+
+.category-links-container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px; /* Space between category buttons */
+}
+
+.category-block .category-block-link {
+  background: var(--secondary-color);
+  border: 1px solid var(--section-bg-color);
+  border-radius: var(--border-radius-small);
+  color: var(--white-color);
+  padding: 8px 15px;
+  margin: 0; /* Remove margins, use gap instead */
+  display: inline-block !important;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: auto !important; /* Width depends on text content */
+  text-align: center;
+  max-width: none !important; /* Override any max-width constraints */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.category-block .category-block-link:hover {
+  background: var(--section-bg-color);
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .badge {
@@ -1079,10 +2063,114 @@ blockquote::before {
   height: 150px;
 }
 
+/* ===================== Testimonials Responsive Fixes ===================== */
+.carousel-title {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.5;
+  max-height: none; /* Remove height restriction */
+  overflow: visible; /* Allow content to be fully visible */
+  display: block; /* Use block instead of -webkit-box */
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 20px; /* Add horizontal padding */
+}
+
+/* Ensure testimonial content doesn't break layout */
+.testimonial-section .carousel-caption {
+  padding: 30px 20px; /* Increased vertical padding */
+  position: relative;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  transform: none;
+  min-height: 200px; /* Ensure minimum height for content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure testimonial section has enough height */
+.testimonial-section {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.testimonial-section .container {
+  width: 100%;
+}
+
+/* Mobile responsiveness for testimonials */
+@media (max-width: 768px) {
+  .carousel-title {
+    font-size: 18px;
+    line-height: 1.4;
+    padding: 0 15px;
+  }
+  
+  .testimonial-section .carousel-caption {
+    padding: 25px 15px;
+    min-height: 180px;
+  }
+  
+  .testimonial-section {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-title {
+    font-size: 16px;
+    line-height: 1.3;
+    padding: 0 10px;
+  }
+  
+  .testimonial-section .carousel-caption {
+    padding: 20px 10px;
+    min-height: 160px;
+  }
+  
+  .testimonial-section {
+    min-height: 300px;
+  }
+}
+
+/* ===================== Language Switcher ===================== */
+/* Language dropdown should behave exactly like the "More" dropdown */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block !important; /* Show dropdown on hover like "More" */
+}
+
+/* Language dropdown styles are handled by Bootstrap and nav-link classes */
+
 /* ===================== Nuestro Equipo ===================== */
 .team {
   position: relative;
   overflow: hidden;
+}
+
+/* Mobile responsiveness for team section - Match Other Sections Width */
+@media (max-width: 768px) {
+  .team {
+    padding: 40px 0; /* Remove section padding to match other sections */
+  }
+  
+  .team .container-team {
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+  
+  .team .section-title h2 {
+    font-size: 28px; /* Smaller title on mobile */
+    margin-bottom: 15px;
+  }
+  
+  .team .section-title p {
+    font-size: 14px; /* Smaller description text */
+    padding: 0; /* Remove extra padding to match other sections */
+  }
 }
 
 .team .decorative-circle-2 {
@@ -1186,20 +2274,22 @@ blockquote::before {
 
 .team .col-lg-3.col-md-6 {
   flex: 0 0 auto;
-  max-width: 400px; /* Increased maximum width for bigger cards */
+  max-width: 400px; /* Desktop maximum width */
   margin-bottom: 30px; /* Adds consistent spacing between rows */
   width: auto; /* Let cards size naturally */
-  flex: 0 0 auto; /* Allow natural sizing */
 }
 
 /* Responsive adjustments for team member cards */
 @media (max-width: 768px) {
   .team .col-lg-3.col-md-6 {
-    max-width: 350px; /* Increased for tablets too */
+    max-width: 90% !important; /* Use full container width to match description */
+    margin: 0 auto 30px auto !important; /* Center cards with bottom margin */
+    width: 90% !important; /* Full width to match other sections */
+    padding: 0 15px; /* Add padding to match container padding */
   }
   
   .team .member .member-img {
-    height: 320px; /* Increased height for tablets */
+    height: 280px; /* Reduced height for tablets */
   }
   
   .team .member .member-info {
@@ -1209,16 +2299,39 @@ blockquote::before {
   .team .member .member-info h4 {
     font-size: 16px; /* Slightly smaller text on mobile */
   }
+  
+  /* Hide decorative circles on tablets */
+  .decorative-circle,
+  .team .decorative-circle-2 {
+    display: none;
+  }
 }
 
 @media (max-width: 576px) {
   .team .col-lg-3.col-md-6 {
-    max-width: 100%; /* Full width on very small screens */
-    width: 100%;
+    max-width: 90% !important; /* Use full container width to match description */
+    width: 90% !important; /* Full width to match other sections */
+    margin: 0 auto 25px auto !important; /* Center cards */
+    padding: 0 15px; /* Add padding to match container padding */
+    flex: none !important; /* Override Bootstrap flex properties */
   }
   
   .team .member .member-img {
-    height: 280px; /* Increased height for mobile */
+    height: 250px; /* Smaller height for mobile */
+  }
+  
+  .team .member .member-info {
+    padding: 15px 12px; /* Even more compact on mobile */
+  }
+  
+  .team .member .member-info h4 {
+    font-size: 15px; /* Smaller text on mobile */
+  }
+  
+  /* Ensure decorative circles are hidden on mobile */
+  .decorative-circle,
+  .team .decorative-circle-2 {
+    display: none !important;
   }
 }
 
@@ -1559,9 +2672,24 @@ blockquote::before {
 }
 
 @media screen and (max-width: 992px) {
+  /* Articles Section Tablet Responsiveness - Match Cards Width */
+  .blog-section .section-content {
+    width: 100%;
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+  
+  .blog-section .section-content .title {
+    width: 100%;
+  }
+  
+  .blog-section .section-content .title p {
+    max-width: 100%; /* Match article cards width */
+  }
+  
   .blog-section .section-content .cards {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 30px; /* Reduced gap on tablets */
+    width: 100%; /* Use full container width */
   }
   
   .blog-section .section-content .cards .card .image-section {
@@ -1570,9 +2698,24 @@ blockquote::before {
 }
 
 @media screen and (max-width: 768px) {
+  /* Articles Section Mobile Responsiveness - Match Cards Width */
+  .blog-section .section-content {
+    width: 100%;
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+  
+  .blog-section .section-content .title {
+    width: 100%;
+  }
+  
+  .blog-section .section-content .title p {
+    max-width: 100%; /* Match article cards width */
+  }
+  
   .blog-section .section-content .cards {
     grid-template-columns: 1fr;
     grid-gap: 25px; /* Reduced gap on mobile */
+    width: 100%; /* Use full container width */
   }
   
   .blog-section .section-content .cards .card .image-section {
@@ -1589,6 +2732,27 @@ blockquote::before {
   
   .blog-section .section-content .cards .card .blog-view {
     padding: 0 15px 12px 15px; /* Consistent mobile padding */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /* Articles Section Small Mobile Responsiveness - Match Cards Width */
+  .blog-section .section-content {
+    width: 100%;
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+  
+  .blog-section .section-content .title {
+    width: 100%;
+  }
+  
+  .blog-section .section-content .title p {
+    max-width: 100%; /* Match article cards width */
+    font-size: 16px; /* Slightly smaller text on small mobile */
+  }
+  
+  .blog-section .section-content .cards {
+    width: 100%; /* Use full container width */
   }
 }
 
@@ -1764,25 +2928,87 @@ blockquote::before {
 
 .search-form {
   position: relative;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: stretch; /* Make children fill the height */
+  background: var(--white-color);
+  border: 2px solid var(--section-bg-color);
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  height: 45px; /* Fixed height to match original */
+}
+
+.search-form:focus-within {
+  border-color: var(--secondary-color);
+  box-shadow: 0 4px 12px rgba(90, 111, 128, 0.15);
+  transform: translateY(-1px);
 }
 
 .search-form .form-control {
-  padding-right: 50px;
-}
-
-.search-form button[type="submit"] {
+  border: none;
   background: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: var(--p-color);
-  width: 50px;
-  padding: 12px;
-}
-
-.search-form button[type="submit"]:hover {
-  background: transparent;
+  padding: 0 15px;
+  height: 100%; /* Fill the container height */
+  font-size: 16px;
   color: var(--dark-color);
+  flex: 1;
+  outline: none;
+  box-shadow: none;
+}
+
+.search-form .form-control:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.search-form .form-control::placeholder {
+  color: #999;
+  font-size: 15px;
+}
+
+.search-form button {
+  background: var(--secondary-color) !important;
+  color: var(--white-color) !important;
+  width: 52px !important; /* Slightly wider for better appearance */
+    min-width: 52px !important;
+    max-width: 52px !important;
+  height: 100% !important; /* Fill the container height */
+  border: none !important;
+  padding: 0 !important; /* No padding for tightest fit */
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important; /* Ensure hover doesn't extend beyond button */
+  box-sizing: border-box !important;
+}
+
+.search-form button:hover {
+  background: var(--primary-color) !important;
+  color: var(--white-color) !important;
+  width: 52px !important; /* Maintain exact width on hover */
+}
+
+.search-form button i {
+  font-size: 14px !important; /* Smaller icon for very compact button */
+}
+
+/* ===================== Spinner Color Override ===================== */
+
+.spinner-border {
+  color: var(--secondary-color) !important; /* Use website's blue-gray color */
+  border-color: var(--secondary-color) !important;
+}
+
+.spinner-border.text-primary {
+  color: var(--secondary-color) !important; /* Override Bootstrap's text-primary */
+  border-color: var(--secondary-color) !important;
 }
 
 .subscribe-form {
@@ -2192,8 +3418,11 @@ faq {
   }
 
   .about-image {
-    width: inherit;
-    height: 450px;
+    width: 100% !important;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
   }
 
   .volunteer-image {
@@ -2203,7 +3432,140 @@ faq {
   }
 
   .custom-text-block {
-    padding: 20px 0 0 0;
+    padding: 20px 5px;
+    text-align: center;
+  }
+
+  /* Founder Section Mobile Responsiveness - Match Other Sections Width */
+  .about-section:not(#documentary) {
+    padding: 0 !important;
+  }
+
+  .about-section:not(#documentary) .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  .about-section .row {
+    flex-direction: column;
+    align-items: center;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .about-section .col-lg-6,
+  .about-section .col-lg-5 {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Center the image in Founder section */
+  .about-section:not(#documentary) .about-image {
+    margin: 0 auto !important;
+    display: block;
+  }
+
+  .about-section:not(#documentary) .col-lg-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-section .ms-lg-auto {
+    margin-left: 0 !important;
+  }
+
+  /* Ensure container doesn't cause overflow */
+  .about-section .container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* Additional mobile responsiveness for smaller screens */
+@media screen and (max-width: 576px) {
+  .about-image {
+    max-width: 280px !important;
+  }
+
+  /* Center the image in Founder section for small mobile */
+  .about-section:not(#documentary) .about-image {
+    margin: 0 auto !important;
+    display: block;
+  }
+
+  .about-section:not(#documentary) .col-lg-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Founder Section Mobile Responsiveness - Match Other Sections Width */
+  .about-section:not(#documentary) {
+    padding: 0 !important;
+  }
+
+  .about-section:not(#documentary) .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  .custom-text-block {
+    padding: 15px 5px;
+  }
+
+  /* Team Section Mobile Responsiveness - Match Other Sections Width */
+  .team {
+    padding: 40px 0; /* Remove section padding to match other sections */
+  }
+  
+  .team .container-team {
+    padding: 0 15px; /* Match other sections - 15px padding */
+  }
+
+  .about-section h2 {
+    font-size: 28px;
+  }
+
+  .about-section .text-muted {
+    font-size: 16px;
+  }
+
+  .about-section p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Fix text overflow and ensure proper wrapping */
+  .about-section .custom-text-block {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .about-section .custom-text-block p {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-section h2 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .about-section .text-muted {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .custom-text-box,
@@ -2323,5 +3685,286 @@ faq {
 
   .donate-form {
     padding: 25px;
+  }
+}
+
+/* ===================== Error Modal Styles ===================== */
+
+.error-modal {
+  background: var(--white-color);
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 10px 30px rgba(49, 54, 63, 0.15);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: center;
+  font-family: var(--body-font-family);
+}
+
+.error-modal-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  color: var(--white-color);
+}
+
+.error-modal h3 {
+  color: var(--primary-color);
+  font-size: var(--h4-font-size);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.error-modal p {
+  color: var(--p-color);
+  font-size: var(--p-font-size);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.error-modal .btn-retry {
+  background: var(--custom-btn-bg-color);
+  color: var(--white-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius-small);
+  font-size: var(--btn-font-size);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--body-font-family);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.error-modal .btn-retry:hover {
+  background: var(--custom-btn-bg-hover-color);
+  color: var(--white-color);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(49, 54, 63, 0.2);
+}
+
+.error-modal .btn-retry:active {
+  transform: translateY(0);
+}
+
+/* Error state for smaller containers */
+.error-state {
+  padding: 1.5rem;
+  background: var(--section-bg-color);
+  border-radius: var(--border-radius-small);
+  border: 1px solid #e3f2fd;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.error-state .error-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: var(--white-color);
+}
+
+.error-state h4,
+.error-state h5,
+.error-state h6 {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.error-state p {
+  color: var(--p-color);
+  margin-bottom: 1rem;
+}
+
+.error-state .btn-retry-sm {
+  background: var(--custom-btn-bg-color);
+  color: var(--white-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-small);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--body-font-family);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.error-state .btn-retry-sm:hover {
+  background: var(--custom-btn-bg-hover-color);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(49, 54, 63, 0.15);
+}
+
+/* Network error specific styling */
+.network-error {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border: 1px solid #ffcc02;
+}
+
+.network-error .error-modal-icon {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+}
+
+.network-error .error-state .error-icon {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+}
+
+/* Loading state improvements */
+.loading-spinner {
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading-spinner .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3rem;
+  border-color: var(--custom-btn-bg-color);
+  border-right-color: transparent;
+}
+
+.loading-spinner p {
+  color: var(--p-color);
+  margin-top: 1rem;
+  font-size: var(--p-font-size);
+}
+
+/* ===================== Acknowledgments Section ===================== */
+
+.acknowledgments-section {
+  background: var(--section-bg-color);
+  position: relative;
+}
+
+.acknowledgments-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.acknowledgments-title {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.acknowledgments-text {
+  margin-bottom: 2.5rem;
+}
+
+.acknowledgments-text p {
+  font-size: var(--p-font-size);
+  color: var(--p-color);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.acknowledgments-logo-container {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.acknowledgments-logo-placeholder {
+  background: var(--white-color);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius-small);
+  padding: 2rem;
+  min-height: 120px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.acknowledgments-logo-placeholder:hover {
+  border-color: var(--custom-btn-bg-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo-placeholder {
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+}
+
+.acknowledgments-logo {
+  max-height: 150px;
+  max-width: 350px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.acknowledgments-subtitle {
+  margin-top: 1.5rem;
+}
+
+.acknowledgments-subtitle p {
+  font-size: 1rem;
+  color: var(--primary-color);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments for acknowledgments section */
+@media screen and (max-width: 768px) {
+  .acknowledgments-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .acknowledgments-text p {
+    font-size: 0.95rem;
+  }
+  
+  .acknowledgments-logo-placeholder {
+    min-height: 100px;
+    min-width: 150px;
+    padding: 1.5rem;
+  }
+  
+  .logo-placeholder {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .acknowledgments-title {
+    font-size: 1.75rem;
+  }
+  
+  .acknowledgments-text p {
+    font-size: 0.9rem;
+  }
+  
+  .acknowledgments-logo-placeholder {
+    min-height: 80px;
+    min-width: 120px;
+    padding: 1rem;
   }
 }

@@ -3,13 +3,28 @@
   
   "use strict";
 
-    // COUNTER NUMBERS
-    jQuery('.counter-thumb').appear(function() {
-      jQuery('.counter-number').countTo();
-    });
+    // COUNTER NUMBERS - Simple fallback for .appear() plugin
+    if (typeof jQuery.fn.appear === 'undefined') {
+      // Simple fallback - just trigger counter animation on page load
+      jQuery(document).ready(function() {
+        if (jQuery('.counter-number').length > 0) {
+          // Use the counter.js animation instead
+          // Counter elements found, using counter.js animation
+        }
+      });
+    } else {
+      jQuery('.counter-thumb').appear(function() {
+        jQuery('.counter-number').countTo();
+      });
+    }
     
     // CUSTOM LINK
     $('.smoothscroll').click(function(){
+    // Skip if cross-page scroll is in progress
+    if (window.isCrossPageScroll) {
+        return false;
+    }
+    
     var el = $(this).attr('href');
     var elWrapped = $(el);
     var header_height = $('.navbar').height();
